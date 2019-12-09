@@ -1,0 +1,27 @@
+.vscode
+
+# KDE directory preferences
+.directory
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Ignore all downloaded node modules
+node_modules/*
+
+
+# Ignore all minified js files
+*.min.js

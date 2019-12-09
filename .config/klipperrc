@@ -1,0 +1,5 @@
+[General]
+IgnoreSelection=true
+MaxClipItems=2048
+PreventEmptyClipboard=false
+Version=5.12.7

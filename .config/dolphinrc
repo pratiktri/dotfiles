@@ -1,0 +1,72 @@
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAwAAAAAAAAC4AAACnfwCAAAAAvsAAAAUAHAAbABhAGMAZQBzAEQAbwBjAGsBAAAAIgAAAWQAAAByAQAAA/sAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawEAAAGHAAABOAAAAHIBAAADAAAAAQAAALgAAAKd/AIAAAAB+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACIAAAKdAAABJAEAAAMAAAADAAAFVgAAAL78AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAAFVgAAAEQBAAADAAAEnQAAAp0AAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+Window-Maximized 768x1366=true
+
+[AdditionalInfoDialog]
+Height 768=294
+Width 1366=300
+
+[CompactMode]
+FontWeight=50
+
+[Desktop Entry]
+DefaultProfile=
+
+[DetailsMode]
+FontWeight=50
+PreviewSize=112
+
+[DownloadDialog Settings]
+Height 768=502
+Width 1366=700
+
+[Favorite Profiles]
+Favorites=
+
+[General]
+LockPanels=false
+ShowCopyMoveMenu=true
+ShowFullPathInTitlebar=true
+UseTabForSwitchingSplitView=true
+Version=200
+ViewPropsTimestamp=2019,3,8,12,20,14
+
+[IconsMode]
+FontWeight=50
+IconSize=80
+
+[KPropertiesDialog]
+Height 768=388
+Width 1366=406
+
+[MainWindow]
+Height 768=703
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAwAAAAAAAAEHAAAB3vwCAAAAAvsAAAAUAHAAbABhAGMAZQBzAEQAbwBjAGsBAAAAIgAAAOcAAAByAQAAA/sAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawEAAAEKAAAA9gAAAHIBAAADAAAAAQAAALAAAAKd/AIAAAAB+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAACIAAAKdAAAAIgEAAAMAAAADAAAFVgAAAL78AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawEAAAAAAAAFVgAAAEQBAAADAAAETgAAAd4AAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+Width 1366=1366
+Window-Maximized 768x1366=true
+
+[MainWindow][Toolbar mainToolBar]
+IconSize=16
+
+[Notification Messages]
+ConfirmTrash=true
+
+[Open-with settings]
+CompletionMode=1
+History=su,vlc,ar,sub,vl,wps
+
+[PreviewSettings]
+Plugins=directorythumbnail,imagethumbnail,jpegthumbnail,gsthumbnail,svgthumbnail
+
+[SettingsDialog]
+Height 768=493
+Width 1366=519
+
+[Toolbar mainToolBar]
+IconSize=16
+
+[ViewPropertiesDialog]
+Height 768=490
+Width 1366=377

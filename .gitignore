@@ -1,0 +1,8 @@
+**state.vscdb
+**state.vscdb.backup
+
+# Ignore all Files under .vscode/extensions/
+.vscode/extensions/**
+
+# Allow only json files inside the .vscode/extensions/ folder
+!.vscode/extensions/**/*.json

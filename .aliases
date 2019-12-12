@@ -10,25 +10,45 @@ alias sz="source ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias bashrc="${EDITOR:-nano} +116 ~/.bashrc"
 alias zshrc="${EDITOR:-nano} ~/.zshrc"
-alias ping="ping -c 10"
 alias free="free -ht"
-alias mkdir="mkdir -pv"
-alias ~="cd ~"
-alias ..="cd .."
 alias type="type -a"
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
+
+# History
 alias histsearch="history | grep"
 alias hs="histsearch"
 alias hsi="histsearch"
 alias untar='tar -zxvf '
 
-# ls commands
+# Directories and Directory listings
+alias mkdir="mkdir -pv"
+alias ~="cd ~"
+alias ..="cd .."
 alias ll='lsc -alF'
 alias la='lsc -A'
 alias l='lsc -CF'
 alias lsa="lsc -lAFhZ"
+mkcd () {
+    mkdir "$1"
+    cd "$1"
+}
+
+
+# Network
+alias ping="ping -c 10"
+alias dnsreset="sudo systemctl restart dnscrypt-proxy"
+alias dnscheck="dnscrypt-proxy -resolve google.com"
+alias pubip="curl https://ipinfo.io/ip; echo"
+alias ips="printf \"Local IP:- \"; hostname -I | awk '{print \$1}'; printf \"Public IP:- \"; curl -s https://ipinfo.io/ip"
+alias ipdetails="printf \"Local IP:- \"; hostname -I | awk '{print \$1}'; printf \"Public IP Details:- \\n\"; geoip"
+alias speedtest="speedtest-cli --secure"			# needs speedtest-cli installed
+geoip () {
+	curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'
+}
+alias listening-apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}' | awk -F: '{print \$1,\$(NF-1),\$NF}' | awk -v OFS=\"\t\" 'BEGIN {printf (\"%s\t%s\t\t%s \n\", \"PROTO\", \"PORT\", \"APPLICATION\")} {print \$1 , \$(NF-1) ,\" \" , \$NF}' | (read -r; printf \"%s\n\" \"\$REPLY\"; sort -k2 -n)"
 
 # Update & Upgrades
 alias up="sudo apt-get update && sudo apt-get upgrade -y"
@@ -36,33 +56,14 @@ alias update="sudo apt-get update"
 alias install="sudo apt-get install "
 alias remove="sudo apt-get remove "
 
-# Services
+# Git
+# To use this - Ensure all git server SSH are in ~/.ssh
+alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*,*gog*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
+
+
+# For servers
 alias ngt="sudo nginx -t"
 alias ngreset="sudo systemctl restart nginx"
 alias ngreload="sudo systemctl reload nginx"
 alias ngstop="sudo systemctl stop nginx"
-alias dnsreset="sudo systemctl restart dnscrypt-proxy"
-alias dnscheck="dnscrypt-proxy -resolve google.com"
-
-# Advanced commands
-# To use this - Ensure all git server SSH are in ~/.ssh
-alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*,*gog*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
-
-alias pubip="curl https://ipinfo.io/ip; echo"
-alias ips="printf \"Local IP:- \"; hostname -I | awk '{print \$1}'; printf \"Public IP:- \"; curl -s https://ipinfo.io/ip"
-alias ipdetails="printf \"Local IP:- \"; hostname -I | awk '{print \$1}'; printf \"Public IP Details:- \\n\"; geoip"
-alias speedtest="speedtest-cli --secure"			# needs speedtest-cli installed
-
-alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
-alias listening-apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}' | awk -F: '{print \$1,\$(NF-1),\$NF}' | awk -v OFS=\"\t\" 'BEGIN {printf (\"%s\t%s\t\t%s \n\", \"PROTO\", \"PORT\", \"APPLICATION\")} {print \$1 , \$(NF-1) ,\" \" , \$NF}' | (read -r; printf \"%s\n\" \"\$REPLY\"; sort -k2 -n)"
-
-
-# Alias-like functions
-mkcd () {
-    mkdir "$1"
-    cd "$1"
-}
-
-geoip () {
-	curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'
-}
+alias tunnel_web='ssh -NL 8080:127.0.0.1:22222 '

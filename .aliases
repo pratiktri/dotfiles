@@ -59,11 +59,17 @@ alias remove="sudo apt-get remove "
 # Git
 # To use this - Ensure all git server SSH are in ~/.ssh
 alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*,*gog*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
-
+git_push_all_changes(){
+	git add . && git stage . && git commit -m "${1}" && git push
+}
 
 # For servers
 alias ngt="sudo nginx -t"
-alias ngreset="sudo systemctl restart nginx"
+alias ngrestart="sudo systemctl restart nginx"
 alias ngreload="sudo systemctl reload nginx"
 alias ngstop="sudo systemctl stop nginx"
-alias tunnel_web='ssh -NL 8080:127.0.0.1:22222 '
+alias fpmreset71="sudo systemctl restart php7.1-fpm"
+alias fpmreset72="sudo systemctl restart php7.2-fpm"
+alias fpmreset73="sudo systemctl restart php7.3-fpm"
+alias fpmreset74="sudo systemctl restart php7.4-fpm"
+alias tunnel_web22222='ssh -NL 8080:127.0.0.1:22222 '

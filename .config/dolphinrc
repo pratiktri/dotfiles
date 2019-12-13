@@ -34,6 +34,7 @@ ViewPropsTimestamp=2019,3,8,12,20,14
 [IconsMode]
 FontWeight=50
 IconSize=80
+PreviewSize=48
 
 [KPropertiesDialog]
 Height 768=478

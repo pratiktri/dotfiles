@@ -23,7 +23,7 @@ main_height=703
 main_maximize=false
 main_sort_column_id=1
 main_sort_order=0
-expanded_group=OVH,Routers
+expanded_group=Hetzner,OVH,Routers
 toolbar_pin_down=false
 sshtunnel_port=4732
 applet_new_ontop=false
@@ -61,6 +61,7 @@ rdp_quality_9=80
 rdp_deviceScaleFactor=0
 rdp_desktopScaleFactor=0
 rdp_desktopOrientation=0
+recent_SSH=51.38.124.34
 
 [ssh_colors]
 background=rgb(1,17,22)

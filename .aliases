@@ -3,6 +3,7 @@
 #Change these are per your requirements
 alias lsc='ls --color=auto'
 
+
 # Generic
 alias sb="source ~/.bashrc"
 alias bashreload="source ~/.bashrc"
@@ -17,20 +18,22 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
 
+
 # History
 alias histsearch="history | grep"
 alias hs="histsearch"
 alias hsi="histsearch"
 alias untar='tar -zxvf '
 
+
 # Directories and Directory listings
-alias mkdir="mkdir -pv"
 alias ~="cd ~"
 alias ..="cd .."
 alias ll='lsc -alF'
 alias la='lsc -A'
 alias l='lsc -CF'
 alias lsa="lsc -lAFhZ"
+alias mkdir="mkdir -pv"
 mkcd () {
     mkdir "$1"
     cd "$1"
@@ -50,11 +53,13 @@ geoip () {
 }
 alias listening-apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}' | awk -F: '{print \$1,\$(NF-1),\$NF}' | awk -v OFS=\"\t\" 'BEGIN {printf (\"%s\t%s\t\t%s \n\", \"PROTO\", \"PORT\", \"APPLICATION\")} {print \$1 , \$(NF-1) ,\" \" , \$NF}' | (read -r; printf \"%s\n\" \"\$REPLY\"; sort -k2 -n)"
 
+
 # Update & Upgrades
 alias up="sudo apt-get update && sudo apt-get upgrade -y"
 alias update="sudo apt-get update"
 alias install="sudo apt-get install "
 alias remove="sudo apt-get remove "
+
 
 # Git
 # To use this - Ensure all git server SSH are in ~/.ssh
@@ -62,6 +67,7 @@ alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*,*gog*}
 git_push_all_changes(){
 	git add . && git stage . && git commit -m "${1}" && git push
 }
+
 
 # For servers
 alias ngt="sudo nginx -t"
@@ -72,4 +78,81 @@ alias fpmreset71="sudo systemctl restart php7.1-fpm"
 alias fpmreset72="sudo systemctl restart php7.2-fpm"
 alias fpmreset73="sudo systemctl restart php7.3-fpm"
 alias fpmreset74="sudo systemctl restart php7.4-fpm"
+
+f2b_banned_ips() {
+	local provided_jail=$1
+
+	if [[ -n "${provided_jail// /}" ]]; then
+		for ip in $(sudo fail2ban-client status "${provided_jail}" | tail -1 | sed 's/[^:]*://;s/\s*//')
+		do
+			printf "%17s\n" "$ip"
+		done
+	else
+		local total_ips_banned=0
+		for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
+		do
+			local banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
+
+			if [[ "${banned_ip_count}" -gt 0 ]]; then
+				echo "${JAIL}: ${banned_ip_count}" 
+
+				for ip in $(sudo fail2ban-client status "${JAIL}" | tail -1 | sed 's/[^:]*://;s/\s*//')
+				do
+					printf "%17s\n" "[$ip]"
+				done
+
+				total_ips_banned=$(( total_ips_banned + banned_ip_count ))
+
+				echo
+			else
+				echo -e "${JAIL}:\n    -None-\n"
+			fi
+		done
+
+		echo "Total IPs banned across all jails - ${total_ips_banned}"
+	fi
+}
+
+f2b_unban_ip() {
+    local ip_to_unban="$1"
+    local jail="$2"
+
+    # If jail is provided - use that jail to directly unban
+    if [[ -n "${jail// /}" ]]; then
+        sudo fail2ban-client set "${jail}" unbanip "${ip_to_unban}" > /dev/null && echo "Successfully released ban"
+    else
+        # Find all JAILS this IP belong to
+        # Unban the ip where ever it is found
+
+        for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
+        do
+            local banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
+            if [[ "$banned_ip_count" -gt 0 ]] && [[ $(sudo fail2ban-client status "${JAIL}") == *"${ip_to_unban}"* ]]; then
+                local found_ip="true"
+                echo "Unbanning from ${JAIL}:"
+                sudo fail2ban-client set "${JAIL}" unbanip "${ip_to_unban}" > /dev/null && echo "Successfully released ban"
+            fi
+        done
+
+        if [[ -z "${found_ip// /}" ]]; then
+                echo "${ip_to_unban} was not found in any banned lists."
+                echo "No action taken."
+        fi
+    fi
+}
+
+f2b_ban_an_ip(){
+	local ip_to_ban=$1
+	local ban_jail=$2
+
+	if [[ ( -z "${ip_to_ban// /}" ) || ( -z "${ban_jail// /}" ) ]]; then
+		echo "Please provide an IP and a Jail (in that order)"
+		echo -e "eg -\n\t f2b_ban_an_ip 1.1.1.1 sshd"
+		return 1
+	fi
+
+	sudo fail2ban-client set "${ban_jail}" banip "${ip_to_ban}" > /dev/null && echo "Ban successful"
+}
+
+# SSH
 alias tunnel_web22222='ssh -NL 8080:127.0.0.1:22222 '

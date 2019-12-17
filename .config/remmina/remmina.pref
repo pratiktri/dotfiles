@@ -61,7 +61,7 @@ rdp_quality_9=80
 rdp_deviceScaleFactor=0
 rdp_desktopScaleFactor=0
 rdp_desktopOrientation=0
-recent_SSH=51.38.124.34
+recent_SSH=51.38.124.34,ovh-pratik
 
 [ssh_colors]
 background=rgb(1,17,22)

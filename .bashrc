@@ -181,7 +181,7 @@ jazz_my_prompt() {
   group9="${groupstart}${normalwhite}${timer_show}s${groupend}"
 
   # Position each group where you would like them
-  PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}-${group9}\n${group8}\n${group6}-${isroot}${reset} "
+  PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}-${group9}\n${group6}-${group8}\n${isroot}${reset} "
 }
 
 if [[ -f ~/.aliases ]]; then

@@ -78,6 +78,11 @@ alias fpmreset71="sudo systemctl restart php7.1-fpm"
 alias fpmreset72="sudo systemctl restart php7.2-fpm"
 alias fpmreset73="sudo systemctl restart php7.3-fpm"
 alias fpmreset74="sudo systemctl restart php7.4-fpm"
+alias ta="tmux a"
+alias tat="tmux a -t"
+alias tls="tmux ls"
+alias tnew="tmux new"
+alias tnewt="tmux new -t"
 
 f2b_banned_ips() {
 	local provided_jail=$1
@@ -153,6 +158,3 @@ f2b_ban_an_ip(){
 
 	sudo fail2ban-client set "${ban_jail}" banip "${ip_to_ban}" > /dev/null && echo "Ban successful"
 }
-
-# SSH
-alias tunnel_web22222='ssh -NL 8080:127.0.0.1:22222 '

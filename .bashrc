@@ -188,6 +188,10 @@ if [[ -f ~/.aliases ]]; then
   source ~/.aliases
 fi
 
+if [[ -f ~/.aliases_personal ]]; then
+  source ~/.aliases_personal
+fi
+
 if [[ -f ~/.gosetup ]]; then
   source ~/.gosetup
 fi

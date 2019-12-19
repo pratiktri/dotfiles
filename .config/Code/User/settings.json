@@ -2,16 +2,16 @@
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"extensions.showRecommendationsOnlyOnDemand": true,
-
 	"workbench.colorTheme": "Material Theme Darker High Contrast",
 	"workbench.iconTheme": "material-icon-theme",
 	"editor.fontFamily": "'FuraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
 	"terminal.integrated.fontFamily": "FuraCode Nerd Font",
 	"editor.fontLigatures": true,
-
 	"shellcheck.run": "onSave",
-	"shellcheck.exclude": [2181],
-
+	"shellcheck.exclude": [
+		2181,
+		2039
+	],
 	"editor.wordWrap": "on",
 	"editor.minimap.enabled": false,
 	"workbench.startupEditor": "newUntitledFile",
@@ -19,20 +19,16 @@
 	"diffEditor.renderSideBySide": false,
 	"files.autoSave": "afterDelay",
 	"editor.multiCursorModifier": "ctrlCmd",
-
 	"bracketPairColorizer.forceUniqueOpeningColor": true,
 	"bracketPairColorizer.rulerPosition": "Full",
 	"bracketPairColorizer.showBracketsInRuler": true,
-
 	//Below reduces the Activity Bar size
 	"window.zoomLevel": -1,
 	"editor.fontSize": 16,
 	"terminal.integrated.fontSize": 16,
-
 	"window.menuBarVisibility": "toggle",
 	"git.enableSmartCommit": true,
 	"bracketPairColorizer.highlightActiveScope": true,
-
 	"prettier.tabWidth": 4,
 	"prettier.useTabs": true,
 	"editor.formatOnSave": true,

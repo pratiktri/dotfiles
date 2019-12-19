@@ -14,7 +14,7 @@ DefaultProfile=
 
 [DetailsMode]
 FontWeight=50
-PreviewSize=112
+PreviewSize=32
 
 [DownloadDialog Settings]
 Height 768=502

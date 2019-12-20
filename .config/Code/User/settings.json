@@ -40,5 +40,6 @@
 	"es6-css-minify.onSaveDelay": 10,
 	"git.autofetch": true,
 	"diffEditor.ignoreTrimWhitespace": true,
-	"explorer.confirmDragAndDrop": false
+	"explorer.confirmDragAndDrop": false,
+	"git.confirmSync": false
 }

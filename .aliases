@@ -1,8 +1,6 @@
+#!/usr/bin/env bash
+
 # Custom aliases
-
-#Change these are per your requirements
-alias lsc='ls --color=auto'
-
 
 # Generic
 alias sb="source ~/.bashrc"
@@ -29,14 +27,29 @@ alias untar='tar -zxvf '
 # Directories and Directory listings
 alias ~="cd ~"
 alias ..="cd .."
+alias ..3='cd ../../../'             # Go back 3 directory levels
+alias ..4='cd ../../../../'          # Go back 4 directory levels
+alias ..5='cd ../../../../../'       # Go back 5 directory levels
+alias ..6='cd ../../../../../../'    # Go back 6 directory levels
+alias lsc='ls --color=auto'
 alias ll='lsc -alF'
 alias la='lsc -A'
 alias l='lsc -CF'
 alias lsa="lsc -lAFhZ"
 alias mkdir="mkdir -pv"
+dir_size(){
+	local dir
+	if [[ -z "$1" ]]; then
+		dir="${PWD}"
+	else
+		dir="$1"
+	fi
+
+	du -ah "${dir}" --max-depth=1 | sort -hr
+}
 mkcd () {
     mkdir "$1"
-    cd "$1"
+    cd "$1" || exit
 }
 
 
@@ -96,7 +109,8 @@ f2b_banned_ips() {
 		local total_ips_banned=0
 		for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
 		do
-			local banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
+			local banned_ip_count
+			banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
 
 			if [[ "${banned_ip_count}" -gt 0 ]]; then
 				echo "${JAIL}: ${banned_ip_count}" 
@@ -131,7 +145,8 @@ f2b_unban_ip() {
 
         for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
         do
-            local banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
+            local banned_ip_count
+			banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
             if [[ "$banned_ip_count" -gt 0 ]] && [[ $(sudo fail2ban-client status "${JAIL}") == *"${ip_to_unban}"* ]]; then
                 local found_ip="true"
                 echo "Unbanning from ${JAIL}:"

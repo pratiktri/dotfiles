@@ -55,11 +55,13 @@ mkcd () {
 
 # Network
 alias ping="ping -c 10"
+alias ping8="ping 8.8.8.8"
+alias p8="ping8"
 alias dnsreset="sudo systemctl restart dnscrypt-proxy"
 alias dnscheck="dnscrypt-proxy -resolve google.com"
 alias pubip="curl https://ipinfo.io/ip; echo"
-alias ips="printf \"Local IP:- \"; hostname -I | awk '{print \$1}'; printf \"Public IP:- \"; curl -s https://ipinfo.io/ip"
-alias ipdetails="printf \"Local IP:- \"; hostname -I | awk '{print \$1}'; printf \"Public IP Details:- \\n\"; geoip"
+alias ips='printf "Local IP:- "; hostname -I | cut -f1 -d " "; printf "Public IP:- "; curl -s https://ipinfo.io/ip'
+alias ipdetails='printf "Local IP:- "; hostname -I | cut -f1 -d " "; printf "Public IP Details:- \n"; geoip'
 alias speedtest="speedtest-cli --secure"			# needs speedtest-cli installed
 geoip () {
 	curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'

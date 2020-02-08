@@ -37,6 +37,7 @@ alias la='lsc -A'
 alias l='lsc -CF'
 alias lsa="lsc -lAFhZ"
 alias mkdir="mkdir -pv"
+alias df="df -h"
 dir_size(){
 	local dir
 	if [[ -z "$1" ]]; then

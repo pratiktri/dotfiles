@@ -279,3 +279,7 @@ Document=,none,New File
 Window=none,none,New Window
 _k_friendly_name=Launch Sublime Text
 _launch=Meta+S,none,Launch Sublime Text
+
+[typora.desktop]
+_k_friendly_name=Launch Typora
+_launch=Meta+M,none,Launch Typora

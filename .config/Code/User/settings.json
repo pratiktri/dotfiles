@@ -41,5 +41,9 @@
 	"git.autofetch": true,
 	"diffEditor.ignoreTrimWhitespace": true,
 	"explorer.confirmDragAndDrop": false,
-	"git.confirmSync": false
+	"git.confirmSync": false,
+	"[go]": {
+        
+	},
+	"editor.formatOnPaste": true
 }

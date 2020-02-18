@@ -72,6 +72,8 @@ alias listening-apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}
 
 # Update & Upgrades
 alias up="sudo apt-get update && sudo apt-get upgrade -y"
+alias distup="sudo apt dist-upgrade"
+alias autorem="sudo apt autoremove"
 alias update="sudo apt-get update"
 alias install="sudo apt-get install "
 alias remove="sudo apt-get remove "

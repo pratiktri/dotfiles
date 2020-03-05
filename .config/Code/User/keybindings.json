@@ -10,14 +10,6 @@
 		"command": "workbench.action.terminal.new"
 	},
 	{
-		"key": "ctrl+shift+`",
-		"command": "-workbench.action.terminal.new"
-	},
-	{
-		"key": "ctrl+shift+f t",
-		"command": "workbench.action.terminal.focus"
-	},
-	{
 		"key": "ctrl+shift+alt+right",
 		"command": "editor.emmet.action.nextEditPoint"
 	},
@@ -45,5 +37,9 @@
 	{
 		"key": "ctrl+alt+e",
 		"command": "python.execInTerminal"
+	},
+	{
+		"key": "ctrl+alt+n",
+		"command": "explorer.newFile"
 	}
 ]

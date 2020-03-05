@@ -42,8 +42,44 @@
 	"diffEditor.ignoreTrimWhitespace": true,
 	"explorer.confirmDragAndDrop": false,
 	"git.confirmSync": false,
-	"[go]": {
-        
+	"[go]": {},
+	"editor.formatOnPaste": true,
+	"markdown.extension.italic.indicator": "_",
+	"markdown.extension.print.imgToBase64": true,
+	"markdown.extension.print.theme": "dark",
+	"markdown.extension.toc.githubCompatibility": true,
+	"markdownlint.config": {
+		"default": true,
+		"MD030": false,
+		"MD007": false,
+		"no-hard-tabs": false,
+		"line-length": false
 	},
-	"editor.formatOnPaste": true
+	"markdownlint.run": "onType",
+	"cSpell.fixSpellingWithRenameProvider": true,
+	"cSpell.userWords": [
+		"GOPATH",
+		"Kumar",
+		"Pratik",
+		"Printf",
+		"Println",
+		"Struct",
+		"Tripathy",
+		"VIMP",
+		"VVIMP",
+		"VVVIMP",
+		"atleast",
+		"mkdir",
+		"pratiktri",
+		"subfolder",
+		"ulta"
+	],
+	"cSpell.diagnosticLevel": "Hint",
+	"go.useLanguageServer": true,
+	"[markdown]": {
+		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
+	},
+	"update.mode": "manual",
+	"cSpell.allowCompoundWords": true,
+	"files.trimTrailingWhitespace": true
 }

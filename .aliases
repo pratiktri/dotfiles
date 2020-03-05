@@ -57,7 +57,9 @@ mkcd () {
 # Network
 alias ping="ping -c 10"
 alias ping8="ping 8.8.8.8"
+alias ping1="ping 1.1.1.1"
 alias p8="ping8"
+alias p1="ping1"
 alias dnsreset="sudo systemctl restart dnscrypt-proxy"
 alias dnscheck="dnscrypt-proxy -resolve google.com"
 alias pubip="curl https://ipinfo.io/ip; echo"
@@ -71,7 +73,7 @@ alias listening-apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}
 
 
 # Update & Upgrades
-alias up="sudo apt-get update && sudo apt-get upgrade -y"
+alias up="sudo apt-get update && sudo apt-get upgrade -y && distup && autorem"
 alias distup="sudo apt dist-upgrade"
 alias autorem="sudo apt autoremove"
 alias update="sudo apt-get update"

@@ -1,61 +1,46 @@
 {
+	"update.mode": "manual",
+	// Privacy
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"extensions.showRecommendationsOnlyOnDemand": true,
-	"workbench.colorTheme": "Material Theme Darker High Contrast",
-	"workbench.iconTheme": "material-icon-theme",
-	"editor.fontFamily": "'FuraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-	"terminal.integrated.fontFamily": "FuraCode Nerd Font",
-	"editor.fontLigatures": true,
-	"shellcheck.run": "onSave",
-	"shellcheck.exclude": [
-		2181,
-		2039
-	],
-	"editor.wordWrap": "on",
+	//
+	// Editor Font
 	"editor.minimap.enabled": false,
+	"workbench.iconTheme": "material-icon-theme",
 	"workbench.startupEditor": "newUntitledFile",
+	"editor.wordWrap": "on",
+	"editor.fontFamily": "'FuraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+	"editor.fontSize": 17.4,
+	"editor.fontLigatures": true,
+	"terminal.integrated.fontFamily": "FuraCode Nerd Font",
+	"terminal.integrated.fontSize": 17,
+	"window.zoomLevel": -1, //Reduces the Activity Bar size
+	//
+	// Editor Style General
 	"bookmarks.navigateThroughAllFiles": true,
-	"diffEditor.renderSideBySide": false,
+	"window.menuBarVisibility": "toggle",
 	"files.autoSave": "afterDelay",
 	"editor.multiCursorModifier": "ctrlCmd",
+	"diffEditor.renderSideBySide": false,
+	"editor.formatOnSave": true,
+	"diffEditor.ignoreTrimWhitespace": true,
+	"explorer.confirmDragAndDrop": false,
+	"editor.formatOnPaste": true,
+	"files.trimTrailingWhitespace": true,
+	//
+	// Prettier Plugin
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+	"prettier.printWidth": 85,
+	//
+	// Bracket Pair Colorizer Plugin
 	"bracketPairColorizer.forceUniqueOpeningColor": true,
 	"bracketPairColorizer.rulerPosition": "Full",
 	"bracketPairColorizer.showBracketsInRuler": true,
-	//Below reduces the Activity Bar size
-	"window.zoomLevel": -1,
-	"editor.fontSize": 16,
-	"terminal.integrated.fontSize": 16,
-	"window.menuBarVisibility": "toggle",
-	"git.enableSmartCommit": true,
 	"bracketPairColorizer.highlightActiveScope": true,
-	"prettier.tabWidth": 4,
-	"prettier.useTabs": true,
-	"editor.formatOnSave": true,
-	"prettier.printWidth": 85,
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"es6-css-minify.minifyOnSave": "yes",
-	"es6-css-minify.onSaveDelay": 10,
-	"git.autofetch": true,
-	"diffEditor.ignoreTrimWhitespace": true,
-	"explorer.confirmDragAndDrop": false,
-	"git.confirmSync": false,
-	"[go]": {},
-	"editor.formatOnPaste": true,
-	"markdown.extension.italic.indicator": "_",
-	"markdown.extension.print.imgToBase64": true,
-	"markdown.extension.print.theme": "dark",
-	"markdown.extension.toc.githubCompatibility": true,
-	"markdownlint.config": {
-		"default": true,
-		"MD030": false,
-		"MD007": false,
-		"no-hard-tabs": false,
-		"line-length": false
-	},
-	"markdownlint.run": "onType",
+	//
+	// Code Spell Checker Plugin
 	"cSpell.fixSpellingWithRenameProvider": true,
 	"cSpell.userWords": [
 		"GOPATH",
@@ -75,11 +60,56 @@
 		"ulta"
 	],
 	"cSpell.diagnosticLevel": "Hint",
+	"cSpell.allowCompoundWords": true,
+	//
+	// Shell check plgin
+	"shellcheck.run": "onSave",
+	"shellcheck.exclude": [
+		2181,
+		2039
+	],
+	//
+	// HTML
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	//
+	// JavaScript
+	"es6-css-minify.minifyOnSave": "yes",
+	"es6-css-minify.onSaveDelay": 10,
+	//
+	// Git
+	"git.enableSmartCommit": true,
+	"git.autofetch": true,
+	"git.confirmSync": false,
+	//
+	// Golang
 	"go.useLanguageServer": true,
+	"[go]": {
+		"editor.formatOnSave": true,
+	},
+	"go.formatTool": "gofmt",
+	//
+	// Markdown
+	"markdown.extension.italic.indicator": "_",
+	"markdown.extension.print.imgToBase64": true,
+	"markdown.extension.print.theme": "dark",
+	"markdown.extension.toc.githubCompatibility": true,
+	"markdownlint.run": "onType",
+	"markdownlint.config": {
+		"default": true,
+		"MD030": false,
+		"MD007": false,
+		"no-hard-tabs": false,
+		"line-length": false
+	},
 	"[markdown]": {
 		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
 	},
-	"update.mode": "manual",
-	"cSpell.allowCompoundWords": true,
-	"files.trimTrailingWhitespace": true
+	"workbench.colorTheme": "Visual Studio Dark",
+	"theme-by-language.themes": {
+		"*": "Visual Studio Dark",
+		"markdown": "Material Theme Darker High Contrast"
+	},
+	//
 }

@@ -22,11 +22,11 @@
 		"command": "editor.emmet.action.wrapWithAbbreviation"
 	},
 	{
-		"key": "ctrl+alt+t",
+		"key": "alt+a",
 		"command": "workbench.action.terminal.focus"
 	},
 	{
-		"key": "ctrl+alt+t",
+		"key": "alt+a",
 		"command": "workbench.action.focusActiveEditorGroup",
 		"when": "terminalFocus"
 	},

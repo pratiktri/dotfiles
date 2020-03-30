@@ -1,6 +1,8 @@
 [ActivityManager]
-_k_friendly_name=Plasma
+_k_friendly_name=System Settings
+switch-to-activity-8cb67766-86a8-4ea0-b7be-d0ef393b2699=none,none,
 switch-to-activity-c51e89fb-89f9-4153-bd74-f5693faee0f9=none,none,
+switch-to-activity-dc4a8a96-5405-4c89-b409-dfbcce79eb14=none,none,
 
 [KDE Keyboard Layout Switcher]
 Switch to Next Keyboard Layout=Ctrl+Alt+K,none,Switch to Next Keyboard Layout
@@ -23,6 +25,10 @@ _launch=Meta+F,none,Launch Firefox Web Browser
 new-private-window=,none,Open a New Private Window
 new-window=none,none,Open a New Window
 
+[flameshot.desktop]
+_k_friendly_name=Launch Take graphical screenshot
+_launch=Print,none,Launch Take graphical screenshot
+
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Toggle Screen Reader On and Off
 _k_friendly_name=Accessibility
@@ -41,8 +47,8 @@ display=Display\tMeta+P,Display\tMeta+P,Switch Display
 [khotkeys]
 _k_friendly_name=KDE Daemon
 {1ff45512-b935-4692-82ae-66ad8e21567e}=Meta+Shift+Print,none,Take Rectangular Region Screenshot
-{777f1fb2-5280-4829-9cd3-6ae6821285a4}=Shift+Print,none,Take Full Screen Screenshot
-{997b3663-0f79-41ce-8f5e-b60234bfa25c}=Print,none,Start Screenshot Tool
+{777f1fb2-5280-4829-9cd3-6ae6821285a4}=,none,Take Full Screen Screenshot
+{997b3663-0f79-41ce-8f5e-b60234bfa25c}=,none,Start Screenshot Tool
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=,none,Search
 {d3172651-b509-47b0-ae10-0e88f6464463}=Meta+Print,none,Take Active Window Screenshot
 
@@ -236,6 +242,14 @@ stopmedia=Media Stop,Media Stop,Stop media playback
 _k_friendly_name=Launch Dolphin
 _launch=Meta+E,none,Launch Dolphin
 
+[org.kde.spectacle.desktop]
+ActiveWindowScreenShot=Ctrl+Print,none,Capture Active Window
+CurrentMonitorScreenShot=,none,Capture Current Monitor
+FullScreenScreenShot=none,none,Capture Entire Desktop
+RectangularRegionScreenShot=,none,Capture Rectangular Region
+_k_friendly_name=Launch Spectacle
+_launch=,none,Launch Spectacle
+
 [org_kde_powerdevil]
 Decrease Keyboard Brightness=Keyboard Brightness Down,Keyboard Brightness Down,Decrease Keyboard Brightness
 Decrease Screen Brightness=Monitor Brightness Down,Monitor Brightness Down,Decrease Screen Brightness
@@ -279,7 +293,3 @@ Document=,none,New File
 Window=none,none,New Window
 _k_friendly_name=Launch Sublime Text
 _launch=Meta+S,none,Launch Sublime Text
-
-[typora.desktop]
-_k_friendly_name=Launch Typora
-_launch=Meta+M,none,Launch Typora

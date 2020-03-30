@@ -1,33 +1,50 @@
 {
+	// Global
 	"update.mode": "manual",
+	"workbench.settings.editor": "json",
+	//
 	// Privacy
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"extensions.showRecommendationsOnlyOnDemand": true,
 	//
-	// Editor Font
+	// Editor
+	"editor.cursorSmoothCaretAnimation": true,
 	"editor.minimap.enabled": false,
-	"workbench.iconTheme": "material-icon-theme",
 	"workbench.startupEditor": "newUntitledFile",
 	"editor.wordWrap": "on",
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.renderIndentGuides": true,
+	"editor.copyWithSyntaxHighlighting": true,
+	//
+	// Editor Font
 	"editor.fontFamily": "'FuraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
 	"editor.fontSize": 17.4,
 	"editor.fontLigatures": true,
 	"terminal.integrated.fontFamily": "FuraCode Nerd Font",
 	"terminal.integrated.fontSize": 17,
-	"window.zoomLevel": -1, //Reduces the Activity Bar size
 	//
-	// Editor Style General
-	"bookmarks.navigateThroughAllFiles": true,
-	"window.menuBarVisibility": "toggle",
+	// Workbench - Everything that surrounds the editor
+	"workbench.colorTheme": "Visual Studio Dark",
+	"window.zoomLevel": -1, //Reduces the Activity Bar size
 	"files.autoSave": "afterDelay",
-	"editor.multiCursorModifier": "ctrlCmd",
-	"diffEditor.renderSideBySide": false,
+	"files.autoSaveDelay": 1000,
 	"editor.formatOnSave": true,
-	"diffEditor.ignoreTrimWhitespace": true,
-	"explorer.confirmDragAndDrop": false,
 	"editor.formatOnPaste": true,
 	"files.trimTrailingWhitespace": true,
+	"bookmarks.navigateThroughAllFiles": true,
+	"window.menuBarVisibility": "toggle",
+	"editor.multiCursorModifier": "ctrlCmd",
+	"diffEditor.renderSideBySide": false,
+	"diffEditor.ignoreTrimWhitespace": true,
+	"explorer.confirmDragAndDrop": false,
+	"workbench.colorCustomizations": {
+		"tab.activeBackground": "#07f7af3f",
+		"tab.activeBorder": "#ffffff"
+	},
+	//
+	// Debugging
+	"debug.toolBarLocation": "docked",
 	//
 	// Prettier Plugin
 	"prettier.tabWidth": 4,
@@ -43,11 +60,13 @@
 	// Code Spell Checker Plugin
 	"cSpell.fixSpellingWithRenameProvider": true,
 	"cSpell.userWords": [
+		"Aadhaar",
 		"GOPATH",
 		"Kumar",
 		"Pratik",
 		"Printf",
 		"Println",
+		"Sprintf",
 		"Struct",
 		"Tripathy",
 		"VIMP",
@@ -82,6 +101,7 @@
 	"git.enableSmartCommit": true,
 	"git.autofetch": true,
 	"git.confirmSync": false,
+	"gitlens.hovers.currentLine.over": "line",
 	//
 	// Golang
 	"go.useLanguageServer": true,
@@ -106,7 +126,6 @@
 	"[markdown]": {
 		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
 	},
-	"workbench.colorTheme": "Visual Studio Dark",
 	"theme-by-language.themes": {
 		"*": "Visual Studio Dark",
 		"markdown": "Material Theme Darker High Contrast"

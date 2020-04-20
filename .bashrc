@@ -114,7 +114,7 @@ HISTFILESIZE=-1
 HISTCONTROL=ignorespace
 HISTTIMEFORMAT="%H:%M:%S(%z)%d-%b-%y "
 
-# Do not let globbing complain on no match 
+# Do not let globbing complain on no match
 shopt -s nullglob
 
 function timer_start {
@@ -129,7 +129,7 @@ jazz_my_prompt() {
   # Capture exit code of last command
   # Below MUST be the 1st line of the function
   local ex=$?
-  
+
   # Capture the last command's execution time
   timer_show=$(($SECONDS - $timer))
   unset timer
@@ -148,7 +148,7 @@ jazz_my_prompt() {
   local normalwhite="\[\e[37${normal}\]"
   local yellow_highlight="\[\e[31;7m\]"
 
-  # Add color preference BEFORE the item 
+  # Add color preference BEFORE the item
   local hostname="${normalwhite}\h"
   local username="${boldwhite}\u"
   local jobs="${boldwhite}jobs:\j"
@@ -181,7 +181,7 @@ jazz_my_prompt() {
   group9="${groupstart}${normalwhite}${timer_show}s${groupend}"
 
   # Position each group where you would like them
-  PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}-${group9}\n${group6}-${group8}\n${isroot}${reset} "
+  PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}\n${group6}-${group9}-${group8}\n${isroot}${reset} "
 }
 
 if [[ -f ~/.aliases ]]; then

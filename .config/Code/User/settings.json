@@ -61,10 +61,12 @@
 	"cSpell.fixSpellingWithRenameProvider": true,
 	"cSpell.userWords": [
 		"Aadhaar",
+		"Aiginia",
 		"BBSR",
 		"GOPATH",
 		"Jython",
 		"Kumar",
+		"Odisha",
 		"Pratik",
 		"Printf",
 		"Println",
@@ -87,10 +89,7 @@
 	//
 	// Shell check plgin
 	"shellcheck.run": "onSave",
-	"shellcheck.exclude": [
-		2181,
-		2039
-	],
+	"shellcheck.exclude": [2181, 2039],
 	//
 	// HTML
 	"[html]": {
@@ -112,7 +111,7 @@
 	// Golang
 	"go.useLanguageServer": true,
 	"[go]": {
-		"editor.formatOnSave": true,
+		"editor.formatOnSave": true
 	},
 	"go.formatTool": "gofmt",
 	//
@@ -139,5 +138,9 @@
 	"editor.suggestSelection": "first",
 	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	"markdown.extension.toc.orderedList": true,
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"projectManager.git.baseFolders": ["/media/pratik/Work/Coding/"]
 	//
 }

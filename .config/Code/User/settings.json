@@ -25,7 +25,6 @@
 	"terminal.integrated.fontSize": 17,
 	//
 	// Workbench - Everything that surrounds the editor
-	"workbench.colorTheme": "Visual Studio Dark",
 	"window.zoomLevel": -1, //Reduces the Activity Bar size
 	"files.autoSave": "afterDelay",
 	"files.autoSaveDelay": 1000,
@@ -38,6 +37,11 @@
 	"diffEditor.renderSideBySide": false,
 	"diffEditor.ignoreTrimWhitespace": false,
 	"explorer.confirmDragAndDrop": false,
+	"theme-by-language.themes": {
+		"*": "Visual Studio Dark",
+		"markdown": "Material Theme Darker High Contrast"
+	},
+	"workbench.colorTheme": "Visual Studio Dark",
 	"workbench.colorCustomizations": {
 		"tab.activeBackground": "#07f7af3f",
 		"tab.activeBorder": "#ffffff"
@@ -47,9 +51,16 @@
 	"debug.toolBarLocation": "docked",
 	//
 	// Prettier Plugin
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"prettier.tabWidth": 4,
 	"prettier.useTabs": true,
 	"prettier.printWidth": 85,
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	//
 	// Bracket Pair Colorizer Plugin
 	"bracketPairColorizer.forceUniqueOpeningColor": true,
@@ -58,7 +69,12 @@
 	"bracketPairColorizer.highlightActiveScope": true,
 	//
 	// Code Spell Checker Plugin
+	"cSpell.diagnosticLevel": "Hint",
+	"cSpell.allowCompoundWords": true,
 	"cSpell.fixSpellingWithRenameProvider": true,
+	"cSpell.enableFiletypes": ["shellscript"],
+	"cSpell.minWordLength": 3,
+	"cSpell.numSuggestions": 10,
 	"cSpell.userWords": [
 		"Aadhaar",
 		"Aiginia",
@@ -84,17 +100,14 @@
 		"subfolder",
 		"ulta"
 	],
-	"cSpell.diagnosticLevel": "Hint",
-	"cSpell.allowCompoundWords": true,
 	//
 	// Shell check plgin
 	"shellcheck.run": "onSave",
 	"shellcheck.exclude": [2181, 2039],
 	//
-	// HTML
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+	// Intellicode Plugin
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	//
 	// JavaScript
 	"es6-css-minify.minifyOnSave": "yes",
@@ -107,6 +120,7 @@
 	"gitlens.hovers.currentLine.over": "annotation",
 	"gitlens.advanced.telemetry.enabled": false,
 	"gitlens.blame.avatars": false,
+	"projectManager.git.baseFolders": ["/media/pratik/Work/Coding/"],
 	//
 	// Golang
 	"go.useLanguageServer": true,
@@ -131,16 +145,6 @@
 	"[markdown]": {
 		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
 	},
-	"theme-by-language.themes": {
-		"*": "Visual Studio Dark",
-		"markdown": "Material Theme Darker High Contrast"
-	},
-	"editor.suggestSelection": "first",
-	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-	"markdown.extension.toc.orderedList": true,
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"projectManager.git.baseFolders": ["/media/pratik/Work/Coding/"]
+	"markdown.extension.toc.orderedList": true
 	//
 }

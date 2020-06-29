@@ -28,8 +28,6 @@
 	"window.zoomLevel": -1, //Reduces the Activity Bar size
 	"files.autoSave": "afterDelay",
 	"files.autoSaveDelay": 1000,
-	"editor.formatOnSave": true,
-	"editor.formatOnPaste": true,
 	"files.trimTrailingWhitespace": true,
 	"bookmarks.navigateThroughAllFiles": true,
 	"window.menuBarVisibility": "toggle",
@@ -51,6 +49,8 @@
 	"debug.toolBarLocation": "docked",
 	//
 	// Prettier Plugin
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"prettier.tabWidth": 4,
 	"prettier.useTabs": true,
@@ -79,9 +79,11 @@
 		"Aadhaar",
 		"Aiginia",
 		"BBSR",
+		"Bhubaneswar",
 		"GOPATH",
 		"Jython",
 		"Kumar",
+		"OOP",
 		"Odisha",
 		"Pratik",
 		"Printf",
@@ -98,16 +100,22 @@
 		"pratiktri",
 		"pylint",
 		"subfolder",
-		"ulta"
+		"ulta",
+		"umount",
+		"unmount"
 	],
 	//
 	// Shell check plgin
 	"shellcheck.run": "onSave",
 	"shellcheck.exclude": [2181, 2039],
 	//
-	// Intellicode Plugin
-	"editor.suggestSelection": "first",
-	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	// ES Lint
+	"eslint.alwaysShowStatus": true,
+	"eslint.packageManager": "yarn",
+	"eslint.run": "onSave",
+	//
+	//Path Intellisense
+	"typescript.suggest.paths": false,
 	//
 	// JavaScript
 	"es6-css-minify.minifyOnSave": "yes",
@@ -139,12 +147,25 @@
 		"default": true,
 		"MD030": false,
 		"MD007": false,
+		"MD029": false,
 		"no-hard-tabs": false,
 		"line-length": false
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
 	},
-	"markdown.extension.toc.orderedList": true
+	"markdown.extension.toc.orderedList": true,
+	//
+	// Python
+	"python.jediEnabled": false,
+	"terminal.integrated.shell.linux": "/bin/zsh",
+	"prettier.packageManager": "yarn",
+	//
+	// Rust
+	"rust.build_on_save": true,
+	"rust.clippy_preference": "on",
+	"[rust]": {
+		"editor.defaultFormatter": "rust-lang.rust"
+	}
 	//
 }

@@ -174,7 +174,6 @@
 	"rust.full_docs": true,
 	"[rust]": {
 		"editor.defaultFormatter": "rust-lang.rust"
-	},
-	"workbench.colorTheme": "Community Material Theme Darker High Contrast"
+	}
 	//
 }

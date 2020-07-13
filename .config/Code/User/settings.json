@@ -9,7 +9,8 @@
 	"extensions.showRecommendationsOnlyOnDemand": true,
 	//
 	// Editor
-	"editor.cursorSmoothCaretAnimation": true,
+	// "editor.cursorSmoothCaretAnimation": true,
+	"editor.cursorWidth": 4,
 	"editor.minimap.enabled": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"editor.wordWrap": "on",
@@ -24,6 +25,10 @@
 	"terminal.integrated.fontFamily": "FuraCode Nerd Font",
 	"terminal.integrated.fontSize": 17,
 	//
+	// Screencast Options
+	"screencastMode.verticalOffset": 5,
+	"screencastMode.fontSize": 45,
+	//
 	// Workbench - Everything that surrounds the editor
 	"window.zoomLevel": -1, //Reduces the Activity Bar size
 	"files.autoSave": "afterDelay",
@@ -36,14 +41,14 @@
 	"diffEditor.ignoreTrimWhitespace": false,
 	"explorer.confirmDragAndDrop": false,
 	"theme-by-language.themes": {
-		"*": "Visual Studio Dark",
+		"*": "Community Material Theme Darker High Contrast",
 		"markdown": "Material Theme Darker High Contrast"
 	},
-	"workbench.colorTheme": "Visual Studio Dark",
 	"workbench.colorCustomizations": {
 		"tab.activeBackground": "#07f7af3f",
 		"tab.activeBorder": "#ffffff"
 	},
+	"workbench.sideBar.location": "right",
 	//
 	// Debugging
 	"debug.toolBarLocation": "docked",
@@ -94,10 +99,12 @@
 		"VIMP",
 		"VVIMP",
 		"VVVIMP",
+		"arity",
 		"atleast",
 		"elif",
 		"mkdir",
 		"pratiktri",
+		"ptr",
 		"pylint",
 		"subfolder",
 		"ulta",
@@ -164,8 +171,10 @@
 	// Rust
 	"rust.build_on_save": true,
 	"rust.clippy_preference": "on",
+	"rust.full_docs": true,
 	"[rust]": {
 		"editor.defaultFormatter": "rust-lang.rust"
-	}
+	},
+	"workbench.colorTheme": "Community Material Theme Darker High Contrast"
 	//
 }

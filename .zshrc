@@ -113,8 +113,8 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=6
 
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user ssh dir_writable dir vcs background_jobs docker_machine newline status root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(history command_execution_time time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user ssh dir_writable dir background_jobs docker_machine command_execution_time time newline history status root_indicator)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 ##############Pratik POWERLEVEL9K Configs END################################
 

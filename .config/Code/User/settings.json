@@ -66,10 +66,10 @@
     },
     //
     // Bracket Pair Colorizer Plugin
-    "bracketPairColorizer.forceUniqueOpeningColor": true,
-    "bracketPairColorizer.rulerPosition": "Full",
-    "bracketPairColorizer.showBracketsInRuler": true,
-    "bracketPairColorizer.highlightActiveScope": true,
+    "bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
+    "bracket-pair-colorizer-2.rulerPosition": "Full",
+    "bracket-pair-colorizer-2.showBracketsInRuler": true,
+    "bracket-pair-colorizer-2.highlightActiveScope": true,
     //
     // Code Spell Checker Plugin
     "cSpell.diagnosticLevel": "Hint",
@@ -173,7 +173,7 @@
     },
     //
     // Theme
-    "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
     "workbench.iconTheme": "material-icon-theme"
     //
 }

@@ -180,3 +180,6 @@ f2b_ban_an_ip(){
 
 	sudo fail2ban-client set "${ban_jail}" banip "${ip_to_ban}" > /dev/null && echo "Ban successful"
 }
+
+## Add ~/.local/bin to PATH
+export PATH="${HOME}"/.local/bin:$PATH

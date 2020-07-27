@@ -134,7 +134,10 @@
     "gitlens.hovers.currentLine.over": "annotation",
     "gitlens.advanced.telemetry.enabled": false,
     "gitlens.blame.avatars": false,
-    "projectManager.git.baseFolders": ["~/Code/"],
+    "projectManager.git.baseFolders": [
+        "~/Code/",
+        "~/Code"
+    ],
     //
     // Golang
     "go.useLanguageServer": true,

@@ -134,7 +134,10 @@
     "gitlens.hovers.currentLine.over": "annotation",
     "gitlens.advanced.telemetry.enabled": false,
     "gitlens.blame.avatars": false,
-    "projectManager.git.baseFolders": ["/media/pratik/Work/Coding/"],
+    "projectManager.git.baseFolders": [
+        "/media/pratik/Personal_Projects/Code/",
+        "/media/pratik/Office/Squbix/Code"
+    ],
     //
     // Golang
     "go.useLanguageServer": true,

@@ -1,49 +1,54 @@
 // Place your key bindings in this file to override the defaults
 [
-	{
-		"key": "ctrl+alt+b",
-		"command": "bookmarks.toggle",
-		"when": "editorTextFocus"
-	},
-	{
-		"key": "ctrl+shift+t",
-		"command": "workbench.action.terminal.new"
-	},
-	{
-		"key": "ctrl+shift+alt+right",
-		"command": "editor.emmet.action.nextEditPoint"
-	},
-	{
-		"key": "ctrl+shift+alt+t",
-		"command": "editor.emmet.action.matchTag"
-	},
-	{
-		"key": "ctrl+shift+alt+p",
-		"command": "editor.emmet.action.wrapWithAbbreviation"
-	},
-	{
-		"key": "alt+q",
-		"command": "workbench.action.terminal.focus"
-	},
-	{
-		"key": "alt+q",
-		"command": "workbench.action.focusActiveEditorGroup",
-		"when": "terminalFocus"
-	},
-	{
-		"key": "alt+e",
-		"command": "workbench.action.focusActiveEditorGroup"
-	},
-	{
-		"key": "ctrl+alt+e",
-		"command": "python.execInTerminal"
-	},
-	{
-		"key": "ctrl+alt+n",
-		"command": "explorer.newFile"
-	},
-	{
-		"key": "ctrl+alt+g",
-		"command": "git.checkout"
-	}
+    {
+        "key": "ctrl+alt+b",
+        "command": "bookmarks.toggle",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "ctrl+shift+alt+right",
+        "command": "editor.emmet.action.nextEditPoint"
+    },
+    {
+        "key": "ctrl+shift+alt+t",
+        "command": "editor.emmet.action.matchTag"
+    },
+    {
+        "key": "ctrl+shift+alt+p",
+        "command": "editor.emmet.action.wrapWithAbbreviation"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+e",
+        "command": "workbench.action.focusActiveEditorGroup"
+    },
+    {
+        "key": "ctrl+alt+e",
+        "command": "python.execInTerminal"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "explorer.newFile"
+    },
+    {
+        "key": "ctrl+alt+g",
+        "command": "git.checkout"
+    },
+    {
+        "key": "ctrl+shift+j",
+        "command": "editor.action.joinLines",
+        "when": "editorTextFocus"
+    }
 ]

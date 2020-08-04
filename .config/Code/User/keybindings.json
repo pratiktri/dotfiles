@@ -48,7 +48,7 @@
     },
     {
         "key": "ctrl+shift+j",
-        "command": "editor.action.joinLines",
-        "when": "editorTextFocus"
-    }
+        "command": "editor.action.joinLines"
+    },
+    { "key": "ctrl+shift+j", "command": "workbench.action.togglePanel" }
 ]

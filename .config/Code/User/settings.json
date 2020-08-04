@@ -160,6 +160,7 @@
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
+
     "markdown.extension.toc.orderedList": true,
     //
     // Python
@@ -175,8 +176,12 @@
         "editor.defaultFormatter": "rust-lang.rust"
     },
     //
-    // Theme
-    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
-    "workbench.iconTheme": "material-icon-theme"
+    // Themes
+    "workbench.iconTheme": "material-icon-theme",
+    "theme-by-language.themes": {
+        "*": "Visual Studio Dark",
+        "markdown": "Material Theme Darker High Contrast"
+    },
+    "workbench.colorTheme": "Visual Studio Dark"
     //
 }

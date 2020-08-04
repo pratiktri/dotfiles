@@ -15,7 +15,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
-alias code="codium"
+# alias code="codium"
 
 # History
 alias histsearch="history | grep"

@@ -27,7 +27,7 @@ alias untar='tar -zxvf '
 # Directories and Directory listings
 alias ~="cd ~"
 alias ..="cd .."
-alias ..3='cd ../../../'             # Go back 3 directory levels
+alias ...='cd ../../../'             # Go back 3 directory levels
 alias ..4='cd ../../../../'          # Go back 4 directory levels
 alias ..5='cd ../../../../../'       # Go back 5 directory levels
 alias ..6='cd ../../../../../../'    # Go back 6 directory levels
@@ -83,10 +83,13 @@ alias remove="sudo apt-get remove "
 
 # Git
 # To use this - Ensure all git server SSH are in ~/.ssh
-alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*,*gog*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
+alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
 git_push_all_changes(){
-	git add . && git stage . && git commit -m "${1}" && git push
+	git commit -am "${1}" && git push
 }
+
+# Add ~/.local/bin to PATH
+export PATH="${HOME}"/.local/bin:$PATH
 
 
 # For servers
@@ -120,7 +123,7 @@ f2b_banned_ips() {
 			banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
 
 			if [[ "${banned_ip_count}" -gt 0 ]]; then
-				echo "${JAIL}: ${banned_ip_count}" 
+				echo "${JAIL}: ${banned_ip_count}"
 
 				for ip in $(sudo fail2ban-client status "${JAIL}" | tail -1 | sed 's/[^:]*://;s/\s*//')
 				do
@@ -180,6 +183,3 @@ f2b_ban_an_ip(){
 
 	sudo fail2ban-client set "${ban_jail}" banip "${ip_to_ban}" > /dev/null && echo "Ban successful"
 }
-
-## Add ~/.local/bin to PATH
-export PATH="${HOME}"/.local/bin:$PATH

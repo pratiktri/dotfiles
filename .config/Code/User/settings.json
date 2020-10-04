@@ -1,4 +1,4 @@
-{
+ {
     // Global
     "update.mode": "manual",
     "workbench.settings.editor": "json",
@@ -87,6 +87,7 @@
         "GOPATH",
         "Jython",
         "Kumar",
+        "Monomorphization",
         "OOP",
         "Odisha",
         "Pratik",
@@ -105,6 +106,7 @@
         "destructure",
         "elif",
         "mkdir",
+        "monomorphized",
         "pratiktri",
         "ptr",
         "pylint",

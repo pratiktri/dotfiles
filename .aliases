@@ -85,7 +85,7 @@ alias remove="sudo apt-get remove "
 # To use this - Ensure all git server SSH are in ~/.ssh
 alias git_signin='(for i in ~/.ssh/{*github*,*bitbucket*,*gitea*,*gitlab*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
 git_push_all_changes(){
-	git commit -am "${1}" && git push
+	git add . && git commit -am "${1}" && git push
 }
 
 # Add ~/.local/bin to PATH

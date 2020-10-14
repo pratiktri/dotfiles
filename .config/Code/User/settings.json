@@ -1,4 +1,4 @@
- {
+{
     // Global
     "update.mode": "manual",
     "workbench.settings.editor": "json",
@@ -65,12 +65,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     //
-    // Bracket Pair Colorizer Plugin
-    "bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
-    "bracket-pair-colorizer-2.rulerPosition": "Full",
-    "bracket-pair-colorizer-2.showBracketsInRuler": true,
-    "bracket-pair-colorizer-2.highlightActiveScope": true,
-    //
     // Code Spell Checker Plugin
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.allowCompoundWords": true,
@@ -118,7 +112,7 @@
     //
     // Shell check plgin
     "shellcheck.run": "onSave",
-    "shellcheck.exclude": [2181, 2039],
+    "shellcheck.exclude": ["2181", "2039"],
     //
     // ES Lint
     "eslint.alwaysShowStatus": true,
@@ -185,7 +179,7 @@
     "workbench.iconTheme": "material-icon-theme",
     "theme-by-language.themes": {
         "*": "Visual Studio Dark",
-        "markdown": "Material Theme Darker High Contrast"
+        "markdown": "Community Material Theme Darker High Contrast"
     },
     "workbench.colorTheme": "Visual Studio Dark"
     //

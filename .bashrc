@@ -184,18 +184,9 @@ jazz_my_prompt() {
   PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}\n${group6}-${group9}-${group8}\n${isroot}${reset} "
 }
 
-if [[ -f ~/.aliases ]]; then
-  source ~/.aliases
-fi
+[[ ! -f ~/.aliases ]] || source ~/.aliases
+[[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
+[[ ! -f ~/.neon_alias ]] || source ~/.neon_alias
 
-if [[ -f ~/.aliases_personal ]]; then
-  source ~/.aliases_personal
-fi
-
-if [[ -f ~/.gosetup ]]; then
-  source ~/.gosetup
-fi
-
-if [[ -f ~/.neon_alias ]]; then
-    source ~/.neon_alias
-fi
+[[ ! -f ~/.gosetup ]] || source ~/.gosetup
+[[ ! -f ~/.flutterpathsetup ]] || source ~/.flutterpathsetup

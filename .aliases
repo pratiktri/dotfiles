@@ -31,8 +31,8 @@ alias ..4='cd ../../../../'          # Go back 4 directory levels
 alias ..5='cd ../../../../../'       # Go back 5 directory levels
 alias ..6='cd ../../../../../../'    # Go back 6 directory levels
 alias lsc='ls --color=auto'
-alias ll='lsc -alF'
-alias la='lsc -A'
+alias ll='lsc -alhF'
+alias la='lsc -Ah'
 alias l='lsc -CF'
 alias lsa="lsc -lAFhZ"
 alias mkdir="mkdir -pv"

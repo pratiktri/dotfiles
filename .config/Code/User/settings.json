@@ -181,6 +181,6 @@
         "*": "Visual Studio Dark",
         "markdown": "Community Material Theme Darker High Contrast"
     },
-    "workbench.colorTheme": "Community Material Theme Darker High Contrast"
+    "workbench.colorTheme": "Visual Studio Dark"
     //
 }

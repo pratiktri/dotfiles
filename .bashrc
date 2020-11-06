@@ -117,6 +117,9 @@ HISTTIMEFORMAT="%H:%M:%S(%z)%d-%b-%y "
 # Do not let globbing complain on no match
 shopt -s nullglob
 
+## When only a directory is entered without cd, cd into it
+shoptd -s autocd
+
 function timer_start {
   timer=${timer:-$SECONDS}
 }
@@ -184,9 +187,18 @@ jazz_my_prompt() {
   PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}\n${group6}-${group9}-${group8}\n${isroot}${reset} "
 }
 
+[[ ! -f ~/.set_path ]] || source ~/.set_path
+
 [[ ! -f ~/.aliases ]] || source ~/.aliases
 [[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
 [[ ! -f ~/.neon_alias ]] || source ~/.neon_alias
 
 [[ ! -f ~/.gosetup ]] || source ~/.gosetup
 [[ ! -f ~/.flutterpathsetup ]] || source ~/.flutterpathsetup
+
+# Optout of dotnetcore telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

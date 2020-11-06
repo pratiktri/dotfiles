@@ -1,3 +1,5 @@
 [user]
 	email = mail@pratik.live
 	name = Pratik Tripathy
+[core]
+	autocrlf = input

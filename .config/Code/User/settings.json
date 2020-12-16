@@ -77,13 +77,19 @@
         "Aiginia",
         "BBSR",
         "Bhubaneswar",
+        "CLR",
         "Destructured",
         "GOPATH",
+        "IIS",
+        "JIT",
         "Jython",
         "Kumar",
+        "LINQ",
+        "MVC",
         "Monomorphization",
         "OOP",
         "Odisha",
+        "Postgres",
         "Pratik",
         "Printf",
         "Println",
@@ -130,8 +136,10 @@
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "git.confirmSync": false,
-    "gitlens.hovers.currentLine.over": "annotation",
+    "gitlens.hovers.currentLine.over": "line",
     "gitlens.advanced.telemetry.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.statusBar.reduceFlicker": true,
     "gitlens.blame.avatars": false,
     "projectManager.git.baseFolders": [
         "/media/pratik/Personal_Projects/Code/",
@@ -181,6 +189,7 @@
         "*": "Visual Studio Dark",
         "markdown": "Community Material Theme Darker High Contrast"
     },
-    "workbench.colorTheme": "Visual Studio Dark"
+    "workbench.colorTheme": "Visual Studio Dark",
+    "python.languageServer": "Pylance"
     //
 }

@@ -3,3 +3,4 @@
 	name = Pratik Tripathy
 [core]
 	autocrlf = input
+	editor = subl --wait

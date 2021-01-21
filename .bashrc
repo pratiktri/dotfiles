@@ -196,9 +196,6 @@ jazz_my_prompt() {
 [[ ! -f ~/.gosetup ]] || source ~/.gosetup
 [[ ! -f ~/.flutterpathsetup ]] || source ~/.flutterpathsetup
 
-# Optout of dotnetcore telemetry
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -206,3 +203,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+# Kubernetes Autocompletion
+source <(kubectl completion bash)
+
+source ~/.env

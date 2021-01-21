@@ -1,5 +1,6 @@
 [user]
-	email = mail@pratik.live
+	email = pratik@keepworks.com
 	name = Pratik Tripathy
 [core]
 	autocrlf = input
+	editor = subl --wait

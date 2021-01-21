@@ -6,7 +6,7 @@
     // Privacy
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "extensions.showRecommendationsOnlyOnDemand": true,
+    "extensions.ignoreRecommendations": true,
     //
     // Editor
     // "editor.cursorSmoothCaretAnimation": true,
@@ -161,6 +161,7 @@
         "MD030": false,
         "MD007": false,
         "MD029": false,
+        "MD024": false,
         "no-hard-tabs": false,
         "line-length": false
     },
@@ -175,13 +176,6 @@
     "terminal.integrated.shell.linux": "/bin/zsh",
     "prettier.packageManager": "yarn",
     //
-    // Rust
-    "rust.build_on_save": true,
-    "rust.clippy_preference": "on",
-    "rust.full_docs": true,
-    "[rust]": {
-        "editor.defaultFormatter": "rust-lang.rust"
-    },
     //
     // Themes
     "workbench.iconTheme": "material-icon-theme",
@@ -190,6 +184,23 @@
         "markdown": "Community Material Theme Darker High Contrast"
     },
     "workbench.colorTheme": "Visual Studio Dark",
-    "python.languageServer": "Pylance"
+    "python.languageServer": "Pylance",
+
+    // Rust
+    // "rust.build_on_save": true,
+    "rust.clippy_preference": "on",
+    "rust.full_docs": true,
+    "[rust]": {
+        "editor.defaultFormatter": "matklad.rust-analyzer"
+    },
+    "rust-analyzer.assist.importMergeBehavior": "last",
+    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.cargo.target": null,
+    "rust-analyzer.completion.postfix.enable": false,
+    "rust-analyzer.inlayHints.enable": false,
+    "rust-analyzer.inlayHints.typeHints": false
+
     //
 }

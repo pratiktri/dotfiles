@@ -189,22 +189,24 @@ jazz_my_prompt() {
 
 [[ ! -f ~/.set_path ]] || source ~/.set_path
 
+# Aliases
 [[ ! -f ~/.aliases ]] || source ~/.aliases
 [[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
 [[ ! -f ~/.neon_alias ]] || source ~/.neon_alias
 
+# Dev Setup Configurations
 [[ ! -f ~/.gosetup ]] || source ~/.gosetup
 [[ ! -f ~/.flutterpathsetup ]] || source ~/.flutterpathsetup
+[[ ! -f ~/.env ]] || source ~/.env
+[[ ! -f ~/.skaffoldenv ]] || source ~/.skaffoldenv
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
 # Kubernetes Autocompletion
-source <(kubectl completion bash)
+command -v kubectl && source <(kubectl completion bash)
 
-source ~/.env
+[[ ! -f ~/.config/exercism/exercism_completion.bash ]] || source ~/.config/exercism/exercism_completion.bash
+[[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
+export QT_PLUGIN_PATH=~/.local/lib/qt/plugins/:

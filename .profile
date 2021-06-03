@@ -26,4 +26,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$HOME/.cargo/bin:/media/pratik/Personal_Projects/DevSetUps/IDEs/flutter/bin:$PATH"
+export PATH="$HOME/.cargo/bin:/media/pratik/Projects/DevSetUps:/media/pratik/Projects/DevSetUps/IDEs/flutter/bin:$PATH"
+source "$HOME/.cargo/env"

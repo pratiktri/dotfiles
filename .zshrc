@@ -49,7 +49,7 @@ HIST_STAMPS="dd.mm.yyyy"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(
   git
   history
@@ -57,7 +57,8 @@ plugins=(
   perms
   sudo
   systemd
-  zsh-syntax-highlighting
+  # zsh-syntax-highlighting
+  # exercism
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -65,6 +66,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 ##############Pratik POWERLEVEL9K Configs####################################
+POWERLEVEL9K_INSTANT_PROMPT=off
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
 # POWERLEVEL9K_SHORTEN_STRATEGY="None"
@@ -92,28 +94,25 @@ setopt HIST_IGNORE_SPACE          # Don't add commands that start with whitespac
 
 ##############Bring all the alias and setup scripts################################
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Setup path and export variables
+[[ ! -f ~/.env ]] || source ~/.env
 [[ ! -f ~/.set_path ]] || source ~/.set_path
 
+# # Aliases
 [[ ! -f ~/.aliases ]] || source ~/.aliases
 [[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
 [[ ! -f ~/.neon_alias ]] || source ~/.neon_alias
 
+# # Dev Setup Configurations
 [[ ! -f ~/.gosetup ]] || source ~/.gosetup
 [[ ! -f ~/.flutterpathsetup ]] || source ~/.flutterpathsetup
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.skaffoldenv ]] || source ~/.skaffoldenv
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
-
-# Kubernetes Autocompletion
-source <(kubectl completion zsh)
-
-source ~/.env
+[[ ! -f ~/.config/exercism/exercism_completion.bash ]] || source ~/.config/exercism/exercism_completion.bash

@@ -29,8 +29,8 @@
     "diffEditor.ignoreTrimWhitespace": false,
     //
     // Editor Font
-    "editor.fontFamily": "'FuraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.fontSize": 17.4,
+    "editor.fontFamily": "Hasklug Nerd Font",
+    "editor.fontSize": 19,
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "FuraCode Nerd Font",
     "terminal.integrated.fontSize": 17,
@@ -38,7 +38,7 @@
     // Workbench - Everything that surrounds the editor
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "left",
-    "window.zoomLevel": -1, //Reduces the Activity Bar size
+    // "window.zoomLevel": -1, //Reduces the Activity Bar size
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff"
@@ -180,10 +180,9 @@
     // Themes
     "workbench.iconTheme": "material-icon-theme",
     "theme-by-language.themes": {
-        "*": "Visual Studio Dark",
+        "*": "GitHub Dark",
         "markdown": "Community Material Theme Darker High Contrast"
     },
-    "workbench.colorTheme": "Visual Studio Dark",
     "python.languageServer": "Pylance",
 
     // Rust
@@ -200,7 +199,12 @@
     "rust-analyzer.cargo.target": null,
     "rust-analyzer.completion.postfix.enable": false,
     "rust-analyzer.inlayHints.enable": false,
-    "rust-analyzer.inlayHints.typeHints": false
+    "rust-analyzer.inlayHints.typeHints": false,
+
+    //
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.snippetSuggestions": "top",
+    "workbench.colorTheme": "GitHub Dark Dimmed"
 
     //
 }

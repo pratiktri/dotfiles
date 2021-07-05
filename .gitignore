@@ -34,3 +34,26 @@ node_modules/*
 
 # Ignore all minified js files
 *.min.js
+
+
+**app_stat_v2.db
+.ssh/*.pub
+**/Package Control.cache
+**Cache
+*.db
+*.qmlc
+*.qml
+*.jsc
+**/contents/images
+**/contents/fonts
+*kpluginindex.json
+
+.directory
+
+.idea/
+*.imi
+*.jar
+*.tar
+
+resharper-host/
+tasks/

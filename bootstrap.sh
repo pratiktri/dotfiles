@@ -49,7 +49,10 @@ done
 
 main()  {
   TS=$(date '+%d_%m_%Y-%H_%M_%S')
-  SCRIPT_DIR="$( cd -P "$( dirname "$0")"  > /dev/null 2>&1 && pwd)"
+
+  # Switch inside dotfile directory
+  cd -P "$( dirname "$0")" || exit
+  SCRIPT_DIR="$(pwd)"
 
   find . -type f ! -name "$0" ! -path '*/.idea/*' ! -path '*/.git/*' ! -name 'LICENSE' ! -name 'README.md' -print0 | while IFS= read -r -d '' file; do
     # Replaces `.` with `~` in the found file names

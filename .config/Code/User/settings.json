@@ -20,7 +20,6 @@
     "prettier.tabWidth": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-    "editor.renderIndentGuides": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "afterDelay",
@@ -204,7 +203,7 @@
     //
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.snippetSuggestions": "top",
-    "workbench.colorTheme": "GitHub Dark Dimmed"
-
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "editor.guides.indentation": true
     //
 }

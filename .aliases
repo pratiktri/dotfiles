@@ -15,6 +15,10 @@ alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
 # alias code="codium"
 
+url_encode(){
+    python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
+}
+
 
 # History
 alias histsearch="history | grep"

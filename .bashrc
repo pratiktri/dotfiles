@@ -211,4 +211,5 @@ command -v kubectl && source <(kubectl completion bash)
 [[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
 export QT_PLUGIN_PATH=~/.local/lib/qt/plugins/:
 
+. "$HOME/.cargo/env"
 eval "$(ssh-agent -s)"

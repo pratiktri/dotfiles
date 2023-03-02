@@ -4,6 +4,7 @@
     "workbench.settings.editor": "json",
     //
     // Privacy
+    "telemetry.telemetryLevel": "off",
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "extensions.ignoreRecommendations": true,

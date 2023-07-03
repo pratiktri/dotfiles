@@ -5,8 +5,6 @@
     //
     // Privacy
     "telemetry.telemetryLevel": "off",
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
     "extensions.ignoreRecommendations": true,
     //
     // Editor
@@ -197,10 +195,6 @@
     "rust-analyzer.completion.postfix.enable": false,
     "rust-analyzer.inlayHints.enable": false,
     "rust-analyzer.inlayHints.typeHints": false,
-    "[rust]": {
-        "editor.defaultFormatter": "matklad.rust-analyzer"
-    },
-
     //
     "workbench.colorTheme": "GitHub Dark Dimmed",
     "terminal.integrated.shell.linux": "/bin/zsh"

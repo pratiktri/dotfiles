@@ -1,1 +1,1 @@
-alias up="sudo pkcon refresh && sudo pkcon update && distup && autorem"
+alias up="sudo pkcon refresh && sudo pkcon update && distup && autorem && rustup update"

@@ -8,7 +8,6 @@
     "extensions.ignoreRecommendations": true,
     //
     // Editor
-    "editor.cursorSmoothCaretAnimation": "on",
     "editor.cursorWidth": 4,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",

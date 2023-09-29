@@ -20,7 +20,6 @@
     "editor.snippetSuggestions": "top",
     "editor.guides.indentation": true,
     "editor.tabSize": 4,
-    "prettier.tabWidth": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -38,13 +37,13 @@
     //
     // Workbench - Everything that surrounds the editor
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.sideBar.location": "left",zoomLevel
+    "workbench.sideBar.location": "left",
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff"
     },
     "bookmarks.navigateThroughAllFiles": true,
-    "window.menuBarVisibility": "toggle",
+    "window.menuBarVisibility": "compact",
     "explorer.confirmDragAndDrop": false,
     //
     // Screencast Options
@@ -55,6 +54,7 @@
     "debug.toolBarLocation": "docked",
     //
     // Prettier Plugin
+    "prettier.tabWidth": 4,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "prettier.useTabs": false,
     "prettier.printWidth": 85,
@@ -194,12 +194,14 @@
     "go.useLanguageServer": true,
     "go.formatTool": "gofmt",
     // Markdown
+    "markdownlint.run": "onType",
     "markdown.extension.print.imgToBase64": true,
     "markdown.extension.print.theme": "dark",
-    "markdownlint.run": "onType",
     "markdown.extension.toc.orderedList": true,
     "markdown.extension.tableFormatter.normalizeIndentation": true,
     "markdown.extension.list.indentationSize": "inherit",
+    "markdown.extension.bold.indicator": "**",
+    "markdown.extension.italic.indicator": "*",
     "markdownlint.config": {
         "default": true,
         "MD007": false,
@@ -211,35 +213,66 @@
         "no-hard-tabs": false,
         "line-length": false
     },
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-    },
+    // LaTex
+    // https://nevalsar.hashnode.dev/compiling-latex-with-ubuntu-and-visual-studio-code#heading-issues-with-modules-setting-additional-compiler-flags
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "--shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "--shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": ["--shell-escape", "%DOCFILE%"],
+            "env": {}
+        }
+    ],
+
     //
     // Python
     "python.jediEnabled": false,
     "python.languageServer": "Pylance",
-    //
-    //
-    // Themes
-    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.iconTheme": "material-icon-theme",
-    "theme-by-language.themes": {
-        "*": "GitHub Dark",
-        "markdown": "Community Material Theme Darker High Contrast"
-    },
+    "workbench.colorTheme": "GitHub Dark",
+    // "theme-by-language.themes": {
+    //     "*": "GitHub Dark",
+    //     "markdown": "Community Material Theme Darker High Contrast"
+    // },
 
     // Rust
     // "rust.build_on_save": true,
-    "rust.clippy_preference": "on",
-    "rust.full_docs": true,
-    "rust-analyzer.assist.importMergeBehavior": "last",
-    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-    "rust-analyzer.procMacro.enable": true,
-    "rust-analyzer.checkOnSave.command": "clippy",
-    "rust-analyzer.cargo.target": null,
-    "rust-analyzer.completion.postfix.enable": false,
-    "rust-analyzer.inlayHints.enable": false,
-    "rust-analyzer.inlayHints.typeHints": false,
+    // "rust.clippy_preference": "on",
+    // "rust.full_docs": true,
+    // "rust-analyzer.assist.importMergeBehavior": "last",
+    // "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    // "rust-analyzer.procMacro.enable": true,
+    // "rust-analyzer.checkOnSave.command": "clippy",
+    // "rust-analyzer.cargo.target": null,
+    // "rust-analyzer.completion.postfix.enable": false,
+    // "rust-analyzer.inlayHints.enable": false,
+    // "rust-analyzer.inlayHints.typeHints": false,
     //
     "terminal.integrated.shell.linux": "/bin/zsh",
     "debug.javascript.autoAttachFilter": "disabled",

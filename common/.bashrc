@@ -187,29 +187,23 @@ jazz_my_prompt() {
   PS1="\n${group1}-${group2}-${group3}-${group4}-${group5}\n${group6}-${group9}-${group8}\n${isroot}${reset} "
 }
 
+# Setup path and export variables
+[[ ! -f ~/.env ]] || source ~/.env
 [[ ! -f ~/.set_path ]] || source ~/.set_path
+[[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
 
 # Aliases
 [[ ! -f ~/.aliases ]] || source ~/.aliases
+[[ ! -f ~/.mac_aliases ]] || source ~/.mac_aliases
+[[ ! -f ~/.neon_aliases ]] || source ~/.neon_aliases
 [[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
-[[ ! -f ~/.neon_alias ]] || source ~/.neon_alias
 
-# Dev Setup Configurations
-[[ ! -f ~/.gosetup ]] || source ~/.gosetup
-[[ ! -f ~/.flutterpathsetup ]] || source ~/.flutterpathsetup
-[[ ! -f ~/.env ]] || source ~/.env
-[[ ! -f ~/.skaffoldenv ]] || source ~/.skaffoldenv
-
+# nvm Setup
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Kubernetes Autocompletion
-command -v kubectl && source <(kubectl completion bash)
-
 [[ ! -f ~/.config/exercism/exercism_completion.bash ]] || source ~/.config/exercism/exercism_completion.bash
-[[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
 export QT_PLUGIN_PATH=~/.local/lib/qt/plugins/:
 
-. "$HOME/.cargo/env"
 eval "$(ssh-agent -s)"

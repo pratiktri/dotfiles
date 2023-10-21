@@ -13,7 +13,7 @@ usage() {
   echo   "  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them"
 
   echo   ""
-  echo   "Example: bash ./$0 -q --create-links"
+  echo   "Example: $0 -q --create-links"
 }
 
 ##################################
@@ -48,31 +48,70 @@ while [[ "${#}" -gt 0 ]]; do
 done
 
 main()  {
-  TS=$(date '+%d_%m_%Y-%H_%M_%S')
 
-  # Switch inside dotfile directory
-  cd -P "$( dirname "$0")" || exit
-  SCRIPT_DIR="$(pwd)"
-
-  find . -type f ! -name "$0" ! -path '*/.idea/*' ! -path '*/.git/*' ! -name 'LICENSE' ! -name 'README.md' -print0 | while IFS= read -r -d '' file; do
-    # Replaces `.` with `~` in the found file names
-    target_file="${file/./~}"
-
-    if [[ -f "${target_file}" ]]; then
-      mv "$target_file" "${target_file}_${TS}" && [[ "$QUIET" == "n" ]] && echo "Existing setting renamed to ${target_file}_${TS}"
+    # Check if the current os is KDE Neon or Mac
+    # if $(command -v pkcon > /dev/null) || [[ $XDG_CURRENT_DESKTOP == "KDE" ]]; then
+    #   OS="kde-neon"
+    #
+    # else
+    #   OS="macos"
+    # fi
+    if [[ $(uname -s) == *Darwin* ]]; then
+        OS="macos"
+    else
+        OS="kde-neon"
     fi
 
-    target_directory=$(dirname "${target_file}")
+    TS=$(date '+%d_%m_%Y-%H_%M_%S')
+
+    # Switch inside dotfile repository directory
+    cd -P "$(dirname "$0")" || exit
+
+    # Copy all files in "Common" dotfiles to $HOME directory ("~")
+    find "./common" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
+    do
+        local file_target_location="${file/.\/common/$HOME}"
+        local source_file_location="${file/./$PWD}"
+        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
+    done
+
+    # Copy platform specific files to $HOME directory ("~")
+    find "./${OS}" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
+    do
+        local file_target_location="${file/.\/${OS}/$HOME}"
+        local source_file_location="${file/./$PWD}"
+        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
+    done
+}
+
+place_dotfile_at_target_location() {
+    local source_file_location="$1"
+    local file_target_location="$2"
+    local TS="$3"
+
+    # echo "${source_file_location}"
+    # echo "${file_target_location}"
+
+    # To avoid over writing existing dot file, we rename them
+    # Appending the timestamp to file name
+    if [[ -f "${file_target_location}" || -L "${file_target_location}" ]]; then
+        # echo "mv ${file_target_location} ${file_target_location}_${TS}" && [[ "$QUIET" == "n" ]] && echo "Existing dotfile renamed to ${file_target_location}_${TS}"
+        mv "${file_target_location}" "${file_target_location}_${TS}" && [[ "$QUIET" == "n" ]] && echo "Existing setting renamed to ${file_target_location}_${TS}"
+    fi
+
+    local target_directory
+    target_directory=$(dirname "${file_target_location}")
     if [[ ! -d "${target_directory}" ]]; then
-      mkdir -p "${target_directory}" && [[ "$QUIET" == "n" ]] && echo "Directory ${target_directory} created"
+        mkdir -p "${target_directory}" && [[ "$QUIET" == "n" ]] && echo "Directory ${target_directory} created"
     fi
 
     if [[ "$CREATE_LINKS" == "y" ]]; then
-      ln -s "${file/./${SCRIPT_DIR}}" "${target_file}" && [[ "$QUIET" == "n" ]] && echo "Linked ${target_file}"
+        # echo "ln -s ${source_file_location} ${target_directory}"
+        ln -s "${source_file_location}" "${target_directory}" && [[ "$QUIET" == "n" ]] && echo "Linked ${file_target_location}"
     else
-      cp "${file/./${SCRIPT_DIR}}" "${target_file}"  && [[ "$QUIET" == "n" ]] && echo "Copied ${target_file}"
+        # echo "cp ${source_file_location} ${target_directory}"
+        cp "${source_file_location}" "${target_directory}"  && [[ "$QUIET" == "n" ]] && echo "Copied ${file_target_location}"
     fi
-  done
 }
 
 main "$@"

@@ -58,6 +58,7 @@ node_modules/*
 *.imi
 *.jar
 *.tar
+
 # KDE directory preferences
 .directory
 
@@ -69,6 +70,3 @@ node_modules/*
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
-
-resharper-host/
-tasks/

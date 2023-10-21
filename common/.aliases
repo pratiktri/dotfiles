@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+# Generic
+alias sb="source ~/.bashrc"
+alias bashreload="source ~/.bashrc"
+alias sz="source ~/.zshrc"
+alias zshreload="source ~/.zshrc"
+alias bashrc="${EDITOR:-nano} +116 ~/.bashrc"
+alias zshrc="${EDITOR:-nano} ~/.zshrc"
+alias free="free -ht"
+alias type="type -a"
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
+alias untar='tar -zxvf '
+
+url_encode(){
+    python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
+}
+
+
+# History
+alias histsearch="history | grep"
+alias hs="histsearch"
+alias hsi="histsearch"
+
+
+# Directories and Directory listings
+alias ~="cd ~"
+alias ..="cd .."
+alias ...='cd ../../../'             # Go back 3 directory levels
+alias ..4='cd ../../../../'          # Go back 4 directory levels
+alias ..5='cd ../../../../../'       # Go back 5 directory levels
+alias ..6='cd ../../../../../../'    # Go back 6 directory levels
+alias lsc='ls --color=auto'
+alias ll='lsc -alhF'
+alias la='lsc -Ah'
+alias l='lsc -CF'
+alias lsa="lsc -lAFhZ"
+alias mkdir="mkdir -pv"
+alias df="df -h"
+mkcd () {
+    mkdir "$1"
+    cd "$1" || exit
+}
+
+
+# Network
+alias ping="ping -c 10"
+alias ping8="ping 8.8.8.8"
+alias ping1="ping 1.1.1.1"
+alias p8="ping8"
+alias p1="ping1"
+alias pubip="curl https://ipinfo.io/ip; echo"
+alias speedtest="speedtest-cli --secure"			# needs speedtest-cli installed
+geoip () {
+	curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'
+}
+
+
+# Git
+# To use this - Ensure all git server SSH are in ~/.ssh
+alias git_signin='(for i in ~/.ssh/{*github*,*gitea*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
+git_push_all_changes(){
+	git add . && git commit -am "${1}" && git push
+}
+
+
+alias ta="tmux a"
+alias tat="tmux a -t"
+alias tls="tmux ls"
+alias tnew="tmux new"
+alias tnewt="tmux new -t"

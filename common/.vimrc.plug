@@ -1,0 +1,24 @@
+call plug#begin('~/.vim/plugged')
+
+"Fugitive Vim Github Wrapper
+Plug 'tpope/vim-fugitive'
+
+" Surround Plugin
+Plug 'tpope/vim-surround'
+
+" Sensible options
+Plug 'tpope/vim-sensible'
+
+" Highlight Yank
+Plug 'machakann/vim-highlightedyank'
+
+" Paragraph Motion
+Plug 'dbakker/vim-paragraph-motion'
+
+" Quick Scope
+" Plug 'unblevable/quick-scope'
+
+" Paragraph Motion
+Plug 'dbakker/vim-paragraph-motion'
+
+call plug#end()

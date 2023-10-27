@@ -84,9 +84,7 @@ set mouse+=a
 
 " Sync vim clipboard with system clipboard
 " Works across Linux, MacOS & Windows
-" set clipboard^=unnamed,unnamedplus
-set clipboard+=unnamedplus
-set paste
+set clipboard^=unnamed,unnamedplus
 
 " Try to prevent bad habits like using the arrow keys for movement. This is
 " not the only possible bad habit. For example, holding down the h/j/k/l keys

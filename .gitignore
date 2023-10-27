@@ -7,7 +7,6 @@
 # Icon must end with two \r
 Icon
 
-
 # Thumbnails
 ._*
 
@@ -27,6 +26,27 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# ---- KDE Neon ----
+# KDE directory preferences
+.directory
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# ---- IDE ----
 # VS Code Artifacts
 .vscode
 **state.vscdb
@@ -34,6 +54,19 @@ Temporary Items
 .vscode/extensions/** # Ignore all Files under .vscode/extensions/
 !.vscode/extensions/**/*.json # Only json files inside the .vscode/extensions/ folder
 
+# Intellij IDE Artifacts
+.idea/
+*.imi
+*.jar
+*.tar
+
+# Vim Artifacts
+*.swp
+
+resharper-host/
+tasks/
+
+# ---- Programming Languages ----
 # Ignore all downloaded node modules
 node_modules/*
 
@@ -52,23 +85,3 @@ node_modules/*
 **/contents/images
 **/contents/fonts
 *kpluginindex.json
-
-# Intellij IDE Artifacts
-.idea/
-*.imi
-*.jar
-*.tar
-# KDE directory preferences
-.directory
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-
-resharper-host/
-tasks/

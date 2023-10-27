@@ -52,12 +52,14 @@ HIST_STAMPS="dd.mm.yyyy"
 # source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(
   git
+  docker
   history
   per-directory-history
   perms
   sudo
   systemd
-  # zsh-syntax-highlighting
+  zsh-syntax-highlighting
+  zsh-autosuggestions
   # exercism
 )
 
@@ -101,6 +103,9 @@ setopt HIST_IGNORE_SPACE          # Don't add commands that start with whitespac
 [[ ! -f ~/.env ]] || source ~/.env
 [[ ! -f ~/.set_path ]] || source ~/.set_path
 [[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 PATH=$(pyenv root)/shims:$PATH
 
 # Aliases
@@ -116,5 +121,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 [[ ! -f ~/.config/exercism/exercism_completion.bash ]] || source ~/.config/exercism/exercism_completion.bash
 
-eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)" > /dev/null
 ulimit -n 10240

@@ -1,3 +1,32 @@
+# ---- macOS ----
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ---- KDE Neon ----
 # KDE directory preferences
 .directory
 
@@ -10,13 +39,6 @@
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-# VS Code Artifacts
-.vscode
-**state.vscdb
-**state.vscdb.backup
-.vscode/extensions/** # Ignore all Files under .vscode/extensions/
-!.vscode/extensions/**/*.json # Only json files inside the .vscode/extensions/ folder
-
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -24,9 +46,29 @@
 *.so
 *.dylib
 
+# ---- IDE ----
+# VS Code Artifacts
+.vscode
+**state.vscdb
+**state.vscdb.backup
+.vscode/extensions/** # Ignore all Files under .vscode/extensions/
+!.vscode/extensions/**/*.json # Only json files inside the .vscode/extensions/ folder
+
+# Intellij IDE Artifacts
+.idea/
+*.imi
+*.jar
+*.tar
+
+# Vim Artifacts
+*.swp
+
+resharper-host/
+tasks/
+
+# ---- Programming Languages ----
 # Ignore all downloaded node modules
 node_modules/*
-
 
 # Ignore all minified js files
 *.min.js
@@ -43,12 +85,3 @@ node_modules/*
 **/contents/images
 **/contents/fonts
 *kpluginindex.json
-
-# Intellij IDE Artifacts
-.idea/
-*.imi
-*.jar
-*.tar
-
-resharper-host/
-tasks/

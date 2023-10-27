@@ -6,8 +6,17 @@ Plug 'tpope/vim-fugitive'
 " Surround Plugin
 Plug 'tpope/vim-surround'
 
+" Repeat for the surround plugin
+Plug 'tpope/vim-repeat'
+
+" Surround Plugin
+Plug 'tpope/vim-commentary'
+
 " Sensible options
 Plug 'tpope/vim-sensible'
+
+" Auto-close brackets
+Plug 'rstacruz/vim-closer'
 
 " Highlight Yank
 Plug 'machakann/vim-highlightedyank'
@@ -18,7 +27,29 @@ Plug 'dbakker/vim-paragraph-motion'
 " Quick Scope
 " Plug 'unblevable/quick-scope'
 
-" Paragraph Motion
-Plug 'dbakker/vim-paragraph-motion'
+" Git in the left-side gutter
+Plug 'airblade/vim-gitgutter'
+
+" Rainbow parenthesis
+Plug 'junegunn/rainbow_parentheses.vim'
+
+" Highlight trailing spaces - remove them all with :FixWhitespace
+Plug 'bronson/vim-trailing-whitespace'
+
+"------------Look and Feel------------"
+" Status Styles
+Plug 'itchyny/lightline.vim'
+
+" ColorScheme - Challenger-deep
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+
+" Color Scheme - Iceberg
+Plug 'cocopon/iceberg.vim'
+
+" Color Scheme - Gotham
+Plug 'whatyouhide/vim-gotham'
+
+" Color Scheme - Deep-space
+Plug 'tyrannicaltoucan/vim-deep-space'
 
 call plug#end()

@@ -21,6 +21,9 @@ set incsearch
 " Don't use Ex mode, use Q for formatting.
 map Q gq
 
+" Copy to and from system clipboard
+set clipboard^=unnamed,unnamedplus
+
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
 " Highlight copied text
@@ -29,6 +32,11 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 " Surround Plugin
 Plug 'tpope/vim-surround'
+" Repeat for Surround
+Plug 'tpope/vim-repeat'
+" Paragraph Motion
+Plug 'dbakker/vim-paragraph-motion'
+
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action

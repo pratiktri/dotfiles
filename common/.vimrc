@@ -16,7 +16,18 @@ set wrap
 set encoding=utf-8
 
 " Status bar
-set laststatus=2
+" set laststatus=2
+" set noshowmode
+
+" Set color
+if !has('gui_running')
+  set t_Co=256
+  set termguicolors
+  hi LineNr ctermbg=NONE guibg=NONE
+endif
+
+" Comments in Grey color and italic
+hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
@@ -71,6 +82,12 @@ set noerrorbells visualbell t_vb=
 " sometimes be convenient.
 set mouse+=a
 
+" Sync vim clipboard with system clipboard
+" Works across Linux, MacOS & Windows
+" set clipboard^=unnamed,unnamedplus
+set clipboard+=unnamedplus
+set paste
+
 " Try to prevent bad habits like using the arrow keys for movement. This is
 " not the only possible bad habit. For example, holding down the h/j/k/l keys
 " for movement, rather than using more efficient movement commands, is also a
@@ -95,3 +112,7 @@ nnoremap <C-u> <C-u>zz
 if filereadable(expand("~/.vimrc.plug"))
 	source ~/.vimrc.plug
 endif
+
+" let g:lightline = { 'colorscheme': 'gotham'}
+let g:lightline = { 'colorscheme': 'deepspace'}
+colorscheme deep-space

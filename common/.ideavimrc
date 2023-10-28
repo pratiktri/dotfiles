@@ -36,7 +36,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Paragraph Motion
 Plug 'dbakker/vim-paragraph-motion'
-
+" Git gutter icons
+Plug 'airblade/vim-gitgutter',
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action

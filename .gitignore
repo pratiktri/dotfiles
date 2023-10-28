@@ -55,7 +55,7 @@ Temporary Items
 !.vscode/extensions/**/*.json # Only json files inside the .vscode/extensions/ folder
 
 # Intellij IDE Artifacts
-.idea/
+**.idea/
 *.imi
 *.jar
 *.tar
@@ -69,6 +69,7 @@ tasks/
 # ---- Programming Languages ----
 # Ignore all downloaded node modules
 node_modules/*
+**lock.json
 
 # Ignore all minified js files
 *.min.js

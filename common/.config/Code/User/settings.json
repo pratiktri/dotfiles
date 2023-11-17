@@ -2,11 +2,11 @@
     // Global
     "update.mode": "manual",
     "workbench.settings.editor": "json",
-    //
+
     // Privacy
     "telemetry.telemetryLevel": "off",
     "extensions.ignoreRecommendations": true,
-    //
+
     // Editor
     "editor.fontSize": 21, // Increase the Editor's font to offset
     "window.zoomLevel": -1, // Reduces the Activity Bar size
@@ -28,13 +28,13 @@
     "files.autoSaveDelay": 1000,
     "diffEditor.renderSideBySide": true,
     "diffEditor.ignoreTrimWhitespace": false,
-    //
+
     // Editor Font
     "editor.fontFamily": "FuraCode Nerd Font",
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "FuraCode Nerd Font",
     "terminal.integrated.fontSize": 20,
-    //
+
     // Workbench - Everything that surrounds the editor
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "left",
@@ -45,14 +45,10 @@
     "bookmarks.navigateThroughAllFiles": true,
     "window.menuBarVisibility": "compact",
     "explorer.confirmDragAndDrop": false,
-    //
-    // Screencast Options
-    "screencastMode.verticalOffset": 5,
-    "screencastMode.fontSize": 45,
-    //
+
     // Debugging
     "debug.toolBarLocation": "docked",
-    //
+
     // Prettier Plugin
     "prettier.tabWidth": 4,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -64,7 +60,7 @@
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    //
+
     // Code Spell Checker Plugin
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.allowCompoundWords": true,
@@ -115,12 +111,12 @@
         "umount",
         "unmount"
     ],
-    //
+
     // Shell check plugin
     "shellcheck.run": "onSave",
     "shellcheck.exclude": ["2181", "2039"],
     "security.workspace.trust.untrustedFiles": "open",
-    //
+
     // Better Comments
     "better-comments.tags": [
         {
@@ -169,30 +165,15 @@
             "italic": false
         }
     ],
-    // ES Lint
-    "eslint.alwaysShowStatus": true,
-    "eslint.run": "onSave",
-    //
+
     // JavaScript
     "typescript.suggest.paths": false,
-    //
+
     // Git
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "git.confirmSync": false,
-    // GetLens
-    "gitlens.hovers.currentLine.over": "line",
-    "gitlens.advanced.telemetry.enabled": false,
-    "gitlens.statusBar.reduceFlicker": true,
-    "gitlens.blame.avatars": false,
-    "gitlens.currentLine.uncommittedChangesFormat": "✏️ ${ago}",
-    "gitlens.codeLens.enabled": false,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.views.branches.branches.layout": "list",
-    //
-    // Golang
-    "go.useLanguageServer": true,
-    "go.formatTool": "gofmt",
+
     // Markdown
     "markdownlint.run": "onType",
     "markdown.extension.print.imgToBase64": true,
@@ -213,53 +194,22 @@
         "no-hard-tabs": false,
         "line-length": false
     },
-    // LaTex
-    // https://nevalsar.hashnode.dev/compiling-latex-with-ubuntu-and-visual-studio-code#heading-issues-with-modules-setting-additional-compiler-flags
-    "latex-workshop.latex.tools": [
-        {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-                "--shell-escape",
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-pdf",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
-            ],
-            "env": {}
-        },
-        {
-            "name": "pdflatex",
-            "command": "pdflatex",
-            "args": [
-                "--shell-escape",
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "%DOC%"
-            ],
-            "env": {}
-        },
-        {
-            "name": "bibtex",
-            "command": "bibtex",
-            "args": ["--shell-escape", "%DOCFILE%"],
-            "env": {}
-        }
-    ],
 
-    //
+    // Vim Plugin
+    "vim.foldfix": true,
+    "vim.highlightedyank.enable": true,
+    "vim.hlsearch": true,
+    "vim.leader": " ",
+    "vim.showMarksInGutter": true,
+    "vim.smartRelativeLine": true,
+    "vim.vimrc.enable": true,
+    "vim.useSystemClipboard": true,
+
     // Python
     "python.jediEnabled": false,
     "python.languageServer": "Pylance",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "GitHub Dark",
-    // "theme-by-language.themes": {
-    //     "*": "GitHub Dark",
-    //     "markdown": "Community Material Theme Darker High Contrast"
-    // },
 
     // Rust
     // "rust.build_on_save": true,
@@ -276,6 +226,7 @@
     //
     "terminal.integrated.shell.linux": "/bin/zsh",
     "debug.javascript.autoAttachFilter": "disabled",
-    "debug.onTaskErrors": "debugAnyway"
+    "debug.onTaskErrors": "debugAnyway",
+    "vim.disableExtension": true
     //
 }

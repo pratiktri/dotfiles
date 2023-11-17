@@ -60,6 +60,7 @@ plugins=(
   systemd
   zsh-syntax-highlighting
   zsh-autosuggestions
+  vi-mode
   # exercism
 )
 
@@ -71,7 +72,6 @@ source $ZSH/oh-my-zsh.sh
 POWERLEVEL9K_INSTANT_PROMPT=off
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-# POWERLEVEL9K_SHORTEN_STRATEGY="None"
 POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S %a}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=6
@@ -98,6 +98,9 @@ setopt HIST_IGNORE_SPACE          # Don't add commands that start with whitespac
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# enable vi-mode
+bindkey -v
 
 # Setup path and export variables
 [[ ! -f ~/.env ]] || source ~/.env

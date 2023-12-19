@@ -1,0 +1,172 @@
+" Load the plugins
+" This being the 1st line in the config file,
+" makes it possible to configure plugins any place in the file.
+call plug#begin('~/.vim/plugged')
+    Plug 'tpope/vim-fugitive' "Fugitive Vim GitHub Wrapper
+    Plug 'tpope/vim-surround' "Surround Plugin
+    Plug 'tpope/vim-repeat' "Repeat for the surround plugin
+    Plug 'tpope/vim-commentary' "Surround Plugin
+    Plug 'tpope/vim-sensible' "Sensible options
+    Plug 'rstacruz/vim-closer' "Auto-close brackets
+    Plug 'machakann/vim-highlightedyank' "Highlight Yank
+    Plug 'dbakker/vim-paragraph-motion' "Paragraph Motion
+    Plug 'airblade/vim-gitgutter' "Git in the left-side gutter
+    Plug 'junegunn/rainbow_parentheses.vim' "Rainbow parenthesis
+    Plug 'easymotion/vim-easymotion' "Easy Motion to quickly jump across the buffer
+    Plug 'preservim/nerdtree' "Nerd Tree
+    Plug 'kshenoy/vim-signature' "Show gutter icons for Vim marks
+    " Plug 'unblevable/quick-scope' "Quick Scope
+    " Plug 'bronson/vim-trailing-whitespace' "Highlight trailing spaces, remove them all with :FixWhitespace
+    "------------Style Plugins------------"
+    " Status Styles
+    Plug 'itchyny/lightline.vim'
+    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } "ColorScheme - Challenger-deep
+    Plug 'cocopon/iceberg.vim' "Color Scheme - Iceberg
+    Plug 'whatyouhide/vim-gotham' "Color Scheme - Gotham
+    Plug 'tyrannicaltoucan/vim-deep-space' "Color Scheme - Deep-space
+call plug#end()
+
+" ------- Look and Feel ----------------
+" let g:lightline = { 'colorscheme': 'gotham'}
+let g:lightline = { 'colorscheme': 'deepspace'}
+colorscheme deep-space
+
+" Set color
+if !has('gui_running')
+  set t_Co=256
+  set termguicolors
+  hi LineNr ctermbg=NONE guibg=NONE
+endif
+
+" ------- Making Vim an IDE ----------------
+" Better autocompletes
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+set complete+=kspell
+
+" Comments in Grey color and italic
+hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
+
+" Highlight and remove trailing blank spaces on save
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWritePre * %s/\s\+$//e
+
+" Turn on syntax highlighting.
+syntax on
+
+" Highlight matching pairs of [] {} ()
+set showmatch
+
+" Make sure tabs are 4 character wide
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
+set autoindent
+set smartindent
+
+" ------- Vim Related ----------------
+" Auto reload .vimrc
+autocmd! bufwritepost ~/.vim/.vimrc source %
+
+" Show line numbers
+set number
+
+" Relative line numbers
+set relativenumber
+
+" Wrap text
+set wrap
+
+" Status bar
+" set laststatus=2
+" set noshowmode
+
+" Encoding
+set encoding=utf-8
+
+" Unbind some useless/annoying default key bindings.
+nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
+
+" Vim is based on Vi. Setting `nocompatible` switches from the default
+" Vi-compatibility mode and enables useful Vim functionality. This
+" configuration option turns out not to be necessary for the file named
+" '~/.vimrc', because Vim automatically enters nocompatible mode if that file
+" is present. But we're including it here just in case this config file is
+" loaded some other way (e.g. saved as `foo`, and then Vim started with
+" `vim -u foo`).
+set nocompatible
+
+" Disable the default Vim startup message.
+set shortmess+=I
+
+" Normally, backspace works only if you have made an edit. This fixes that.
+set backspace=indent,eol,start
+
+" A line to specify 80 column limit
+" setlocal colorcolumn=80
+
+" Vim, by default, won't let you jump to a different file without saving the
+" current one. With the below, unsaved files are just hidden.
+set hidden
+
+" This setting makes search case-insensitive when all characters in the string
+" being searched are lowercase. However, the search becomes case-sensitive if
+" it contains any capital letters. This makes searching more convenient.
+set ignorecase
+set smartcase
+
+" Enable searching as you type, rather than waiting till you press enter.
+set incsearch
+
+" Highlight search pattern
+set hlsearch
+
+" Disable audible bell because it's annoying.
+set noerrorbells visualbell t_vb=
+
+" Enable mouse support. You should avoid relying on this too much, but it can
+" sometimes be convenient.
+set mouse+=a
+
+" No header spam in netrw
+let g:netrw_banner=0
+
+" Display directory in tree style in netrw
+let g:netrw_liststyle=3
+
+" Sync vim clipboard with system clipboard
+" Works across Linux, MacOS & Windows
+set clipboard^=unnamed,unnamedplus
+
+" ------- Remap Keybindings ----------------
+" Disable left, right, up and down keys
+" In normal mode...
+nnoremap <Left>  :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
+" ...and in insert mode
+inoremap <Left>  <ESC>:echoe "Use h"<CR>
+inoremap <Right> <ESC>:echoe "Use l"<CR>
+inoremap <Up>    <ESC>:echoe "Use k"<CR>
+inoremap <Down>  <ESC>:echoe "Use j"<CR>
+
+" Center the cursor when moving through file
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
+nnoremap ]s ]szz
+
+" Make space-bar the leader-key
+let mapleader = " "
+
+" Map easymotion Plugin to <Leader>j
+map <leader>j <Plug>(easymotion-s)
+
+" Map nerdtree to <Leader>e
+map <leader>e :NERDTreeToggle<CR>

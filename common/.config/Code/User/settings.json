@@ -8,8 +8,7 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 21, // Increase the Editor's font to offset
-    "window.zoomLevel": -1, // Reduces the Activity Bar size
+    "editor.fontSize": 21, // Reduces the Activity Bar size
     "editor.cursorWidth": 4,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",

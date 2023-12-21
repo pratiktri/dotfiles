@@ -1,5 +1,10 @@
+""""""""""""""""""""""""""""""""""""""
+"
+" Get source common configs from VIM
+"
+""""""""""""""""""""""""""""""""""""""
 let $VIMDIR="$HOME/.vim"
-let $VIMRC="$VIMDIR/vimrc"
+let $NVIMDIR="$HOME/.config/nvim"
 
 " Load plugins
 source $VIMDIR/plugins.vim
@@ -7,7 +12,7 @@ source $VIMDIR/plugins.vim
 " Load VIM Configurations
 source $VIMDIR/configs.vim
 
-" Load Keybindings
+" Load Keybindings from VIM
 source $VIMDIR/key_maps.vim
 
 " Save session files to $HOME/.vim/session directory
@@ -20,20 +25,4 @@ let g:session_dir="$VIMDIR/session"
 """"""""""""""""""""""""""""""""
 let g:lightline = { 'colorscheme': 'deepspace' }
 colorscheme deep-space
-
-" Set color
-if !has('gui_running')
-  set t_Co=256
-  set termguicolors
-  hi LineNr ctermbg=NONE guibg=NONE
-endif
-
-""""""""""""""""""""""""""""""""
-"
-" Quality of life improvements
-"
-""""""""""""""""""""""""""""""""
-
-" Auto reload .vimrc
-autocmd! bufwritepost $VIMRC source %
 

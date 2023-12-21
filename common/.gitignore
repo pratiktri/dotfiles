@@ -47,6 +47,9 @@ Temporary Items
 *.dylib
 
 # ---- IDE ----
+# Vim Artifacts
+*.swp
+
 # VS Code Artifacts
 .vscode
 **state.vscdb
@@ -96,3 +99,4 @@ lerna-debug.log*
 **/contents/images
 **/contents/fonts
 *kpluginindex.json
+

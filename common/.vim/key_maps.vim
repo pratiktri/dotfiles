@@ -36,6 +36,9 @@ nnoremap <Leader>/ :call clearmatches()<CR>:noh<CR>
 " Make space-bar the leader-key
 let mapleader = " "
 
+" Changes the pwd to the opened file's directory
+nnoremap <leader>cd :lcd %:h<CR>
+
 " Map easymotion Plugin to <Leader>j
 map <leader>j <Plug>(easymotion-s)
 
@@ -44,7 +47,4 @@ map <leader>j <Plug>(easymotion-s)
 nnoremap <leader>e :lcd %:h<CR> :NERDTreeToggleVCS<CR>
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 20
-
-" Changes the pwd to the opened file's directory
-nnoremap <leader>cd :lcd %:h<CR>
 

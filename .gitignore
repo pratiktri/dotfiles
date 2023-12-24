@@ -63,6 +63,9 @@ Temporary Items
 # Vim Artifacts
 *.swp
 
+# NVIM Artifacts
+*.luarc.json
+
 resharper-host/
 tasks/
 

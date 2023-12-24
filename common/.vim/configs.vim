@@ -8,6 +8,7 @@ set shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 set autoindent smartindent
 
 syntax on " syntax highlighting.
+set cursorline " Hightlight cursor line
 set showmatch " Highlight matching braces
 set ls=2 " Show a status line
 set wrap " Wrap text

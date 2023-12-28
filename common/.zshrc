@@ -113,8 +113,8 @@ PATH=$(pyenv root)/shims:$PATH
 
 # Aliases
 [[ ! -f ~/.aliases ]] || source ~/.aliases
-[[ ! -f ~/.mac_aliases ]] || source ~/.mac_aliases
-[[ ! -f ~/.neon_aliases ]] || source ~/.neon_aliases
+[[ ! -f ~/.aliases_mac ]] || source ~/.aliases_mac
+[[ ! -f ~/.aliases_neon ]] || source ~/.aliases_neon
 [[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
 
 # nvm Setup

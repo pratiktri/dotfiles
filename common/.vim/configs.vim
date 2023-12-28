@@ -2,39 +2,62 @@
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 set complete+=kspell
+set complete-=i
+set completeopt="menuone,noselect"
 
 " Make sure tabs are 4 character wide
-set shiftwidth=4 tabstop=4 softtabstop=4 expandtab
-set autoindent smartindent
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab smarttab
+set autoindent smartindent breakindent
 
 syntax on " syntax highlighting.
+syntax enable
 set cursorline " Hightlight cursor line
 set showmatch " Highlight matching braces
 set ls=2 " Show a status line
 set wrap " Wrap text
 set wildmenu " Makes the ex command mode autocomplete paths with Tab
 set number " Show line numbers
+set ruler
 set relativenumber " Relative line numbers
 set shortmess+=I " Disable the default Vim startup message.
 set noerrorbells visualbell t_vb= " Disable audible bell because it's annoying.
 set mouse+=a " Enable mouse support
 set encoding=utf-8 " Encoding
+set autoread
+set nrformats-=octal
+set formatoptions+=j
+set display+=lastline
+set display+=truncate
+set history=1000
+set tabpagemax=50
+set viminfo^=!
+set sessionoptions-=options
+set viewoptions-=options
+set nolangremap
+set list
+set signcolumn=yes
+set scrolloff=5
+set isfname+={,},@-@
+set updatetime=50
+
+" Enable undofile and save them in ~/.vim/undo
+set undofile " Enable undofiles
+set undodir=$HOME/.vim/undo// " Save in each project's root
+set directory^=$HOME/.vim/swap// " All swap files at the one place please
 
 " Vim, by default, won't let you jump to a different file without saving the
 " current one. With the below, unsaved files are just hidden.
 set hidden
 
-" Enable searching as you type, rather than waiting till you press enter.
-" Highlight search pattern
-" Intelligently handle cases in search
+" Enable searching as you type, rather than waiting till you press enter. Highlight search pattern. Intelligently handle cases in search.
 set incsearch hlsearch ignorecase smartcase
 
 " Comments in Grey color and italic
 hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
 
 " Highlight and remove trailing blank spaces on save
-highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd BufWritePre * %s/\s\+$//e
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
@@ -49,8 +72,7 @@ set nocompatible
 " Normally, backspace works only if you have made an edit. This fixes that.
 set backspace=indent,eol,start
 
-" Sync vim clipboard with system clipboard
-" Works across Linux, MacOS & Windows
+" Sync vim clipboard with system clipboard. Works across Linux, MacOS & Windows.
 if has("mac")
     set clipboard+=unnamed
 else
@@ -62,5 +84,6 @@ if !has('gui_running')
   set t_Co=256
   set termguicolors
   hi LineNr ctermbg=NONE guibg=NONE
+  set termguicolors
 endif
 

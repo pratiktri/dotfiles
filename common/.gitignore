@@ -1,3 +1,23 @@
+# ---- KDE Neon ----
+# KDE directory preferences
+.directory
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
 # ---- macOS ----
 # General
 .DS_Store
@@ -26,32 +46,14 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# ---- KDE Neon ----
-# KDE directory preferences
-.directory
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
 # ---- IDE ----
 # Vim Artifacts
-*.swp
+**.swp
+lazy-lock.json
+.luarc.json
 
 # VS Code Artifacts
-.vscode
+/.vscode/
 **state.vscdb
 **state.vscdb.backup
 .vscode/extensions/** # Ignore all Files under .vscode/extensions/
@@ -62,10 +64,6 @@ Temporary Items
 *.imi
 *.jar
 *.tar
-
-# Vim Artifacts
-*.swp
-
 resharper-host/
 tasks/
 

@@ -15,22 +15,15 @@ let g:session_dir="$VIMDIR/session"
 
 """"""""""""""""""""""""""""""""
 "
-" LOOKS
+" THEME
 "
 """"""""""""""""""""""""""""""""
 let g:lightline = { 'colorscheme': 'deepspace' }
 colorscheme deep-space
 
-" Set color
-if !has('gui_running')
-  set t_Co=256
-  set termguicolors
-  hi LineNr ctermbg=NONE guibg=NONE
-endif
-
 """"""""""""""""""""""""""""""""
 "
-" Quality of life improvements
+" VIM SPECIFIC CONFIG
 "
 """"""""""""""""""""""""""""""""
 

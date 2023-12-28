@@ -5,8 +5,8 @@ alias sb="source ~/.bashrc"
 alias bashreload="source ~/.bashrc"
 alias sz="source ~/.zshrc"
 alias zshreload="source ~/.zshrc"
-alias bashrc="${EDITOR:-nano} +116 ~/.bashrc"
-alias zshrc="${EDITOR:-nano} ~/.zshrc"
+alias bashrc="${EDITOR:-vim} +116 ~/.bashrc"
+alias zshrc="${EDITOR:-vim} ~/.zshrc"
 alias free="free -ht"
 alias type="type -a"
 alias grep='grep --color=auto'
@@ -14,6 +14,8 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
 alias untar='tar -zxvf '
+alias v=nvim
+alias n=nvim
 
 url_encode(){
     python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
@@ -30,9 +32,10 @@ alias hsi="histsearch"
 alias ~="cd ~"
 alias ..="cd .."
 alias ...='cd ../../../'             # Go back 3 directory levels
-alias ..4='cd ../../../../'          # Go back 4 directory levels
-alias ..5='cd ../../../../../'       # Go back 5 directory levels
-alias ..6='cd ../../../../../../'    # Go back 6 directory levels
+alias cd_root='cd $(git rev-parse --show-toplevel 2>/dev/null || echo ".")'
+alias cd_git_root=cd_root
+alias c=clear
+alias cl=clear
 alias lsc='ls --color=auto'
 alias ll='lsc -alhF'
 alias la='lsc -Ah'

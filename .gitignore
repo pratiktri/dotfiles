@@ -1,3 +1,23 @@
+# ---- KDE Neon ----
+# KDE directory preferences
+.directory
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
 # ---- macOS ----
 # General
 .DS_Store
@@ -26,56 +46,44 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# ---- KDE Neon ----
-# KDE directory preferences
-.directory
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
 # ---- IDE ----
+# Vim Artifacts
+**.swp
+lazy-lock.json
+.luarc.json
+
 # VS Code Artifacts
-.vscode
+/.vscode/
 **state.vscdb
 **state.vscdb.backup
 .vscode/extensions/** # Ignore all Files under .vscode/extensions/
 !.vscode/extensions/**/*.json # Only json files inside the .vscode/extensions/ folder
 
 # Intellij IDE Artifacts
-**.idea/
+.idea/
 *.imi
 *.jar
 *.tar
-
-# Vim Artifacts
-*.swp
-
-# NVIM Artifacts
-*.luarc.json
-
 resharper-host/
 tasks/
 
 # ---- Programming Languages ----
 # Ignore all downloaded node modules
 node_modules/*
-**lock.json
-
+dist
+dist-ssr
+*.local
 # Ignore all minified js files
 *.min.js
+
+# Log files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Other Files to ignore
 **app_stat_v2.db
@@ -89,3 +97,4 @@ node_modules/*
 **/contents/images
 **/contents/fonts
 *kpluginindex.json
+

@@ -1,8 +1,10 @@
--- TODO: Todo-Comments: Highlight TODOs
--- TODO: Neo-Tree: reduce size, hidden visible by default, set vcs root at pwd+cwd
--- TODO: Telescope: open in a new window -> vertial & horizontal
--- TODO: LSPConfig: Standardize keymaps to <leader>d[x]
--- TODO: Note what exactly Treesitter does???
+-- TODO: Git: Add a plugin
+-- TODO: System install and setup lazygit
+-- TODO: Setup auto complete
+-- TODO: Provide description to each keymap
+-- TODO: tpope/vim-obsession configure to work with tmux-resurrection
+-- TODO: Check why Nvim can't find todos
+-- TODO: Put all plugin configs inside /after/plugin directory
 
 -- Loads the system's Vim configs: keeps the VIM & NVim configs in sync
 local vimrc = vim.fn.stdpath("config") .. "/vim-sync.vim"
@@ -23,9 +25,15 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup("plugins", {
     change_detection = {
         enabled = true,
         notify = false
-    }
+    },
 })
+
+require("configs.autocommands")
+require("configs.configs")
+require("configs.keymaps")
+

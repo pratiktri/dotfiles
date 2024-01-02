@@ -6,7 +6,7 @@ return {
     font = wezterm.font_with_fallback({
         -- "JetBrains Mono",
         "JetBrainsMono Nerd Font",
-        { family = "Symbols Nerd Font Mono", scale = 0.75 }
+        { family = "Symbols Nerd Font Mono", scale = 0.75 },
     }),
     window_decorations = "RESIZE",
     enable_tab_bar = true,
@@ -36,7 +36,7 @@ return {
             event = { Up = { streak = 1, button = "Left" } },
             mods = "CTRL",
             action = wezterm.action.OpenLinkAtMouseCursor,
-        }
+        },
     },
 
     force_reverse_video_cursor = true,

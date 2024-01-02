@@ -30,3 +30,6 @@ colorscheme deep-space
 " Auto reload .vimrc
 autocmd! bufwritepost $VIMRC source %
 
+" Save inside vim config directory
+set undodir=$VIMDIR/undo//
+

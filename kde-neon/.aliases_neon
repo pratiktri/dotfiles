@@ -1,15 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Directories and Directory listings
 dir_size(){
-	local dir
-	if [[ -z "$1" ]]; then
-		dir="${PWD}"
-	else
-		dir="$1"
-	fi
+    local dir
+    if [[ -z "$1" ]]; then
+        dir="${PWD}"
+    else
+        dir="$1"
+    fi
 
-	du -ah "${dir}" --max-depth=1 | sort -hr
+    du -ah "${dir}" --max-depth=1 | sort -hr
 }
 
 
@@ -42,38 +42,38 @@ alias fpmreset73="sudo systemctl restart php7.3-fpm"
 alias fpmreset74="sudo systemctl restart php7.4-fpm"
 
 f2b_banned_ips() {
-	local provided_jail=$1
+    local provided_jail=$1
 
-	if [[ -n "${provided_jail// /}" ]]; then
-		for ip in $(sudo fail2ban-client status "${provided_jail}" | tail -1 | sed 's/[^:]*://;s/\s*//')
-		do
-			printf "%17s\n" "$ip"
-		done
-	else
-		local total_ips_banned=0
-		for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
-		do
-			local banned_ip_count
-			banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
+    if [[ -n "${provided_jail// /}" ]]; then
+        for ip in $(sudo fail2ban-client status "${provided_jail}" | tail -1 | sed 's/[^:]*://;s/\s*//')
+        do
+            printf "%17s\n" "$ip"
+        done
+    else
+        local total_ips_banned=0
+        for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
+        do
+            local banned_ip_count
+            banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
 
-			if [[ "${banned_ip_count}" -gt 0 ]]; then
-				echo "${JAIL}: ${banned_ip_count}"
+            if [[ "${banned_ip_count}" -gt 0 ]]; then
+                echo "${JAIL}: ${banned_ip_count}"
 
-				for ip in $(sudo fail2ban-client status "${JAIL}" | tail -1 | sed 's/[^:]*://;s/\s*//')
-				do
-					printf "%17s\n" "[$ip]"
-				done
+                for ip in $(sudo fail2ban-client status "${JAIL}" | tail -1 | sed 's/[^:]*://;s/\s*//')
+                do
+                    printf "%17s\n" "[$ip]"
+                done
 
-				total_ips_banned=$(( total_ips_banned + banned_ip_count ))
+                total_ips_banned=$(( total_ips_banned + banned_ip_count ))
 
-				echo
-			else
-				echo -e "${JAIL}:\n    -None-\n"
-			fi
-		done
+                echo
+            else
+                echo -e "${JAIL}:\n    -None-\n"
+            fi
+        done
 
-		echo "Total IPs banned across all jails - ${total_ips_banned}"
-	fi
+        echo "Total IPs banned across all jails - ${total_ips_banned}"
+    fi
 }
 
 f2b_unban_ip() {
@@ -90,7 +90,7 @@ f2b_unban_ip() {
         for JAIL in $(sudo fail2ban-client status | tail -1 | sed 's/[^:]*://;s/\s*//;s/,//g')
         do
             local banned_ip_count
-			banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
+            banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
             if [[ "$banned_ip_count" -gt 0 ]] && [[ $(sudo fail2ban-client status "${JAIL}") == *"${ip_to_unban}"* ]]; then
                 local found_ip="true"
                 echo "Unbanning from ${JAIL}:"
@@ -99,21 +99,21 @@ f2b_unban_ip() {
         done
 
         if [[ -z "${found_ip// /}" ]]; then
-                echo "${ip_to_unban} was not found in any banned lists."
-                echo "No action taken."
+            echo "${ip_to_unban} was not found in any banned lists."
+            echo "No action taken."
         fi
     fi
 }
 
 f2b_ban_an_ip(){
-	local ip_to_ban=$1
-	local ban_jail=$2
+    local ip_to_ban=$1
+    local ban_jail=$2
 
-	if [[ ( -z "${ip_to_ban// /}" ) || ( -z "${ban_jail// /}" ) ]]; then
-		echo "Please provide an IP and a Jail (in that order)"
-		echo -e "eg -\n\t f2b_ban_an_ip 1.1.1.1 sshd"
-		return 1
-	fi
+    if [[ ( -z "${ip_to_ban// /}" ) || ( -z "${ban_jail// /}" ) ]]; then
+        echo "Please provide an IP and a Jail (in that order)"
+        echo -e "eg -\n\t f2b_ban_an_ip 1.1.1.1 sshd"
+        return 1
+    fi
 
-	sudo fail2ban-client set "${ban_jail}" banip "${ip_to_ban}" > /dev/null && echo "Ban successful"
+    sudo fail2ban-client set "${ban_jail}" banip "${ip_to_ban}" > /dev/null && echo "Ban successful"
 }

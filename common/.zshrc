@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -51,17 +51,17 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(
-  git
-  docker
-  history
-  per-directory-history
-  perms
-  sudo
-  systemd
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-  vi-mode
-  # exercism
+    git
+    docker
+    history
+    per-directory-history
+    perms
+    sudo
+    systemd
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    vi-mode
+    # exercism
 )
 
 source $ZSH/oh-my-zsh.sh

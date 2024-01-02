@@ -11,9 +11,9 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = "<C-CR>",
+                        init_selection = "<C-A-space>",
+                        node_incremental = "<C-A-space>",
+                        scope_incremental = "<C-A-CR>",
                         node_decremental = "<bs>",
                     }
                 }
@@ -24,7 +24,9 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         config = function()
-            require("ibl").setup({})
+            require("ibl").setup({
+                indent = { char = "┆" },
+            })
         end
     },
     -- { "windwp/nvim-autopairs" },
@@ -36,5 +38,3 @@ return {
     --     end
     -- },
 }
-
-

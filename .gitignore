@@ -77,13 +77,8 @@ dist-ssr
 *.min.js
 
 # Log files
-logs
+..logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
 # Other Files to ignore
 **app_stat_v2.db

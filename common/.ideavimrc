@@ -6,6 +6,9 @@
 "source ~/.vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source ~/.vim/configs.vim
+source ~/.vim/key_maps.vim
+
 " Set Tabs to 4 characters
 set expandtab
 set tabstop=4
@@ -19,13 +22,8 @@ set incsearch                     " show search results while typing
 set wrapscan                      " searches wrap around the end of the file
 
 " Common settings
-set number                        " Show current line number
-set relativenumber                " Show relative line numbers
 set gdefault                      " substitute all occurrences in line
-set history=10000                 " command line history
-set scrolloff=5 sidescrolloff=10  " Keep some line before and after the cursor visible
 set clipboard^=unnamed,unnamedplus,ideaput " Copy to and from system clipboard
-set nrfomats+=alpha,bin,octal,hex " Useful for auto incrementing
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enabled plugins
@@ -41,30 +39,15 @@ Plug 'tpope/vim-repeat'                 " Repeat for Surround
 " Plug 'terryma/vim-multiple-cursors'     " mc (selects), mx (skips), mp (previous)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" To see a list of all available :actions -> :actionlist
-    " Or select "IdeaVim: Track Action Ids" -> Copy the action id required
-" Keymaps
-let mapleader = " "
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
 " Map <leader>d to start debug
 "map <leader>d <Action>(Debug)
 " Map \b to toggle breakpoint
 "map \b <Action>(ToggleLineBreakpoint)
 
-" Center the cursor when doing 1/2 page down and page up
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-
 " Multiple Cursors
 map mc <A-n>
 map mx <A-x>
 map mp <A-p>
-
-" Clear search highlighting
-nnoremap <leader>/ :nohls<return><esc>
 
 " Find/Open file
 nmap <leader>of :action GotoFile<CR>

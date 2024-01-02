@@ -1,2 +1,3 @@
--- Nvim Specific Configs that don't apply to VIM
+vim.opt.undodir = vim.fn.stdpath("config") .. "/undo"
+vim.opt.backupdir = vim.fn.stdpath("config") .. "/backup/"
 

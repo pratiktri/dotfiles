@@ -58,9 +58,10 @@ map <leader>j <Plug>(easymotion-s)
 " Map nerdtree to <Leader>e
 " Changes the pwd and opens the VCS root
 nnoremap <leader>e :tcd %:h<CR> :NERDTreeToggleVCS<CR>
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeWinSize = 25
 
 " <ctrl-q> to save everything and quit Neovim
 nnoremap <C-q> :wqa<CR>
+vnoremap <C-q> :wqa<CR>
+nnoremap <C-s> :wa<CR>
+vnoremap <C-s> :wa<CR>
 

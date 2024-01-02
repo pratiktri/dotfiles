@@ -4,25 +4,28 @@ set omnifunc=syntaxcomplete#Complete
 set complete+=kspell
 set complete-=i
 set completeopt="menuone,noselect"
+set wildmenu        " List and cycle through autocomplete on <Tab>
+set wildignorecase  " Case insensitive path completion
 
 " Make sure tabs are 4 character wide
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab smarttab
 set autoindent smartindent breakindent
 
-syntax on " syntax highlighting.
+syntax on           " Syntax highlighting.
 syntax enable
-set cursorline " Hightlight cursor line
-set showmatch " Highlight matching braces
-set ls=2 " Show a status line
-set wrap " Wrap text
-set wildmenu " Makes the ex command mode autocomplete paths with Tab
-set number " Show line numbers
+set cursorline      " Hightlight cursor line
+set showmatch       " Highlight matching braces
+set noshowmode      " Donot write "--INSERT--" etc.
+set showcmd         " Write out commands on status line
+set ls=2            " Show a status line
+set wrap            " Wrap text
+set number          " Show line numbers
 set ruler
-set relativenumber " Relative line numbers
-set shortmess+=I " Disable the default Vim startup message.
+set relativenumber  " Relative line numbers
+set shortmess+=I    " Disable the default Vim startup message.
 set noerrorbells visualbell t_vb= " Disable audible bell because it's annoying.
-set mouse+=a " Enable mouse support
-set encoding=utf-8 " Encoding
+set mouse+=a        " Enable mouse support
+set encoding=utf-8  " Encoding
 set autoread
 set nrformats-=octal
 set formatoptions+=j
@@ -39,11 +42,10 @@ set signcolumn=yes
 set scrolloff=5
 set isfname+={,},@-@
 set updatetime=50
-
-" Enable undofile and save them in ~/.vim/undo
-set undofile " Enable undofiles
-set undodir=$HOME/.vim/undo// " Save in each project's root
-set directory^=$HOME/.vim/swap// " All swap files at the one place please
+set noswapfile
+set undofile
+set undolevels=10000
+set undoreload=100000
 
 " Vim, by default, won't let you jump to a different file without saving the
 " current one. With the below, unsaved files are just hidden.
@@ -56,8 +58,8 @@ set incsearch hlsearch ignorecase smartcase
 hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
 
 " Highlight and remove trailing blank spaces on save
-match ExtraWhitespace /\s\+$/
 highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 autocmd BufWritePre * %s/\s\+$//e
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
@@ -87,3 +89,6 @@ if !has('gui_running')
   set termguicolors
 endif
 
+" NERDTree Plugin configurations
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeWinSize = 25

@@ -1,10 +1,9 @@
 """"""""""""""""""""""""""""""""""""""
 "
-" Source common configs from VIM
+" Source common keymaps & configs from VIM
 "
 """"""""""""""""""""""""""""""""""""""
 let $VIMDIR="$HOME/.vim"
-let $NVIMDIR="$HOME/.config/nvim"
 
 " Load VIM Configurations
 source $VIMDIR/configs.vim
@@ -14,4 +13,3 @@ source $VIMDIR/key_maps.vim
 
 " Save session files to $HOME/.vim/session directory
 let g:session_dir="$VIMDIR/session"
-

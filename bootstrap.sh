@@ -1,19 +1,19 @@
 #!/bin/sh
 
 usage() {
-  if   [ -n "$1" ]; then
-    echo     ""
-    echo     -e "${CRED}$1${CEND}\n"
-  fi
+    if   [ -n "$1" ]; then
+        echo     ""
+        echo     -e "${CRED}$1${CEND}\n"
+    fi
 
-  echo   "Applies all settings stored in the script's directory to your home directory"
-  echo   ""
-  echo   "Usage: $0 [-q|--quiet] [-l|--create-links]"
-  echo   "  -q,     --quiet              No screen outputs"
-  echo   "  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them"
+    echo   "Applies all settings stored in the script's directory to your home directory"
+    echo   ""
+    echo   "Usage: $0 [-q|--quiet] [-l|--create-links]"
+    echo   "  -q,     --quiet              No screen outputs"
+    echo   "  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them"
 
-  echo   ""
-  echo   "Example: $0 -q --create-links"
+    echo   ""
+    echo   "Example: $0 -q --create-links"
 }
 
 ##################################
@@ -25,26 +25,26 @@ QUIET="n"
 CREATE_LINKS="n"
 
 while [[ "${#}" -gt 0 ]]; do
-  case $1 in
-    -q |   --quiet)
-      QUIET="y"
-      shift
-      ;;
-    -l |   --create-links)
-      CREATE_LINKS="y"
-      shift
-      ;;
-    -h |   --help)
-      echo
-      usage
-      echo
-      exit       0
-      ;;
-    *)
-      usage       "Unknown parameter passed: $1" "h"
-      exit       1
-      ;;
-  esac
+    case $1 in
+        -q |   --quiet)
+            QUIET="y"
+            shift
+            ;;
+        -l |   --create-links)
+            CREATE_LINKS="y"
+            shift
+            ;;
+        -h |   --help)
+            echo
+            usage
+            echo
+            exit       0
+            ;;
+        *)
+            usage       "Unknown parameter passed: $1" "h"
+            exit       1
+            ;;
+    esac
 done
 
 main()  {

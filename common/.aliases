@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Generic
 alias sb="source ~/.bashrc"
@@ -16,6 +16,7 @@ alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home
 alias untar='tar -zxvf '
 alias v=nvim
 alias n=nvim
+alias vim=nvim
 
 url_encode(){
     python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
@@ -58,7 +59,7 @@ alias p1="ping1"
 alias pubip="curl https://ipinfo.io/ip; echo"
 alias speedtest="speedtest-cli --secure"			# needs speedtest-cli installed
 geoip () {
-	curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'
+    curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'
 }
 
 
@@ -66,7 +67,7 @@ geoip () {
 # To use this - Ensure all git server SSH are in ~/.ssh
 alias git_signin='(for i in ~/.ssh/{*github*,*gitea*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
 git_push_all_changes(){
-	git add . && git commit -am "${1}" && git push
+    git add . && git commit -am "${1}" && git push
 }
 
 

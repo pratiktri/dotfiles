@@ -21,3 +21,4 @@ Example: bash ./bootstrap.sh -q --create-links
 I have multiple Linux installations on my machine. Linking it from one place (this repository) keeps things tidy. Also, changes to dotfiles automatically get applied to all the distros.
 
 <!-- TODO: Move as many dotfiles inside ~/.config as possible -->
+

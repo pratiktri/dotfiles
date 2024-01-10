@@ -16,7 +16,6 @@ alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home
 alias untar='tar -zxvf '
 alias v=nvim
 alias n=nvim
-alias vim=nvim
 
 url_encode(){
     python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
@@ -76,3 +75,19 @@ alias tat="tmux a -t"
 alias tls="tmux ls"
 alias tnew="tmux new"
 alias tnewt="tmux new -t"
+
+# Nvim Distro-Switcher
+alias nvim-lazy="NVIM_APPNAME=lazyvim nvim"
+alias nvim-chad="NVIM_APPNAME=nvchad nvim"
+function nvims() {
+    items=$(find -L $HOME/.config -maxdepth 2 -name "init.lua" -type f -execdir sh -c 'pwd | xargs basename' \;)
+    config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+    if [[ -z $config ]]; then
+        echo "Nothing selected"
+        return 0
+    elif [[ $config == "default" ]]; then
+        config=""
+    fi
+    NVIM_APPNAME=$config nvim $@
+}
+

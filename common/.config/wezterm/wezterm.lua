@@ -4,7 +4,6 @@ return {
     color_scheme = "Catppuccin Mocha",
     font_size = 14.0,
     font = wezterm.font_with_fallback({
-        -- "JetBrains Mono",
         "JetBrainsMono Nerd Font",
         { family = "Symbols Nerd Font Mono", scale = 0.75 },
     }),
@@ -12,7 +11,6 @@ return {
     enable_tab_bar = true,
     use_fancy_tab_bar = true,
     hide_tab_bar_if_only_one_tab = true,
-    -- window_background_opacity = 0.99,
     win32_system_backdrop = "Mica",
     macos_window_background_blur = 80,
 

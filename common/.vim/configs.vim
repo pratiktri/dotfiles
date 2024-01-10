@@ -17,13 +17,13 @@ set cursorline      " Hightlight cursor line
 set showmatch       " Highlight matching braces
 set noshowmode      " Donot write "--INSERT--" etc.
 set showcmd         " Write out commands on status line
-set ls=2            " Show a status line
+set laststatus=2    " Show a status line
 set wrap            " Wrap text
 set number          " Show line numbers
 set ruler
 set relativenumber  " Relative line numbers
 set shortmess+=I    " Disable the default Vim startup message.
-set noerrorbells visualbell t_vb= " Disable audible bell because it's annoying.
+set noerrorbells novisualbell t_vb= " Disable audible bell because it's annoying.
 set mouse+=a        " Enable mouse support
 set encoding=utf-8  " Encoding
 set autoread
@@ -46,6 +46,7 @@ set noswapfile
 set undofile
 set undolevels=10000
 set undoreload=100000
+set timeoutlen=500
 
 " Vim, by default, won't let you jump to a different file without saving the
 " current one. With the below, unsaved files are just hidden.
@@ -58,8 +59,8 @@ set incsearch hlsearch ignorecase smartcase
 hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
 
 " Highlight and remove trailing blank spaces on save
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" match ExtraWhitespace /\s\+$/
 autocmd BufWritePre * %s/\s\+$//e
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default

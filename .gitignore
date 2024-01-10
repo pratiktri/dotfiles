@@ -92,3 +92,7 @@ dist-ssr
 **/contents/images
 **/contents/fonts
 *kpluginindex.json
+
+*backup
+*undo
+*sessions

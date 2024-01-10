@@ -9,6 +9,10 @@
 source ~/.vim/configs.vim
 source ~/.vim/key_maps.vim
 
+" Because :noh does not work in Jetbrains
+nnoremap <esc> <esc>
+inoremap <esc> <esc>
+
 " Set Tabs to 4 characters
 set expandtab
 set tabstop=4

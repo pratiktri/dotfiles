@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdtree' "Nerd Tree
     Plug 'tpope/vim-obsession' "Obsessions -> saves sessions
     Plug 'christoomey/vim-tmux-navigator' "Syncs with Tmux pane navigation keymaps
+    Plug 'mbbill/undotree' "Show the undo tree
     "------------Style Plugins------------"
     " Status Styles
     Plug 'itchyny/lightline.vim'

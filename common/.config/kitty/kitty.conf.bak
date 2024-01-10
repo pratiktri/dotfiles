@@ -247,14 +247,13 @@
 #: is the cause of the problem.
 
 #: }}}
-
 font_family JetBrains Mono Nerd Font
-font_size 14
 bold_font auto
 static_font auto
 bold_italic_font auto
-disable_ligatures never
 
+font_size 14
+disable_ligatures never
 ###########################################################
 # From https://erwin.co/kitty-and-nerd-fonts/
 # Symbols Nerd Font complete symbol_map
@@ -422,11 +421,6 @@ cursor_beam_thickness 1
 #: scroll direction.
 
 #: }}}
-
-scrollback_lines 10000
-scrollback_pager_history_size 10
-# scrollback_pager less --chop-long-lines --RAW-CONTROL-CHARS +INPUT_LINE_NUMBER
-scrollback_pager nvim -c 'set ft=man'
 
 #: Mouse {{{
 
@@ -1011,17 +1005,8 @@ enable_audio_bell no
 
 #: }}}
 
-# Hide title bar
-hide_window_decorations yes
 window_border_width 0.2pt
-# New windows open in the same directory as the current window
-map ctrl+shift+enter new_window_with_cwd
-
-enabled_layouts fat:bias=75;full_size=1,stack,tall:bias=50;full_size=2
-map F11 toggle_layout stack
-
-# Open nvim on the current directory with ctrl+shift+o
-map ctrl+shift+o launch --cwd=current --type=tab nvim
+enabled_layouts stack,fat:bias=75;full_size=1,tall:bias=50;full_size=2,vertical,horizontal
 
 #: Tab bar {{{
 
@@ -1358,7 +1343,7 @@ map ctrl+shift+o launch --cwd=current --type=tab nvim
 #: }}}
 
 background_opacity 0.95
-background_blur 65
+background_blur 10
 
 #: Advanced {{{
 
@@ -1653,18 +1638,6 @@ background_blur 65
 #: created by adding more levels separated by ::.
 
 #: }}}
-
-editor nvim
-update_check_interval 0
-
-# Enable kitty scrollback.nvim plugin
-allow_remote_control yes
-listen_on unix:/tmp/kitty
-shell_integration enabled
-action_alias kitty_scrollback_nvim kitten /home/pratik/.local/share/nvim/lazy/kitty-scrollback.nvim/python/kitty_scrollback_nvim.py
-map kitty_mod+h kitty_scrollback_nvim
-map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
-mouse_map kitty_mod+right press ungrabbed combine : mouse_select_command_output : kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
 
 #: OS specific tweaks {{{
 
@@ -2546,6 +2519,6 @@ map ctrl+shift+n nth_window +1
 
 
 # BEGIN_KITTY_THEME
-# GitHub Dark Dimmed
+# Catppuccin-Frappe
 include current-theme.conf
 # END_KITTY_THEME

@@ -207,3 +207,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export QT_PLUGIN_PATH=~/.local/lib/qt/plugins/:
 
 eval "$(ssh-agent -s)"
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init bash)"
+fi

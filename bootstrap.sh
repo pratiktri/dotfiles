@@ -1,21 +1,5 @@
 #!/bin/sh
-
-usage() {
-    if   [ -n "$1" ]; then
-        echo     ""
-        echo     -e "${CRED}$1${CEND}\n"
-    fi
-
-    echo   "Applies all settings stored in the script's directory to your home directory"
-    echo   ""
-    echo   "Usage: $0 [-q|--quiet] [-l|--create-links]"
-    echo   "  -q,     --quiet              No screen outputs"
-    echo   "  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them"
-
-    echo   ""
-    echo   "Example: $0 -q --create-links"
-}
-
+#
 ##################################
 # Parse script arguments
 ##################################
@@ -47,41 +31,20 @@ while [[ "${#}" -gt 0 ]]; do
     esac
 done
 
-main()  {
-
-    # Check if the current os is KDE Neon or Mac
-    # if $(command -v pkcon > /dev/null) || [[ $XDG_CURRENT_DESKTOP == "KDE" ]]; then
-    #   OS="kde-neon"
-    #
-    # else
-    #   OS="macos"
-    # fi
-    if [[ $(uname -s) == *Darwin* ]]; then
-        OS="macos"
-    else
-        OS="kde-neon"
+usage() {
+    if   [ -n "$1" ]; then
+        echo     ""
+        echo     -e "${CRED}$1${CEND}\n"
     fi
 
-    TS=$(date '+%d_%m_%Y-%H_%M_%S')
+    echo   "Applies all settings stored in the script's directory to your home directory"
+    echo   ""
+    echo   "Usage: $0 [-q|--quiet] [-l|--create-links]"
+    echo   "  -q,     --quiet              No screen outputs"
+    echo   "  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them"
 
-    # Switch inside dotfile repository directory
-    cd -P "$(dirname "$0")" || exit
-
-    # Copy all files in "Common" dotfiles to $HOME directory ("~")
-    find "./common" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
-    do
-        local file_target_location="${file/.\/common/$HOME}"
-        local source_file_location="${file/./$PWD}"
-        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
-    done
-
-    # Copy platform specific files to $HOME directory ("~")
-    find "./${OS}" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
-    do
-        local file_target_location="${file/.\/${OS}/$HOME}"
-        local source_file_location="${file/./$PWD}"
-        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
-    done
+    echo   ""
+    echo   "Example: $0 -q --create-links"
 }
 
 place_dotfile_at_target_location() {
@@ -112,6 +75,35 @@ place_dotfile_at_target_location() {
         # echo "cp ${source_file_location} ${target_directory}"
         cp "${source_file_location}" "${target_directory}"  && [[ "$QUIET" == "n" ]] && echo "Copied ${file_target_location}"
     fi
+}
+
+main()  {
+    if [[ $(uname -s) == *Darwin* ]]; then
+        OS="macos"
+    else
+        OS="kde-neon"
+    fi
+
+    TS=$(date '+%d_%m_%Y-%H_%M_%S')
+
+    # Switch inside dotfile repository directory
+    cd -P "$(dirname "$0")" || exit
+
+    # Copy all files in "Common" dotfiles to $HOME directory ("~")
+    find "./common" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
+    do
+        local file_target_location="${file/.\/common/$HOME}"
+        local source_file_location="${file/./$PWD}"
+        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
+    done
+
+    # Copy platform specific files to $HOME directory ("~")
+    find "./${OS}" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
+    do
+        local file_target_location="${file/.\/${OS}/$HOME}"
+        local source_file_location="${file/./$PWD}"
+        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
+    done
 }
 
 main "$@"

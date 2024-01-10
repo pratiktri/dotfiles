@@ -126,3 +126,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 eval "$(ssh-agent -s)" > /dev/null
 ulimit -n 10240
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init zsh)"
+fi

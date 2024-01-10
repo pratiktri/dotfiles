@@ -33,3 +33,9 @@ autocmd! bufwritepost $VIMRC source %
 " Save inside vim config directory
 set undodir=$VIMDIR/undo//
 
+" Map easymotion Plugin to <Leader>j
+map <leader>j <Plug>(easymotion-s)
+
+" Map nerdtree to <Leader>e
+" Changes the pwd and opens the VCS root
+nnoremap <leader>e :tcd %:h<CR> :NERDTreeToggleVCS<CR>

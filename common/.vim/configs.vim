@@ -20,8 +20,8 @@ set showcmd         " Write out commands on status line
 set laststatus=2    " Show a status line
 set wrap            " Wrap text
 set number          " Show line numbers
-set ruler
 set relativenumber  " Relative line numbers
+set ruler
 set shortmess+=I    " Disable the default Vim startup message.
 set noerrorbells novisualbell t_vb= " Disable audible bell because it's annoying.
 set mouse+=a        " Enable mouse support
@@ -31,10 +31,8 @@ set nrformats-=octal
 set formatoptions+=j
 set display+=lastline
 set display+=truncate
-set history=1000
 set tabpagemax=50
 set viminfo^=!
-set sessionoptions-=options
 set viewoptions-=options
 set nolangremap
 set list
@@ -43,9 +41,11 @@ set scrolloff=5
 set isfname+={,},@-@
 set updatetime=50
 set noswapfile
+set history=1000
 set undofile
 set undolevels=10000
 set undoreload=100000
+set sessionoptions-=options
 set timeoutlen=500
 
 " Vim, by default, won't let you jump to a different file without saving the
@@ -89,7 +89,3 @@ if !has('gui_running')
   hi LineNr ctermbg=NONE guibg=NONE
   set termguicolors
 endif
-
-" NERDTree Plugin configurations
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeWinSize = 25

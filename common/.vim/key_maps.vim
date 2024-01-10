@@ -38,8 +38,8 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " Better indenting
 vnoremap <  <gv
-vnoremap >  >gv
 xnoremap <  <gv
+vnoremap >  >gv
 xnoremap >  >gv
 
 " Keeps the cursor at the same place when doing J
@@ -76,10 +76,6 @@ nnoremap <expr> N  'nN'[v:searchforward]
 xnoremap <expr> N  'nN'[v:searchforward]
 onoremap <expr> N  'nN'[v:searchforward]
 
-" Clear search highlights
-nnoremap <esc> :nohlsearch<CR><esc>
-inoremap <esc> :nohlsearch<CR><esc>
-
 " <ctrl-q> to save everything and quit Neovim
 nnoremap <C-q> :wqa<CR>
 vnoremap <C-q> :wqa<CR>
@@ -87,12 +83,12 @@ nnoremap <C-s> :wa<CR>
 vnoremap <C-s> :wa<CR>
 
 " Move cursor in insert mode
-inoremap <C-b> <ESC>^i
-inoremap <C-e> <END>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
+inoremap <M-b> <ESC>^i
+inoremap <M-e> <END>
+inoremap <M-h> <Left>
+inoremap <M-l> <Right>
+inoremap <M-j> <Down>
+inoremap <M-k> <Up>
 
 " Copy entire content of the current buffer
 nnoremap <C-c> :%y+<CR>
@@ -103,4 +99,10 @@ nnoremap <leader>/ :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
 " Changes the pwd to the opened file's directory
 nnoremap <leader>cd :lcd %:h<CR>
 
-map <leader>j <Plug>(easymotion-s)
+
+" Map easymotion Plugin to <Leader>j
+nnoremap <leader>j <Plug>(easymotion-s)
+
+" Show the undo tree
+nnoremap <leader>u :UndotreeToggle<CR>
+

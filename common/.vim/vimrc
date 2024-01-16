@@ -1,4 +1,4 @@
-let $VIMDIR="$HOME/.vim"
+let $VIMDIR=expand($HOME)."/.vim"
 let $VIMRC="$VIMDIR/vimrc"
 
 " Load plugins
@@ -26,6 +26,8 @@ colorscheme deep-space
 " VIM SPECIFIC CONFIG
 "
 """"""""""""""""""""""""""""""""
+" Move the .viminfo file inside .vim directory
+set viminfofile=$VIMDIR/viminfo
 
 " Auto reload .vimrc
 autocmd! bufwritepost $VIMRC source %

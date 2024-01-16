@@ -8,7 +8,7 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 21, // Reduces the Activity Bar size
+    "editor.fontSize": 20, // Reduces the Activity Bar size
     "editor.cursorWidth": 4,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
@@ -29,9 +29,9 @@
     "diffEditor.ignoreTrimWhitespace": false,
 
     // Editor Font
-    "editor.fontFamily": "FuraCode Nerd Font",
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
-    "terminal.integrated.fontFamily": "FuraCode Nerd Font",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
     "terminal.integrated.fontSize": 20,
 
     // Workbench - Everything that surrounds the editor
@@ -226,6 +226,7 @@
     "terminal.integrated.shell.linux": "/bin/zsh",
     "debug.javascript.autoAttachFilter": "disabled",
     "debug.onTaskErrors": "debugAnyway",
-    "vim.disableExtension": true
+    "vim.disableExtension": true,
+    "window.zoomLevel": -1
     //
 }

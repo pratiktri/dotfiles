@@ -1,3 +1,6 @@
+# I'm not using a separate .zprofile; reuse the .profile instead
+[ ! -f "$HOME/.profile" ] || source "$HOME/.profile"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -9,14 +12,9 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/pratik/.oh-my-zsh"
+export ZSH="$XDG_CONFIG_HOME/shell/oh-my-zsh"
+source "${ZSH}/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-POWERLEVEL9K_MODE='awesome-fontconfig'
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -27,7 +25,7 @@ CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -49,44 +47,40 @@ HIST_STAMPS="dd.mm.yyyy"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(
     git
-    docker
-    history
+    # dotenv
+    # colored-man-pages
+    # docker
+    # fd
+    # nvm
     per-directory-history
-    perms
+    # ripgrep
     sudo
-    systemd
     zsh-syntax-highlighting
     zsh-autosuggestions
     vi-mode
     # exercism
 )
+VI_MODE_SET_CURSOR=true
+VI_MODE_CURSOR_INSERT=3
+zstyle ':omz:plugins:nvm' lazy yes
+HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
 
 source $ZSH/oh-my-zsh.sh
+compinit -d "$XDG_CACHE_HOME/zcompdump"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"
 
 # User configuration
-
-##############Pratik POWERLEVEL9K Configs####################################
-POWERLEVEL9K_INSTANT_PROMPT=off
-
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S %a}"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=6
-
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user ssh dir_writable dir background_jobs docker_machine command_execution_time time newline history status root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-
-##############Pratik POWERLEVEL9K Configs END################################
 
 setopt +o nomatch
 
 # Higher History
 export HISTSIZE=10000000
 export SAVEHIST=10000000
+export HISTFILE="$XDG_STATE_HOME/shell/zsh_history"
 setopt EXTENDED_HISTORY           # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY         # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY              # Share history between all sessions.
@@ -94,38 +88,11 @@ setopt HIST_REDUCE_BLANKS         # Remove superfluous blanks before recording e
 setopt HIST_VERIFY                # Don't execute immediately upon history expansion.
 setopt HIST_IGNORE_SPACE          # Don't add commands that start with whitespace to history
 
-##############Bring all the alias and setup scripts################################
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # enable vi-mode
 bindkey -v
 
-# Setup path and export variables
-[[ ! -f ~/.env ]] || source ~/.env
-[[ ! -f ~/.set_path ]] || source ~/.set_path
-[[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-PATH=$(pyenv root)/shims:$PATH
+# [ ! -f "$XDG_CONFIG_HOME/exercism/exercism_completion.zsh" ] || source "$XDG_CONFIG_HOME/exercism/exercism_completion.zsh"
 
-# Aliases
-[[ ! -f ~/.aliases ]] || source ~/.aliases
-[[ ! -f ~/.aliases_mac ]] || source ~/.aliases_mac
-[[ ! -f ~/.aliases_neon ]] || source ~/.aliases_neon
-[[ ! -f ~/.aliases_personal ]] || source ~/.aliases_personal
-
-# nvm Setup
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[[ ! -f ~/.config/exercism/exercism_completion.bash ]] || source ~/.config/exercism/exercism_completion.bash
-
-eval "$(ssh-agent -s)" > /dev/null
-ulimit -n 10240
-if command -v zoxide > /dev/null; then
-  eval "$(zoxide init zsh)"
+if command -v zoxide >/dev/null; then
+	eval "$(zoxide init zsh)"
 fi

@@ -16,6 +16,7 @@ alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home
 alias untar='tar -zxvf '
 alias v=nvim
 alias n=nvim
+alias wget="wget --hsts-file ${WGET_HSTS_FILE}"
 
 url_encode(){
     python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
@@ -36,7 +37,7 @@ alias cd_root='cd $(git rev-parse --show-toplevel 2>/dev/null || echo ".")'
 alias cd_git_root=cd_root
 alias c=clear
 alias cl=clear
-alias lsc='ls --color=auto'
+alias lsc='ls --color=auto --hyperlink=auto'
 alias ll='lsc -alhF'
 alias la='lsc -Ah'
 alias l='lsc -CF'
@@ -77,10 +78,11 @@ alias tnew="tmux new"
 alias tnewt="tmux new -t"
 
 # Nvim Distro-Switcher
-alias nvim-lazy="NVIM_APPNAME=lazyvim nvim"
+alias nvim-lazy=nvim
+alias OldConfig="NVIM_APPNAME=oldconfig nvim"
 alias nvim-chad="NVIM_APPNAME=nvchad nvim"
-function nvims() {
-    items=$(find -L $HOME/.config -maxdepth 2 -name "init.lua" -type f -execdir sh -c 'pwd | xargs basename' \;)
+nvims() {
+    items=$(find -L "$HOME"/.config -maxdepth 2 -name "init.lua" -type f -execdir sh -c 'pwd | xargs basename' \;)
     config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
     if [[ -z $config ]]; then
         echo "Nothing selected"
@@ -90,4 +92,3 @@ function nvims() {
     fi
     NVIM_APPNAME=$config nvim $@
 }
-

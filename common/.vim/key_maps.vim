@@ -99,7 +99,6 @@ nnoremap <leader>/ :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
 " Changes the pwd to the opened file's directory
 nnoremap <leader>cd :lcd %:h<CR>
 
-
 " Map easymotion Plugin to <Leader>j
 nnoremap <leader>j <Plug>(easymotion-s)
 

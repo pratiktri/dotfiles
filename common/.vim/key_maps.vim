@@ -1,3 +1,11 @@
+" Make space-bar the leader-key
+let mapleader = " "
+let maplocalleader = " "
+
+" Don't do anything on pressing space itself
+nnoremap <Space> <Nop>
+vnoremap <Space> <Nop>
+
 " Disable left, right, up and down keys
 " In normal mode...
 nnoremap <Left>  :echoe "Use h"<CR>
@@ -12,14 +20,6 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop>
-
-" Don't do anything on pressing space itself
-nnoremap <Space> <Nop>
-vnoremap <Space> <Nop>
-
-" Make space-bar the leader-key
-let mapleader = " "
-let maplocalleader = " "
 
 " Center the cursor when moving through document
 nnoremap <C-d> <C-d>zz

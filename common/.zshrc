@@ -8,12 +8,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
-export ZSH="$XDG_CONFIG_HOME/shell/oh-my-zsh"
-source "${ZSH}/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
+export ZSH="$XDG_DATA_HOME/shell/oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
+source "${ZSH_CUSTOM}/themes/powerlevel10k/powerlevel10k.zsh-theme"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -50,27 +48,29 @@ HIST_STAMPS="dd.mm.yyyy"
 plugins=(
     git
     # dotenv
+    # dotnet
+    gitignore
     # colored-man-pages
-    # docker
+    docker
     # fd
-    # nvm
     per-directory-history
     # ripgrep
     sudo
     zsh-syntax-highlighting
     zsh-autosuggestions
     vi-mode
-    # exercism
+    exercism
 )
 VI_MODE_SET_CURSOR=true
 VI_MODE_CURSOR_INSERT=3
-zstyle ':omz:plugins:nvm' lazy yes
 HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
 
-source $ZSH/oh-my-zsh.sh
-compinit -d "$XDG_CACHE_HOME/zcompdump"
+# NOTE: Should be exported before sourcing oh-my-zsh, to avoid the dumpfiles on $HOME
+export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh/zcompdump-$HOST
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source $ZSH/oh-my-zsh.sh
+
+# To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"
 
 # User configuration
@@ -91,8 +91,27 @@ setopt HIST_IGNORE_SPACE          # Don't add commands that start with whitespac
 # enable vi-mode
 bindkey -v
 
-# [ ! -f "$XDG_CONFIG_HOME/exercism/exercism_completion.zsh" ] || source "$XDG_CONFIG_HOME/exercism/exercism_completion.zsh"
+# Basic auto/tab completions
+autoload -U compinit
+zstyle ':completion:*' menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zmodload zsh/complist
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+_comp_options+=(globdots)  # Include hidden files
 
-if command -v zoxide >/dev/null; then
-	eval "$(zoxide init zsh)"
-fi
+# [ctrl+r]:replaces shell command search
+# [ctrl+t]:fzf & over the files & directories under the current one & paste it to prompt
+# [alt+c] :fzf & cd into a directory under the current one
+[ -f $XDG_STATE_HOME/shell/fzf.zsh ] && source $XDG_STATE_HOME/shell/fzf.zsh
+
+# FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions" # TODO: Make the completions here work
+
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# TODO: Use fzf + fd + kitty to auto create kitty sessions: use only the following directories
+# 1. /media/pratik/Office/Code/
+# 2. /media/pratik/Projects/LearningProjects/
+# 3. /media/pratik/Projects/PersonalProjects/
+# 4. /media/pratik/Projects/Interviews/
+# - Ignore hidden directories
+# - Put it in one of the aliases
+

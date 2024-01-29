@@ -98,3 +98,5 @@ lerna-debug.log*
 **/contents/fonts
 *kpluginindex.json
 
+*.bak
+nvim_switch/

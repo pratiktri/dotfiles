@@ -1,5 +1,0 @@
-return {
-    {
-        "theprimeagen/refactoring.nvim"
-    },
-}

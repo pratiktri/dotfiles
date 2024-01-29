@@ -23,7 +23,7 @@ alias listening_apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}
 
 
 # Update & Upgrades
-alias up="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove && rustup update && brew upgrade && npm update -g"
+alias up="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove && rustup update && brew upgrade && brew autoremove && npm update -g"
 alias distup="sudo apt dist-upgrade"
 alias autorem="sudo apt autoremove"
 alias update="sudo apt-get update"

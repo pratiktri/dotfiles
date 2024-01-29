@@ -174,14 +174,3 @@ HISTFILESIZE=-1
 HISTCONTROL=ignorespace
 HISTTIMEFORMAT="%H:%M:%S(%z)%d-%b-%y "
 HISTFILE="$XDG_STATE_HOME/shell/bash_history"
-
-[ ! -f "$XDG_CONFIG_HOME/exercism/exercism_completion.bash" ] || source "$XDG_CONFIG_HOME/exercism/exercism_completion.bash"
-
-if command -v zoxide >/dev/null; then
-	eval "$(zoxide init bash)"
-fi
-
-# [ctrl+r]:replaces shell command search
-# [ctrl+t]:fzf & over the files & directories under the current one & paste it to prompt
-# [alt+c] :fzf & cd into a directory under the current one
-[ -f $XDG_STATE_HOME/shell/fzf.bash ] && source $XDG_STATE_HOME/shell/fzf.bash

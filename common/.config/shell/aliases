@@ -5,8 +5,7 @@ alias sb="source ~/.bashrc"
 alias bashreload="source ~/.bashrc"
 alias sz="source ~/.zshrc"
 alias zshreload="source ~/.zshrc"
-alias bashrc="${EDITOR:-vim} +116 ~/.bashrc"
-alias zshrc="${EDITOR:-vim} ~/.zshrc"
+alias zshrc="${EDITOR} ~/.zshrc"
 alias free="free -ht"
 alias type="type -a"
 alias grep='grep --color=auto'
@@ -14,9 +13,10 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
 alias untar='tar -zxvf '
-alias v=nvim
-alias n=nvim
 alias wget="wget --hsts-file ${WGET_HSTS_FILE}"
+
+alias v="${EDITOR}"
+alias snvim="${HOMEBREW_PREFIX}"/bin/nvim # Stable nvim
 
 url_encode(){
     python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
@@ -78,9 +78,8 @@ alias tnew="tmux new"
 alias tnewt="tmux new -t"
 
 # Nvim Distro-Switcher
-alias nvim-lazy=nvim
+alias nvim-lazy="NVIM_APPNAME=nvim-lazy nvim"
 alias OldConfig="NVIM_APPNAME=oldconfig nvim"
-alias nvim-chad="NVIM_APPNAME=nvchad nvim"
 nvims() {
     items=$(find -L "$HOME"/.config -maxdepth 2 -name "init.lua" -type f -execdir sh -c 'pwd | xargs basename' \;)
     config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)

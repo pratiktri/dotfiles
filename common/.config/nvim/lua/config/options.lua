@@ -1,6 +1,6 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
+-- Options available as-is: VimScript,
+--      Options starting with nvim_: lua
+--      To set VimScript options in lua: use either vim.opt (:help vim.opt)
 
 -- Load configs from VIM
 local vim_configs = os.getenv("HOME") .. "/.vim/configs.vim"
@@ -13,3 +13,4 @@ vim.opt.backupdir = vim.fn.stdpath("config") .. "/backup/"
 
 vim.opt.wrap = true
 vim.opt.cursorline = true
+vim.opt.inccommand = "split" -- With :%s command, show the preview in a split instead of inline

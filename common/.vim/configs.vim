@@ -23,7 +23,7 @@ set viewoptions-=options
 set nolangremap             " Do not use non-English keyboards to define keymaps
 set list                    " Show tabs as >, trailing spaces as -, non-breakable space as +
 set signcolumn=yes          " Always show the signs column (before line number column)
-set scrolloff=5           " Cursor always at middle of the screen
+set scrolloff=10            " Cursor always at middle of the screen
 set updatetime=249          " No typing for this millisec -> write to swap file
 set timeoutlen=500          " Multiple keys in keymaps must be pressed in these millisecs
 set noswapfile              " Turn off swapfiles
@@ -64,11 +64,7 @@ autocmd BufWritePre * %s/\s\+$//e
 set backspace=indent,eol,start
 
 " Sync vim clipboard with system clipboard. Works across Linux, MacOS & Windows.
-if has("mac")
-    set clipboard+=unnamed
-else
-    set clipboard^=unnamed,unnamedplus
-endif
+set clipboard^=unnamed
 
 " Set color
 if !has('gui_running')

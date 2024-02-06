@@ -2,13 +2,19 @@ return {
     -- Navigate between NVIM & Tmux splits seamlessly
     { "christoomey/vim-tmux-navigator" },
 
+    -- Navigate between NVIM & kitty splits seamlessly
+    {
+        "knubie/vim-kitty-navigator",
+        build = "cp ./*.py ~/.config/kitty/",
+    },
+
     -- Open Kitty terminal scrollback as buffer
     {
         "mikesmithgh/kitty-scrollback.nvim",
         lazy = true,
         cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
         event = { "User KittyScrollbackLaunch" },
-        version = "^3.0.0",
+        version = "^4.0.0",
         opts = {
             status_window = {
                 icons = { nvim = "" },
@@ -26,13 +32,9 @@ return {
             require("which-key").register({
                 ["<leader>e"] = { name = "[E]xplorer", _ = "which_key_ignore" },
                 ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-                ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
                 ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-                ["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
-                ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
                 ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
                 ["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-                ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
             })
             -- register which-key VISUAL mode
             -- required for visual <leader>hs (hunk stage) to work
@@ -43,20 +45,46 @@ return {
         end,
     },
 
-    -- Session management. This saves your session in the background,
-    -- keeping track of open buffers, window arrangement, and more.
-    -- You can restore sessions when returning through the dashboard.
+    -- Session management. Saves your session in the background
     {
-        -- TODO:
-        -- 1. Find out where they are stored exactly.
-        -- 2. Add them to source control
-        -- 3. Need a startup dashboard with options for loading last session
         "folke/persistence.nvim",
         event = "BufReadPre",
-        opts = { options = vim.opt.sessionoptions:get() },
+        opts = {
+            -- Session files stored at: ~/.config/nvim/sessions/
+            dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"),
+            options = vim.opt.sessionoptions:get()
+            -- NOTE: autocmd to autoload sessions at: ../config/autocmd.lua
+        },
         keys = {
-            { "<leader>sr", function() require("persistence").load() end,                desc = "[R]estore [S]ession" },
-            { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "[R]estore [L]ast Session" },
+            -- Since we are auto-restoring sessions, keymaps aren't required
+            -- { "<leader>sr", function() require("persistence").load() end,                desc = "[R]estore [S]ession" },
+            -- { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "[R]estore [L]ast Session" },
+        },
+    },
+
+    -- Speedup loading large files by disabling some plugins
+    {
+        "LunarVim/bigfile.nvim",
+        lazy = true,
+        opts = {
+            filesize = 2, --2MiB
+            pattern = "*",
+            features = {
+                "indent_blankline",
+                "lsp",
+                "syntax",
+                "treesitter",
+            },
+        },
+    },
+
+    -- Provides tldr on vertical split
+    -- `:Tldr [command]`
+    {
+        "wlemuel/vim-tldr",
+        lazy = true,
+        dependencies = {
+            "nvim-telescope/telescope.nvim"
         },
     },
 }

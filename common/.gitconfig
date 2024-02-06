@@ -1,14 +1,37 @@
 [user]
     email = mail@pratik.live
     name = Pratik Tripathy
+
 [core]
     autocrlf = input
-    editor = code --wait
+    editor = nvim
+    excludesfile = ~/.gitignore
+
+    # Make `git rebase` safer on macOS
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+
 [diff]
     tool = vscode
+
 [difftool "vscode"]
     cmd = "code --wait --diff $LOCAL $REMOTE"
+
+[merge]
+  tool = vscode
+  conflictstyle = diff3
+
+[mergetool]
+  prompt = true
+	keepBackup = false
+
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+
+[log]
+    date = relative
+
 [alias]
     ll = log --pretty=format:'%Cblue%cn (%ce)%Creset commited %Cred%h%Creset %Cgreen%cr%Creset:%n%B'
     unstage = restore --staged .
-
+    cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"

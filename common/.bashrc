@@ -179,10 +179,17 @@ HISTFILE="$XDG_STATE_HOME/shell/bash_history"
 [ ! -f "$XDG_CONFIG_HOME/exercism/exercism_completion.bash" ] || source "$XDG_CONFIG_HOME/exercism/exercism_completion.bash"
 
 if command -v zoxide >/dev/null; then
-	eval "$(zoxide init bash)"
+	eval "$(zoxide init --cmd cd bash)"
 fi
 
 # [ctrl+r]:replaces shell command search
 # [ctrl+t]:fzf & over the files & directories under the current one & paste it to prompt
 # [alt+c] :fzf & cd into a directory under the current one
 [ -f $XDG_STATE_HOME/shell/fzf.bash ] && source $XDG_STATE_HOME/shell/fzf.bash
+
+# Source aliases and shell functions
+for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
+
+# TIP: Following should be executed AFTER the aliases are sourced
+command -v op >/dev/null && bind '"^O":"op\n"' # Fuzzyfind projects and open in nvim
+command -v pnew >/dev/null && bind '"^[o":"pnew\n"' # Create a new project quickly

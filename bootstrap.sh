@@ -13,7 +13,7 @@ QUIET="n"
 CREATE_LINKS="n"
 
 usage() {
-    if   [ -n "$1" ]; then
+    if   [ "$1" != "" ]; then
         echo     ""
         echo     -e "${CRED}$1${CEND}\n"
     fi
@@ -29,32 +29,32 @@ usage() {
 }
 
 place_dotfile_at_target_location() {
-    local source_file_location="$1"
-    local file_target_location="$2"
-    local TS="$3"
+    source_file_location="$1"
+    file_target_location="$2"
+    TS="$3"
 
     # echo "${source_file_location}"
     # echo "${file_target_location}"
 
     # To avoid over writing existing dot file, we rename them
     # Appending the timestamp to file name
-    if [ -f "${file_target_location}" ] || [ -L "${file_target_location}" ]; then
+    if [ -f "$file_target_location" ] || [ -L "$file_target_location" ]; then
         # echo "mv ${file_target_location} ${file_target_location}_${TS}" && [[ "$QUIET" == "n" ]] && echo "Existing dotfile renamed to ${file_target_location}_${TS}"
-        mv "${file_target_location}" "${file_target_location}_${TS}" && [ "$QUIET" = "n" ] && echo "Existing setting renamed to ${file_target_location}_${TS}"
+        mv "$file_target_location" "${file_target_location}_${TS}" && [ "$QUIET" = "n" ] && echo "Existing setting renamed to ${file_target_location}_${TS}"
     fi
 
-    local target_directory
-    target_directory=$(dirname "${file_target_location}")
-    if [ ! -d "${target_directory}" ]; then
-        mkdir -p "${target_directory}" && [ "$QUIET" = "n" ] && echo "Directory ${target_directory} created"
+    target_directory
+    target_directory=$(dirname "$file_target_location")
+    if [ ! -d "$target_directory" ]; then
+        mkdir -p "$target_directory" && [ "$QUIET" = "n" ] && echo "Directory ${target_directory} created"
     fi
 
    if [ "$CREATE_LINKS" = "y" ]; then
         # echo "ln -s ${source_file_location} ${target_directory}"
-        ln -s "${source_file_location}" "${target_directory}" && [ "$QUIET" = "n" ] && echo "Linked ${file_target_location}"
+        ln -s "$source_file_location" "$target_directory" && [ "$QUIET" = "n" ] && echo "Linked ${file_target_location}"
     else
         # echo "cp ${source_file_location} ${target_directory}"
-        cp "${source_file_location}" "${target_directory}"  && [ "$QUIET" = "n" ] && echo "Copied ${file_target_location}"
+        cp "$source_file_location" "$target_directory"  && [ "$QUIET" = "n" ] && echo "Copied ${file_target_location}"
     fi
 }
 
@@ -92,6 +92,7 @@ main()  {
             ;;
         *)
             OS="UNSUPPORTED"
+            ;;
     esac
 
     TS=$(date '+%d_%m_%Y-%H_%M_%S')
@@ -100,20 +101,20 @@ main()  {
     cd -P "$(dirname "$0")" || exit
 
     # Copy all files in "Common" dotfiles to $HOME directory ("~")
-    find "./common" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
-do
-    local file_target_location="${file/.\/common/$HOME}"
-    local source_file_location="${file/./$PWD}"
-    place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
-done
+    find "./common" -type f -not -path '*.DS_Store' -not -path '*.directory' | while read -r file;
+    do
+        file_target_location="${file/.\/common/$HOME}"
+        source_file_location="${file/./$PWD}"
+        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
+    done
 
     # Copy platform specific files to $HOME directory ("~")
-    find "./${OS}" -type f ! -path '*.DS_Store' ! -path '*.directory' -print0 | while IFS= read -r -d '' file;
-do
-    local file_target_location="${file/.\/${OS}/$HOME}"
-    local source_file_location="${file/./$PWD}"
-    place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
-done
+    find "./${OS}" -type f -not -path '*.DS_Store' -not -path '*.directory' | while read -r file;
+    do
+        file_target_location="${file/.\/${OS}/$HOME}"
+        source_file_location="${file/./$PWD}"
+        place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
+    done
 }
 
 main "$@"

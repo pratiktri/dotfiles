@@ -1,6 +1,6 @@
 return {
 
-    { "tpope/vim-fugitive", },
+    { "tpope/vim-fugitive" },
     --{  "tpope/vim-rhubarb" }, --If fugitive.vim is the Git, rhubarb.vim is the Hub.
 
     {
@@ -14,6 +14,7 @@ return {
                 delete = { text = "_" },
                 topdelete = { text = "‾" },
                 changedelete = { text = "~" },
+                untracked = { text = "▎" },
             },
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
@@ -52,6 +53,7 @@ return {
                 end, { desc = "reset git hunk" })
                 -- normal mode
                 map("n", "<leader>ghp", gs.preview_hunk, { desc = "preview git hunk" })
+                map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
 
                 map("n", "<leader>ghr", gs.reset_hunk, { desc = "git reset hunk" })
                 map("n", "<leader>ghb", function()

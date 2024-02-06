@@ -34,12 +34,6 @@ export VISUAL=$EDITOR
 # Manually follow steps from https://steamcommunity.com/app/646570/discussions/1/3935537639868400686
 # To disable ~/.oracle_jre_usage/ from being created
 
-# Source aliases
-[ ! -f "$XDG_CONFIG_HOME/shell/aliases" ] || source "$XDG_CONFIG_HOME/shell/aliases"
-[ ! -f "$XDG_CONFIG_HOME/shell/aliases_mac" ] || source "$XDG_CONFIG_HOME/shell/aliases_mac"
-[ ! -f "$XDG_CONFIG_HOME/shell/aliases_neon" ] || source "$XDG_CONFIG_HOME/shell/aliases_neon"
-[ ! -f "$XDG_CONFIG_HOME/shell/aliases_personal" ] || source "$XDG_CONFIG_HOME/shell/aliases_personal"
-
 if [ "$(uname -s)" = "Linux" ]; then
 	export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nvidia"
 

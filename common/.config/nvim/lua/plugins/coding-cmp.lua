@@ -1,4 +1,7 @@
 return {
+
+    -- TODO: Figureout how to add custom snippets
+
     {
         -- Autocompletion
         "hrsh7th/nvim-cmp",
@@ -10,17 +13,17 @@ return {
             -- Adds LSP completion capabilities
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
 
             -- Adds a number of user-friendly snippets
             "rafamadriz/friendly-snippets",
-
-            -- Autocompletion for commands
-            "hrsh7th/cmp-cmdline",
         },
         config = function()
             -- [[ Configure nvim-cmp ]]
             -- See `:help cmp`
+            -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             local cmp = require("cmp")
+            local defaults = require("cmp.config.default")()
             local luasnip = require("luasnip")
             require("luasnip.loaders.from_vscode").lazy_load()
             luasnip.config.setup({})
@@ -37,58 +40,64 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+
+                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-u>"] = cmp.mapping.scroll_docs(4),
+
                     ["<C-Space>"] = cmp.mapping.complete({}),
+                    ["<C-x>"] = cmp.mapping.abort(),
+
+                    -- Enter to perform the completion
                     ["<CR>"] = cmp.mapping.confirm({
+                        select = true,
+                    }),
+                    ["<S-CR>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
                     }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_locally_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.locally_jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
                 }),
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "path" },
+                    { { name = "buffer" } },
                 },
+                -- experimental = {
+                --     ghost_text = {
+                --         hl_group = "CmpGhostText",
+                --     },
+                -- },
+                sorting = defaults.sorting,
             })
+        end,
+    },
 
-            cmp.setup.cmdline("/", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" },
-                }
-            })
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                }, {
-                    {
-                        name = "cmdline",
-                        option = {
-                            ignore_cmds = { "Man", "!" }
-                        }
-                    }
-                })
-            })
-        end
+    {
+        "L4MON4D3/LuaSnip",
+        keys = {
+            {
+                "<tab>",
+                function()
+                    return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+                end,
+                expr = true,
+                silent = true,
+                mode = "i",
+            },
+            {
+                "<tab>",
+                function()
+                    require("luasnip").jump(1)
+                end,
+                mode = "s",
+            },
+            {
+                "<s-tab>",
+                function()
+                    require("luasnip").jump(-1)
+                end,
+                mode = { "i", "s" },
+            },
+        },
     },
 }

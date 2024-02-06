@@ -47,14 +47,9 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
     git
-    # dotenv
-    # dotnet
     gitignore
-    # colored-man-pages
     docker
-    # fd
     per-directory-history
-    # ripgrep
     sudo
     zsh-syntax-highlighting
     zsh-autosuggestions
@@ -93,6 +88,7 @@ bindkey -v
 
 # Add brew provided autocompletions to path
 [[ ! -d  "/home/linuxbrew/.linuxbrew/share/zsh/site-functions" ]] || FPATH="/home/linuxbrew/.linuxbrew/share/zsh/site-functions:$FPATH"
+
 # Auto/tab completions
 autoload -Uz compinit
 zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
@@ -105,5 +101,11 @@ _comp_options+=(globdots)  # Include hidden files
 # [alt+c] :fzf & cd into a directory under the current one
 [ -f "$XDG_STATE_HOME/shell/fzf.zsh" ] && source "$XDG_STATE_HOME/shell/fzf.zsh"
 
-command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
-command -v zoxide >/dev/null && bindkey -s '^o' 'op\n' # Fuzzyfind projects and open in nvim
+command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd zsh)"
+
+# Source aliases and shell functions
+for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
+
+# TIP: Following should be executed AFTER the aliases are sourced
+command -v op >/dev/null && bindkey -s '^o' 'op\n' # Fuzzyfind projects and open in nvim
+command -v pnew >/dev/null && bindkey -s '^[o' 'pnew\n' # Create a new project quickly

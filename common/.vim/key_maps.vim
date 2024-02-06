@@ -62,6 +62,10 @@ map <C-l> <C-w>l
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
+" Navigate Quickfixs
+nnoremap [q cprev
+nnoremap ]q cnext
+
 " Resize window using <ctrl> arrow keys
 nnoremap <C-Up> :resize +2<CR>
 nnoremap <C-Down> :resize -2<CR>
@@ -83,15 +87,28 @@ nnoremap <C-s> :wa<CR>
 vnoremap <C-s> :wa<CR>
 
 " Move cursor in insert mode
-inoremap <M-b> <ESC>^i
+inoremap <M-a> <ESC>^i
 inoremap <M-e> <END>
 inoremap <M-h> <Left>
 inoremap <M-l> <Right>
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 
+" Ctrl+Backspace to add an undo-point and delete last word
+imap <C-BS> <C-W><C-g>u
+
+" Insert mode: add undo points on "," & "." & ";"
+imap , ,<C-g>u
+imap . .<C-g>u
+imap ; ;<C-g>u
+
 " Copy entire content of the current buffer
 nnoremap <C-c> :%y+<CR>
+
+" Copy to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+" To paste from system clipboard "+p
 
 " Clear search, diff update and redraw
 nnoremap <leader>/ :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
@@ -104,4 +121,3 @@ nnoremap <leader>j <Plug>(easymotion-s)
 
 " Show the undo tree
 nnoremap <leader>u :UndotreeToggle<CR>
-

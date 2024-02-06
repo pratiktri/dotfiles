@@ -53,6 +53,7 @@ return {
                     ensure_installed = {
                         -- These 2 are required for cmdline
                         "regex",
+                        "markdown",
                         "markdown_inline",
                     },
 
@@ -117,8 +118,8 @@ return {
                             floating_preview_opts = {},
                             peek_definition_code = {
                                 -- TIP: Press the shortcut 2 times to enter the floating window
-                                ["<leader>df"] = { query = "@function.outer", desc = "Peek function definition on a popup" },
-                                ["<leader>dF"] = { query = "@class.outer", desc = "Peek class definition on a popup" },
+                                ["<leader>cd"] = { query = "@function.outer", desc = "Peek function definition on a popup" },
+                                ["<leader>cD"] = { query = "@class.outer", desc = "Peek class definition on a popup" },
                             },
                         },
                     },

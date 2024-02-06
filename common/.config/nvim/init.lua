@@ -9,13 +9,18 @@
 -- TIP: Keymap structure:
 -- b: buffer
 -- g: git/github
--- c: Coding things
+-- c: Coding Stuff
 -- e: explorer
--- f: list & find something
+-- l: list & find something
 -- s: Grep/Search over something
 -- x: close/dismiss something
--- r: restore sessions
 -- l: List some stuff
+-- d: [D]iagnostics
+-- t: Test runner stuff
+
+-- TODO:
+-- Reduce noice timeout
+-- WhichKey add hints
 
 -- Load keymaps & options
 require("config")
@@ -42,6 +47,9 @@ require("lazy").setup({
     lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json",
     change_detection = {
         notify = false,
+    },
+    build = {
+        warn_on_override = true,
     },
     performance = {
         rtp = {

@@ -20,16 +20,27 @@ return {
                 function()
                     require("neo-tree.command").execute({ source = "buffers", toggle = true })
                 end,
-                desc = "NeoTree: Open [B]uffer [E]xplorer",
+                desc = "NeoTree: Open [B]buffer [E]xplorer",
             },
         },
+        deactivate = function()
+            vim.cmd([[Neotree close]])
+        end,
+        init = function()
+            if vim.fn.argc(-1) == 1 then
+                local stat = vim.loop.fs_stat(vim.fn.argv(0))
+                if stat and stat.type == "directory" then
+                    require("neo-tree")
+                end
+            end
+        end,
         opts = {
             enable_git_status = true,
             filesystem = {
                 bind_to_cwd = true,
                 follow_current_file = {
                     enabled = true, -- Highlight the current buffer
-                    leave_dirs_open = true,
+                    leave_dirs_open = false,
                 },
                 use_libuv_file_watcher = true, -- Sync file system changes
                 filtered_items = {
@@ -41,25 +52,65 @@ return {
             },
             window = {
                 position = "left",
-                width = 30,                -- Saner window size
+                width = 30, -- Saner window size
                 mappings = {
-                    ["s"] = "open_split",  -- Default vim keymap for horizontal split
-                    ["v"] = "open_vsplit", -- Default vim keymap for vertical split
+                    ["s"] = "open_split", -- horizontal split
+                    ["v"] = "open_vsplit", -- vertical split
+                    ["Y"] = function(state)
+                        local node = state.tree:get_node()
+                        local path = node:get_id()
+                        vim.fn.setreg("+", path, "c")
+                    end,
                 },
             },
             default_component_configs = {
                 indent = {
                     indent_size = 2, -- Compact tree display
+                    with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+                    expander_collapsed = "",
+                    expander_expanded = "",
+                    expander_highlight = "NeoTreeExpander",
                 },
             },
             sources = { "filesystem", "buffers", "git_status", "document_symbols" },
             open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
         },
+        config = function(_, opts)
+            local config = require("config.util")
+
+            local function on_move(data)
+                config.on_rename(data.source, data.destination)
+            end
+
+            local events = require("neo-tree.events")
+            opts.event_handlers = opts.event_handlers or {}
+            vim.list_extend(opts.event_handlers, {
+                { event = events.FILE_MOVED, handler = on_move },
+                { event = events.FILE_RENAMED, handler = on_move },
+            })
+            require("neo-tree").setup(opts)
+            vim.api.nvim_create_autocmd("TermClose", {
+                pattern = "*lazygit",
+                callback = function()
+                    if package.loaded["neo-tree.sources.git_status"] then
+                        require("neo-tree.sources.git_status").refresh()
+                    end
+                end,
+            })
+        end,
     },
 
     -- Automatically highlights other instances of the word under cursor
     {
         "RRethy/vim-illuminate",
+        lazy = false,
+        opts = {
+            delay = 200,
+            large_file_cutoff = 2000,
+            large_file_override = {
+                providers = { "lsp" },
+            },
+        },
         config = function(_, opts)
             -- Copied from LazyNvim
             require("illuminate").configure(opts)
@@ -104,13 +155,17 @@ return {
         },
         event = "VeryLazy",
         keys = {
-            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",   desc = "Toggle buffer-pin" },
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
             { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
         },
         opts = {
             options = {
-                close_command = function(n) require("mini.bufremove").delete(n, false) end,
-                right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+                close_command = function(n)
+                    require("mini.bufremove").delete(n, false)
+                end,
+                right_mouse_command = function(n)
+                    require("mini.bufremove").delete(n, false)
+                end,
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = false,
                 offsets = {
@@ -121,6 +176,9 @@ return {
                         text_align = "left",
                     },
                 },
+                numbers = function(opts)
+                    return string.format("%s", opts.raise(opts.id))
+                end,
             },
         },
         config = function(_, opts)
@@ -161,7 +219,7 @@ return {
         },
         opts = {
             render = "wrapped-compact", -- Smaller popups
-            timeout = 3000,
+            timeout = 2500,
             max_height = function()
                 return math.floor(vim.o.lines * 0.25)
             end,
@@ -184,10 +242,16 @@ return {
         },
         opts = {
             lsp = {
+                progress = {
+                    throttle = 1000 / 100,
+                },
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,
                     ["cmp.entry.get_documentation"] = true,
+                },
+                hover = {
+                    silent = true,
                 },
             },
             routes = {
@@ -214,11 +278,15 @@ return {
                             { find = "yanked" },
                             { find = "fewer lines" },
                             { find = "more lines" },
-                            { find = "EasyMotion" }, -- This can be completely discarded
+                            { find = "EasyMotion" },
                             { find = "Target key" },
                             { find = "search hit BOTTOM" },
                             { find = "lines to indent" },
                             { find = "lines indented" },
+                            { find = "lines changed" },
+                            { find = ">ed" },
+                            { find = "<ed" },
+                            { find = "The only match" },
                         },
                     },
                 },
@@ -233,15 +301,6 @@ return {
         },
         keys = {
             { "<leader>nx", "<cmd>NoiceDismiss<CR>", desc = "Dismiss all [N]oice notifications" },
-            -- TODO: Find better keymaps
-            -- { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 mode = "c",                 desc = "Redirect Cmdline" },
-            -- { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
-            -- { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
-            -- { "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
-            -- { "<leader>snd", function() require("noice").cmd("dismiss") end,                                desc = "Dismiss All" },
-            -- { "<leader>snd", function() require("noice").cmd("dismiss") end,                                desc = "Dismiss All" },
-            -- { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  silent = true,              expr = true,              desc = "Scroll forward",  mode = { "i", "n", "s" } },
-            -- { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,              expr = true,              desc = "Scroll backward", mode = { "i", "n", "s" } },
         },
     },
 
@@ -249,16 +308,123 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         -- See `:help lualine.txt`
-        opts = {
-            -- TODO: Need the following:
-            -- - Remove encoding & OS
-            -- - Add Breadcrumb
-            -- - Show command that was typed
-            options = {
-                icons_enabled = false,
-                component_separators = "|",
-                section_separators = "",
-            },
-        },
+        --
+        init = function()
+            vim.g.lualine_laststatus = vim.o.laststatus
+            if vim.fn.argc(-1) > 0 then
+                -- set an empty statusline till lualine loads
+                vim.o.statusline = " "
+            else
+                -- hide the statusline on the starter page
+                vim.o.laststatus = 0
+            end
+        end,
+        opts = function()
+            local lualine_require = require("lualine_require")
+            lualine_require.require = require
+            vim.o.laststatus = vim.g.lualine_laststatus
+
+            local config = require("config.util")
+
+            return {
+                options = {
+                    theme = "auto",
+                    icons_enabled = true,
+                    globalstatus = true,
+                    component_separators = "|",
+                    section_separators = "",
+                },
+                extensions = { "neo-tree", "lazy" },
+                sections = {
+                    lualine_a = { "mode" },
+                    lualine_b = { "branch" },
+
+                    lualine_c = {
+                        {
+                            "diagnostics",
+                            symbols = {
+                                error = config.icons.diagnostics.Error,
+                                warn = config.icons.diagnostics.Warn,
+                                info = config.icons.diagnostics.Info,
+                                hint = config.icons.diagnostics.Hint,
+                            },
+                        },
+                        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                        {
+                            "filename",
+                            file_status = true,
+                            path = 1,
+                        },
+                        -- Breadcrumbs from "nvim-navic" plugin
+                        {
+                            function()
+                                return require("nvim-navic").get_location()
+                            end,
+                            cond = function()
+                                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+                            end,
+                        },
+                    },
+
+                    lualine_x = {
+                        {
+                            function()
+                                return require("noice").api.status.command.get()
+                            end,
+                            cond = function()
+                                return package.loaded["noice"] and require("noice").api.status.command.has()
+                            end,
+                            color = config.fg("Statement"),
+                        },
+                        {
+                            function()
+                                return require("noice").api.status.mode.get()
+                            end,
+                            cond = function()
+                                return package.loaded["noice"] and require("noice").api.status.mode.has()
+                            end,
+                            color = config.fg("Constant"),
+                        },
+                        {
+                            function()
+                                return "  " .. require("dap").status()
+                            end,
+                            cond = function()
+                                return package.loaded["dap"] and require("dap").status() ~= ""
+                            end,
+                            color = config.fg("Debug"),
+                        },
+                        {
+                            "diff",
+                            symbols = {
+                                added = config.icons.git.added,
+                                modified = config.icons.git.modified,
+                                removed = config.icons.git.removed,
+                            },
+                            source = function()
+                                local gitsigns = vim.b.gitsigns_status_dict
+                                if gitsigns then
+                                    return {
+                                        added = gitsigns.added,
+                                        modified = gitsigns.changed,
+                                        removed = gitsigns.removed,
+                                    }
+                                end
+                            end,
+                        },
+                    },
+
+                    lualine_y = {
+                        { "progress", separator = " ", padding = { left = 1, right = 0 } },
+                        { "location", padding = { left = 0, right = 1 } },
+                    },
+                    lualine_z = {
+                        function()
+                            return " " .. os.date("%R")
+                        end,
+                    },
+                },
+            }
+        end,
     },
 }

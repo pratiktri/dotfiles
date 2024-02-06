@@ -10,6 +10,9 @@ source $VIMDIR/configs.vim
 " Load Keybindings
 source $VIMDIR/key_maps.vim
 
+" Load Autocommand
+source $VIMDIR/autocommands.vim
+
 " Save session files to $HOME/.vim/session directory
 let g:session_dir="$VIMDIR/session"
 

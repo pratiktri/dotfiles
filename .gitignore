@@ -96,3 +96,6 @@ dist-ssr
 *backup
 *undo
 *sessions
+*.bak
+nvim_switch/
+*kitty/*.py

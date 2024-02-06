@@ -52,14 +52,10 @@ return {
 
             -- Load some required Telescope extensions
             pcall(require("telescope").load_extension, "fzf")
-            pcall(require("telescope").load_extension, "noice")
-            pcall(require("telescope").load_extension, "undo")
 
             -- Special Things: [T]elescope
-            vim.keymap.set("n", "<leader>tr", require("telescope.builtin").resume,
-                { desc = "[T]elescope [R]esume Last Search" })
-            vim.keymap.set("n", "<leader>tc", require("telescope.builtin").colorscheme,
-                { desc = "List Colorschemes (with preview)" })
+            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme,
+                { desc = "List [N]eovim [C]olorschemes (with preview)" })
 
             -- Grep things -> [S]earch
             vim.keymap.set("n", "<leader>sb", function()
@@ -83,8 +79,7 @@ return {
                 { desc = "[L]ist & Search NeoVIM [H]elp" })
             vim.keymap.set("n", "<leader>lk", require("telescope.builtin").keymaps,
                 { desc = "[L]ist & Search NeoVIM [K]eymaps" })
-            vim.keymap.set("n", "<leader>lm", require("telescope.builtin").marks, { desc = "[L]ist [M]arks" })
-            vim.keymap.set("n", "<leader>ln", require("telescope.builtin").man_pages,
+            vim.keymap.set("n", "<leader>lm", require("telescope.builtin").man_pages,
                 { desc = "[L]ist & Search System Ma[n] Pages" })
             vim.keymap.set("n", "<leader>lq", require("telescope.builtin").quickfixhistory,
                 { desc = "[L]ist [Q]uickfix History" })
@@ -106,14 +101,24 @@ return {
                 require("telescope.builtin").lsp_implementations,
                 { desc = "[C]ode: Goto [I]mplementation of the word under cursor" }
             )
-            vim.keymap.set("n", "<leader>cr", require("telescope.builtin").lsp_references,
+            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references,
                 { desc = "[C]ode: List [R]eferences for word under cursor" })
             vim.keymap.set(
                 "n",
-                "<leader>ct",
+                "<leader>cgt",
                 require("telescope.builtin").lsp_type_definitions,
                 { desc = "[C]ode: Goto definition of the [T]ype under cursor" }
             )
+            vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "[G]oto [D]efinition" })
+            vim.keymap.set("n", "<leader>cgd", require("telescope.builtin").lsp_type_definitions,
+                { desc = "Type [D]efinition" })
+            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references,
+                { desc = "[G]oto [R]eferences" })
+            vim.keymap.set("n", "<leader>cI", require("telescope.builtin").lsp_implementations,
+                { desc = "[G]oto [I]mplementation" })
+            vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols,
+                { desc = "[D]ocument [S]ymbols" })
+            -- vim.keymap.set("n", "<leader>cgD", vim.lsp.buf.declaration, { desc = "[G]oto [D]eclaration" })
         end,
     },
 }

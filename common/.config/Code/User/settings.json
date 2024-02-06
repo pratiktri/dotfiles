@@ -8,7 +8,7 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 20, // Reduces the Activity Bar size
+    "editor.fontSize": 21, // Reduces the Activity Bar size
     "editor.cursorWidth": 4,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
@@ -208,7 +208,7 @@
     "python.jediEnabled": false,
     "python.languageServer": "Pylance",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "GitHub Dark",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
 
     // Rust
     // "rust.build_on_save": true,

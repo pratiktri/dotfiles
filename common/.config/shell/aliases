@@ -1,11 +1,8 @@
 #!/bin/sh
 
 # Generic
-alias sb="source ~/.bashrc"
 alias bashreload="source ~/.bashrc"
-alias sz="source ~/.zshrc"
 alias zshreload="source ~/.zshrc"
-alias zshrc="${EDITOR} ~/.zshrc"
 alias free="free -ht"
 alias type="type -a"
 alias grep='grep --color=auto'
@@ -16,7 +13,7 @@ alias untar='tar -zxvf '
 alias wget="wget --hsts-file ${WGET_HSTS_FILE}"
 
 alias v="${EDITOR}"
-alias snvim="${HOMEBREW_PREFIX}"/bin/nvim # Stable nvim
+alias snvim="${HOMEBREW_PREFIX}/bin/nvim" # Stable nvim
 
 url_encode(){
     python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$1"
@@ -35,7 +32,6 @@ alias ..="cd .."
 alias ...='cd ../../../'             # Go back 3 directory levels
 alias cd_root='cd $(git rev-parse --show-toplevel 2>/dev/null || echo ".")'
 alias cd_git_root=cd_root
-alias c=clear
 alias cl=clear
 alias lsc='ls --color=auto --hyperlink=auto'
 alias ll='lsc -alhF'
@@ -49,7 +45,6 @@ mkcd () {
     cd "$1" || exit
 }
 
-
 # Network
 alias ping="ping -c 10"
 alias ping8="ping 8.8.8.8"
@@ -57,18 +52,17 @@ alias ping1="ping 1.1.1.1"
 alias p8="ping8"
 alias p1="ping1"
 alias pubip="curl https://ipinfo.io/ip; echo"
-alias speedtest="speedtest-cli --secure"			# needs speedtest-cli installed
+alias speedtest="speedtest-cli --secure"
 geoip () {
-    curl -s https://ipinfo.io | sed '/readme/d;/loc/d;/postal/d;s/org/ISP/' | tr -d {},\" | awk -F ':' 'NF {printf ("%10s: %.25s \n", $1, $2)}'
+    curl -s https://ipinfo.io | sed '/readme\|loc\|postal\|{\|}\|hostname/d;s/org/ISP/;s/"\|,$//g' | awk -F ':' 'NF { printf("%10s: %s \n", $1, $2)}'
 }
 
 
 # Git
-# To use this - Ensure all git server SSH are in ~/.ssh
-alias git_signin='(for i in ~/.ssh/{*github*,*gitea*}; do ssh-add -k $i; done; ) && (echo; echo Identities added successfully)'
 git_push_all_changes(){
     git add . && git commit -am "${1}" && git push
 }
+alias git_just_push=git_push_all_changes
 
 
 alias ta="tmux a"
@@ -83,11 +77,24 @@ alias OldConfig="NVIM_APPNAME=oldconfig nvim"
 nvims() {
     items=$(find -L "$HOME"/.config -maxdepth 2 -name "init.lua" -type f -execdir sh -c 'pwd | xargs basename' \;)
     config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-    if [[ -z $config ]]; then
+    if [ -z "$config" ]; then
         echo "Nothing selected"
         return 0
-    elif [[ $config == "default" ]]; then
+    elif [ "$config" = "default" ]; then
         config=""
     fi
-    NVIM_APPNAME=$config nvim $@
+    NVIM_APPNAME=$config nvim "$@"
 }
+
+op() {
+    local chosen_project
+    chosen_project="$(find -L ~/Code -mindepth 2 -maxdepth 2 -not -path '*/.*' -printf "%T@ %p\n" | sort -nr | cut -d ' ' -f 2- | fzf --border --layout=reverse --height=~50% --prompt='Select a project: ' --preview 'ls -Lltc {1}')"
+    if [ -z "$chosen_project" ]; then
+        return 0
+    fi
+
+    cd "$chosen_project" || return
+    nvim
+}
+
+# TODO: Create fuzzy finder for cht.sh & tldr

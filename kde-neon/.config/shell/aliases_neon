@@ -3,7 +3,7 @@
 # Directories and Directory listings
 dir_size(){
     local dir
-    if [[ -z "$1" ]]; then
+    if [ -z "$1" ]; then
         dir="${PWD}"
     else
         dir="$1"
@@ -11,6 +11,7 @@ dir_size(){
 
     du -ah "${dir}" --max-depth=1 | sort -hr
 }
+alias tldr="tldr --platform=linux "
 
 
 # Network
@@ -23,7 +24,7 @@ alias listening_apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}
 
 
 # Update & Upgrades
-alias up="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove && rustup update && brew upgrade && brew autoremove && npm update -g"
+alias up="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove && rustup update && brew upgrade && brew autoremove && brew cleanup && npm update -g"
 alias distup="sudo apt dist-upgrade"
 alias autorem="sudo apt autoremove"
 alias update="sudo apt-get update"
@@ -44,7 +45,7 @@ alias fpmreset74="sudo systemctl restart php7.4-fpm"
 f2b_banned_ips() {
     local provided_jail=$1
 
-    if [[ -n "${provided_jail// /}" ]]; then
+    if [ -n "${provided_jail// /}" ]; then
         for ip in $(sudo fail2ban-client status "${provided_jail}" | tail -1 | sed 's/[^:]*://;s/\s*//')
         do
             printf "%17s\n" "$ip"
@@ -56,7 +57,7 @@ f2b_banned_ips() {
             local banned_ip_count
             banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
 
-            if [[ "${banned_ip_count}" -gt 0 ]]; then
+            if [ "${banned_ip_count}" -gt 0 ]; then
                 echo "${JAIL}: ${banned_ip_count}"
 
                 for ip in $(sudo fail2ban-client status "${JAIL}" | tail -1 | sed 's/[^:]*://;s/\s*//')
@@ -81,7 +82,7 @@ f2b_unban_ip() {
     local jail="$2"
 
     # If jail is provided - use that jail to directly unban
-    if [[ -n "${jail// /}" ]]; then
+    if [ -n "${jail// /}" ]; then
         sudo fail2ban-client set "${jail}" unbanip "${ip_to_unban}" > /dev/null && echo "Successfully released ban"
     else
         # Find all JAILS this IP belong to
@@ -91,7 +92,7 @@ f2b_unban_ip() {
         do
             local banned_ip_count
             banned_ip_count=$(sudo fail2ban-client status "${JAIL}" | grep -oP 'Currently banned:\s*\K\d+')
-            if [[ "$banned_ip_count" -gt 0 ]] && [[ $(sudo fail2ban-client status "${JAIL}") == *"${ip_to_unban}"* ]]; then
+            if [ "$banned_ip_count" -gt 0 ] && [[ $(sudo fail2ban-client status "${JAIL}") == *"${ip_to_unban}"* ]]; then
                 local found_ip="true"
                 echo "Unbanning from ${JAIL}:"
                 sudo fail2ban-client set "${JAIL}" unbanip "${ip_to_unban}" > /dev/null && echo "Successfully released ban"

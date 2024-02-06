@@ -1,5 +1,5 @@
 # I'm not using a separate .zprofile; reuse the .profile instead
-[ ! -f "$HOME/.profile" ] || source "$HOME/.profile"
+[[ ! -f "$HOME/.profile" ]] || source "$HOME/.profile"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -66,9 +66,9 @@ VI_MODE_CURSOR_INSERT=3
 HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
 
 # NOTE: Should be exported before sourcing oh-my-zsh, to avoid the dumpfiles on $HOME
-export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh/zcompdump-$HOST
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$HOST"
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"
@@ -91,9 +91,11 @@ setopt HIST_IGNORE_SPACE          # Don't add commands that start with whitespac
 # enable vi-mode
 bindkey -v
 
-# Basic auto/tab completions
-autoload -U compinit
-zstyle ':completion:*' menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+# Add brew provided autocompletions to path
+[[ ! -d  "/home/linuxbrew/.linuxbrew/share/zsh/site-functions" ]] || FPATH="/home/linuxbrew/.linuxbrew/share/zsh/site-functions:$FPATH"
+# Auto/tab completions
+autoload -Uz compinit
+zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zmodload zsh/complist
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 _comp_options+=(globdots)  # Include hidden files
@@ -101,17 +103,7 @@ _comp_options+=(globdots)  # Include hidden files
 # [ctrl+r]:replaces shell command search
 # [ctrl+t]:fzf & over the files & directories under the current one & paste it to prompt
 # [alt+c] :fzf & cd into a directory under the current one
-[ -f $XDG_STATE_HOME/shell/fzf.zsh ] && source $XDG_STATE_HOME/shell/fzf.zsh
-
-# FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions" # TODO: Make the completions here work
+[ -f "$XDG_STATE_HOME/shell/fzf.zsh" ] && source "$XDG_STATE_HOME/shell/fzf.zsh"
 
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
-
-# TODO: Use fzf + fd + kitty to auto create kitty sessions: use only the following directories
-# 1. /media/pratik/Office/Code/
-# 2. /media/pratik/Projects/LearningProjects/
-# 3. /media/pratik/Projects/PersonalProjects/
-# 4. /media/pratik/Projects/Interviews/
-# - Ignore hidden directories
-# - Put it in one of the aliases
-
+command -v zoxide >/dev/null && bindkey -s '^o' 'op\n' # Fuzzyfind projects and open in nvim

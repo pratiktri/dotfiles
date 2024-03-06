@@ -52,7 +52,7 @@ return {
         opts = {
             -- Session files stored at: ~/.config/nvim/sessions/
             dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"),
-            options = vim.opt.sessionoptions:get()
+            options = vim.opt.sessionoptions:get(),
             -- NOTE: autocmd to autoload sessions at: ../config/autocmd.lua
         },
         keys = {
@@ -75,16 +75,6 @@ return {
                 "syntax",
                 "treesitter",
             },
-        },
-    },
-
-    -- Provides tldr on vertical split
-    -- `:Tldr [command]`
-    {
-        "wlemuel/vim-tldr",
-        lazy = true,
-        dependencies = {
-            "nvim-telescope/telescope.nvim"
         },
     },
 }

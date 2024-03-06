@@ -10,15 +10,15 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
 alias untar='tar -zxvf '
-alias wget="wget --hsts-file ${WGET_HSTS_FILE}"
+alias wget='wget --hsts-file ${WGET_HSTS_FILE}'
 
-alias v="${EDITOR}"
-alias snvim="${HOMEBREW_PREFIX}/bin/nvim" # Stable nvim
+alias v='$EDITOR'
+alias snvim='${HOMEBREW_PREFIX}/bin/nvim' # Stable nvim
 
 # Directories and Directory listings
 alias ~="cd ~"
 alias ..="cd .."
-alias ...='cd ../../../'             # Go back 3 directory levels
+alias ...='cd ../../../' # Go back 3 directory levels
 alias cl=clear
 
 alias lsc='ls --color=auto --hyperlink'
@@ -28,7 +28,7 @@ alias lsa="lsc -lAFhZ"
 
 alias mkdir="mkdir -pv"
 alias df="df -h"
-mkcd () {
+mkcd() {
     mkdir "$1"
     cd "$1" || exit
 }
@@ -41,7 +41,6 @@ alias p8="ping8"
 alias p1="ping1"
 alias pubip="curl https://ipinfo.io/ip; echo"
 alias speedtest="speedtest-cli --secure"
-geoip () {
+geoip() {
     curl -s https://ipinfo.io | sed '/readme\|loc\|postal\|{\|}\|hostname/d;s/org/ISP/;s/"\|,$//g' | awk -F ':' 'NF { printf("%10s: %s \n", $1, $2)}'
 }
-

@@ -19,16 +19,20 @@ return {
             "rafamadriz/friendly-snippets",
         },
         config = function()
-            -- [[ Configure nvim-cmp ]]
             -- See `:help cmp`
-            -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             local cmp = require("cmp")
             local defaults = require("cmp.config.default")()
             local luasnip = require("luasnip")
             require("luasnip.loaders.from_vscode").lazy_load()
             luasnip.config.setup({})
 
+            -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             cmp.setup({
+                -- experimental = {
+                --     ghost_text = {
+                --         hl_group = "CmpGhostText",
+                --     },
+                -- },
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
@@ -62,18 +66,13 @@ return {
                     { name = "path" },
                     { { name = "buffer" } },
                 },
-                -- experimental = {
-                --     ghost_text = {
-                --         hl_group = "CmpGhostText",
-                --     },
-                -- },
                 sorting = defaults.sorting,
             })
         end,
     },
 
     {
-        "L4MON4D3/LuaSnip",
+        "L3MON4D3/LuaSnip",
         keys = {
             {
                 "<tab>",

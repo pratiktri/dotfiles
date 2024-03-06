@@ -1,3 +1,5 @@
+#!/bin/sh
+
 [ ! -f "/home/linuxbrew/.linuxbrew/bin/brew" ] || eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # set PATH so it includes user's private bin if it exists
@@ -11,35 +13,38 @@
 [ ! -d "$HOME/.local/bin" ] || PATH="$PATH:$HOME/.local/bin"
 
 # Set the config directory environment variable
-[ -n "$XDG_CONFIG_HOME" ] || export XDG_CONFIG_HOME="$HOME/.config"
+[ "$XDG_CONFIG_HOME" != "" ] || export XDG_CONFIG_HOME="$HOME/.config"
 
 # Set the cache directory environment variable
-[ -n "$XDG_CACHE_HOME" ] || export XDG_CACHE_HOME="$HOME/.cache"
+[ "$XDG_CACHE_HOME" != "" ] || export XDG_CACHE_HOME="$HOME/.cache"
 
 # Set the data directory environment variable
-[ -n "$XDG_DATA_HOME" ] || export XDG_DATA_HOME="$HOME/.local/share"
+[ "$XDG_DATA_HOME" != "" ] || export XDG_DATA_HOME="$HOME/.local/share"
 
 # Set the state directory environment variable
-[ -n "$XDG_STATE_HOME" ] || export XDG_STATE_HOME="$HOME/.local/state"
+[ "$XDG_STATE_HOME" != "" ] || export XDG_STATE_HOME="$HOME/.local/state"
 
 ##################################################################################
 
 eval "$(ssh-agent -s)" >/dev/null
 ulimit -n 10240
 
+[ ! -f "$XDG_CONFIG_HOME/templates/.gitignore" ] || export GITIGNORE_TEMPLATE="$XDG_CONFIG_HOME/templates/.gitignore"
+[ ! -f "$XDG_CONFIG_HOME/templates/.prettierrc" ] || export PRETTIER_TEMPLATE="$XDG_CONFIG_HOME/templates/.prettierrc"
+
 EDITOR=$(command -v nvim 2>/dev/null || command -v vim 2>/dev/null)
 export EDITOR
-export VISUAL=$EDITOR
+export VISUAL="$EDITOR"
 
 # Manually follow steps from https://steamcommunity.com/app/646570/discussions/1/3935537639868400686
 # To disable ~/.oracle_jre_usage/ from being created
 
 if [ "$(uname -s)" = "Linux" ]; then
-	export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nvidia"
+    export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nvidia"
 
-	# Needs upstream fix to work: https://bugs.kde.org/show_bug.cgi?id=415770
-	export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
-	export CUDA_CACHE_PATH="XDG_CACHE_HOME/nv"
+    # Needs upstream fix to work: https://bugs.kde.org/show_bug.cgi?id=415770
+    export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+    export CUDA_CACHE_PATH="XDG_CACHE_HOME/nv"
 
     # Map caps-lock to escape TIP: also added to /etc/profile
     setxkbmap -option caps:escape
@@ -48,7 +53,7 @@ fi
 export QT_PLUGIN_PATH="$HOME/local/lib/qt/plugins/:"
 
 if [ "$XDG_SESSION_DESKTOP" = "KDE" ]; then
-	export KDEHOME="$XDG_CONFIG_HOME/KDE"
+    export KDEHOME="$XDG_CONFIG_HOME/KDE"
 fi
 
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
@@ -94,6 +99,6 @@ export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_DEFAULT_OPTS='--layout=reverse --inline-info --height=~50% --border'
+export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~50% --border'
 
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME/tldr"

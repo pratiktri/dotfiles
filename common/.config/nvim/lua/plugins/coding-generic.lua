@@ -1,8 +1,17 @@
 return {
     { "tpope/vim-repeat" },
-    { "tpope/vim-surround" },
     { "easymotion/vim-easymotion" },
     { "machakann/vim-highlightedyank" },
+
+    -- Better surround than tpope/vim-surround
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end,
+    },
 
     -- "gc" to comment visual regions/lines
     {

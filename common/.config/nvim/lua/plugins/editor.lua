@@ -216,6 +216,13 @@ return {
                 end,
                 desc = "Dismiss all Notifications",
             },
+            {
+                "<leader>xx",
+                function()
+                    require("notify").dismiss({ silent = true, pending = true })
+                end,
+                desc = "Dismiss all Notifications",
+            },
         },
         opts = {
             render = "wrapped-compact", -- Smaller popups

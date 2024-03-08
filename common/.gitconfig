@@ -32,6 +32,15 @@
     date = relative
 
 [alias]
-    ll = log --pretty=format:'%Cblue%cn (%ce)%Creset commited %Cred%h%Creset %Cgreen%cr%Creset:%n%B'
+    ll = log --pretty=format:'%Cblue%cn (%ce)%Creset committed %Cred%h%Creset %Cgreen%cr%Creset:%n%B'
     unstage = restore --staged .
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
+
+[rerere]
+	enabled = true
+
+[branch]
+	sort = -committerdate
+
+[fetch]
+	writeCommitGraph = true

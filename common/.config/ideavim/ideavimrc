@@ -4,6 +4,25 @@
 " Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
 "source ~/.vimrc
+" FIX: "u" appears randomly when deleting words and other times
+" TODO: Keep the mappings same across Neovim & Idea
+"  Keymap structure:
+"  b+: [B]buffer Operations
+"  c+: [C]oding Stuff
+"  d+: [D]iagnostics
+"  f+: [F]ile Operations
+"  g+: [G]it Operations
+"  l+: [L]ist Things
+"  n+: [N]eoVim Stuff
+"  s+: Grep/[S]earch Things
+"  t+: [T]est runner stuff
+"  x+: close/dismiss something
+"  e: explorer
+"  j: EasyMotion jump
+"  p: Paste from system clipboard
+"  y: Copy selected stuff to system clipboard
+"  u: Open undo-tree side-panel
+"  v: Open document symbol explorer
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/configs.vim
@@ -19,11 +38,7 @@ set tabstop=4
 set shiftwidth=4
 
 " Searches
-set hlsearch                      " highlight search occurrences
-set ignorecase                    " ignore case in search patterns
-set smartcase                     " no ignore case when pattern is uppercase
-set incsearch                     " show search results while typing
-set wrapscan                      " searches wrap around the end of the file
+set hlsearch ignorecase smartcase incsearch wrapscan
 
 " Common settings
 set gdefault                      " substitute all occurrences in line

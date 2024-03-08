@@ -7,20 +7,25 @@
 -- Check past messages -> :messages
 
 -- TIP: Keymap structure:
--- b: buffer
--- g: git/github
--- c: Coding Stuff
+-- b+: [B]buffer Operations
+-- c+: [C]oding Stuff
+-- d+: [D]iagnostics
+-- f+: [F]ile Operations
+-- g+: [G]it Operations
+-- l+: [L]ist Things
+-- n+: [N]eoVim Stuff
+-- s+: Grep/[S]earch Things
+-- t+: [T]est runner stuff
+-- x+: close/dismiss something
 -- e: explorer
--- l: list & find something
--- s: Grep/Search over something
--- x: close/dismiss something
--- l: List some stuff
--- d: [D]iagnostics
--- t: Test runner stuff
+-- j: EasyMotion jump
+-- p: Paste from system clipboard
+-- y: Copy selected stuff to system clipboard
+-- u: Open undo-tree side-panel
+-- v: Open document symbol explorer
 
 -- TODO:
 -- Reduce noice timeout
--- WhichKey add hints
 
 -- Load keymaps & options
 require("config")

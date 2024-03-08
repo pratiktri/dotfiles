@@ -10,17 +10,17 @@ local on_attach = function(_, bufnr)
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap("<leader>cr", vim.lsp.buf.rename, "[R]e[n]ame")
+    nmap("<leader>cr", vim.lsp.buf.rename, "[R]ename Symbol")
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     -- See `:help K` for why this keymap
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     -- Lesser used LSP functionality
-    nmap("<leader>cws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    nmap("<leader>cwl", function()
+    nmap("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace [S]symbols")
+    nmap("<leader>clf", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, "[W]orkspace [L]ist Folders")
+    end, "Workspace [L]ist [F]olders")
 
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
@@ -34,11 +34,11 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { "williamboman/mason.nvim",          config = true },
+            { "williamboman/mason.nvim", config = true },
             { "williamboman/mason-lspconfig.nvim" },
 
             -- Useful status updates for LSP
-            { "j-hui/fidget.nvim",                opts = {} },
+            { "j-hui/fidget.nvim", opts = {} },
 
             { "folke/neodev.nvim" },
         },
@@ -84,7 +84,7 @@ return {
                 cssls = {},
                 dockerls = {},
                 docker_compose_language_service = {},
-                html = { filetypes = { 'html', 'twig', 'hbs' } },
+                html = { filetypes = { "html", "twig", "hbs" } },
                 jsonls = {},
                 pyright = {},
                 rust_analyzer = {},
@@ -99,7 +99,7 @@ return {
                             includeInlayPropertyDeclarationTypeHints = true,
                             includeInlayFunctionLikeReturnTypeHints = true,
                             includeInlayEnumMemberValueHints = true,
-                        }
+                        },
                     },
                     javascript = {
                         inlayHints = {
@@ -111,8 +111,8 @@ return {
                             includeInlayPropertyDeclarationTypeHints = true,
                             includeInlayFunctionLikeReturnTypeHints = true,
                             includeInlayEnumMemberValueHints = true,
-                        }
-                    }
+                        },
+                    },
                 },
             }
 
@@ -141,14 +141,14 @@ return {
         "j-hui/fidget.nvim",
         opts = {
             progress = {
-                poll_rate = 1,               -- How and when to poll for progress messages
-                suppress_on_insert = true,   -- Suppress new messages while in insert mode
-                ignore_done_already = true,  -- Ignore new tasks that are already complete
+                poll_rate = 1, -- How and when to poll for progress messages
+                suppress_on_insert = true, -- Suppress new messages while in insert mode
+                ignore_done_already = true, -- Ignore new tasks that are already complete
                 ignore_empty_message = true, -- Ignore new tasks that don't contain a message
-                ignore = {},                 -- List of LSP servers to ignore
+                ignore = {}, -- List of LSP servers to ignore
 
                 display = {
-                    render_limit = 1,    -- How many LSP messages to show at once
+                    render_limit = 1, -- How many LSP messages to show at once
                     skip_history = true, -- Whether progress notifications should be omitted from history
                 },
             },

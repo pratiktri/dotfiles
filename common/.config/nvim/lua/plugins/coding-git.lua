@@ -11,11 +11,12 @@ return {
             signs = {
                 add = { text = "+" },
                 change = { text = "~" },
-                delete = { text = "_" },
-                topdelete = { text = "‾" },
+                delete = { text = "—" },
+                topdelete = { text = "—" },
                 changedelete = { text = "~" },
-                untracked = { text = "▎" },
+                untracked = { text = "┆" },
             },
+            attach_to_untracker = true,
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
 
@@ -46,30 +47,34 @@ return {
                     return "<Ignore>"
                 end, { expr = true, desc = "Jump to previous git hunk" })
 
+                -- Staging
                 -- Actions
-                -- visual mode
-                map("v", "<leader>ghr", function()
-                    gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                end, { desc = "reset git hunk" })
-                -- normal mode
-                map("n", "<leader>ghp", gs.preview_hunk, { desc = "preview git hunk" })
-                map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
+                map("n", "<leader>gsh", gs.stage_hunk, { desc = "Git: Stage Hunk" })
+                map("n", "<leader>gsu", gs.undo_stage_hunk, { desc = "Git: Undo Stage Hunk" })
+                map("n", "<leader>gsb", gs.stage_buffer, { desc = "Git: Stage Current File" })
+                map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: reset hunk" })
 
-                map("n", "<leader>ghr", gs.reset_hunk, { desc = "git reset hunk" })
-                map("n", "<leader>ghb", function()
-                    gs.blame_line({ full = false })
-                end, { desc = "git blame line" })
-                map("n", "<leader>ghD", gs.diffthis, { desc = "git diff against index" })
-                map("n", "<leader>ghd", function()
+                -- visual mode
+                map("v", "<leader>gsH", function()
+                    gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                end, { desc = "Git: Visual Stage Hunk" })
+                map("v", "<leader>gsR", function()
+                    gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                end, { desc = "Git: Visual Reset Hunk" })
+
+                -- normal mode
+                map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
+                map("n", "<leader>gD", gs.diffthis, { desc = "Git: diff against index" })
+                map("n", "<leader>gd", function()
                     gs.diffthis("~")
-                end, { desc = "git diff against last commit" })
+                end, { desc = "Git: diff against last commit" })
 
                 -- Toggles
-                map("n", "<leader>gtb", gs.toggle_current_line_blame, { desc = "toggle git blame line" })
-                map("n", "<leader>gtd", gs.toggle_deleted, { desc = "toggle git show deleted" })
+                map("n", "<leader>gtb", gs.toggle_current_line_blame, { desc = "Git: toggle blame line" })
+                map("n", "<leader>gtd", gs.toggle_deleted, { desc = "Git: toggle show deleted" })
 
                 -- Text object
-                map({ "o", "x" }, "gih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
+                map({ "o", "x" }, "gih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
             end,
         },
     },

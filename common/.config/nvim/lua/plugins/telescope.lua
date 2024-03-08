@@ -79,8 +79,8 @@ return {
             vim.keymap.set("n", "<leader>lv", require("telescope.builtin").vim_options, { desc = "[L]ist [V]im Options" })
 
             -- Git things -> [G]it
-            vim.keymap.set("n", "<leader>gb", require("telescope.builtin").git_branches, { desc = "List [G]it [B]ranches" })
-            vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, { desc = "List [G]it [C]omits" })
+            vim.keymap.set("n", "<leader>glb", require("telescope.builtin").git_branches, { desc = "List [G]it [B]ranches" })
+            vim.keymap.set("n", "<leader>glc", require("telescope.builtin").git_commits, { desc = "List [G]it [C]omits" })
 
             -- LSP Things -> [C]oding
             vim.keymap.set("n", "<leader>cd", require("telescope.builtin").diagnostics, { desc = "[C]ode: List [D]iagnostics" })

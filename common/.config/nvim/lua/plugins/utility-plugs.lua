@@ -30,11 +30,16 @@ return {
         config = function()
             -- document existing key chains
             require("which-key").register({
-                ["<leader>e"] = { name = "[E]xplorer", _ = "which_key_ignore" },
                 ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-                ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-                ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-                ["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
+                ["<leader>b"] = { name = "[B]buffer Operations", _ = "which_key_ignore" },
+                ["<leader>d"] = { name = "[D]iagnostics", _ = "which_key_ignore" },
+                ["<leader>f"] = { name = "[F]ile Operations", _ = "which_key_ignore" },
+                ["<leader>g"] = { name = "[G]it Operations", _ = "which_key_ignore" },
+                ["<leader>l"] = { name = "[L]ist Things", _ = "which_key_ignore" },
+                ["<leader>n"] = { name = "[N]VIM Operations", _ = "which_key_ignore" },
+                ["<leader>s"] = { name = "[S]earch/Grep Things", _ = "which_key_ignore" },
+                ["<leader>t"] = { name = "Unit [T]est Operations", _ = "which_key_ignore" },
+                ["<leader>x"] = { name = "Delete/Remove Something", _ = "which_key_ignore" },
             })
             -- register which-key VISUAL mode
             -- required for visual <leader>hs (hunk stage) to work
@@ -46,19 +51,13 @@ return {
     },
 
     -- Session management. Saves your session in the background
+    -- TIP: autocmd to autoload sessions at: ../config/autocmd.lua
     {
         "folke/persistence.nvim",
         event = "BufReadPre",
         opts = {
             -- Session files stored at: ~/.config/nvim/sessions/
             dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"),
-            options = vim.opt.sessionoptions:get(),
-            -- NOTE: autocmd to autoload sessions at: ../config/autocmd.lua
-        },
-        keys = {
-            -- Since we are auto-restoring sessions, keymaps aren't required
-            -- { "<leader>sr", function() require("persistence").load() end,                desc = "[R]estore [S]ession" },
-            -- { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "[R]estore [L]ast Session" },
         },
     },
 

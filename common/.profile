@@ -27,6 +27,7 @@
 ##################################################################################
 
 eval "$(ssh-agent -s)" >/dev/null
+# shellcheck disable=SC3045
 ulimit -n 10240
 
 [ ! -f "$XDG_CONFIG_HOME/templates/.gitignore" ] || export GITIGNORE_TEMPLATE="$XDG_CONFIG_HOME/templates/.gitignore"

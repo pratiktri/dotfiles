@@ -56,7 +56,7 @@ return {
                 mappings = {
                     ["s"] = "open_split", -- horizontal split
                     ["v"] = "open_vsplit", -- vertical split
-                    ["Y"] = function(state)
+                    ["Y"] = function(state) -- Copy file's path to + register
                         local node = state.tree:get_node()
                         local path = node:get_id()
                         vim.fn.setreg("+", path, "c")
@@ -142,9 +142,9 @@ return {
     -- Display undotree
     {
         "mbbill/undotree",
-        config = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-        end,
+        keys = {
+            { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle Undotree panel" },
+        },
     },
 
     -- Show buffers like VS Code tabs
@@ -157,6 +157,8 @@ return {
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
             { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
+            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
         },
         opts = {
             options = {
@@ -176,9 +178,6 @@ return {
                         text_align = "left",
                     },
                 },
-                numbers = function(opts)
-                    return string.format("%s", opts.raise(opts.id))
-                end,
             },
         },
         config = function(_, opts)
@@ -305,9 +304,6 @@ return {
                 long_message_to_split = true,
                 inc_rename = true,
             },
-        },
-        keys = {
-            { "<leader>nx", "<cmd>NoiceDismiss<CR>", desc = "Dismiss all [N]oice notifications" },
         },
     },
 

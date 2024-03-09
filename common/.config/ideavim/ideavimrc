@@ -27,6 +27,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/configs.vim
 source ~/.vim/key_maps.vim
+source ~/.vim/plugin_config.vim
 
 " Because :noh does not work in Jetbrains
 nnoremap <esc> <esc>

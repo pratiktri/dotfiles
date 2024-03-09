@@ -124,3 +124,6 @@ nnoremap <leader>j <Plug>(easymotion-s)
 
 " Show the undo tree
 nnoremap <leader>u :UndotreeToggle<CR>
+
+" Fugitive
+nnoremap <leader>gg :0G<cr>

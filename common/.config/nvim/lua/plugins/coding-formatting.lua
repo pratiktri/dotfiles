@@ -24,7 +24,6 @@ return {
                     sh = { { "shfmt", "shellharden" } },
                     bash = { { "shfmt", "shellharden" } },
                     zsh = { { "shfmt", "shellharden" } },
-                    ["*"] = { "codespell" },
                     ["_"] = { "trim_whitespace" },
                 },
                 format_on_save = {

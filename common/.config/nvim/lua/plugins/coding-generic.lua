@@ -119,7 +119,10 @@ return {
     {
         "folke/trouble.nvim",
         cmd = { "TroubleToggle", "Trouble" },
-        opts = { use_diagnostic_signs = true },
+        opts = {
+            use_diagnostic_signs = true,
+            severity = vim.diagnostic.severity.WARN,
+        },
         keys = {
             { "<leader>dx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
             { "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },

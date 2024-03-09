@@ -32,6 +32,7 @@ colorscheme deep-space
 " VIM SPECIFIC CONFIG
 "
 """"""""""""""""""""""""""""""""
+
 " Move the .viminfo file inside .vim directory
 set viminfofile=$VIMDIR/viminfo
 
@@ -41,10 +42,11 @@ autocmd! bufwritepost $VIMRC source %
 " Save inside vim config directory
 set undodir=$VIMDIR/undo//
 
+" Ctrl+Backspace to add an undo-point and delete last word
+" It's here cause ideavim messes it up
+imap <C-BS> <C-g>u<C-w>
+
 " Map nerdtree to <Leader>e
 " Changes the pwd and opens the VCS root
+" Placed here because ideavim doesn't understand :tcd
 nnoremap <leader>e :tcd %:h<CR> :NERDTreeToggleVCS<CR>
-
-" NERDTree Plugin configurations
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeWinSize = 25

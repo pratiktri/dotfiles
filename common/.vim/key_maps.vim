@@ -94,8 +94,11 @@ inoremap <M-l> <Right>
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 
-" Ctrl+Backspace to add an undo-point and delete last word
-imap <C-BS> <C-W><C-g>u
+" Move Lines with Alt+j,k
+nnoremap <M-j> :m .+1<cr>==
+nnoremap <M-k> :m .-2<cr>==
+vnoremap <M-j> :m '>+1<cr>gv=gv
+vnoremap <M-k> :m '<-2<cr>gv=gv
 
 " Insert mode: add undo points on "," & "." & ";"
 imap , ,<C-g>u

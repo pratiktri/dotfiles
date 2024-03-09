@@ -1,8 +1,4 @@
 return {
-    { "tpope/vim-repeat" },
-    { "easymotion/vim-easymotion" },
-    { "machakann/vim-highlightedyank" },
-
     -- Better surround than tpope/vim-surround
     {
         "kylechui/nvim-surround",
@@ -30,54 +26,6 @@ return {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
         opts = {},
-    },
-
-    -- indent guides for Neovim
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        opts = {
-            indent = { char = "│", tab_char = "│" },
-            scope = { enabled = false },
-            exclude = {
-                filetypes = {
-                    "help",
-                    "alpha",
-                    "dashboard",
-                    "neo-tree",
-                    "Trouble",
-                    "trouble",
-                    "lazy",
-                    "mason",
-                    "notify",
-                    "toggleterm",
-                    "lazyterm",
-                },
-            },
-        },
-        main = "ibl",
-    },
-
-    -- Highlights the current level of indentation, and animates the highlighting.
-    {
-        "echasnovski/mini.indentscope",
-        opts = { symbol = "│", options = { try_as_border = true } },
-        init = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = {
-                    "help",
-                    "neo-tree",
-                    "Trouble",
-                    "trouble",
-                    "lazy",
-                    "mason",
-                    "notify",
-                    "toggleterm",
-                },
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
-        end,
     },
 
     -- Finds and lists all of the TODO, HACK, BUG, etc comment

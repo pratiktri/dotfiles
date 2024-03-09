@@ -1,10 +1,63 @@
 return {
 
+    { "tpope/vim-repeat" },
+    { "easymotion/vim-easymotion" },
+    { "machakann/vim-highlightedyank" },
+    { "unblevable/quick-scope" },
+
     -- Changes the Nvim root to git root
     {
         "airblade/vim-rooter",
         config = function()
             vim.g.rooter_cd_cmd = "tcd" -- Use tcd command to change the root
+        end,
+    },
+
+    -- indent guides for Neovim
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        opts = {
+            indent = { char = "│", tab_char = "│" },
+            scope = { enabled = false },
+            exclude = {
+                filetypes = {
+                    "help",
+                    "alpha",
+                    "dashboard",
+                    "neo-tree",
+                    "Trouble",
+                    "trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "toggleterm",
+                    "lazyterm",
+                },
+            },
+        },
+        main = "ibl",
+    },
+
+    -- Highlights the current level of indentation, and animates the highlighting.
+    {
+        "echasnovski/mini.indentscope",
+        opts = { symbol = "│", options = { try_as_border = true } },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "help",
+                    "neo-tree",
+                    "Trouble",
+                    "trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "toggleterm",
+                },
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
         end,
     },
 
@@ -310,8 +363,6 @@ return {
     -- Set lualine as statusline
     {
         "nvim-lualine/lualine.nvim",
-        -- See `:help lualine.txt`
-        --
         init = function()
             vim.g.lualine_laststatus = vim.o.laststatus
             if vim.fn.argc(-1) > 0 then

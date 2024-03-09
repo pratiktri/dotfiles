@@ -27,32 +27,32 @@ return {
                 end
 
                 -- Navigation
-                map({ "n", "v" }, "]h", function()
+                map({ "n", "v" }, "]g", function()
                     if vim.wo.diff then
-                        return "]h"
+                        return "]g"
                     end
                     vim.schedule(function()
                         gs.next_hunk()
                     end)
                     return "<Ignore>"
-                end, { expr = true, desc = "Jump to next git hunk" })
+                end, { expr = true, desc = "Next Git hunk" })
 
-                map({ "n", "v" }, "[h", function()
+                map({ "n", "v" }, "[g", function()
                     if vim.wo.diff then
-                        return "[h"
+                        return "[g"
                     end
                     vim.schedule(function()
                         gs.prev_hunk()
                     end)
                     return "<Ignore>"
-                end, { expr = true, desc = "Jump to previous git hunk" })
+                end, { expr = true, desc = "Previous Git hunk" })
 
                 -- Staging
                 -- Actions
+                map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: reset hunk" })
                 map("n", "<leader>gsh", gs.stage_hunk, { desc = "Git: Stage Hunk" })
                 map("n", "<leader>gsu", gs.undo_stage_hunk, { desc = "Git: Undo Stage Hunk" })
                 map("n", "<leader>gsb", gs.stage_buffer, { desc = "Git: Stage Current File" })
-                map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: reset hunk" })
 
                 -- visual mode
                 map("v", "<leader>gsH", function()

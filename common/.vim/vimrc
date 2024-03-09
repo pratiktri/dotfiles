@@ -4,6 +4,9 @@ let $VIMRC="$VIMDIR/vimrc"
 " Load plugins
 source $VIMDIR/plugins.vim
 
+" Load plugin configurations
+source $VIMDIR/plugin_config.vim
+
 " Load VIM Configurations
 source $VIMDIR/configs.vim
 

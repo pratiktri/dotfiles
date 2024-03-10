@@ -44,7 +44,7 @@ return {
                     async = false,
                     timeout_ms = 1000,
                 })
-            end, { desc = "[C]ode [F]ormat (visual selection)" })
+            end, { desc = "Code Format (visual selection)" })
         end,
     },
 }

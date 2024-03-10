@@ -1,4 +1,96 @@
 return {
+    -- File Explorer
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        keys = {
+            { "<leader>e", ":Neotree filesystem toggle<CR>", desc = "Open NeoTree [E]plorer at Git root", remap = true },
+
+            {
+                "<leader>be",
+                function()
+                    require("neo-tree.command").execute({ source = "buffers", toggle = true })
+                end,
+                desc = "NeoTree: Open [B]buffer [E]xplorer",
+            },
+        },
+        deactivate = function()
+            vim.cmd([[Neotree close]])
+        end,
+        init = function()
+            if vim.fn.argc(-1) == 1 then
+                local stat = vim.loop.fs_stat(vim.fn.argv(0))
+                if stat and stat.type == "directory" then
+                    require("neo-tree")
+                end
+            end
+        end,
+        opts = {
+            enable_git_status = true,
+            filesystem = {
+                bind_to_cwd = true,
+                follow_current_file = {
+                    enabled = true, -- Highlight the current buffer
+                    leave_dirs_open = false,
+                },
+                use_libuv_file_watcher = true, -- Sync file system changes
+                filtered_items = {
+                    visible = true,
+                    show_hidden_count = true,
+                    hide_dotfile = false,
+                    hide_gitignore = false,
+                },
+            },
+            window = {
+                position = "left",
+                width = 30, -- Saner window size
+                mappings = {
+                    ["s"] = "open_split", -- horizontal split
+                    ["v"] = "open_vsplit", -- vertical split
+                    ["Y"] = function(state) -- Copy file's path to + register
+                        local node = state.tree:get_node()
+                        local path = node:get_id()
+                        vim.fn.setreg("+", path, "c")
+                    end,
+                },
+            },
+            default_component_configs = {
+                indent = {
+                    indent_size = 2, -- Compact tree display
+                    with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+                    expander_collapsed = "",
+                    expander_expanded = "",
+                    expander_highlight = "NeoTreeExpander",
+                },
+            },
+            sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+            open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+        },
+        config = function(_, opts)
+            local config = require("config.util")
+
+            local function on_move(data)
+                config.on_rename(data.source, data.destination)
+            end
+
+            local events = require("neo-tree.events")
+            opts.event_handlers = opts.event_handlers or {}
+            vim.list_extend(opts.event_handlers, {
+                { event = events.FILE_MOVED, handler = on_move },
+                { event = events.FILE_RENAMED, handler = on_move },
+            })
+            require("neo-tree").setup(opts)
+            vim.api.nvim_create_autocmd("TermClose", {
+                pattern = "*lazygit",
+                callback = function()
+                    if package.loaded["neo-tree.sources.git_status"] then
+                        require("neo-tree.sources.git_status").refresh()
+                    end
+                end,
+            })
+        end,
+    },
+
     -- Fuzzy Finder (files, lsp, etc)
     {
         "nvim-telescope/telescope.nvim",

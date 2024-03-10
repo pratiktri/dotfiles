@@ -74,6 +74,7 @@ return {
     {
         "L3MON4D3/LuaSnip",
         keys = {
+            -- TODO: Verify if this fixed the tab-going-crazy-sometimes issue
             -- {
             --     "<tab>",
             --     function()

@@ -10,17 +10,17 @@ local on_attach = function(_, bufnr)
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap("<leader>cr", vim.lsp.buf.rename, "[R]ename Symbol")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+    nmap("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
+    nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
     -- See `:help K` for why this keymap
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     -- Lesser used LSP functionality
-    nmap("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace [S]symbols")
+    nmap("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace Symbols")
     nmap("<leader>clf", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, "Workspace [L]ist [F]olders")
+    end, "Workspace List Folders")
 
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)

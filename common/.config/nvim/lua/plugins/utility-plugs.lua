@@ -46,22 +46,22 @@ return {
         config = function()
             -- document existing key chains
             require("which-key").register({
-                ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-                ["<leader>b"] = { name = "[B]buffer Operations", _ = "which_key_ignore" },
-                ["<leader>d"] = { name = "[D]iagnostics", _ = "which_key_ignore" },
-                ["<leader>f"] = { name = "[F]ile Operations", _ = "which_key_ignore" },
-                ["<leader>g"] = { name = "[G]it Operations", _ = "which_key_ignore" },
-                ["<leader>l"] = { name = "[L]ist Things", _ = "which_key_ignore" },
-                ["<leader>n"] = { name = "[N]VIM Operations", _ = "which_key_ignore" },
-                ["<leader>s"] = { name = "[S]earch/Grep Things", _ = "which_key_ignore" },
-                ["<leader>t"] = { name = "Unit [T]est Operations", _ = "which_key_ignore" },
+                ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
+                ["<leader>b"] = { name = "Buffer Operations", _ = "which_key_ignore" },
+                ["<leader>d"] = { name = "Diagnostics", _ = "which_key_ignore" },
+                ["<leader>f"] = { name = "File Operations", _ = "which_key_ignore" },
+                ["<leader>g"] = { name = "Git Operations", _ = "which_key_ignore" },
+                ["<leader>l"] = { name = "List Things", _ = "which_key_ignore" },
+                ["<leader>n"] = { name = "NVIM Operations", _ = "which_key_ignore" },
+                ["<leader>s"] = { name = "Search/Grep Things", _ = "which_key_ignore" },
+                ["<leader>t"] = { name = "Unit Test Operations", _ = "which_key_ignore" },
                 ["<leader>x"] = { name = "Delete/Remove Something", _ = "which_key_ignore" },
             })
             -- register which-key VISUAL mode
             -- required for visual <leader>hs (hunk stage) to work
             require("which-key").register({
                 ["<leader>"] = { name = "VISUAL <leader>" },
-                ["<leader>h"] = { "Git [H]unk" },
+                ["<leader>h"] = { "Git Hunk" },
             }, { mode = "v" })
         end,
     },

@@ -219,7 +219,7 @@ return {
                 function()
                     return require("nvim-navbuddy").open()
                 end,
-                desc = "N[v]igate through document symbols",
+                desc = "Navigate through document symbols",
             },
         },
     },

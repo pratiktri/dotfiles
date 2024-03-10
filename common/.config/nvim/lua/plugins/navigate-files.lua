@@ -4,14 +4,14 @@ return {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         keys = {
-            { "<leader>e", ":Neotree filesystem toggle<CR>", desc = "Open NeoTree [E]plorer at Git root", remap = true },
+            { "<leader>e", ":Neotree filesystem toggle<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
 
             {
                 "<leader>be",
                 function()
                     require("neo-tree.command").execute({ source = "buffers", toggle = true })
                 end,
-                desc = "NeoTree: Open [B]buffer [E]xplorer",
+                desc = "NeoTree: Open Buffer Explorer",
             },
         },
         deactivate = function()
@@ -145,56 +145,46 @@ return {
             -- Load some required Telescope extensions
             pcall(require("telescope").load_extension, "fzf")
 
-            -- Special Things: [T]elescope
-            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme, { desc = "List [N]eovim [C]olorschemes (with preview)" })
+            -- Special Things: Telescope
+            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme, { desc = "List Neovim Colorschemes (with preview)" })
 
-            -- Grep things -> [S]earch
+            -- Grep things -> Search
             vim.keymap.set("n", "<leader>sb", function()
                 require("telescope.builtin").live_grep({
                     grep_open_files = true,
                     prompt_title = "Live Grep in Open Files",
                 })
-            end, { desc = "[S]earch Open [B]buffers" })
-            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch/Live[G]rep the Project" })
-            vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord in Project" })
+            end, { desc = "Search Open Buffers" })
+            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
 
-            -- [L]ist
-            vim.keymap.set("n", "<leader>lb", require("telescope.builtin").buffers, { desc = "[L]ist [B]buffers" })
-            vim.keymap.set("n", "<leader>lc", require("telescope.builtin").command_history, { desc = "[L]ist NeoVIM [C]ommand History" })
-            vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, { desc = "[L]ist & Search [F]iles" })
-            vim.keymap.set("n", "<leader>lf", require("telescope.builtin").find_files, { desc = "[L]ist & Search [F]iles" })
-            vim.keymap.set("n", "<leader>lh", require("telescope.builtin").help_tags, { desc = "[L]ist & Search NeoVIM [H]elp" })
-            vim.keymap.set("n", "<leader>lk", require("telescope.builtin").keymaps, { desc = "[L]ist & Search NeoVIM [K]eymaps" })
-            vim.keymap.set("n", "<leader>lm", require("telescope.builtin").man_pages, { desc = "[L]ist & Search System Ma[n] Pages" })
-            vim.keymap.set("n", "<leader>lq", require("telescope.builtin").quickfixhistory, { desc = "[L]ist [Q]uickfix History" })
-            vim.keymap.set("n", "<leader>ls", require("telescope.builtin").search_history, { desc = "[L]ist [S]earch History" })
-            vim.keymap.set("n", "<leader>lv", require("telescope.builtin").vim_options, { desc = "[L]ist [V]im Options" })
+            -- List
+            vim.keymap.set("n", "<leader>lb", require("telescope.builtin").buffers, { desc = "List Bbuffers" })
+            vim.keymap.set("n", "<leader>lc", require("telescope.builtin").command_history, { desc = "List NeoVIM Command History" })
+            vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
+            vim.keymap.set("n", "<leader>lf", require("telescope.builtin").find_files, { desc = "List & Search Files" })
+            vim.keymap.set("n", "<leader>lh", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
+            vim.keymap.set("n", "<leader>lk", require("telescope.builtin").keymaps, { desc = "List & Search NeoVIM Keymaps" })
+            vim.keymap.set("n", "<leader>lm", require("telescope.builtin").man_pages, { desc = "List & Search System Man Pages" })
+            vim.keymap.set("n", "<leader>lq", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })
+            vim.keymap.set("n", "<leader>ls", require("telescope.builtin").search_history, { desc = "List Search History" })
+            vim.keymap.set("n", "<leader>lv", require("telescope.builtin").vim_options, { desc = "List Vim Options" })
 
-            -- Git things -> [G]it
-            vim.keymap.set("n", "<leader>glb", require("telescope.builtin").git_branches, { desc = "List [G]it [B]ranches" })
-            vim.keymap.set("n", "<leader>glc", require("telescope.builtin").git_commits, { desc = "List [G]it [C]omits" })
+            -- Git things -> Git
+            vim.keymap.set("n", "<leader>glb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })
+            vim.keymap.set("n", "<leader>glc", require("telescope.builtin").git_commits, { desc = "List Git Commits" })
 
-            -- LSP Things -> [C]oding
-            vim.keymap.set("n", "<leader>cd", require("telescope.builtin").diagnostics, { desc = "[C]ode: List [D]iagnostics" })
-            vim.keymap.set(
-                "n",
-                "<leader>ci",
-                require("telescope.builtin").lsp_implementations,
-                { desc = "[C]ode: Goto [I]mplementation of the word under cursor" }
-            )
-            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "[C]ode: List [R]eferences for word under cursor" })
-            vim.keymap.set(
-                "n",
-                "<leader>cgt",
-                require("telescope.builtin").lsp_type_definitions,
-                { desc = "[C]ode: Goto definition of the [T]ype under cursor" }
-            )
-            vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "[G]oto [D]efinition" })
-            vim.keymap.set("n", "<leader>cgd", require("telescope.builtin").lsp_type_definitions, { desc = "Type [D]efinition" })
-            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "[G]oto [R]eferences" })
-            vim.keymap.set("n", "<leader>cI", require("telescope.builtin").lsp_implementations, { desc = "[G]oto [I]mplementation" })
-            vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols, { desc = "[D]ocument [S]symbols" })
-            -- vim.keymap.set("n", "<leader>cgD", vim.lsp.buf.declaration, { desc = "[G]oto [D]eclaration" })
+            -- LSP Things -> Coding
+            vim.keymap.set("n", "<leader>cd", require("telescope.builtin").diagnostics, { desc = "Code: List Diagnostics" })
+            vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations, { desc = "Code: Goto Implementation of the word under cursor" })
+            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: List References for word under cursor" })
+            vim.keymap.set("n", "<leader>cgt", require("telescope.builtin").lsp_type_definitions, { desc = "Code: Goto definition of the Type under cursor" })
+            vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
+            vim.keymap.set("n", "<leader>cgd", require("telescope.builtin").lsp_type_definitions, { desc = "Type Definition" })
+            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Goto References" })
+            vim.keymap.set("n", "<leader>cI", require("telescope.builtin").lsp_implementations, { desc = "Goto Implementation" })
+            vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
+            -- vim.keymap.set("n", "<leader>cgD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
         end,
     },
 }

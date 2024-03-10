@@ -25,6 +25,22 @@ return {
         end,
     },
 
+    -- Changes the Nvim root to git root
+    {
+        "airblade/vim-rooter",
+        config = function()
+            vim.g.rooter_cd_cmd = "tcd" -- Use tcd command to change the root
+        end,
+    },
+
+    -- Display undotree
+    {
+        "mbbill/undotree",
+        keys = {
+            { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle Undotree panel" },
+        },
+    },
+
     {
         "folke/which-key.nvim",
         config = function()

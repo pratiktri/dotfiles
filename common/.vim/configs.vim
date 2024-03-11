@@ -13,10 +13,12 @@ set shortmess+=I            " Disable the default Vim startup message.
 set shortmess+=s            " Less verbose search messages
 set mouse+=a                " Enable mouse support
 set encoding=utf-8          " Encoding
+set autowrite               " Enable auto write
 set autoread                " Auto reload file if externally changed
 set nrformats-=octal        " Do not let Ctrl-a + Ctrl-x work on octal format numbers
-set formatoptions+=j        " When joining lines with J, delete comment characters
+set formatoptions=jcroqlnt  " When joining lines with J, delete comment characters
 set display+=truncate       " @@@ is displayed in the 1st column of the last screen line
+set conceallevel=2          " Hide * markup for bold and italic, but not markers with substitutions
 set tabpagemax=50           " Max number of tabs
 set viminfo^=!
 set viewoptions-=options
@@ -24,7 +26,8 @@ set nolangremap             " Do not use non-English keyboards to define keymaps
 set list                    " Show tabs as >, trailing spaces as -, non-breakable space as +
 set signcolumn=yes          " Always show the signs column (before line number column)
 set scrolloff=10            " Cursor always at middle of the screen
-set updatetime=249          " No typing for this millisec -> write to swap file
+set sidescrolloff=10
+set updatetime=200          " No typing for this millisec -> write to swap file
 set timeoutlen=500          " Multiple keys in keymaps must be pressed in these millisecs
 set noswapfile              " Turn off swapfiles
 set history=10000           " Number of : commands to save
@@ -56,6 +59,7 @@ set complete-=i
 set completeopt="menuone,noselect"  " Better completion experience
 set wildmenu                        " List and cycle through autocomplete on <Tab>
 set wildignorecase                  " Case insensitive path completion
+set wildmode="longest:full,full"    " Command-line completion mode
 
 " Remove trailing blank spaces on save
 autocmd BufWritePre * %s/\s\+$//e

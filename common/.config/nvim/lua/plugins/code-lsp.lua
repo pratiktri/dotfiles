@@ -36,14 +36,11 @@ return {
             -- Automatically install LSPs to stdpath for neovim
             { "williamboman/mason.nvim", config = true },
             { "williamboman/mason-lspconfig.nvim" },
+            { "folke/neodev.nvim" },
 
             -- Useful status updates for LSP
             { "j-hui/fidget.nvim", opts = {} },
-
-            { "folke/neodev.nvim" },
         },
-        -- WARN: DO NOT do `config` here it would override `config` from coding-formatting.lua
-        -- That's why we do the LSP config inside mason-lspconfig
     },
 
     {
@@ -68,7 +65,7 @@ return {
                     Lua = {
                         workspace = { checkThirdParty = false },
                         telemetry = { enable = false },
-                        -- hint = { enable = true },
+                        completion = { callSnippet = "Replace" },
                         -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                         -- diagnostics = { disable = { 'missing-fields' } },
                     },
@@ -127,10 +124,29 @@ return {
             mason_lspconfig.setup_handlers({
                 function(server_name)
                     require("lspconfig")[server_name].setup({
+                        inlay_hints = { enabled = true },
                         capabilities = capabilities,
                         on_attach = on_attach,
                         settings = servers[server_name],
                         filetypes = (servers[server_name] or {}).filetypes,
+                        diagnostics = {
+                            underline = true,
+                            update_in_insert = false,
+                            virtual_text = {
+                                spacing = 4,
+                                source = "if_many",
+                                prefix = "●",
+                            },
+                            severity_sort = true,
+                            signs = {
+                                text = {
+                                    [vim.diagnostic.severity.ERROR] = require("config.util").icons.diagnostics.Error,
+                                    [vim.diagnostic.severity.WARN] = require("config.util").icons.diagnostics.Warn,
+                                    [vim.diagnostic.severity.HINT] = require("config.util").icons.diagnostics.Hint,
+                                    [vim.diagnostic.severity.INFO] = require("config.util").icons.diagnostics.Info,
+                                },
+                            },
+                        },
                     })
                 end,
             })

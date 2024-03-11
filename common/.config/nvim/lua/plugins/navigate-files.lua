@@ -1,5 +1,116 @@
 return {
-    -- File Explorer
+    -- Harpoon
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        keys = {
+            {
+                "<leader>ha",
+                function()
+                    require("harpoon"):list():append()
+                end,
+                desc = "Add current file to harpoon-list",
+            },
+            {
+                "<leader>hd",
+                function()
+                    require("harpoon"):list():remove()
+                end,
+                desc = "Remove current file from harpoon-list",
+            },
+            {
+                "<leader>hh",
+                function()
+                    local harpoon = require("harpoon")
+                    harpoon.ui:toggle_quick_menu(harpoon:list())
+                end,
+                desc = "Show harpoon list",
+            },
+            {
+                "<C-1>",
+                function()
+                    require("harpoon"):list():select(1)
+                end,
+                desc = "Switch to the 1st file in harpoon-list",
+            },
+            {
+                "<C-2>",
+                function()
+                    require("harpoon"):list():select(2)
+                end,
+                desc = "Switch to the 2nd file in harpoon-list",
+            },
+            {
+                "<C-3>",
+                function()
+                    require("harpoon"):list():select(3)
+                end,
+                desc = "Switch to the 3rd file in harpoon-list",
+            },
+            {
+                "<C-4>",
+                function()
+                    require("harpoon"):list():select(4)
+                end,
+                desc = "Switch to the 4th file in harpoon-list",
+            },
+            -- Toggle previous & next buffers stored within require("harpoon") list
+            {
+                "<C-S-P>",
+                function()
+                    require("harpoon"):list():prev()
+                end,
+                desc = "Harpoon go to the next file in harpoon-list",
+            },
+            {
+                "<C-S-N>",
+                function()
+                    require("harpoon"):list():next()
+                end,
+                desc = "Harpoon go to the previous file in harpoon-list",
+            },
+        },
+        setup = {
+            settings = {
+                save_on_change = true,
+                mark_branch = true,
+            },
+        },
+        config = function()
+            local harpoon = require("harpoon")
+            harpoon:setup()
+
+            -- basic telescope configuration
+            local tele_conf = require("telescope.config").values
+            local function toggle_telescope(harpoon_files)
+                local file_paths = {}
+                for _, item in ipairs(harpoon_files.items) do
+                    table.insert(file_paths, item.value)
+                end
+
+                require("telescope.pickers")
+                    .new({}, {
+                        prompt_title = "Harpoon",
+                        finder = require("telescope.finders").new_table({
+                            results = file_paths,
+                        }),
+                        previewer = tele_conf.file_previewer({}),
+                        sorter = tele_conf.generic_sorter({}),
+                    })
+                    :find()
+            end
+
+            vim.keymap.set("n", "<leader>lh", function()
+                toggle_telescope(harpoon:list())
+            end, { desc = "List harpooned files" })
+        end,
+    },
+
+    -- File Explorer: Neotree
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
@@ -91,7 +202,7 @@ return {
         end,
     },
 
-    -- Fuzzy Finder (files, lsp, etc)
+    -- Telescope: Fuzzy Finder (files, lsp, etc)
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
@@ -163,7 +274,7 @@ return {
             vim.keymap.set("n", "<leader>lc", require("telescope.builtin").command_history, { desc = "List NeoVIM Command History" })
             vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
             vim.keymap.set("n", "<leader>lf", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>lh", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
+            vim.keymap.set("n", "<leader>ln", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
             vim.keymap.set("n", "<leader>lk", require("telescope.builtin").keymaps, { desc = "List & Search NeoVIM Keymaps" })
             vim.keymap.set("n", "<leader>lm", require("telescope.builtin").man_pages, { desc = "List & Search System Man Pages" })
             vim.keymap.set("n", "<leader>lq", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })

@@ -86,6 +86,39 @@ return {
                 pyright = {},
                 rust_analyzer = {},
                 tsserver = {
+                    -- keys = {
+                    --     {
+                    --         "<leader>co",
+                    --         function()
+                    --             vim.lsp.buf.code_action({
+                    --                 apply = true,
+                    --                 context = {
+                    --                     only = { "source.organizeImports.ts" },
+                    --                     diagnostics = {},
+                    --                 },
+                    --             })
+                    --         end,
+                    --         desc = "Typescript: Organize Imports",
+                    --     },
+                    --     {
+                    --         "<leader>cO",
+                    --         function()
+                    --             vim.lsp.buf.code_action({
+                    --                 apply = true,
+                    --                 context = {
+                    --                     only = { "source.removeUnused.ts" },
+                    --                     diagnostics = {},
+                    --                 },
+                    --             })
+                    --         end,
+                    --         desc = "Typescript: Remove Unused Imports",
+                    --     },
+                    -- },
+                    settings = {
+                        completions = {
+                            completeFunctionCalls = true,
+                        },
+                    },
                     typescript = {
                         inlayHints = {
                             -- includeInlayParameterNameHints = 'all',

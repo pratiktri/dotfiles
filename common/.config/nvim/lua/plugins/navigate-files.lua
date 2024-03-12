@@ -31,28 +31,28 @@ return {
                 desc = "Show harpoon list",
             },
             {
-                "<C-1>",
+                "<M-1>",
                 function()
                     require("harpoon"):list():select(1)
                 end,
                 desc = "Switch to the 1st file in harpoon-list",
             },
             {
-                "<C-2>",
+                "<M-2>",
                 function()
                     require("harpoon"):list():select(2)
                 end,
                 desc = "Switch to the 2nd file in harpoon-list",
             },
             {
-                "<C-3>",
+                "<M-3>",
                 function()
                     require("harpoon"):list():select(3)
                 end,
                 desc = "Switch to the 3rd file in harpoon-list",
             },
             {
-                "<C-4>",
+                "<M-4>",
                 function()
                     require("harpoon"):list():select(4)
                 end,
@@ -115,7 +115,7 @@ return {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         keys = {
-            { "<leader>e", ":Neotree filesystem toggle<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
+            { "<leader>e", "<CMD>Neotree filesystem toggle<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
 
             {
                 "<leader>be",

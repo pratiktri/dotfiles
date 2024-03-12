@@ -1,6 +1,17 @@
 return {
+    -- Fugitive
     { "tpope/vim-fugitive" },
-    --{  "tpope/vim-rhubarb" }, --If fugitive.vim is the Git, rhubarb.vim is the Hub.
+
+    -- Git worktree
+    {
+        "ThePrimeagen/git-worktree.nvim",
+        config = function()
+            -- FIX: Open files do NOT get replaced with the changed branch
+            require("telescope").load_extension("git_worktree")
+
+            vim.keymap.set("n", "<leader>glw", "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+        end,
+    },
 
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     {

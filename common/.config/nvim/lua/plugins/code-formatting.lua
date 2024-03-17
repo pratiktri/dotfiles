@@ -16,9 +16,9 @@ return {
                     css = { { "prettierd", "prettier" } },
                     html = { { "prettierd", "prettier" } },
                     json = { { "prettierd", "prettier" } },
-                    yaml = { { "prettierd", "prettier" } },
-                    markdown = { { "prettierd", "prettier" } },
                     graphql = { { "prettierd", "prettier" } },
+                    yaml = { { "yamlfmt", "prettierd" } },
+                    markdown = { { "markdownlint" } },
                     lua = { "stylua" },
                     python = { "black" },
                     sh = { { "shfmt", "shellharden" } },
@@ -36,6 +36,19 @@ return {
                     injected = { options = { ignore_errors = true } },
                     shfmt = {
                         prepend_args = { "-i", "4" },
+                    },
+                    markdownlint = {
+                        prepend_args = {
+                            "--config",
+                            "~/.config/templates/markdownlint.json",
+                        },
+                    },
+                    yamlfmt = {
+                        prepend_args = {
+                            "-formatter",
+                            "include_document_start=true,retain_line_breaks_single=true",
+                            "-gitignore_excludes",
+                        },
                     },
                 },
             })

@@ -19,7 +19,15 @@ return {
                 javascript = { "codespell" },
                 typescriptreact = { "codespell" },
                 javascriptreact = { "codespell" },
+                dockerfile = { "hadolint" },
                 html = { "codespell" },
+            }
+
+            local markdownlint = lint.linters.markdownlint
+            markdownlint.args = {
+                "--config",
+                "~/.config/templates/markdownlint.json",
+                "--",
             }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

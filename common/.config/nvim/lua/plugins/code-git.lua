@@ -9,7 +9,7 @@ return {
             -- FIX: Open files do NOT get replaced with the changed branch
             require("telescope").load_extension("git_worktree")
 
-            vim.keymap.set("n", "<leader>glw", "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+            vim.keymap.set("n", "<leader>gw", "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
         end,
     },
 
@@ -26,7 +26,7 @@ return {
                 changedelete = { text = "~" },
                 untracked = { text = "┆" },
             },
-            attach_to_untracker = true,
+            attach_to_untracked = true,
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
 
@@ -63,6 +63,9 @@ return {
                 map("n", "<leader>gsh", gs.stage_hunk, { desc = "Git: Stage Hunk" })
                 map("n", "<leader>gsu", gs.undo_stage_hunk, { desc = "Git: Undo Stage Hunk" })
                 map("n", "<leader>gsb", gs.stage_buffer, { desc = "Git: Stage Current File" })
+                map("n", "<leader>gb", function()
+                    gs.blame_line({ full = true })
+                end, { desc = "Git: Hover blame-line" })
 
                 -- visual mode
                 map("v", "<leader>gsH", function()

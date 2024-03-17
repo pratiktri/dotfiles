@@ -1,3 +1,4 @@
+#!/bin/zsh
 # I'm not using a separate .zprofile; reuse the .profile instead
 [[ ! -f "$HOME/.profile" ]] || source "$HOME/.profile"
 

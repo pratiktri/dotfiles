@@ -1,16 +1,30 @@
 return {
-    -- Fugitive
-    { "tpope/vim-fugitive" },
-
-    -- Git worktree
+    -- Better fugitive: neogit
     {
-        "ThePrimeagen/git-worktree.nvim",
-        config = function()
-            -- FIX: Open files do NOT get replaced with the changed branch
-            require("telescope").load_extension("git_worktree")
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        config = true,
+        keys = {
+            { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git: Open Neogit", mode = { "n" } },
+            { "<leader>gL", "<cmd>Neogit log<cr>", desc = "Git: Open Neogit Log", mode = { "n" } },
+        },
+    },
 
-            vim.keymap.set("n", "<leader>gw", "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
-        end,
+    -- Git Diffview
+    {
+        "sindrets/diffview.nvim",
+        keys = {
+
+            { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview", mode = { "n" } },
+            { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview against master", mode = { "n" } },
+            { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Git: Show file history", mode = { "n" } },
+        },
+        -- TODO:
+        -- Toggle Diffview keymap
     },
 
     -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -77,18 +91,29 @@ return {
 
                 -- normal mode
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
-                map("n", "<leader>gD", gs.diffthis, { desc = "Git: diff against index" })
-                map("n", "<leader>gd", function()
-                    gs.diffthis("~")
-                end, { desc = "Git: diff against last commit" })
+                -- map("n", "<leader>gD", gs.diffthis, { desc = "Git: diff against index" })
+                -- map("n", "<leader>gd", function()
+                --     gs.diffthis("~")
+                -- end, { desc = "Git: diff against last commit" })
 
                 -- Toggles
                 map("n", "<leader>gtb", gs.toggle_current_line_blame, { desc = "Git: toggle blame line" })
                 map("n", "<leader>gtd", gs.toggle_deleted, { desc = "Git: toggle show deleted" })
 
                 -- Text object
-                map({ "o", "x" }, "gih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
+                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
             end,
         },
+    },
+
+    -- Git worktree
+    {
+        "ThePrimeagen/git-worktree.nvim",
+        config = function()
+            -- FIX: Open files do NOT get replaced with the changed branch
+            require("telescope").load_extension("git_worktree")
+
+            vim.keymap.set("n", "<leader>gw", "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+        end,
     },
 }

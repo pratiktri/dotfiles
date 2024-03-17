@@ -18,7 +18,6 @@ set autoread                " Auto reload file if externally changed
 set nrformats-=octal        " Do not let Ctrl-a + Ctrl-x work on octal format numbers
 set formatoptions=jcroqlnt  " When joining lines with J, delete comment characters
 set display+=truncate       " @@@ is displayed in the 1st column of the last screen line
-set conceallevel=2          " Hide * markup for bold and italic, but not markers with substitutions
 set tabpagemax=50           " Max number of tabs
 set viminfo^=!
 set viewoptions-=options

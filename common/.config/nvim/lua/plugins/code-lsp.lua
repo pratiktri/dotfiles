@@ -58,9 +58,6 @@ return {
             --  Add any additional override configuration in the following tables. They will be passed to the `settings` field of the server config
             --  If you want to override the default filetypes that your language server will attach to you can define the property 'filetypes' to the map in question.
             local servers = {
-                -- clangd = {},
-                -- gopls = {},
-
                 lua_ls = {
                     Lua = {
                         workspace = { checkThirdParty = false },
@@ -70,50 +67,9 @@ return {
                         -- diagnostics = { disable = { 'missing-fields' } },
                     },
                 },
-
-                -- Markdown
-                marksman = {},
-
-                awk_ls = {},
-                bashls = {
-                    filetypes = { "sh", "bash", "zsh" },
-                },
-                cssls = {},
-                dockerls = {},
-                docker_compose_language_service = {},
+                bashls = { filetypes = { "sh", "bash", "zsh" } },
                 html = { filetypes = { "html", "twig", "hbs" } },
-                jsonls = {},
-                pyright = {},
-                rust_analyzer = {},
                 tsserver = {
-                    -- keys = {
-                    --     {
-                    --         "<leader>co",
-                    --         function()
-                    --             vim.lsp.buf.code_action({
-                    --                 apply = true,
-                    --                 context = {
-                    --                     only = { "source.organizeImports.ts" },
-                    --                     diagnostics = {},
-                    --                 },
-                    --             })
-                    --         end,
-                    --         desc = "Typescript: Organize Imports",
-                    --     },
-                    --     {
-                    --         "<leader>cO",
-                    --         function()
-                    --             vim.lsp.buf.code_action({
-                    --                 apply = true,
-                    --                 context = {
-                    --                     only = { "source.removeUnused.ts" },
-                    --                     diagnostics = {},
-                    --                 },
-                    --             })
-                    --         end,
-                    --         desc = "Typescript: Remove Unused Imports",
-                    --     },
-                    -- },
                     settings = {
                         completions = {
                             completeFunctionCalls = true,
@@ -144,6 +100,17 @@ return {
                         },
                     },
                 },
+
+                -- https://github.com/joe-re/sql-language-server?tab=readme-ov-file#configuration
+                sqlls = {},
+                marksman = {},
+                awk_ls = {},
+                cssls = {},
+                dockerls = {},
+                docker_compose_language_service = {},
+                jsonls = {},
+                pyright = {},
+                rust_analyzer = {},
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -184,6 +151,34 @@ return {
                 end,
             })
         end,
+        keys = {
+            {
+                "<leader>co",
+                function()
+                    vim.lsp.buf.code_action({
+                        apply = true,
+                        context = {
+                            only = { "source.organizeImports.ts" },
+                            diagnostics = {},
+                        },
+                    })
+                end,
+                desc = "Typescript: Organize Imports",
+            },
+            {
+                "<leader>cO",
+                function()
+                    vim.lsp.buf.code_action({
+                        apply = true,
+                        context = {
+                            only = { "source.removeUnused.ts" },
+                            diagnostics = {},
+                        },
+                    })
+                end,
+                desc = "Typescript: Remove Unused Imports",
+            },
+        },
     },
 
     {

@@ -14,6 +14,7 @@
 -- g+: [G]it Operations
 -- l+: [L]ist Things
 -- n+: [N]eoVim Stuff
+-- q+: DB [Q]ueries
 -- s+: Grep/[S]earch Things
 -- t+: [T]est runner stuff
 -- x+: close/dismiss something

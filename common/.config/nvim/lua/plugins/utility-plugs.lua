@@ -2,7 +2,7 @@ return {
     -- Navigate between NVIM & Tmux splits seamlessly
     { "christoomey/vim-tmux-navigator" },
 
-    -- Navigate between NVIM & kitty splits seamlessly
+    -- Navigate between NVIM & kitty splits
     {
         "knubie/vim-kitty-navigator",
         build = "cp ./*.py ~/.config/kitty/",

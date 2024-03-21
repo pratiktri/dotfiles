@@ -156,6 +156,7 @@ return {
                             { find = "<ed" },
                             { find = "The only match" },
                             { find = "DB:" },
+                            { find = "cwd:" },
                         },
                     },
                 },

@@ -127,3 +127,6 @@ nnoremap <leader>u :UndotreeToggle<CR>
 
 " Fugitive
 nnoremap <leader>gg :0G<cr>
+
+" Close Tab
+nnoremap <leader>xt :tabclose

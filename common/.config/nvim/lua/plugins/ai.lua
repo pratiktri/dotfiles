@@ -2,10 +2,10 @@ return {
     {
         "David-Kunz/gen.nvim",
         opts = {
-            model = "mistral", -- The default model to use.
-            host = "localhost", -- The host running the Ollama service.
+            model = "mistral:instruct", -- The default model to use.
+            host = "127.0.0.1", -- The host running the Ollama service.
             port = "11434", -- The port on which the Ollama service is listening.
-            display_mode = "float", -- The display mode. Can be "float" or "split".
+            display_mode = "split", -- The display mode. Can be "float" or "split".
             show_prompt = true, -- Shows the Prompt submitted to Ollama.
             show_model = true, -- Displays which model you are using at the beginning of your chat session.
             quit_map = "q", -- set keymap for quit
@@ -25,7 +25,8 @@ return {
             debug = false, -- Prints errors and the command which is run.
         },
         keys = {
-            { "<leader>]", "<cmd>Gen<cr>", desc = "AI Prompt", mode = { "n", "v" } },
+            { "<leader>[", ":Gen<cr>", desc = "AI Prompt", mode = { "n" } },
+            { "<leader>]", ":'<,'>Gen<cr>", desc = "Contextual AI Prompt", mode = { "v" } },
         },
     },
 }

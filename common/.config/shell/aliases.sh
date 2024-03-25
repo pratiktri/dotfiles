@@ -10,7 +10,6 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias usersearch="awk -F: '{print \"UserName: \" \$1 \", UserID: \" \$3 \", Home Dir: \" \$6 \", Shell Used: \" \$7}' /etc/passwd | grep"
 alias untar='tar -zxvf '
-alias wget='wget --hsts-file ${WGET_HSTS_FILE}'
 
 alias v='$EDITOR'
 alias snvim='${HOMEBREW_PREFIX}/bin/nvim' # Stable nvim

@@ -50,6 +50,7 @@ plugins=(
     git
     gitignore
     docker
+    docker-compose
     per-directory-history
     sudo
     zsh-syntax-highlighting
@@ -108,5 +109,5 @@ command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd zsh)"
 for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
 
 # TIP: Following should be executed AFTER the aliases are sourced
-command -v op >/dev/null && bindkey -s '^o' 'op\n' # Fuzzyfind projects and open in nvim
-command -v pnew >/dev/null && bindkey -s '^[o' 'pnew\n' # Create a new project quickly
+command -v op >/dev/null && bindkey -s '^o' ' op\n' # Fuzzyfind projects and open in nvim
+command -v pnew >/dev/null && bindkey -s '^[o' ' pnew\n' # Create a new project quickly

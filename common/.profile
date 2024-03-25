@@ -44,7 +44,7 @@ if [ "$(uname -s)" = "Linux" ]; then
     export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nvidia"
 
     # Needs upstream fix to work: https://bugs.kde.org/show_bug.cgi?id=415770
-    export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+    export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc":"$XDG_CONFIG_HOME/gtk-2.0/gtkrc.mine"
     export CUDA_CACHE_PATH="XDG_CACHE_HOME/nv"
 
     # Map caps-lock to escape TIP: also added to /etc/profile
@@ -59,7 +59,7 @@ fi
 
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 export LESSHISTFILE="$XDG_STATE_HOME/shell/lesshst"
-export WGET_HSTS_FILE="$XDG_STATE_HOME/shell/wget-hsts-history" # wget aliased to use this path
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 # Move the Android device keys to .config (TODO: This needs to be tested)
 export ADB_VENDOR_KEYS="$XDG_CONFIG_HOME/android"
@@ -82,7 +82,10 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_CLI_HOME="$XDG_CONFIG_HOME/dotnet"
 export DOTNET_TOOLS_PATH="$XDG_DATA_HOME/dotnet"
 
-# FIX: BELOW DID NOT WORK
+# Go
+export GOPATH=/media/pratik/Projects/DevSetUps/gopath/
+
+# FIX: BELOW DID NOT WORK: added to /etc/profile, need to recheck on reboot
 # alias code="code --extensions-dir $XDG_DATA_HOME/vscode"
 
 # Java
@@ -103,3 +106,5 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~50% --border'
 
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME/tldr"
+
+export OLLAMA_HOME="$XDG_CONFIG_HOME/ollama"

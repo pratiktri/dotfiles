@@ -280,21 +280,23 @@ return {
             vim.keymap.set("n", "<leader>ls", require("telescope.builtin").search_history, { desc = "List Search History" })
             vim.keymap.set("n", "<leader>lv", require("telescope.builtin").vim_options, { desc = "List Vim Options" })
 
-            -- Git things -> Git
+            -- Git
             vim.keymap.set("n", "<leader>glb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })
             vim.keymap.set("n", "<leader>glc", require("telescope.builtin").git_commits, { desc = "List Git Commits" })
 
             -- LSP Things -> Coding
-            vim.keymap.set("n", "<leader>cd", require("telescope.builtin").diagnostics, { desc = "Code: List Diagnostics" })
-            vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations, { desc = "Code: Goto Implementation of the word under cursor" })
-            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: List References for word under cursor" })
-            vim.keymap.set("n", "<leader>cgt", require("telescope.builtin").lsp_type_definitions, { desc = "Code: Goto definition of the Type under cursor" })
-            vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
-            vim.keymap.set("n", "<leader>cgd", require("telescope.builtin").lsp_type_definitions, { desc = "Type Definition" })
-            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Goto References" })
-            vim.keymap.set("n", "<leader>cI", require("telescope.builtin").lsp_implementations, { desc = "Goto Implementation" })
-            vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
+            vim.keymap.set("n", "<leader>cld", require("telescope.builtin").diagnostics, { desc = "Code: List Diagnostics" })
+
+            vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations, { desc = "Code: Goto Implementation" })
+
+            vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Code: Goto Definition" })
+            vim.keymap.set("n", "<leader>ct", require("telescope.builtin").lsp_type_definitions, { desc = "Code: Goto Type Definition" })
             -- vim.keymap.set("n", "<leader>cgD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+
+            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: Goto References" })
+            -- vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: List References for word under cursor" })
+
+            -- vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
         end,
     },
 }

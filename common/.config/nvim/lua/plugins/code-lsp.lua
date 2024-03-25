@@ -13,7 +13,7 @@ local on_attach = function(_, bufnr)
     nmap("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
     nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
     -- See `:help K` for why this keymap
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     -- Lesser used LSP functionality
@@ -153,7 +153,7 @@ return {
         end,
         keys = {
             {
-                "<leader>co",
+                "<leader>cu",
                 function()
                     vim.lsp.buf.code_action({
                         apply = true,
@@ -166,7 +166,7 @@ return {
                 desc = "Typescript: Organize Imports",
             },
             {
-                "<leader>cO",
+                "<leader>cU",
                 function()
                     vim.lsp.buf.code_action({
                         apply = true,

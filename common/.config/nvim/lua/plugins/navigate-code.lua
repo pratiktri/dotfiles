@@ -114,7 +114,6 @@ return {
                     },
 
                     textobjects = {
-
                         select = {
                             enable = true,
                             lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -158,11 +157,10 @@ return {
                             enable = true,
                             border = "none",
                             floating_preview_opts = {},
-                            peek_definition_code = {
-                                -- TIP: Press the shortcut 2 times to enter the floating window
-                                ["<leader>cd"] = { query = "@function.outer", desc = "Peek function definition on a popup" },
-                                ["<leader>cD"] = { query = "@class.outer", desc = "Peek class definition on a popup" },
-                            },
+                            -- peek_definition_code = {
+                            --     ["<leader>cd"] = { query = "@function.outer", desc = "Peek function definition on a popup" },
+                            --     ["<leader>cD"] = { query = "@class.outer", desc = "Peek class definition on a popup" },
+                            -- },
                         },
                     },
                 })

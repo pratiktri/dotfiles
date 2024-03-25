@@ -49,7 +49,7 @@ return {
                 return { "treesitter", "indent" }
             end,
             open_fold_hl_timeout = 0,
-            close_fold_kinds = { "imports", "comment" },
+            close_fold_kinds_for_ft = { "imports", "comment" },
             fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
                 local totalLines = vim.api.nvim_buf_line_count(0)

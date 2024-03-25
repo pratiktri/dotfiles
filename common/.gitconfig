@@ -29,7 +29,7 @@
   cmd = code --wait $MERGED
 
 [log]
-    date = relative
+    date = local
 
 [alias]
     ll = log --pretty=format:'%Cblue%cn (%ce)%Creset committed %Cred%h%Creset %Cgreen%cr%Creset:%n%B'

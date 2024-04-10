@@ -29,7 +29,8 @@ return {
         event = "VeryLazy",
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
-            { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
+            { "<leader>bj", "<Cmd>BufferLinePick<CR>", desc = "Choose and jump to a buffer" },
+            { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
             { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
             { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
         },
@@ -54,12 +55,14 @@ return {
             },
         },
         config = function(_, opts)
-            require("bufferline").setup(opts)
+            local buf_line = require("bufferline")
+            buf_line.setup(opts)
+
             -- Fix bufferline when restoring a session
             vim.api.nvim_create_autocmd("BufAdd", {
                 callback = function()
                     vim.schedule(function()
-                        pcall(nvim_bufferline)
+                        pcall(buf_line)
                     end)
                 end,
             })

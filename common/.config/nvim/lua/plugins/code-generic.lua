@@ -203,7 +203,7 @@ return {
             severity = vim.diagnostic.severity.WARN,
         },
         keys = {
-            { "<leader>dx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+            { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
             { "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
             { "<leader>dl", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
             { "<leader>dq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
@@ -285,11 +285,12 @@ return {
                 outline = { auto_preview = false },
             })
 
-            vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover Documentation" })
             vim.keymap.set("n", "<leader>cR", "<cmd>Lspsaga finder<cr>", { desc = "Code: Goto References" })
-            vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outline<cr>", { desc = "Code: Toggle Symbol Outline" })
             vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga peek_definition<cr>", { desc = "Code: Peek definition: Function" })
             vim.keymap.set("n", "<leader>cD", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "Code: Peek definition: Class" })
+
+            vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover Documentation" })
+            vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<cr>", { desc = "Code: Toggle Symbol Outline" })
         end,
     },
 

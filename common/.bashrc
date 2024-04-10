@@ -176,14 +176,12 @@ HISTFILE="$XDG_STATE_HOME/shell/bash_history"
 
 [ ! -f "$XDG_CONFIG_HOME/exercism/exercism_completion.bash" ] || source "$XDG_CONFIG_HOME/exercism/exercism_completion.bash"
 
-# [ctrl+r]:replaces shell command search
-# [ctrl+t]:fzf & over the files & directories under the current one & paste it to prompt
-# [alt+c] :fzf & cd into a directory under the current one
-[ -f "$XDG_STATE_HOME/shell/fzf.bash" ] && source "$XDG_STATE_HOME/shell/fzf.bash"
+# [ctrl+r]: Search command history
+# [ctrl+t]: fzf & over the files & directories under the current one & paste it to prompt
+# [alt+c] : fzf & cd into a directory under the current one
+command -v fzf >/dev/null && eval "$(fzf --bash)"
 
-if command -v zoxide >/dev/null; then
-    eval "$(zoxide init --cmd cd bash)"
-fi
+command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd bash)"
 
 # Source aliases and shell functions
 for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done

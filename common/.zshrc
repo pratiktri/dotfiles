@@ -98,10 +98,10 @@ zmodload zsh/complist
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 _comp_options+=(globdots)  # Include hidden files
 
-# [ctrl+r]:replaces shell command search
-# [ctrl+t]:fzf & over the files & directories under the current one & paste it to prompt
-# [alt+c] :fzf & cd into a directory under the current one
-[ -f "$XDG_STATE_HOME/shell/fzf.zsh" ] && source "$XDG_STATE_HOME/shell/fzf.zsh"
+# [ctrl+r]: Search command history
+# [ctrl+t]: fzf & over the files & directories under the current one & paste it to prompt
+# [alt+c] : fzf & cd into a directory under the current one
+command -v fzf > /dev/null && eval "$(fzf --zsh)"
 
 command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd zsh)"
 

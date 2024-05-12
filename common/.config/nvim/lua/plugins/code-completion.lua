@@ -15,6 +15,9 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
 
+            "hrsh7th/cmp-vsnip",
+            "hrsh7th/vim-vsnip",
+
             -- Adds a number of user-friendly snippets
             "rafamadriz/friendly-snippets",
         },

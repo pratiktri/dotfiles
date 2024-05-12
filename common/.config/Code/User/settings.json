@@ -48,6 +48,16 @@
     // Debugging
     "debug.toolBarLocation": "docked",
 
+    // NeoVIM
+    "keyboard.dispatch": "keyCode", // Hack to make CAPS->Esc remap work on Ubuntu
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "vscode-neovim.logLevel": "warn",
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
+    "vscode-neovim.useWSL": true
+
+    //
     // Prettier Plugin
     "prettier.tabWidth": 4,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -192,16 +202,6 @@
         "line-length": false
     },
 
-    // Vim Plugin
-    "vim.foldfix": true,
-    "vim.highlightedyank.enable": true,
-    "vim.hlsearch": true,
-    "vim.leader": " ",
-    "vim.showMarksInGutter": true,
-    "vim.smartRelativeLine": true,
-    "vim.vimrc.enable": true,
-    "vim.useSystemClipboard": true,
-
     // Python
     "python.jediEnabled": false,
     "python.languageServer": "Pylance",
@@ -225,6 +225,21 @@
     "debug.javascript.autoAttachFilter": "disabled",
     "debug.onTaskErrors": "debugAnyway",
     "vim.disableExtension": true,
-    "window.zoomLevel": -1
-    //
+    "window.zoomLevel": -1,
+
+    // Dotnet & C#
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
+    "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
+    "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
+    "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
+    "csharp.inlayHints.enableInlayHintsForTypes": true,
+    "dotnet.inlayHints.enableInlayHintsForIndexerParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForLiteralParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForObjectCreationParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForParameters": true,
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+    "csharp.experimental.debug.hotReload": true,
+
 }

@@ -53,9 +53,8 @@ plugins=(
     docker-compose
     per-directory-history
     sudo
-    zsh-syntax-highlighting
-    zsh-autosuggestions
     vi-mode
+    dotnet
     exercism
 )
 VI_MODE_SET_CURSOR=true
@@ -66,6 +65,9 @@ HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
 export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$HOST"
 
 source "$ZSH/oh-my-zsh.sh"
+
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"

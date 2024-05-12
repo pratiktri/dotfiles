@@ -69,6 +69,7 @@ return {
                 },
                 bashls = { filetypes = { "sh", "bash", "zsh" } },
                 html = { filetypes = { "html", "twig", "hbs" } },
+                omnisharp = {},
                 tsserver = {
                     settings = {
                         completions = {

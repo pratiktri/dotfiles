@@ -152,34 +152,6 @@ return {
                 end,
             })
         end,
-        keys = {
-            {
-                "<leader>cu",
-                function()
-                    vim.lsp.buf.code_action({
-                        apply = true,
-                        context = {
-                            only = { "source.organizeImports.ts" },
-                            diagnostics = {},
-                        },
-                    })
-                end,
-                desc = "Typescript: Organize Imports",
-            },
-            {
-                "<leader>cU",
-                function()
-                    vim.lsp.buf.code_action({
-                        apply = true,
-                        context = {
-                            only = { "source.removeUnused.ts" },
-                            diagnostics = {},
-                        },
-                    })
-                end,
-                desc = "Typescript: Remove Unused Imports",
-            },
-        },
     },
 
     {

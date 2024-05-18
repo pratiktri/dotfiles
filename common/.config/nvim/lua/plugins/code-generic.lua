@@ -197,16 +197,57 @@ return {
     -- better diagnostics list and others
     {
         "folke/trouble.nvim",
-        cmd = { "TroubleToggle", "Trouble" },
+        branch = "dev",
         opts = {
-            use_diagnostic_signs = true,
-            severity = vim.diagnostic.severity.WARN,
+            -- Default: Preview in a split
+            preview = {
+                type = "split",
+                relative = "win",
+                position = "right",
+                size = 0.6,
+            },
+            modes = {
+
+                -- Show only the most severe diagnostics; once resolved, less severe will be shown
+                most_severe = {
+                    mode = "diagnostics", -- inherit from diagnostics mode
+                    filter = function(items)
+                        local severity = vim.diagnostic.severity.HINT
+                        for _, item in ipairs(items) do
+                            severity = math.min(severity, item.severity)
+                        end
+                        return vim.tbl_filter(function(item)
+                            return item.severity == severity
+                        end, items)
+                    end,
+                },
+
+                -- Diagnostics from buffer + Errors from current project
+                project_errors = {
+                    mode = "diagnostics", -- inherit from diagnostics mode
+                    filter = {
+                        any = {
+                            buf = 0, -- current buffer
+                            {
+                                severity = vim.diagnostic.severity.ERROR,
+                                -- limit to files in the current project
+                                function(item)
+                                    return item.filename:find((vim.loop or vim.uv).cwd(), 1, true)
+                                end,
+                            },
+                        },
+                    },
+                },
+            },
         },
         keys = {
-            { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-            { "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-            { "<leader>dl", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-            { "<leader>dq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+            { "<leader>o", "<cmd>Trouble symbols toggle focus=true<cr>", desc = "Code: Toggle Symbol Outline" },
+
+            { "<leader>dd", "<cmd>Trouble project_errors toggle focus=true<cr>", desc = "Trouble: Document Diagnostics" },
+            { "<leader>dw", "<cmd>Trouble most_severe toggle focus=true<cr>", desc = "Trouble: List Project Diagnostics" },
+            { "<leader>dl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Trouble: Location List" },
+            { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Trouble: Quickfix List" },
+            { "gr", "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Code: List References" },
             {
                 "[q",
                 function()
@@ -290,7 +331,6 @@ return {
             vim.keymap.set("n", "<leader>cD", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "Code: Peek definition: Class" })
 
             vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover Documentation" })
-            vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<cr>", { desc = "Code: Toggle Symbol Outline" })
         end,
     },
 

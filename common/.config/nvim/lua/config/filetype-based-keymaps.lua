@@ -1,6 +1,6 @@
--- Enable spell check on markdown and text files
+-- Enable keymaps that are specific to only a certain LSP
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("keymaps-csharp-omnisharp", { clear = true }),
+    group = vim.api.nvim_create_augroup("keymaps-javascript", { clear = true }),
     pattern = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte", "astro" },
     callback = function()
         -- vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>OmniSharpGetCodeActions<CR>", { desc = "Code: Code Actions  (C#)" })

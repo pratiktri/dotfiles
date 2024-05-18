@@ -12,6 +12,7 @@ local on_attach = function(_, bufnr)
 
     nmap("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
     nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    nmap("<C-.>", vim.lsp.buf.code_action, "Code Action: VSCode Style")
     -- See `:help K` for why this keymap
     -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")

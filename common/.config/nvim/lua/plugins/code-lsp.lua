@@ -167,11 +167,12 @@ return {
 
                 display = {
                     render_limit = 1, -- How many LSP messages to show at once
-                    skip_history = true, -- Whether progress notifications should be omitted from history
+                    -- skip_history = true, -- Whether progress notifications should be omitted from history
                 },
             },
 
             notification = {
+                poll_rate = 2, -- How often to udate and render notifications
                 filter = vim.log.levels.WARN, -- Minimum notifications level
             },
         },

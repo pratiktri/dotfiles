@@ -77,6 +77,7 @@ return {
         setup = {
             settings = {
                 save_on_change = true,
+                save_on_toggle = false,
                 mark_branch = true,
             },
         },
@@ -297,6 +298,8 @@ return {
             -- vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: List References for word under cursor" })
 
             -- vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
+
+            vim.keymap.set("n", "<leader>nn", "<cmd>Telescope notify<cr>", { desc = "List past notifications" })
         end,
     },
 }

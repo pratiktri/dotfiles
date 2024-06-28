@@ -1,5 +1,4 @@
 #!/bin/sh
-#
 
 # TODO: Use this to better manage dotfiles
 # https://github.com/dylanirlbeck/dotfiles/blob/master/scripts/bootstrap.sh

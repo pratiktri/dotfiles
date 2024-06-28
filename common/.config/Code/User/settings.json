@@ -8,7 +8,7 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 21, // Reduces the Activity Bar size
+    "editor.fontSize": 18,
     "editor.cursorWidth": 4,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
@@ -27,16 +27,18 @@
     "files.autoSaveDelay": 1000,
     "diffEditor.renderSideBySide": true,
     "diffEditor.ignoreTrimWhitespace": false,
+    "terminal.integrated.shell.linux": "/bin/zsh",
 
     // Editor Font
     "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
-    "terminal.integrated.fontSize": 20,
+    "terminal.integrated.fontSize": 18,
 
     // Workbench - Everything that surrounds the editor
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "left",
+    "security.workspace.trust.untrustedFiles": "prompt",
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff"
@@ -47,26 +49,24 @@
 
     // Debugging
     "debug.toolBarLocation": "docked",
+    "debug.onTaskErrors": "debugAnyway",
 
     // NeoVIM
-    "keyboard.dispatch": "keyCode", // Hack to make CAPS->Esc remap work on Ubuntu
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "vscode-neovim.logLevel": "warn",
-    "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
-    "vscode-neovim.useWSL": true
+    // "keyboard.dispatch": "keyCode", // Hack to make CAPS->Esc remap work on Ubuntu
+    // "extensions.experimental.affinity": {
+    //     "asvetliakov.vscode-neovim": 1
+    // },
+    // "vscode-neovim.logLevel": "warn",
+    // "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
+    // "vscode-neovim.useWSL": true,
 
     //
     // Prettier Plugin
     "prettier.tabWidth": 4,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "prettier.useTabs": false,
     "prettier.printWidth": 85,
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[html,json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
 
@@ -124,7 +124,6 @@
     // Shell check plugin
     "shellcheck.run": "onSave",
     "shellcheck.exclude": ["2181", "2039"],
-    "security.workspace.trust.untrustedFiles": "open",
 
     // Better Comments
     "better-comments.tags": [
@@ -177,11 +176,17 @@
 
     // JavaScript
     "typescript.suggest.paths": false,
+    "debug.javascript.autoAttachFilter": "disabled",
 
     // Git
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "git.confirmSync": false,
+    "git-graph.dialog.addTag.pushToRemote": true,
+    "git-graph.dialog.createBranch.checkOut": true,
+    "git-graph.dialog.general.referenceInputSpaceSubstitution": "Underscore",
+    "git-graph.enhancedAccessibility": true,
+    "git-graph.dialog.rebase.launchInteractiveRebase": true,
 
     // Markdown
     "markdownlint.run": "onType",
@@ -221,15 +226,10 @@
     // "rust-analyzer.inlayHints.enable": false,
     // "rust-analyzer.inlayHints.typeHints": false,
     //
-    "terminal.integrated.shell.linux": "/bin/zsh",
-    "debug.javascript.autoAttachFilter": "disabled",
-    "debug.onTaskErrors": "debugAnyway",
-    "vim.disableExtension": true,
-    "window.zoomLevel": -1,
 
     // Dotnet & C#
     "[csharp]": {
-        "editor.defaultFormatter": "ms-dotnettools.csharp"
+        "editor.defaultFormatter": "csharpier.csharpier-vscode"
     },
     "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
     "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
@@ -241,5 +241,7 @@
     "dotnet.inlayHints.enableInlayHintsForParameters": true,
     "dotnetAcquisitionExtension.enableTelemetry": false,
     "csharp.experimental.debug.hotReload": true,
-
+    "dotnet.inlayHints.enableInlayHintsForOtherParameters": true,
+    "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "fullSolution",
+    "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "fullSolution"
 }

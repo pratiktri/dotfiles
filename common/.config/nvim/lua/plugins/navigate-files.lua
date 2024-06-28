@@ -267,6 +267,7 @@ return {
                 })
             end, { desc = "Search Open Buffers" })
             vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<CS-F>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
             vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
 
             -- List

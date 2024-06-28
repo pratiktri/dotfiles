@@ -54,8 +54,16 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 # Oh-my-zsh plugins
+# zi snippet OMZP::aliases
+# zi snippet OMZP::gitfast
+zi snippet OMZP::aws
+zi snippet OMZP::azure
+zi snippet OMZP::brew
 zi snippet OMZP::colored-man-pages
 zi snippet OMZP::command-not-found
+zi snippet OMZP::dotnet
+zi snippet OMZP::dotenv
+zi snippet OMZP::git
 zi snippet OMZP::gitignore
 zi snippet OMZP::kitty
 zi snippet OMZP::podman
@@ -63,6 +71,8 @@ zi snippet OMZP::rust
 zi snippet OMZP::sudo
 zi snippet OMZP::systemd
 zi snippet OMZP::timer
+zi snippet OMZP::ubuntu
+zi snippet OMZP::urltools
 zi snippet OMZP::vi-mode
 zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/per-directory-history/per-directory-history.zsh
 

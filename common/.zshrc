@@ -3,7 +3,7 @@
 [[ ! -f "$HOME/.profile" ]] || source "$HOME/.profile"
 
 # ZSH Options
-bindkey -v # enable vi-mode
+bindkey -v                  # enable vi-mode
 setopt +o nomatch
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -11,8 +11,6 @@ CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="dd.mm.yyyy" # see 'man strftime' for details.
-VI_MODE_SET_CURSOR=true
-VI_MODE_CURSOR_INSERT=3
 
 # ZSH History
 export HISTSIZE=10000000
@@ -42,6 +40,13 @@ if [[ ! -d "$ZINIT_HOME" ]]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
+# Zinit plugin settings
+TIMER_PRECISION=3; TIMER_FORMAT='[%d]'
+VI_MODE_SET_CURSOR=true
+VI_MODE_CURSOR_INSERT=3
+# Having HISTORY_BASE after per-directory-history plugin install does NOT work
+HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
+
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zdharma-continuum/fast-syntax-highlighting
@@ -64,20 +69,17 @@ zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/per-directory-
 zi ice as"completion"
 zi snippet OMZP::fd/_fd
 
-HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
-TIMER_PRECISION=3; TIMER_FORMAT='[%d]'
-
 # ZSH Auto-completion settings
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-_comp_options+=(globdots)  # Include hidden files
+_comp_options+=(globdots)   # Include hidden files
 zmodload zsh/complist
 zinit cdreplay -q
 
 # Completion styling
-zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'      # Case INsensitive completion match
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Add color to completion suggestions
+zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 
 # To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"
@@ -101,6 +103,6 @@ for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
 bindkey '^f' autosuggest-accept         #
 bindkey '^p' history-search-backward    # Ctrl+p gets the last history match
 bindkey '^n' history-search-forward     # Ctrl+n gets the next history match
-# TIP: Following should be executed AFTER the aliases are sourced
+# TIP: Following should be executed AFTER aliases are sourced
 command -v op >/dev/null && bindkey -s '^o' ' op\n' # Fuzzyfind projects and open in nvim
 command -v pnew >/dev/null && bindkey -s '^[o' ' pnew\n' # Create a new project quickly

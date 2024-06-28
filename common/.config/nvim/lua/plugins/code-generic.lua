@@ -197,7 +197,6 @@ return {
     -- better diagnostics list and others
     {
         "folke/trouble.nvim",
-        branch = "dev",
         opts = {
             -- Default: Preview in a split
             preview = {

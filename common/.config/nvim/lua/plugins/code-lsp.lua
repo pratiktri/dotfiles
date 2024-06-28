@@ -70,7 +70,23 @@ return {
                 },
                 bashls = { filetypes = { "sh", "bash", "zsh" } },
                 html = { filetypes = { "html", "twig", "hbs" } },
-                omnisharp = {},
+                omnisharp = {
+                    -- DotNet = {
+                    --     enablePackageRestore = true,
+                    -- },
+                    settings = {
+                        FormattingOptions = {
+                            OrganizeImports = true,
+                        },
+                        RoslynExtensionOptions = {
+                            EnableAnalyzerSupport = true,
+                            EnableImportCompletion = true,
+                        },
+                        Sdk = {
+                            IncludePrereleases = false,
+                        },
+                    },
+                },
                 tsserver = {
                     settings = {
                         completions = {

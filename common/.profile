@@ -1,6 +1,7 @@
 #!/bin/sh
 
 [ ! -f "/home/linuxbrew/.linuxbrew/bin/brew" ] || eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ ! -f "/opt/homebrew/bin/brew" ] || eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # set PATH so it includes user's private bin if it exists
 [ ! -d "$HOME/bin" ] || PATH="$HOME/bin:$PATH"

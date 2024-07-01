@@ -1,6 +1,7 @@
 -- Load Keybindings from VIM
 local vim_mappings = os.getenv("HOME") .. "/.vim/key_maps.vim"
-if vim.loop.fs_stat(vim_mappings) then
+local util = require("config.util")
+if vim.loop.fs_stat(vim_mappings) and util.is_not_vscode() then
     vim.cmd("source " .. vim_mappings)
 end
 
@@ -43,8 +44,10 @@ vim.keymap.set("i", ";", ";<C-g>u", { desc = "Auto add undo breakpoints on ';'" 
 vim.keymap.set("i", "\r", "\r<C-g>u", { desc = "Auto add undo breakpoints on new lines" })
 
 -- Traverse Buffer
-vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Switch to next buffer" })
-vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Switch to previous buffer" })
+if require("config.util").is_not_vscode() then
+    vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Switch to next buffer" })
+    vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Switch to previous buffer" })
+end
 
 -- Save file
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })

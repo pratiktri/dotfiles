@@ -5,6 +5,7 @@ return {
     {
         -- Autocompletion
         "hrsh7th/nvim-cmp",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
             "L3MON4D3/LuaSnip",
@@ -76,6 +77,7 @@ return {
 
     {
         "L3MON4D3/LuaSnip",
+        cond = require("config.util").is_not_vscode(),
         keys = {
             {
                 "<tab>",

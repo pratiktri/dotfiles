@@ -114,6 +114,7 @@ return {
     -- File Explorer: Neotree
     {
         "nvim-neo-tree/neo-tree.nvim",
+        cond = require("config.util").is_not_vscode(),
         branch = "v3.x",
         keys = {
             { "<leader>e", "<CMD>Neotree filesystem toggle<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
@@ -206,6 +207,7 @@ return {
     -- Telescope: Fuzzy Finder (files, lsp, etc)
     {
         "nvim-telescope/telescope.nvim",
+        cond = require("config.util").is_not_vscode(),
         branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",

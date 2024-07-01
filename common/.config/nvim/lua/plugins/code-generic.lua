@@ -14,6 +14,7 @@ return {
     -- "gc" to comment visual regions/lines
     {
         "numToStr/Comment.nvim",
+        cond = require("config.util").is_not_vscode(),
         config = function()
             require("Comment").setup({
                 pre_hook = function()
@@ -26,6 +27,7 @@ return {
     -- Better code folding
     {
         "kevinhwang91/nvim-ufo",
+        cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         dependencies = {
             "kevinhwang91/promise-async",
@@ -114,6 +116,7 @@ return {
     -- indent guides for Neovim
     {
         "lukas-reineke/indent-blankline.nvim",
+        cond = require("config.util").is_not_vscode(),
         opts = {
             indent = { char = "│", tab_char = "│" },
             scope = { enabled = false },
@@ -139,6 +142,7 @@ return {
     -- Highlights the current level of indentation, and animates the highlighting.
     {
         "echasnovski/mini.indentscope",
+        cond = require("config.util").is_not_vscode(),
         opts = { symbol = "│", options = { try_as_border = true } },
         init = function()
             vim.api.nvim_create_autocmd("FileType", {
@@ -281,6 +285,7 @@ return {
     -- Inlay hints
     {
         "lvimuser/lsp-inlayhints.nvim",
+        cond = require("config.util").is_not_vscode(),
         config = function()
             require("lsp-inlayhints").setup()
 
@@ -304,6 +309,7 @@ return {
     -- LspSaga
     {
         "nvimdev/lspsaga.nvim",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
@@ -412,6 +418,7 @@ return {
     -- Refactor code: Refactoring book by Martin Fowler
     {
         "ThePrimeagen/refactoring.nvim",
+        cond = require("config.util").is_not_vscode(),
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "nvim-lua/plenary.nvim",

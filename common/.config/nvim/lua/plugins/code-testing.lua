@@ -3,11 +3,12 @@ return {
     -- Taken from LazyVim
     {
         "nvim-neotest/neotest",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "marilari88/neotest-vitest"
+            "marilari88/neotest-vitest",
         },
         opts = {
             -- Do NOT add adapters here
@@ -31,8 +32,7 @@ return {
                 virtual_text = {
                     format = function(diagnostic)
                         -- Replace newline and tab characters with space for more compact diagnostics
-                        local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+",
-                            "")
+                        local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
                         return message
                     end,
                 },

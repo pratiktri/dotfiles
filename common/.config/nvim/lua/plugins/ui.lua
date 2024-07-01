@@ -1,18 +1,28 @@
 return {
     -- icons
-    { "nvim-tree/nvim-web-devicons" },
+    {
+        "nvim-tree/nvim-web-devicons",
+        cond = require("config.util").is_not_vscode(),
+    },
 
     -- ui components
-    { "MunifTanjim/nui.nvim" },
+    {
+        "MunifTanjim/nui.nvim",
+        cond = require("config.util").is_not_vscode(),
+    },
 
     -- Better vim.ui
-    { "stevearc/dressing.nvim" },
+    {
+        "stevearc/dressing.nvim",
+        cond = require("config.util").is_not_vscode(),
+    },
 
     { "machakann/vim-highlightedyank" },
 
     -- colorscheme
     {
         "projekt0n/github-nvim-theme",
+        cond = require("config.util").is_not_vscode(),
         lazy = false,
         priority = 1000,
         config = function()
@@ -23,6 +33,7 @@ return {
     -- Show buffers like VS Code tabs
     {
         "akinsho/bufferline.nvim",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             { "echasnovski/mini.bufremove", version = "*" },
         },
@@ -72,6 +83,7 @@ return {
     -- Better `vim.notify()`
     {
         "rcarriga/nvim-notify",
+        cond = require("config.util").is_not_vscode(),
         keys = {
             {
                 "<leader>xn",
@@ -106,6 +118,7 @@ return {
     -- Completely replaces the UI for messages, cmdline and the popupmenu.
     {
         "folke/noice.nvim",
+        cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -177,6 +190,7 @@ return {
     -- Set lualine as statusline
     {
         "nvim-lualine/lualine.nvim",
+        cond = require("config.util").is_not_vscode(),
         init = function()
             vim.g.lualine_laststatus = vim.o.laststatus
             if vim.fn.argc(-1) > 0 then

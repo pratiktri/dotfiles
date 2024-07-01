@@ -5,6 +5,7 @@ end
 return {
     {
         "tpope/vim-dadbod",
+        cond = require("config.util").is_not_vscode(),
         opt = true,
         dependencies = {
             { "kristijanhusak/vim-dadbod-ui" },

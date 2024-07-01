@@ -98,6 +98,10 @@ local M = {
     },
 }
 
+function M.is_not_vscode()
+    return not vim.g.vscode
+end
+
 function M.fg(name)
     ---@type {foreground?:number}?
     ---@diagnostic disable-next-line: deprecated

@@ -33,6 +33,7 @@ return {
     {
         -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
             { "williamboman/mason.nvim", config = true },
@@ -46,6 +47,7 @@ return {
 
     {
         "williamboman/mason-lspconfig.nvim",
+        cond = require("config.util").is_not_vscode(),
         config = function()
             -- Configure LSP
 
@@ -64,6 +66,7 @@ return {
                         workspace = { checkThirdParty = false },
                         telemetry = { enable = false },
                         completion = { callSnippet = "Replace" },
+                        hint = { enable = true },
                         -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                         -- diagnostics = { disable = { 'missing-fields' } },
                     },
@@ -95,7 +98,7 @@ return {
                     },
                     typescript = {
                         inlayHints = {
-                            -- includeInlayParameterNameHints = 'all',
+                            includeInlayParameterNameHints = "all",
                             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                             includeInlayFunctionParameterTypeHints = true,
                             includeInlayVariableTypeHints = true,
@@ -107,7 +110,7 @@ return {
                     },
                     javascript = {
                         inlayHints = {
-                            -- includeInlayParameterNameHints = 'all',
+                            includeInlayParameterNameHints = "all",
                             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                             includeInlayFunctionParameterTypeHints = true,
                             includeInlayVariableTypeHints = true,
@@ -173,6 +176,7 @@ return {
 
     {
         "j-hui/fidget.nvim",
+        cond = require("config.util").is_not_vscode(),
         opts = {
             progress = {
                 poll_rate = 1, -- How and when to poll for progress messages

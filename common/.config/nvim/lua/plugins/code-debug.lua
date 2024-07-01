@@ -3,6 +3,7 @@
 
 return {
     "mfussenegger/nvim-dap",
+    cond = require("config.util").is_not_vscode(),
     dependencies = {
         -- Creates a beautiful debugger UI
         "rcarriga/nvim-dap-ui",

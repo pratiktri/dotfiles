@@ -22,6 +22,7 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "editor.multiCursorModifier": "ctrlCmd",
+    "editor.cursorSurroundingLines": 8,
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
@@ -52,13 +53,23 @@
     "debug.onTaskErrors": "debugAnyway",
 
     // NeoVIM
-    // "keyboard.dispatch": "keyCode", // Hack to make CAPS->Esc remap work on Ubuntu
-    // "extensions.experimental.affinity": {
-    //     "asvetliakov.vscode-neovim": 1
-    // },
-    // "vscode-neovim.logLevel": "warn",
+    "keyboard.dispatch": "keyCode", // Hack to make CAPS->Esc remap work on Ubuntu
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
     // "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
     // "vscode-neovim.useWSL": true,
+    // https://github.com/vscode-neovim/vscode-neovim/wiki/Settings#search-result-border
+    "vscode-neovim.highlightGroups.highlights": {
+        "IncSearch": {
+            "borderStyle": "solid",
+            "borderWidth": "1px"
+        },
+        "Search": {
+            "borderStyle": "solid",
+            "borderWidth": "1px"
+        }
+    },
 
     //
     // Prettier Plugin

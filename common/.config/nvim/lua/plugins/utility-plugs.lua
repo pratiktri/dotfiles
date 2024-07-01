@@ -176,11 +176,15 @@ return {
     },
 
     -- Navigate between NVIM & Tmux splits seamlessly
-    { "christoomey/vim-tmux-navigator" },
+    {
+        "christoomey/vim-tmux-navigator",
+        cond = require("config.util").is_not_vscode(),
+    },
 
     -- Navigate between NVIM & kitty splits
     {
         "knubie/vim-kitty-navigator",
+        cond = require("config.util").is_not_vscode(),
         build = "cp ./*.py ~/.config/kitty/",
         keys = {
             { "<C-S-h>", "<cmd>KittyNavigateLeft<cr>" },
@@ -194,6 +198,7 @@ return {
     {
         "mikesmithgh/kitty-scrollback.nvim",
         lazy = true,
+        cond = require("config.util").is_not_vscode(),
         cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
         event = { "User KittyScrollbackLaunch" },
         version = "^4.0.0",
@@ -210,6 +215,7 @@ return {
     -- Changes the Nvim root to git root
     {
         "airblade/vim-rooter",
+        cond = require("config.util").is_not_vscode(),
         config = function()
             vim.g.rooter_cd_cmd = "tcd" -- Use tcd command to change the root
         end,
@@ -265,6 +271,7 @@ return {
     -- Speedup loading large files by disabling some plugins
     {
         "LunarVim/bigfile.nvim",
+        cond = require("config.util").is_not_vscode(),
         lazy = true,
         opts = {
             filesize = 2, --2MiB

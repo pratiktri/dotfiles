@@ -5,6 +5,7 @@
 # ZSH Options
 bindkey -v                  # enable vi-mode
 setopt +o nomatch
+ZSH_STATE_HOME="$XDG_STATE_HOME/shell"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 CASE_SENSITIVE="true"
@@ -15,7 +16,7 @@ HIST_STAMPS="dd.mm.yyyy" # see 'man strftime' for details.
 # ZSH History
 export HISTSIZE=10000000
 export SAVEHIST=$HISTSIZE
-export HISTFILE="$XDG_STATE_HOME/shell/zsh_history"
+export HISTFILE="$ZSH_STATE_HOME/zsh_history"
 setopt appendhistory        # Append rather than overwriting
 setopt sharehistory         # Share history between all sessions.
 setopt extended_history     # Write the history file in the ":start:elapsed;command" format.
@@ -45,7 +46,7 @@ TIMER_PRECISION=3; TIMER_FORMAT='[%d]'
 VI_MODE_SET_CURSOR=true
 VI_MODE_CURSOR_INSERT=3
 # Having HISTORY_BASE after per-directory-history plugin install does NOT work
-HISTORY_BASE="$XDG_STATE_HOME/shell/per-directory-history"
+HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -80,8 +81,10 @@ zi ice as"completion"
 zi snippet OMZP::fd/_fd
 
 # ZSH Auto-completion settings
+[ -d "${XDG_CACHE_HOME}/zsh" ] || mkdir -p "${XDG_CACHE_HOME}/zsh"
+ZCOMP_CACHE_FILE="${XDG_CACHE_HOME}/zsh/zcompcache"
 autoload -Uz compinit
-compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
 _comp_options+=(globdots)   # Include hidden files
 zmodload zsh/complist
 zinit cdreplay -q
@@ -89,7 +92,8 @@ zinit cdreplay -q
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'      # Case INsensitive completion match
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Add color to completion suggestions
-zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"
+zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOMP_CACHE_FILE"
 
 # To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"

@@ -10,8 +10,6 @@ dir_size(){
 
     du -ah "$dir" --max-depth=1 | sort -hr
 }
-alias tldr="tldr --platform=linux "
-
 
 # Network
 alias flush-dns="sudo systemd-resolve --flush-caches"

@@ -49,7 +49,7 @@ if [ "$(uname -s)" = "Linux" ]; then
     export CUDA_CACHE_PATH="XDG_CACHE_HOME/nv"
 
     # Map caps-lock to escape TIP: also added to /etc/profile
-    setxkbmap -option caps:escape
+    command -v setxkbmap >/dev/null && setxkbmap -option caps:escape
 fi
 
 export QT_PLUGIN_PATH="$HOME/local/lib/qt/plugins/:"

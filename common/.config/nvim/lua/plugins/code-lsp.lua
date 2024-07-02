@@ -125,7 +125,6 @@ return {
                 -- https://github.com/joe-re/sql-language-server?tab=readme-ov-file#configuration
                 sqlls = {},
                 marksman = {},
-                awk_ls = {},
                 cssls = {},
                 dockerls = {},
                 docker_compose_language_service = {},

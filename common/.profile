@@ -67,7 +67,7 @@ export ADB_VENDOR_KEYS="$XDG_CONFIG_HOME/android"
 
 # Setup Python
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-command -v pyenv >/dev/null && export PATH="$PATH:$PYENV_ROOT/bin"
+command -v pyenv >/dev/null && export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 export PYTHON_HISTORY="$XDG_STATE_HOME/shell/python_history" # will be picked up by Python 3.13+
 

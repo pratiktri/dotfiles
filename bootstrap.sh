@@ -9,7 +9,7 @@
 
 # defaults
 QUIET="n"
-CREATE_LINKS="n"
+CREATE_LINKS="y"
 
 usage() {
     if [ "$1" != "" ]; then
@@ -21,7 +21,7 @@ usage() {
     echo ""
     echo "Usage: $0 [-q|--quiet] [-l|--create-links]"
     echo "  -q,     --quiet              No screen outputs"
-    echo "  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them"
+    echo "  -l,     --create-links       Applied by default. Creates soft-links to files in the current directory instead of copying them"
 
     echo ""
     echo "Example: $0 -q --create-links"
@@ -32,9 +32,6 @@ place_dotfile_at_target_location() {
     file_target_location="$2"
     TS="$3"
 
-    # echo "${source_file_location}"
-    # echo "${file_target_location}"
-
     # To avoid over writing existing dot file, we rename them
     # Appending the timestamp to file name
     if [ -f "$file_target_location" ] || [ -L "$file_target_location" ]; then
@@ -42,7 +39,6 @@ place_dotfile_at_target_location() {
         mv "$file_target_location" "${file_target_location}_${TS}" && [ "$QUIET" = "n" ] && echo "Existing setting renamed to ${file_target_location}_${TS}"
     fi
 
-    target_directory
     target_directory=$(dirname "$file_target_location")
     if [ ! -d "$target_directory" ]; then
         mkdir -p "$target_directory" && [ "$QUIET" = "n" ] && echo "Directory ${target_directory} created"
@@ -50,7 +46,7 @@ place_dotfile_at_target_location() {
 
     if [ "$CREATE_LINKS" = "y" ]; then
         # echo "ln -s ${source_file_location} ${target_directory}"
-        ln -s "$source_file_location" "$target_directory" && [ "$QUIET" = "n" ] && echo "Linked ${file_target_location}"
+        ln -sf "$source_file_location" "$target_directory" && [ "$QUIET" = "n" ] && echo "Linked ${file_target_location}"
     else
         # echo "cp ${source_file_location} ${target_directory}"
         cp "$source_file_location" "$target_directory" && [ "$QUIET" = "n" ] && echo "Copied ${file_target_location}"
@@ -83,6 +79,7 @@ main() {
 
     case $(uname -a) in
     Linux*)
+        # TODO: Make it less KDE-Neon specific and more towards general Linux
         OS="kde-neon"
 
         [ "$XDG_CURRENT_DESKTOP" = "KDE" ] && OS="kde-neon"
@@ -109,7 +106,7 @@ main() {
 
     # Copy platform specific files to $HOME directory ("~")
     find "./${OS}" -type f -not -path '*.DS_Store' -not -path '*.directory' | while read -r file; do
-        file_target_location="${HOME}${file#./${OS}}"
+        file_target_location="${HOME}${file#./"${OS}"}"
         source_file_location="${PWD}${file#.}"
         place_dotfile_at_target_location "$source_file_location" "$file_target_location" "$TS"
     done

@@ -11,6 +11,13 @@ dir_size(){
     du -ah "$dir" --max-depth=1 | sort -hr
 }
 
+up(){
+    sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove
+    command -v rustup >/dev/null && rustup update
+    command -v brew > /dev/null && brew update && brew upgrade && brew autoremove && brew cleanup
+    command -v npm > /dev/null && npm update -g
+}
+
 # Network
 alias flush-dns="sudo systemd-resolve --flush-caches"
 alias dnsreset="sudo systemctl restart dnscrypt-proxy"
@@ -21,23 +28,17 @@ alias listening_apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}
 
 
 # Update & Upgrades
-alias up="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove && rustup update && brew upgrade && brew autoremove && brew cleanup && npm update -g"
 alias distup="sudo apt dist-upgrade"
 alias autorem="sudo apt autoremove"
 alias update="sudo apt-get update"
 alias install="sudo apt-get install "
 alias remove="sudo apt-get remove "
 
-
 # For servers
 alias ngt="sudo nginx -t"
 alias ngrestart="sudo systemctl restart nginx"
 alias ngreload="sudo systemctl reload nginx"
 alias ngstop="sudo systemctl stop nginx"
-alias fpmreset71="sudo systemctl restart php7.1-fpm"
-alias fpmreset72="sudo systemctl restart php7.2-fpm"
-alias fpmreset73="sudo systemctl restart php7.3-fpm"
-alias fpmreset74="sudo systemctl restart php7.4-fpm"
 
 f2b_banned_ips() {
     provided_jail=$1

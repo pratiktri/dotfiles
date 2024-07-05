@@ -81,18 +81,21 @@ zi ice as"completion"
 zi snippet OMZP::fd/_fd
 
 # ZSH Auto-completion settings
-[ -d "${XDG_CACHE_HOME}/zsh" ] || mkdir -p "${XDG_CACHE_HOME}/zsh"
-ZCOMP_CACHE_FILE="${XDG_CACHE_HOME}/zsh/zcompcache"
 autoload -Uz compinit
-compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
 _comp_options+=(globdots)   # Include hidden files
 zmodload zsh/complist
 zinit cdreplay -q
 
+# Completion files: Use XDG dirs
+ZCOMP_CACHE_HOME="${XDG_CACHE_HOME}/zsh"
+ZCOMP_CACHE_FILE="${ZCOMP_CACHE_HOME}/zcompcache"
+[ -d "${ZCOMP_CACHE_HOME}" ] || mkdir -p "${ZCOMP_CACHE_HOME}"
+zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"
+compinit -d "${ZCOMP_CACHE_HOME}/zcompdump-${ZSH_VERSION}"
+
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'      # Case INsensitive completion match
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Add color to completion suggestions
-zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"
 zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOMP_CACHE_FILE"
 
 # To customize prompt, run `p10k configure`

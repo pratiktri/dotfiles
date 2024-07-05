@@ -84,7 +84,6 @@ zi snippet OMZP::fd/_fd
 autoload -Uz compinit
 _comp_options+=(globdots)   # Include hidden files
 zmodload zsh/complist
-zinit cdreplay -q
 
 # Completion files: Use XDG dirs
 ZCOMP_CACHE_HOME="${XDG_CACHE_HOME}/zsh"
@@ -92,6 +91,8 @@ ZCOMP_CACHE_FILE="${ZCOMP_CACHE_HOME}/zcompcache"
 [ -d "${ZCOMP_CACHE_HOME}" ] || mkdir -p "${ZCOMP_CACHE_HOME}"
 zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"
 compinit -d "${ZCOMP_CACHE_HOME}/zcompdump-${ZSH_VERSION}"
+
+zinit cdreplay -q # Must be AFTER compinit -d
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'      # Case INsensitive completion match

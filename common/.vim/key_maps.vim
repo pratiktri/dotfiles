@@ -119,14 +119,5 @@ nnoremap <leader>/ :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
 " Changes the pwd to the opened file's directory
 nnoremap <leader>cd :lcd %:h<CR>
 
-" Map easymotion Plugin to <Leader>j
-nnoremap <leader>j <Plug>(easymotion-s)
-
-" Show the undo tree
-nnoremap <leader>u :UndotreeToggle<CR>
-
-" Fugitive
-nnoremap <leader>gg :0G<cr>
-
 " Close Tab
 nnoremap <leader>xt :tabclose

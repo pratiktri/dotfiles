@@ -46,7 +46,7 @@ set shiftwidth=4 tabstop=4 softtabstop=4 expandtab smarttab
 set autoindent smartindent breakindent  " Proper indentation
 
 " Enable searching as you type, rather than waiting till you press enter. Highlight search pattern. Intelligently handle cases in search.
-set incsearch hlsearch ignorecase smartcase
+set incsearch hlsearch ignorecase smartcase wrapscan
 " Comments in Grey color and italic
 hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
 

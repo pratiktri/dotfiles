@@ -3,88 +3,89 @@
 " Examples to map IDE actions to IdeaVim -- https://jb.gg/abva4t
 " Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
-"source ~/.vimrc
-" FIX: "u" appears randomly when deleting words and other times
-" TODO: Keep the mappings same across Neovim & Idea
-"  Keymap structure:
-"  b+: [B]buffer Operations
-"  c+: [C]oding Stuff
-"  d+: [D]iagnostics
-"  f+: [F]ile Operations
-"  g+: [G]it Operations
-"  l+: [L]ist Things
-"  n+: [N]eoVim Stuff
-"  s+: Grep/[S]earch Things
-"  t+: [T]est runner stuff
-"  x+: close/dismiss something
-"  e: explorer
-"  j: EasyMotion jump
-"  p: Paste from system clipboard
-"  y: Copy selected stuff to system clipboard
-"  u: Open undo-tree side-panel
-"  v: Open document symbol explorer
+" FIX: Macros does NOT work
+" TODO: Add Jetbrains shortcut-config-file to dotfiles repo
+
+" Resolve Shortcut conflicts with Jetbrains
+sethandler <S-Tab> a:vim
+sethandler <C-S-CR> a:vim
+sethandler <C-6> a:vim
+sethandler <C-;> a:vim
+sethandler <C-S-;> a:vim
+sethandler <C-A> a:vim
+sethandler <C-B> a:vim
+sethandler <C-C> a:vim
+sethandler <C-D> a:vim
+sethandler <C-E> a:vim
+sethandler <C-F> a:ide
+sethandler <C-G> a:vim
+sethandler <C-H> a:vim
+sethandler <C-I> a:vim
+sethandler <C-J> a:vim
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
+sethandler <C-N> a:vim
+sethandler <A-N> a:ide
+sethandler <C-O> a:vim
+sethandler <C-P> a:ide
+sethandler <C-R> a:vim
+sethandler <C-S> a:ide
+sethandler <C-T> a:vim
+sethandler <C-U> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+sethandler <C-X> a:vim
+sethandler <C-Y> a:vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/configs.vim
 source ~/.vim/key_maps.vim
 source ~/.vim/plugin_config.vim
 
-" Because :noh does not work in Jetbrains
-nnoremap <esc> <esc>
-inoremap <esc> <esc>
-
-" Set Tabs to 4 characters
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
-" Searches
-set hlsearch ignorecase smartcase incsearch wrapscan
-
 " Common settings
-set gdefault                      " substitute all occurrences in line
 set clipboard^=unnamed,unnamedplus,ideaput " Copy to and from system clipboard
+"set ideavimsupport=+singleline,dialog
+set showmode
+set idearefactormode=keep
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enabled plugins
-set ideajoin quickscope
-Plug "easymotion/vim-easymotion"        " <leader>j or J [2 characters]
-Plug "preservim/nerdtree"               " <leader>e
-Plug "tpope/vim-surround"               " ys or cs or ds [motion]
-Plug "tpope/vim-commentary"             " gc [motion]
-Plug "machakann/vim-highlightedyank"
-Plug "dbakker/vim-paragraph-motion"
-Plug "chrisbra/matchit"
-Plug "tpope/vim-repeat"                 " Repeat for Surround
-Plug "vim-indent-object"                " Select indent with ai, ii, aI, iI
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set commentary              " gc [motion]
+set easymotion              " <leader>j
+set exchange                " cx[motion] 2 times, cxc <- cancel exchange
+set highlightedyank
+set indent-object           " ai, ii, aI, iI <- Select indent
+set quickscope
+set paragraph-motion
+set matchit
+set multiple-cursors
+set nerdtree                " <leader>e
+set repeat
+set surround                " ys or cs or ds [motion]
+set textobj-entire          " yae, cae, dae <- operates on entire file
+set ReplaceWithRegister
 
-" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
-" Map \b to toggle breakpoint
-"map \b <Action>(ToggleLineBreakpoint)
+" IdeaVIM specific plugins
+set argtextobj              " vaa, caa, daa <- Works on function args
+let g:argtextobj_pairs="[:],(:),<:>"
+set ideajoin
+set ideamarks               " m[A-Z] <- sets marks
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""               SHORTCUTS           """""""""""""""""""""""""
+
+" Easy Motion
+map <leader>j <Plug>(easymotion-s)
 
 " Multiple Cursors
-map mc <A-n>
-map mx <A-x>
-map mp <A-p>
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
 
-" Find/Open file
-nmap <leader>of :action GotoFile<CR>
-nmap <leader>or :action RecentFiles<CR>
-
-" Find/Navigate to different parts of code
-nmap <leader>gf :action FindInPath<CR>
-nmap <leader>gr :action ShowUsages<CR>
-nmap <leader>gi :action GotoImplementation<CR>
-nmap <leader>gs :action GotoSuperMethod<CR>
-
-" Tabs
-nmap <leader>tn :action NextTab<CR>
-nmap <leader>tp :action PreviousTab<CR>
-
-" NerdTree
-nmap <leader>e :NERDTreeToggle<CR>
+" NerdTree """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>e :NERDTreeToggle<cr>
     " When in the tree use the below default keybindings
     " j, k - To go down and up
     " p - Go to the parent directory
@@ -99,24 +100,66 @@ nmap <leader>e :NERDTreeToggle<CR>
     " A - expand the file tree
     " x - close the file tree
 
-nmap <C-p> :action ParameterInfo<CR>
-imap <C-p> <C-o>:action ParameterInfo<CR>
-nmap <leader>n :action GotoNextError<CR>
-map gh <Action>(ShowErrorDescription)
+" File Navigation """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>ls :action Switcher<cr>
+nnoremap <c-p> :action GotoFile<cr>
+nnoremap <c-s-enter> :action ActivateTerminalToolWindow<cr>
 
-" Code refactoring
-nmap <leader>ri :action Inline<CR>
-nmap <leader>rr :action RenameElement<CR>
-nmap <leader>rev :action IntroduceVariable<CR>
-vmap <leader>rev :action IntroduceVariable<CR>
-nmap <leader>rem :action ExtractMethod<CR>
-vmap <leader>rem :action ExtractMethod<CR>
-nmap <leader>rm :action Move<CR>
-nmap <leader>ro :action OptimizeImports<CR>
-nmap <leader>rG :action Generate<CR>
-nmap <leader>rf :action ReformatCode<CR>
+" Code Navigation, Formatting, Others """""""""""""""""""""""""""""""""""""""
+nnoremap ]] :action GotoNextElementUnderCaretUsage<cr>
+nnoremap [[ :action GotoPrevElementUnderCaretUsage<cr>
+nnoremap ]f :action MethodDown<cr>
+nnoremap [f :action MethodUp<cr>
+nmap <c-o> :action Back<cr>
+nmap <c-i> :action Forward<cr>
+nnoremap <leader>cS :action GotoSymbol<cr>
+noremap <leader>v :action FileStructurePopup<cr>
 
-" Easy motion
-map <leader>j <Plug>(easymotion-s)
+map == V<Action>(ReformatCode)
 
-nmap <leader>gr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>cr :action RenameElement<cr>
+nnoremap <leader>ca :action ShowIntentionActions<cr>
+nnoremap <leader>cR :action FindUsages<cr>
+map <C-s> <Action>(ReformatCode) \| <Action>(SaveAll)
+
+" Diagnostics """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>dd :action ActivateProblemsViewToolWindow<cr>
+nnoremap <leader>dw :action InspectCode<cr>
+nnoremap ]d :action GotoNextError<cr>
+nnoremap [d :action GotoPreviousError<cr>
+
+" Git """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>gg :action ActivateCommitToolWindow<cr>
+nnoremap <leader>gr :action Vcs.RollbackChangedLines<cr>
+nnoremap <leader>gb :action Git.Branches<cr>
+nnoremap <leader>gG :action ActivateVersionControlToolWindow<cr>
+nnoremap <leader>ga :action Annotate<cr>
+nnoremap <leader>gf :action ShowTabbedFileHistory<cr>
+nnoremap ]g :action VcsShowNextChangeMarker<cr>
+nnoremap [g :action VcsShowPrevChangeMarker<cr>
+
+" List stuff """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>lt :action ActivateTODOToolWindow<cr>
+nnoremap <leader>lb :action RecentFiles<cr>
+nnoremap <leader>lc :action RecentLocations<cr>
+
+" Search stuff """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>sg :action FindInPath<cr>
+nnoremap <leader>sb :action TextSearchAction<cr>
+nnoremap <leader>sc :action GotoClass<cr>
+
+" Close stuff """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>xo :action CloseAllEditorsButActive<cr>
+nnoremap <leader>z :action ToggleDistractionFreeMode<cr>
+nnoremap <leader>/ :nohlsearch<cr>
+
+" Run, debug & test """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>rd :action Debug<cr>
+map <leader>rx :action Run<cr>
+map <leader>rs :action Stop<cr>
+map <leader>rt :action RunTests<cr>
+map <leader>rb :action ToggleLineBreakpoint<cr>
+
+" Split window
+nnoremap <c-w>m :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <c-w>x :action Unsplit<cr>

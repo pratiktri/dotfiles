@@ -1,0 +1,3 @@
+Create a script that 
+  - links keymaps in each subfolder 
+  - To the _Latest_ corresponding product folder in ~/.config/JetBrains

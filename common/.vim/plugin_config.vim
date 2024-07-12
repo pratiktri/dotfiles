@@ -2,6 +2,15 @@
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 25
 
+" Map easymotion Plugin to <Leader>j
+nnoremap <leader>j <Plug>(easymotion-s)
+
+" Show the undo tree
+nnoremap <leader>u :UndotreeToggle<CR>
+
+" Fugitive
+nnoremap <leader>gg :0G<cr>
+
 " Quickscope
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

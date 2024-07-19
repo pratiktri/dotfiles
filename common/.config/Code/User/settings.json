@@ -8,8 +8,8 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 18,
-    "editor.cursorWidth": 4,
+    "editor.fontSize": 14,
+    "editor.cursorWidth": 2,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
     "editor.formatOnSave": true,
@@ -22,119 +22,73 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "editor.multiCursorModifier": "ctrlCmd",
-    "editor.cursorSurroundingLines": 8,
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 1000,
+    "files.autoSaveDelay": 500,
     "diffEditor.renderSideBySide": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "terminal.integrated.shell.linux": "/bin/zsh",
 
     // Editor Font
-    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontFamily": "FiraCode Nerd Font Mono",
     "editor.fontLigatures": true,
-    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
-    "terminal.integrated.fontSize": 18,
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+    "terminal.integrated.fontSize": 15,
 
     // Workbench - Everything that surrounds the editor
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.sideBar.location": "left",
-    "security.workspace.trust.untrustedFiles": "prompt",
+    "workbench.sideBar.location": "right",
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff"
     },
-    "bookmarks.navigateThroughAllFiles": true,
     "window.menuBarVisibility": "compact",
     "explorer.confirmDragAndDrop": false,
+    "security.workspace.trust.untrustedFiles": "open",
 
-    // Debugging
-    "debug.toolBarLocation": "docked",
-    "debug.onTaskErrors": "debugAnyway",
+    // Project Manager
+    "projectManager.git.baseFolders": [
+        ".git"
+    ],
 
-    // NeoVIM
-    "keyboard.dispatch": "keyCode", // Hack to make CAPS->Esc remap work on Ubuntu
+    // VIM & NeoVIM
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    // "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
-    // "vscode-neovim.useWSL": true,
-    // https://github.com/vscode-neovim/vscode-neovim/wiki/Settings#search-result-border
-    "vscode-neovim.highlightGroups.highlights": {
-        "IncSearch": {
-            "borderStyle": "solid",
-            "borderWidth": "1px"
-        },
-        "Search": {
-            "borderStyle": "solid",
-            "borderWidth": "1px"
-        }
-    },
+    "vscode-neovim.useWSL": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
 
-    //
+    // Debugging
+    "debug.toolBarLocation": "docked",
+    "debug.javascript.autoAttachFilter": "disabled",
+    "debug.onTaskErrors": "debugAnyway",
+
     // Prettier Plugin
     "prettier.tabWidth": 4,
     "prettier.useTabs": false,
     "prettier.printWidth": 85,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[html,json]": {
+
+    // Formatters
+    "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-
-    // Code Spell Checker Plugin
-    "cSpell.diagnosticLevel": "Hint",
-    "cSpell.allowCompoundWords": true,
-    "cSpell.fixSpellingWithRenameProvider": true,
-    "cSpell.enableFiletypes": ["shellscript"],
-    "cSpell.minWordLength": 3,
-    "cSpell.numSuggestions": 10,
-    "cSpell.userWords": [
-        "Aadhaar",
-        "Aiginia",
-        "BBSR",
-        "Bhubaneswar",
-        "CLR",
-        "Destructured",
-        "GOPATH",
-        "IIS",
-        "JIT",
-        "Jython",
-        "Kumar",
-        "LINQ",
-        "MVC",
-        "Monomorphization",
-        "OOP",
-        "Odisha",
-        "Postgres",
-        "Pratik",
-        "Printf",
-        "Println",
-        "Sprintf",
-        "Struct",
-        "Structs",
-        "Tripathy",
-        "VIMP",
-        "VVIMP",
-        "VVVIMP",
-        "Vec",
-        "arity",
-        "atleast",
-        "destructure",
-        "elif",
-        "mkdir",
-        "monomorphized",
-        "pratiktri",
-        "ptr",
-        "pylint",
-        "subfolder",
-        "ulta",
-        "umount",
-        "unmount"
-    ],
-
-    // Shell check plugin
-    "shellcheck.run": "onSave",
-    "shellcheck.exclude": ["2181", "2039"],
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[csharp]": {
+        "editor.defaultFormatter": "csharpier.csharpier-vscode"
+    },
+    "[sql]": {
+        "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
 
     // Better Comments
     "better-comments.tags": [
@@ -185,19 +139,77 @@
         }
     ],
 
-    // JavaScript
-    "typescript.suggest.paths": false,
-    "debug.javascript.autoAttachFilter": "disabled",
+    // Code Spell Checker Plugin
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.allowCompoundWords": true,
+    "cSpell.fixSpellingWithRenameProvider": true,
+    "cSpell.enableFiletypes": [
+        "shellscript",
+        "csharp",
+        "python",
+        "javascript",
+        "javascriptreact"
+    ],
+    "cSpell.minWordLength": 3,
+    "cSpell.numSuggestions": 10,
+    "cSpell.userWords": [
+        "Aadhaar",
+        "Aiginia",
+        "BBSR",
+        "Bhubaneswar",
+        "CLR",
+        "Destructured",
+        "GOPATH",
+        "IIS",
+        "JIT",
+        "Jython",
+        "Kumar",
+        "LINQ",
+        "MVC",
+        "Monomorphization",
+        "OOP",
+        "Odisha",
+        "Postgres",
+        "Pratik",
+        "Printf",
+        "Println",
+        "Sprintf",
+        "Struct",
+        "Structs",
+        "Tripathy",
+        "VIMP",
+        "VVIMP",
+        "VVVIMP",
+        "Vec",
+        "arity",
+        "atleast",
+        "destructure",
+        "elif",
+        "mkdir",
+        "monomorphized",
+        "pratiktri",
+        "ptr",
+        "pylint",
+        "subfolder",
+        "ulta",
+        "umount",
+        "unmount"
+    ],
 
     // Git
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "git.confirmSync": false,
-    "git-graph.dialog.addTag.pushToRemote": true,
-    "git-graph.dialog.createBranch.checkOut": true,
-    "git-graph.dialog.general.referenceInputSpaceSubstitution": "Underscore",
-    "git-graph.enhancedAccessibility": true,
-    "git-graph.dialog.rebase.launchInteractiveRebase": true,
+
+    // Shell check plugin
+    "shellcheck.run": "onSave",
+    "shellcheck.exclude": [
+        "2181",
+        "2039"
+    ],
+
+    // JavaScript
+    "typescript.suggest.paths": false,
 
     // Markdown
     "markdownlint.run": "onType",
@@ -221,38 +233,23 @@
     // Python
     "python.jediEnabled": false,
     "python.languageServer": "Pylance",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "GitHub Dark Dimmed",
 
     // Rust
-    // "rust.build_on_save": true,
-    // "rust.clippy_preference": "on",
-    // "rust.full_docs": true,
-    // "rust-analyzer.assist.importMergeBehavior": "last",
-    // "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-    // "rust-analyzer.procMacro.enable": true,
-    // "rust-analyzer.checkOnSave.command": "clippy",
-    // "rust-analyzer.cargo.target": null,
-    // "rust-analyzer.completion.postfix.enable": false,
-    // "rust-analyzer.inlayHints.enable": false,
-    // "rust-analyzer.inlayHints.typeHints": false,
-    //
+    "rust.build_on_save": true,
+    "rust.clippy_preference": "on",
+    "rust.full_docs": true,
+    "rust-analyzer.assist.importMergeBehavior": "last",
+    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.cargo.target": null,
+    "rust-analyzer.completion.postfix.enable": false,
+    "rust-analyzer.inlayHints.enable": false,
+    "rust-analyzer.inlayHints.typeHints": false,
 
-    // Dotnet & C#
-    "[csharp]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    },
-    "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
-    "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
-    "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
-    "csharp.inlayHints.enableInlayHintsForTypes": true,
-    "dotnet.inlayHints.enableInlayHintsForIndexerParameters": true,
-    "dotnet.inlayHints.enableInlayHintsForLiteralParameters": true,
-    "dotnet.inlayHints.enableInlayHintsForObjectCreationParameters": true,
-    "dotnet.inlayHints.enableInlayHintsForParameters": true,
-    "dotnetAcquisitionExtension.enableTelemetry": false,
-    "csharp.experimental.debug.hotReload": true,
-    "dotnet.inlayHints.enableInlayHintsForOtherParameters": true,
-    "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "fullSolution",
-    "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "fullSolution"
+    // SQL
+    "sql-formatter.uppercase": true,
+    "sql-formatter.dialect": "pl/sql",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    //
 }

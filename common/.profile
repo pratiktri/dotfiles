@@ -33,6 +33,7 @@ ulimit -n 10240
 
 [ ! -f "${XDG_CONFIG_HOME}/templates/.gitignore" ] || export GITIGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.gitignore"
 [ ! -f "${XDG_CONFIG_HOME}/templates/.prettierrc" ] || export PRETTIER_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierrc"
+[ ! -f "${XDG_CONFIG_HOME}/templates/.prettierignore" ] || export PRETTIER_IGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierignore"
 
 EDITOR=$(command -v nvim 2>/dev/null || command -v vim 2>/dev/null)
 export EDITOR

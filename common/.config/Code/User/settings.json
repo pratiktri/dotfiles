@@ -8,8 +8,8 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 14,
-    "editor.cursorWidth": 2,
+    "editor.fontSize": 20,
+    "editor.cursorWidth": 3,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
     "editor.formatOnSave": true,
@@ -22,6 +22,7 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "editor.multiCursorModifier": "ctrlCmd",
+    "editor.cursorSurroundingLines": 8,
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
@@ -36,6 +37,7 @@
     "terminal.integrated.fontSize": 15,
 
     // Workbench - Everything that surrounds the editor
+    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "right",
@@ -43,6 +45,7 @@
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff"
     },
+    "bookmarks.navigateThroughAllFiles": true,
     "window.menuBarVisibility": "compact",
     "explorer.confirmDragAndDrop": false,
     "security.workspace.trust.untrustedFiles": "open",
@@ -56,8 +59,8 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    "vscode-neovim.useWSL": true,
-    "vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
+    //"vscode-neovim.useWSL": true,
+    //"vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
 
     // Debugging
     "debug.toolBarLocation": "docked",
@@ -68,9 +71,11 @@
     "prettier.tabWidth": 4,
     "prettier.useTabs": false,
     "prettier.printWidth": 85,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.jsxSingleQuote": true,
 
     // Formatters
-    "[html]": {
+    "[html,json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[json]": {
@@ -200,6 +205,11 @@
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "git.confirmSync": false,
+    "git-graph.dialog.addTag.pushToRemote": true,
+    "git-graph.dialog.createBranch.checkOut": true,
+    "git-graph.dialog.general.referenceInputSpaceSubstitution": "Underscore",
+    "git-graph.enhancedAccessibility": true,
+    "git-graph.dialog.rebase.launchInteractiveRebase": true,
 
     // Shell check plugin
     "shellcheck.run": "onSave",
@@ -247,9 +257,22 @@
     "rust-analyzer.inlayHints.enable": false,
     "rust-analyzer.inlayHints.typeHints": false,
 
+    // Dotnet & C#
+    "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
+    "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
+    "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
+    "csharp.inlayHints.enableInlayHintsForTypes": true,
+    "dotnet.inlayHints.enableInlayHintsForIndexerParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForLiteralParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForObjectCreationParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForParameters": true,
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+    "csharp.experimental.debug.hotReload": true,
+    "dotnet.inlayHints.enableInlayHintsForOtherParameters": true,
+    "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "fullSolution",
+    "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "fullSolution",
+
     // SQL
     "sql-formatter.uppercase": true,
-    "sql-formatter.dialect": "pl/sql",
-    "workbench.colorTheme": "GitHub Dark Dimmed",
-    //
+    "sql-formatter.dialect": "pl/sql"
 }

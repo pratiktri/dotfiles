@@ -129,8 +129,7 @@ return {
                 dockerls = {},
                 docker_compose_language_service = {},
                 jsonls = {},
-                pyright = {},
-                rust_analyzer = {},
+                pylsp = {},
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

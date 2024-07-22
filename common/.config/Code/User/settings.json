@@ -37,30 +37,41 @@
     "terminal.integrated.fontSize": 15,
 
     // Workbench - Everything that surrounds the editor
-    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "right",
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
-        "tab.activeBorder": "#ffffff"
+        "tab.activeBorder": "#ffffff",
+        "statusBar.background": "#005f87",
+        "statusBar.noFolderBackground": "#005f87",
+        "statusBar.debuggingBackground": "#005f87",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
     },
-    "bookmarks.navigateThroughAllFiles": true,
     "window.menuBarVisibility": "compact",
     "explorer.confirmDragAndDrop": false,
     "security.workspace.trust.untrustedFiles": "open",
 
     // Project Manager
-    "projectManager.git.baseFolders": [
-        ".git"
-    ],
+    "projectManager.git.baseFolders": [".git"],
 
     // VIM & NeoVIM
     "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
+        "asvetliakov.vscode-neovim": 1,
+        "vscodevim.vim": 1
     },
-    //"vscode-neovim.useWSL": true,
-    //"vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
+    "vim.showMarksInGutter": true,
+    "vim.replaceWithRegister": true,
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.replace": "block",
+    "vim.cursorStylePerMode.visual": "block",
+    "vim.cursorStylePerMode.visualblock": "block",
+    "vim.cursorStylePerMode.visualline": "block",
+    "vim.easymotion": true,
+    "vscode-neovim.useWSL": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
 
     // Debugging
     "debug.toolBarLocation": "docked",
@@ -82,6 +93,12 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[csharp]": {

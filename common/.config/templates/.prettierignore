@@ -105,4 +105,3 @@ nvim_switch/
 .prettierignore
 package-lock.json
 .prettierrc
-.prettierrc

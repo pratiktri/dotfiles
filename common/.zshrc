@@ -68,7 +68,7 @@ zi snippet OMZP::git
 zi snippet OMZP::gitignore
 zi snippet OMZP::kitty
 zi snippet OMZP::podman
-zi snippet OMZP::rust
+# zi snippet OMZP::rust
 zi snippet OMZP::sudo
 zi snippet OMZP::systemd
 zi snippet OMZP::timer

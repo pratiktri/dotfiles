@@ -69,6 +69,7 @@
     "vim.cursorStylePerMode.visual": "block",
     "vim.cursorStylePerMode.visualblock": "block",
     "vim.cursorStylePerMode.visualline": "block",
+    "vim.smartRelativeLine": true,
     "vim.easymotion": true,
     "vscode-neovim.useWSL": true,
     "vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
@@ -230,10 +231,7 @@
 
     // Shell check plugin
     "shellcheck.run": "onSave",
-    "shellcheck.exclude": [
-        "2181",
-        "2039"
-    ],
+    "shellcheck.exclude": ["2181", "2039"],
 
     // JavaScript
     "typescript.suggest.paths": false,
@@ -291,5 +289,8 @@
 
     // SQL
     "sql-formatter.uppercase": true,
-    "sql-formatter.dialect": "pl/sql"
+    "sql-formatter.dialect": "pl/sql",
+
+    // Codium
+    "codium.codeCompletion.enable": true
 }

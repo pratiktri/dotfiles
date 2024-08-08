@@ -166,13 +166,7 @@
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.allowCompoundWords": true,
     "cSpell.fixSpellingWithRenameProvider": true,
-    "cSpell.enableFiletypes": [
-        "shellscript",
-        "csharp",
-        "python",
-        "javascript",
-        "javascriptreact"
-    ],
+    "cSpell.enableFiletypes": ["shellscript", "csharp", "python", "javascript", "javascriptreact"],
     "cSpell.minWordLength": 3,
     "cSpell.numSuggestions": 10,
     "cSpell.userWords": [

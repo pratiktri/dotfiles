@@ -54,7 +54,7 @@ set commentary              " gc [motion]
 set easymotion              " <leader>j
 set exchange                " cx[motion] 2 times, cxc <- cancel exchange
 set highlightedyank
-set indent-object           " ai, ii, aI, iI <- Select indent
+" set indent-object           " ai, ii, aI, iI <- Select indent
 set quickscope
 set paragraph-motion
 set matchit

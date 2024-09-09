@@ -73,6 +73,26 @@ return {
                 },
                 bashls = { filetypes = { "sh", "bash", "zsh" } },
                 html = { filetypes = { "html", "twig", "hbs" } },
+                ltex = {
+                    filetypes = { "markdown", "text" },
+                    flags = { debounce_text_changes = 3000 },
+                    settings = {
+                        ltex = {
+                            language = "en",
+                            markdown = {
+                                nodes = {
+                                    CodeBlock = "ignore",
+                                    FencedCodeBlock = "ignore",
+                                    Code = "ignore",
+                                    AutoLink = "ignore",
+                                },
+                                checkFrequency = "save",
+                                languageToolHttpServerUri = "https://api.languagetool.org",
+                            },
+                        },
+                    },
+                },
+
                 omnisharp = {
                     -- DotNet = {
                     --     enablePackageRestore = true,

@@ -231,29 +231,26 @@ return {
 
     {
         "folke/which-key.nvim",
+        dependencies = {
+            "echasnovski/mini.icons",
+        },
         config = function()
             -- document existing key chains
-            require("which-key").register({
-                ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
-                ["<leader>b"] = { name = "Buffer Operations", _ = "which_key_ignore" },
-                ["<leader>d"] = { name = "Diagnostics", _ = "which_key_ignore" },
-                ["<leader>f"] = { name = "File Operations", _ = "which_key_ignore" },
-                ["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
-                ["<leader>h"] = { name = "Harpoon", _ = "which_key_ignore" },
-                ["<leader>l"] = { name = "List Things", _ = "which_key_ignore" },
-                ["<leader>n"] = { name = "NVIM Things", _ = "which_key_ignore" },
-                ["<leader>q"] = { name = "Database Query", _ = "which_key_ignore" },
-                ["<leader>r"] = { name = "Refactor Code", _ = "which_key_ignore" },
-                ["<leader>s"] = { name = "Search/Grep Things", _ = "which_key_ignore" },
-                ["<leader>t"] = { name = "Unit Test Operations", _ = "which_key_ignore" },
-                ["<leader>x"] = { name = "Delete/Remove Something", _ = "which_key_ignore" },
+            require("which-key").add({
+                { "<leader>c", group = "Code" },
+                { "<leader>b", group = "Buffer Operations" },
+                { "<leader>d", group = "Diagnostics" },
+                { "<leader>f", group = "File Operations" },
+                { "<leader>g", group = "Git" },
+                { "<leader>h", group = "Harpoon" },
+                { "<leader>l", group = "List Things" },
+                { "<leader>n", group = "NVIM Things" },
+                { "<leader>q", group = "Database Query" },
+                { "<leader>r", group = "Refactor Code" },
+                { "<leader>s", group = "Search/Grep Things" },
+                { "<leader>t", group = "Unit Test Operations" },
+                { "<leader>x", group = "Delete/Remove Something" },
             })
-            -- register which-key VISUAL mode
-            -- required for visual <leader>hs (hunk stage) to work
-            require("which-key").register({
-                ["<leader>"] = { name = "VISUAL <leader>" },
-                ["<leader>h"] = { "Git Hunk" },
-            }, { mode = "v" })
         end,
     },
 

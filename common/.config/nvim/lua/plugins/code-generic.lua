@@ -27,6 +27,7 @@ return {
     -- Better code folding
     {
         "kevinhwang91/nvim-ufo",
+        version = "v1.4.0",
         cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         dependencies = {

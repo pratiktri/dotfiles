@@ -50,6 +50,7 @@ Temporary Items
 # Vim Artifacts
 **.swp
 lazy-lock.json
+.luarc.json
 
 # VS Code Artifacts
 /.vscode/
@@ -98,3 +99,8 @@ dist-ssr
 *.bak
 nvim_switch/
 *kitty/*.py
+
+README.md
+.gitignore
+.prettierrc
+LICENSE

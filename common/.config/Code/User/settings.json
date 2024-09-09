@@ -8,7 +8,7 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 20,
+    "editor.fontSize": 18,
     "editor.cursorWidth": 3,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
@@ -58,6 +58,7 @@
     "projectManager.git.baseFolders": [".git"],
 
     // VIM & NeoVIM
+    "keyboard.dispatch": "keyCode",
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1,
         "vscodevim.vim": 1
@@ -71,8 +72,6 @@
     "vim.cursorStylePerMode.visualline": "block",
     "vim.smartRelativeLine": true,
     "vim.easymotion": true,
-    "vscode-neovim.useWSL": true,
-    "vscode-neovim.neovimExecutablePaths.linux": "/home/pratik/downloads/nvim.appimage",
 
     // Debugging
     "debug.toolBarLocation": "docked",
@@ -166,7 +165,13 @@
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.allowCompoundWords": true,
     "cSpell.fixSpellingWithRenameProvider": true,
-    "cSpell.enableFiletypes": ["shellscript", "csharp", "python", "javascript", "javascriptreact"],
+    "cSpell.enableFiletypes": [
+        "shellscript",
+        "csharp",
+        "python",
+        "javascript",
+        "javascriptreact"
+    ],
     "cSpell.minWordLength": 3,
     "cSpell.numSuggestions": 10,
     "cSpell.userWords": [

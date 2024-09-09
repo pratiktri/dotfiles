@@ -50,7 +50,6 @@ Temporary Items
 # Vim Artifacts
 **.swp
 lazy-lock.json
-.luarc.json
 
 # VS Code Artifacts
 /.vscode/

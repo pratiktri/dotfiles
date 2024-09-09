@@ -98,3 +98,4 @@ dist-ssr
 *.bak
 nvim_switch/
 *kitty/*.py
+Folder.DotSettings.user

@@ -1,21 +1,51 @@
-# dotfiles
+# Dotfiles
 
-Place to keep my .dotfiles, so I do not have to worry about migrating to another system.
+1. Restore my dotfiles on any *nix OS.
+2. Install required applications on any Linux OS.
+
+Dotfiles are symlinked from the repo to the required location.
+That is, changes on repository get auto reflected on the system.
 
 ## Usage
 
 ```bash
-$ bash bootstrap.sh -h
+$ git clone https://github.com/pratiktri/dotfiles
 
-Applies all settings stored in the script's directory to your home directory
+$ bash setup.sh -h
+Apply all settings stored in the script's directory to your home directory.
 
-Usage: bootstrap.sh [-q|--quiet] [-l|--create-links]
-  -q,     --quiet              No screen outputs
-  -l,     --create-links       Creates soft-links to files in the current directory instead of copying them
-
-Example: bash ./bootstrap.sh -q --create-links
+Usage: ./setup.sh [OPTION]
+Options:
+  -h, --help      Show this help message.
+  -d, --dry-run   Simulate dotfile symlink without doing anything.
+  -i, --install   Install programs listed on package-list-os & package-list-brew files.
 ```
 
-## Why `--create-links`?
+## Installation
 
-I have multiple Linux installations on my machine. Linking it from one place (this repository) keeps things tidy. Also, changes to dotfiles automatically get applied to all the distros.
+Installation scripts are inside `scripts` directory.
+
+It reads 2 text files to gather lists of software to install:
+
+1. `package-list-os` - To install using OS package manager.
+2. `package-list-brew` - To install using brew package manager.
+
+Any package not available are *skipped*.
+
+`install.sh` calls `install-os-packages.sh` and `install-brew-packages.sh`. Both can be executed separately.
+
+## Test
+
+1. Need to be inside this directory
+
+    ```bash
+    cd scripts/test
+    ```
+
+2. Change `Dockerfile` as required
+
+3. Run the script
+
+    ```bash
+    ./run-test.sh
+    ```

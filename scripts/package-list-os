@@ -1,5 +1,4 @@
 # Lines that start with # are ignored
-apt-transport-https
 bash
 bleachbit
 build-essential

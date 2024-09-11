@@ -2,27 +2,46 @@
 
 OS_PACKAGE_FILE=package-list-os
 
-OS_INSTALL_COMMAND=""
-OS_PKG_CHECK_COMMAND=""
+setup() {
+    OS_INSTALL_COMMAND=""
+    OS_PKG_CHECK_COMMAND=""
 
-os_check() {
-    # TODO: Apply pre-processing to each.
-    #   - Install apt specific things: apt-transport-https, sudo apt-get update && sudo apt-get upgrade -y
-    #   - Improve dnf download speed by pre-applying required config
     # Detect package manager and set package manager commands
     if command -v apt-get > /dev/null 2>&1; then
-        OS_INSTALL_COMMAND="apt-get update && sudo apt-get upgrade -y && sudo apt-get"
+        OS_INSTALL_COMMAND="apt-get"
         OS_PKG_CHECK_COMMAND="apt-cache show"
-    elif command -v yum > /dev/null 2>&1; then
-        OS_INSTALL_COMMAND="yum"
-        OS_PKG_CHECK_COMMAND="yum list available"
+
+        apt_setup
     elif command -v dnf > /dev/null 2>&1; then
         OS_INSTALL_COMMAND="dnf"
         OS_PKG_CHECK_COMMAND="dnf list available"
+
+        dnf_setup
+    elif command -v yum > /dev/null 2>&1; then
+        OS_INSTALL_COMMAND="yum"
+        OS_PKG_CHECK_COMMAND="yum list available"
     else
         log "Unsupported package manager. This script supports apt, yum, and dnf."
         exit 1
     fi
+}
+
+dnf_setup() {
+    # Faster dnf installs
+    echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
+    echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
+    echo "defaultYes=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
+    echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
+
+    # Enable RPM Fusion & Install media codecs
+    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video
+
+    sudo dnf update -y
+}
+
+apt_setup() {
+    sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y apt-transport-https
+    # Add PPAs here
 }
 
 input_file_check() {
@@ -69,8 +88,8 @@ print_summary() {
 }
 
 main() {
-    os_check
     input_file_check
+    setup
     install_os_packages
     print_summary "OS" "$os_not_found_packages"
 }

@@ -1,5 +1,4 @@
 # Lines that start with # are ignored
-# TODO: use apt to check if the package is available. if not, remove them from list before installing
 apt-transport-https
 bash
 bleachbit
@@ -17,9 +16,12 @@ gdb
 git
 gparted
 htop
-imagemagick
+#imagemagick
 kde-spectacle
 kdeconnect
+kitty
+kitty-terminfo
+libreoffice
 llvm
 make
 net-tools

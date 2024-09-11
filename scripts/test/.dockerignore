@@ -104,3 +104,5 @@ README.md
 .gitignore
 .prettierrc
 LICENSE
+
+test/

@@ -1,4 +1,5 @@
 # Lines that start with # are ignored
+# TIP: Only add commandline apps that aren't available/updated on OS repos
 bat
 bats-core
 dnscrypt-proxy
@@ -34,5 +35,6 @@ tlrc
 tokei
 tree-sitter
 yt-dlp
+zoxide
 zsh-autosuggestions
 zsh-syntax-highlighting

@@ -1,4 +1,14 @@
 # Lines that start with # are ignored
+# Below few are apt-only packages - non-free sources must be added before this
+apt-transport-https
+libavcodec-extra
+nvidia-driver
+synaptic
+# Below few are dnf-only packages
+akmod-nvidia
+libva-nvidia-driver
+xorg-x11-drv-nvidia-cuda
+# Common
 bash
 bleachbit
 build-essential
@@ -8,25 +18,32 @@ curl
 evolution-ews
 dolphin
 dolphin-plugins
+aspnetcore-runtime-8.0
+dotnet-sdk-8.0
+dotnet-runtime-8.0
 ffmpeg
 flameshot
+flatpak
+plasma-discover-backend-flatpak
 gcc
 gdb
 git
 gparted
+gnupg
+grub-customizer
 htop
-#imagemagick
 kde-spectacle
 kdeconnect
-kitty
 kitty-terminfo
-libreoffice
 llvm
 make
+nala
 net-tools
 okular
+openssh-client
 python3
 python3-pip
+qbittorrent
 ripgrep
 simplescreenrecorder
 smplayer
@@ -35,7 +52,9 @@ solaar
 syncthing
 tmux
 ufw
+ulauncher
 vim
+vim-enhanced
 vim-common
 vim-tiny
 vlc

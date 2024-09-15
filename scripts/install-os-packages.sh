@@ -8,18 +8,15 @@ setup() {
 
     # Detect package manager and set package manager commands
     if command -v apt-get > /dev/null 2>&1; then
-        OS_INSTALL_COMMAND="apt-get"
+        OS_INSTALL_COMMAND="apt-get install -y"
         OS_PKG_CHECK_COMMAND="apt-cache show"
 
         apt_setup
     elif command -v dnf > /dev/null 2>&1; then
-        OS_INSTALL_COMMAND="dnf"
+        OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken"
         OS_PKG_CHECK_COMMAND="dnf list available"
 
         dnf_setup
-    elif command -v yum > /dev/null 2>&1; then
-        OS_INSTALL_COMMAND="yum"
-        OS_PKG_CHECK_COMMAND="yum list available"
     else
         log "Unsupported package manager. This script supports apt, yum, and dnf."
         exit 1
@@ -34,14 +31,14 @@ dnf_setup() {
     echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
 
     # Enable RPM Fusion & Install media codecs
-    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video
-
-    sudo dnf update -y
+    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video
 }
 
 apt_setup() {
-    sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y apt-transport-https
-    # Add PPAs here
+    # TODO: Enable non-free software in /etc/apt/sources.list
+    #   Add "back-ports" in /etc/apt/sources.list
+    #   Check how it affects Ubuntu
+    sudo apt-get update && sudo apt-get upgrade -y
 }
 
 input_file_check() {
@@ -66,7 +63,7 @@ install_os_packages() {
         esac
 
         # Check if the package exists in the APT repository
-        if eval "$OS_PKG_CHECK_COMMAND" "$os_package" > /dev/null 2>&1; then
+        if eval "$OS_PKG_CHECK_COMMAND" "$os_package" 2> /dev/null | grep -q "$os_package"; then
             echo "Available: $os_package"
             os_found_packages="$os_found_packages $os_package"
         else
@@ -75,15 +72,18 @@ install_os_packages() {
         fi
     done < "$OS_PACKAGE_FILE"
 
-    eval sudo "$OS_INSTALL_COMMAND" install -y "$os_found_packages"
+    # Install available packages
+    if ! eval sudo "$OS_INSTALL_COMMAND" "$os_found_packages"; then
+        exit 1
+    fi
 }
 
 print_summary() {
     # Print the list of packages that were not found
-    echo
     if [ -n "$2" ]; then
-        echo "The following $1 packages were not found in the repository:"
-        echo "$2"
+        echo | tee -a "$INSTALL_LOG_FILE"
+        echo "The following $1 packages were not found in the repository:" | tee -a "$INSTALL_LOG_FILE"
+        echo "$2" | tee -a "$INSTALL_LOG_FILE"
     fi
 }
 

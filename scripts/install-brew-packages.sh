@@ -10,8 +10,10 @@ input_file_check() {
 }
 
 install_brew() {
-    yes | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    if ! command -v brew > /dev/null 2>&1; then
+        yes | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
 
     # Required for installing fonts
     brew tap homebrew/linux-fonts
@@ -30,7 +32,7 @@ install_brew_packages() {
         esac
 
         # Check if the package exists in the Homebrew repository
-        if brew search "$brew_package" | grep -q "^$brew_package\$"; then
+        if brew search "$brew_package" 2> /dev/null | grep -q "$brew_package"; then
             echo "Available: $brew_package"
             found_packages="$found_packages $brew_package"
         else
@@ -39,15 +41,18 @@ install_brew_packages() {
         fi
     done < "$BREW_PACKAGE_FILE"
 
-    brew install $found_packages
+    # Install available brew packages
+    if ! brew install $found_packages; then
+        exit 1
+    fi
 }
 
 print_summary() {
     # Print the list of packages that were not found
-    echo
     if [ -n "$2" ]; then
-        echo "The following $1 packages were not found in the repository:"
-        echo "$2"
+        echo
+        echo "The following $1 packages were not found in the repository:" | tee -a "$INSTALL_LOG_FILE"
+        echo "$2" | tee -a "$INSTALL_LOG_FILE"
     fi
 }
 

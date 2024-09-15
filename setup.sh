@@ -35,8 +35,6 @@ place_dotfile_at_target_location() {
 }
 
 parse_input() {
-    # TODO: Accept input to execute install.sh script
-
     while [ "${#}" -gt 0 ]; do
         case $1 in
         -i | --install)
@@ -104,7 +102,6 @@ main() {
     )/scripts"
 
     setup_symlinks
-    echo "$install_file_location"
 
     if [ "$INSTALL" = "y" ]; then
         cd "$install_file_location" || exit

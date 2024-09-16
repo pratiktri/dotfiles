@@ -1,19 +1,5 @@
 #!/usr/bin/env sh
 
-# All:
-#   - Jetbrains-Toolbox: https://www.jetbrains.com/toolbox-app/
-#   - Sublime-Text: https://www.sublimetext.com/docs/linux_repositories.html
-#   - Appimagelauncher: https://github.com/TheAssassin/AppImageLauncher/releases
-#   - Zoho Mail: https://downloads.zohocdn.com/zmail-desktop/linux/zoho-mail-desktop-lite-x64-v1.6.4.AppImage
-#   - Zoho Workdrive: https://files-accl.zohopublic.com/public/wdbin/download/2014030a29db316e9cedd501f32270e8
-#   - Cursor: https://downloader.cursor.sh/linux/appImage/x64
-# Debian & Ubuntu:
-#   - Ulauncher: https://ulauncher.io/#Download
-# Debian:
-#   - Dotnet8: https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
-
-# Jetbrains: check if scriptfile not available (because we use flatpak) has any issued with ulauncher
-
 kitty_term() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
@@ -25,8 +11,13 @@ kitty_term() {
     echo 'kitty.desktop' > ~/.config/xdg-terminals.list
 }
 
-manual_installs(){
+rustlang() {
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+}
+
+manual_installs() {
     kitty_term
+    rustlang
 }
 
 post_install() {
@@ -40,11 +31,15 @@ post_install() {
         ln -s /home/linuxbrew/.linuxbrew/share/fonts -t ~/.local/share && fc-cache -fv
     fi
 
+    # TODO: Ensure KDE, Jetbrains, Zed, Sublime-text, VS-Code, flatpak have: the same theme installed
+
     rm -rf ~/.cache
 }
 
 pre_install() {
     export INSTALL_LOG_FILE="$(basename "$0")_$(date +"%Y%m%d_%H%M%S")_log.txt"
+    echo
+    echo "Starting Installation..."
     echo "Use the following command to view the list of software that was NOT installed:"
     echo "cat $PWD/$INSTALL_LOG_FILE"
     echo

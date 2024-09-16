@@ -39,7 +39,6 @@ llvm
 make
 nala
 net-tools
-okular
 openssh-client
 python3
 python3-pip

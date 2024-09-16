@@ -4,7 +4,7 @@ INSTALL="n"
 DRY_RUN="n"
 
 show_help() {
-    echo "Apply all settings stored in the script's directory to your home directory"
+    echo "Create soft-links from this to corresponding XDG directories. Optionally, install all the necessary programs for coding on a new Linux setup."
     echo
     echo "usage: $0 [option]"
     echo "options:"

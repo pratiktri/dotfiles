@@ -70,9 +70,6 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
 
-# Move the Android device keys to .config (TODO: This needs to be tested)
-export ADB_VENDOR_KEYS="${XDG_CONFIG_HOME}/android"
-
 # Setup Python
 export PYTHON_HISTORY="${XDG_STATE_HOME}/shell/python_history" # will be picked up by Python 3.13+
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
@@ -100,9 +97,6 @@ export PSQLRC="${XDG_CONFIG_HOME}/postgres/psqlrc"
 export PGPASSFILE="${XDG_CONFIG_HOME}/postgres/pgpass"
 export PGSERVICEFILE="${XDG_CONFIG_HOME}/postgres/pg_service.conf"
 export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
-
-# Go
-export GOPATH=/media/pratik/Projects/DevSetUps/gopath/
 
 # FIX: BELOW DID NOT WORK: added to /etc/profile, need to recheck on reboot
 # alias code="code --extensions-dir ${XDG_DATA_HOME}/vscode"

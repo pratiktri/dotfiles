@@ -34,6 +34,22 @@ Any package not available are *skipped*.
 
 `install.sh` calls `install-os-packages.sh` and `install-brew-packages.sh`. Both can be executed separately.
 
+### Manual installation to be done for various distros
+
+- aka, pending installations that I gave up automating.
+
+- All Distros:
+    - Appimagelauncher: https://github.com/TheAssassin/AppImageLauncher/releases
+    - Zoho Mail: https://downloads.zohocdn.com/zmail-desktop/linux/
+    - Zoho Workdrive: https://www.zoho.com/workdrive/desktop-sync.html
+    - Jetbrains-Toolbox: https://www.jetbrains.com/toolbox-app/
+    - Sublime-Text: https://www.sublimetext.com/docs/linux_repositories.html
+- Debian & Ubuntu:
+    - Add non-free and backport sources, then run the `install-os-packges.sh` again
+    - Ulauncher: https://ulauncher.io/#Download
+- Debian:
+    - Dotnet8: https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
+
 ## Test
 
 1. Need to be inside this directory
@@ -42,7 +58,7 @@ Any package not available are *skipped*.
     cd scripts/test
     ```
 
-2. Change `Dockerfile` as required
+2. Use `Dockerfile` to change OS
 
 3. Run the script
 

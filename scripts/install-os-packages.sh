@@ -35,9 +35,6 @@ dnf_setup() {
 }
 
 apt_setup() {
-    # TODO: Enable non-free software in /etc/apt/sources.list
-    #   Add "back-ports" in /etc/apt/sources.list
-    #   Check how it affects Ubuntu
     sudo apt-get update && sudo apt-get upgrade -y
 }
 

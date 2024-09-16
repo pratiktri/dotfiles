@@ -7,8 +7,11 @@ org.libreoffice.libreoffice
 com.mattermost.Desktop
 md.obsidian.Obsidian
 com.getpostman.Postman
-com.jetbrains.Rider
+#com.jetbrains.Rider
 #com.slack.Slack
+com.github.tchx84.Flatseal
+org.kde.KStyle.Kvantum/x86_64/6.6
+org.kde.okular
 com.skype.Client
 dev.zed.zed
 io.github.zen_browser.zen

@@ -69,6 +69,7 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
+[ ! -f "$WGETRC" ] && touch "$WGETRC"
 
 # Setup Python
 export PYTHON_HISTORY="${XDG_STATE_HOME}/shell/python_history" # will be picked up by Python 3.13+

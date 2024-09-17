@@ -5,7 +5,6 @@ FROM debian:11-slim
 #FROM ubuntu:22.04
 #FROM ubuntu:23.04
 #FROM fedora:40
-#TODO: Arch
 WORKDIR /dotfiles
 RUN apt-get update && apt-get install sudo -y     # for debian distros
 #RUN dnf install sudo -y                           # for fedora and its derivatives

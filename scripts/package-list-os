@@ -1,6 +1,8 @@
 # Lines that start with # are ignored
 # Below few are apt-only packages - non-free sources must be added before this
 apt-transport-https
+build-essential
+libreadline-dev
 libavcodec-extra
 nvidia-driver
 synaptic
@@ -11,9 +13,9 @@ xorg-x11-drv-nvidia-cuda
 # Common
 bash
 bleachbit
-build-essential
 ca-certificates
 clang
+code
 curl
 evolution-ews
 dolphin
@@ -22,6 +24,7 @@ aspnetcore-runtime-8.0
 dotnet-sdk-8.0
 dotnet-runtime-8.0
 ffmpeg
+firefox
 flameshot
 flatpak
 plasma-discover-backend-flatpak
@@ -36,8 +39,11 @@ kde-spectacle
 kdeconnect
 kitty-terminfo
 llvm
+lua
+lua5.3
 make
 nala
+neovim
 net-tools
 openssh-client
 python3

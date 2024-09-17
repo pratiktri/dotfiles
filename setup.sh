@@ -60,10 +60,7 @@ parse_input() {
 setup_symlinks() {
     case $(uname -a) in
     Linux*)
-        # TODO: Make it less KDE-Neon specific and more general Linux
-        OS="kde-neon"
-
-        [ "$XDG_CURRENT_DESKTOP" = "KDE" ] && OS="kde-neon"
+        OS="linux"
         ;;
     Darwin*)
         OS="macos"

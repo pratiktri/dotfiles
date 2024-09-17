@@ -7,7 +7,7 @@ switch-to-activity-fe100d1b-ab30-493d-9635-bce7284a67b9=Meta+F1,none,Switch to a
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (India, with rupee)=none,none,Switch keyboard layout to English (India\\, with rupee)
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
-Switch to Next Keyboard Layout=,Meta+Alt+K,Switch to Next Keyboard Layout
+Switch to Next Keyboard Layout=none,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]

@@ -11,12 +11,35 @@ dir_size(){
     du -ah "$dir" --max-depth=1 | sort -hr
 }
 
+# TODO: Make these portable across ALL Linux distros
+# TODO: flatpak
+#   - Portable `up` that includes `flatpak` as well
+#       - flatpak update
+#       - flatpak uninstall --unused
+#       - flatpak --user uninstall --unused
+#       - flatpak repair
+#   - Portable `remove` that includes:
+#       - dnf/apt
+#       - brew
+#       - flatpak remove
+#   - Link flatpak installed app's config to ~/.var dir
+
 up(){
-    sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove
+    # TODO: dnf autoremove -y
+    command -v pkcon > /dev/null && sudo pkcon refresh && sudo pkcon update
+    command -v apt-get > /dev/null && sudo apt-get update && sudo apt-get upgrade -y && sudo apt dist-upgrade && sudo apt autoremove
+    command -v flatpak > /dev/null && flatpak update && flatpak uninstall --unused && flatpak --user uninstall --unused && flatpak repair
     command -v rustup >/dev/null && rustup update
     command -v brew > /dev/null && brew update && brew upgrade && brew autoremove && brew cleanup
     command -v npm > /dev/null && npm update -g
 }
+
+# Update & Upgrades
+alias distup="sudo apt dist-upgrade"
+alias autorem="sudo apt autoremove"
+alias update="sudo apt-get update"
+alias install="sudo apt-get install "
+alias remove="sudo apt-get remove "
 
 # Network
 alias flush-dns="sudo systemd-resolve --flush-caches"
@@ -25,14 +48,6 @@ alias dnscheck="dnscrypt-proxy -resolve google.com"
 alias ips='printf "Local IP:- "; hostname -I | cut -f1 -d " "; printf "Public IP:- "; curl -s https://ipinfo.io/ip'
 alias ipdetails='printf "Local IP:- "; hostname -I | cut -f1 -d " "; printf "Public IP Details:- \n"; geoip'
 alias listening_apps="sudo netstat -nutlp | grep ':' | awk '{print \$1,\$4,\$NF}' | awk -F: '{print \$1,\$(NF-1),\$NF}' | awk -v OFS=\"\t\" 'BEGIN {printf (\"%s\t%s\t\t%s \n\", \"PROTO\", \"PORT\", \"APPLICATION\")} {print \$1 , \$(NF-1) ,\" \" , \$NF}' | (read -r; printf \"%s\n\" \"\$REPLY\"; sort -k2 -n)"
-
-
-# Update & Upgrades
-alias distup="sudo apt dist-upgrade"
-alias autorem="sudo apt autoremove"
-alias update="sudo apt-get update"
-alias install="sudo apt-get install "
-alias remove="sudo apt-get remove "
 
 # For servers
 alias ngt="sudo nginx -t"

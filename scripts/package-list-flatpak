@@ -1,17 +1,15 @@
 # Lines that start with # are ignored
 # TIP: Only add GUI apps that aren't available/updated on OS repos
 com.brave.Browser
-com.visualstudio.code
 org.mozilla.firefox
-org.libreoffice.libreoffice
+org.libreoffice.LibreOffice
 com.mattermost.Desktop
 md.obsidian.Obsidian
 com.getpostman.Postman
-#com.jetbrains.Rider
 #com.slack.Slack
 com.github.tchx84.Flatseal
-org.kde.KStyle.Kvantum/x86_64/6.6
 org.kde.okular
 com.skype.Client
-dev.zed.zed
+dev.zed.Zed
 io.github.zen_browser.zen
+#org.kde.KStyle.Kvantum

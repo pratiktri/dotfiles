@@ -32,10 +32,26 @@ dnf_setup() {
 
     # Enable RPM Fusion & Install media codecs
     sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video
+
+    # Add VS-Code repo
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    printf "%s\n%s\n%s\n%s\n%s\n%s\n" "[code]" "name=Visual Studio Code" "baseurl=https://packages.microsoft.com/yumrepos/vscode" "enabled=1" "gpgcheck=1" "gpgkey=https://packages.microsoft/com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+
+    # Install development Tools
+    sudo yum groupinstall -y "Development Tools" && yum install readline readline-devel -y
+
+    dnf check-update
 }
 
 apt_setup() {
     sudo apt-get update && sudo apt-get upgrade -y
+
+    # Add VS-Code repo
+    sudo apt-get install -y wget gpg
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+    rm -f packages.microsoft.gpg && sudo apt-get update
 }
 
 input_file_check() {

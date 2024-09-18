@@ -11,35 +11,102 @@ dir_size(){
     du -ah "$dir" --max-depth=1 | sort -hr
 }
 
-# TODO: Make these portable across ALL Linux distros
-# TODO: flatpak
-#   - Portable `up` that includes `flatpak` as well
-#       - flatpak update
-#       - flatpak uninstall --unused
-#       - flatpak --user uninstall --unused
-#       - flatpak repair
-#   - Portable `remove` that includes:
-#       - dnf/apt
-#       - brew
-#       - flatpak remove
-#   - Link flatpak installed app's config to ~/.var dir
-
 up(){
-    # TODO: dnf autoremove -y
-    command -v pkcon > /dev/null && sudo pkcon refresh && sudo pkcon update
-    command -v apt-get > /dev/null && sudo apt-get update && sudo apt-get upgrade -y && sudo apt dist-upgrade && sudo apt autoremove
-    command -v flatpak > /dev/null && flatpak update && flatpak uninstall --unused && flatpak --user uninstall --unused && flatpak repair
-    command -v rustup >/dev/null && rustup update
-    command -v brew > /dev/null && brew update && brew upgrade && brew autoremove && brew cleanup
+    update_command=""
+
+    # Detect package manager and set package manager commands
+    if command -v pkcon > /dev/null; then
+        update_command="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove"
+    elif command -v apt-get > /dev/null 2>&1; then
+        update_command="sudo apt-get update && sudo apt-get upgrade && sudo apt dist-upgrade && sudo apt autoremove"
+    elif command -v dnf > /dev/null 2>&1; then
+        update_command="sudo dnf upgrade --refresh && sudo dnf system-upgrade download --releasever=$(rpm -E %fedora) && sudo dnf autoremove"
+    fi
+
+    eval "$update_command"
+    command -v brew > /dev/null && echo "Brew:" &&  brew update && brew upgrade && brew autoremove && brew cleanup
+    command -v flatpak > /dev/null && echo "Flatpak:" && flatpak update && flatpak uninstall --unused && flatpak --user uninstall --unused && flatpak repair
     command -v npm > /dev/null && npm update -g
+    command -v rustup >/dev/null && rustup update
 }
 
 # Update & Upgrades
-alias distup="sudo apt dist-upgrade"
-alias autorem="sudo apt autoremove"
-alias update="sudo apt-get update"
-alias install="sudo apt-get install "
-alias remove="sudo apt-get remove "
+autorem(){
+    remove_command=""
+
+    if command -v apt-get > /dev/null 2>&1; then
+        remove_command="sudo apt autoremove"
+    elif command -v dnf > /dev/null 2>&1; then
+        remove_command="sudo dnf autoremove"
+    fi
+
+    eval "$remove_command"
+    flatpak uninstall --unused && flatpak --user uninstall --unused
+}
+
+install() {
+    if [ -z "$1" ]; then
+        echo "No program name provided."
+        return 1
+    fi
+
+    if command -v "$1" >/dev/null 2>&1; then
+        echo "The program '$1' is already installed."
+        type "$1"
+        return 1
+    fi
+
+    if command -v apt-get > /dev/null 2>&1; then
+        sudo apt-get install "$1"
+        os_install_status=$?
+    elif command -v dnf > /dev/null 2>&1; then
+        sudo dnf install "$1"
+        os_install_status=$?
+    else
+        log "Unsupported package manager. This script supports apt, yum, and dnf."
+        exit 1
+    fi
+
+    if [ "$os_install_status" = 0 ]; then
+        return 0
+    fi
+
+    # Try to install through brew if OS install failed
+    if brew install "$1"; then
+        return 0
+    fi
+
+    echo
+    echo "$1 could not be installed using the OS package manager or Homebrew."
+    return 1
+}
+
+remove() {
+    if [ -z "$1" ]; then
+        echo "No program name provided."
+        return 1
+    fi
+
+    # Determine the package manager and distribution
+    if command -v apt-get >/dev/null 2>&1; then
+        sudo apt-get remove "$1"
+    elif command -v yum >/dev/null 2>&1; then
+        sudo yum remove "$1"
+    elif command -v dnf >/dev/null 2>&1; then
+        sudo dnf remove "$1"
+    elif command -v zypper >/dev/null 2>&1; then
+        sudo zypper remove "$1"
+    elif command -v pacman >/dev/null 2>&1; then
+        sudo pacman -R "$1"
+    else
+        echo "Unsupported package manager or distribution."
+        return 1
+    fi
+
+    brew remove "$1"
+    flatpak uninstall --user "$1"
+    flatpak uninstall "$1"
+}
 
 # Network
 alias flush-dns="sudo systemd-resolve --flush-caches"

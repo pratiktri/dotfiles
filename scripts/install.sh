@@ -4,7 +4,6 @@
 #   - Shortcuts: Maximize current window with [Windows + space] didn't
 #   - NEOVIM: Lazy did not download automatically
 #   - dotfiles: could NOT link it to aliases_personal
-# TODO: Ensure KDE, Jetbrains, Zed, Sublime-text, VS-Code, flatpak, kitty: have the same theme installed
 
 # NOTE: should download dotfiles repo to ~ and NOT to ~/Downloads - since we are going to link Downloads
 
@@ -59,10 +58,10 @@ main() {
     pre_install
 
     ./install-os-packages.sh
-    #    ./install-brew-packages.sh
-    #    ./install-flatpak-packages.sh
+    ./install-brew-packages.sh
+    ./install-flatpak-packages.sh
 
-    #    manual_installs
+    manual_installs
     post_install
 
     cat "$INSTALL_LOG_FILE"

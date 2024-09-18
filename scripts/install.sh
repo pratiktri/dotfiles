@@ -39,6 +39,10 @@ post_install() {
     fi
 
     rm -rf ~/.cache
+
+    up
+    zsh
+    nvim
 }
 
 pre_install() {

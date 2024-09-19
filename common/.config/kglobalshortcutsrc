@@ -1,13 +1,14 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
 switch-to-activity-252e9f66-21d0-4196-8af8-9f144dae5052=Meta+F3,none,Switch to activity "3 - Email"
+switch-to-activity-79bc8b93-e5e1-4149-8ed2-4222a14f199f=none,none,Switch to activity "Default"
 switch-to-activity-a397c46b-22b0-442b-88bc-9f21a3b18fae=Meta+F2,none,Switch to activity "2 - Code"
 switch-to-activity-fe100d1b-ab30-493d-9635-bce7284a67b9=Meta+F1,none,Switch to activity "1 - Default"
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (India, with rupee)=none,none,Switch keyboard layout to English (India\\, with rupee)
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
-Switch to Next Keyboard Layout=none,Meta+Alt+K,Switch to Next Keyboard Layout
+Switch to Next Keyboard Layout=,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]
@@ -17,7 +18,7 @@ _k_friendly_name=Accessibility
 [kcm_touchpad]
 Disable Touchpad=Touchpad Off,Touchpad Off,Disable Touchpad
 Enable Touchpad=Touchpad On,Touchpad On,Enable Touchpad
-Toggle Touchpad=Touchpad Toggle,Touchpad Toggle,Toggle Touchpad
+Toggle Touchpad=Touchpad Toggle,Touchpad Toggle\tMeta+Ctrl+Zenkaku Hankaku,Toggle Touchpad
 _k_friendly_name=Touchpad
 
 [khotkeys]
@@ -365,6 +366,7 @@ activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
 activate widget 10=Meta+Alt+V,none,Activate Vaults Widget
 activate widget 106=none,none,Activate Pager Widget
 activate widget 107=Alt+F1,none,Activate Application Launcher Widget
+activate widget 31=,none,Activate Icons-and-Text Task Manager Widget
 activate widget 72=none,none,Activate Total CPU Use Widget
 activate widget 76=none,none,Activate ChatGPT Plasmoid Widget
 activate widget 95=none,none,Activate Task Manager Widget

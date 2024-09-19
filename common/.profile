@@ -48,9 +48,6 @@ if [ "$(uname -s)" = "Linux" ]; then
     # Needs upstream fix to work: https://bugs.kde.org/show_bug.cgi?id=415770
     export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc":"${XDG_CONFIG_HOME}/gtk-2.0/gtkrc.mine"
     export CUDA_CACHE_PATH="XDG_CACHE_HOME/nv"
-
-    # Map caps-lock to escape TIP: also added to /etc/profile
-    command -v setxkbmap >/dev/null && setxkbmap -option caps:escape
 fi
 
 export QT_PLUGIN_PATH="$HOME/local/lib/qt/plugins/:"

@@ -56,6 +56,7 @@ if [ "$XDG_SESSION_DESKTOP" = "KDE" ]; then
     export KDEHOME="${XDG_CONFIG_HOME}/KDE"
 fi
 
+# Homebrew
 export HOMEBREW_BAT=1
 export HOMEBREW_VEBOSE=1
 export HOMEBREW_NO_ENV_HINTS=1
@@ -95,6 +96,9 @@ export PSQLRC="${XDG_CONFIG_HOME}/postgres/psqlrc"
 export PGPASSFILE="${XDG_CONFIG_HOME}/postgres/pgpass"
 export PGSERVICEFILE="${XDG_CONFIG_HOME}/postgres/pg_service.conf"
 export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
+
+# Go
+export GOPATH=/media/pratik/Projects/DevSetUps/gopath/
 
 # FIX: BELOW DID NOT WORK: added to /etc/profile, need to recheck on reboot
 # alias code="code --extensions-dir ${XDG_DATA_HOME}/vscode"

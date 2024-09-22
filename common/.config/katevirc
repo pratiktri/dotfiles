@@ -1,0 +1,20 @@
+[Kate Vi Input Mode Settings]
+Command Mode Mapping Keys=
+Command Mode Mappings=
+Command Mode Mappings Recursion=
+Insert Mode Mapping Keys=
+Insert Mode Mappings=
+Insert Mode Mappings Recursion=
+Macro Completions=
+Macro Contents=
+Macro Registers=
+Map Leader=\\
+Normal Mode Mapping Keys=<right>,<c-q>,<leader>cd,<left>,g;,<c-c>,<leader>/,k,<c-d>,N,[q,<down>,<c-i>,]q,j,?,<c-o>,<c-right>,J,<m-j>,<up>,<c-s>,<m-k>,<s-tab>,]s,<leader>y,<tab>,<c-left>,<leader>xt,<c-u>,n,g\\,,<c-up>,<c-down>
+Normal Mode Mappings=:echoe,:wqa<cr>,:lcd,,g;zz,:%y+<cr>,:nohlsearch<cr>:diffupdate<cr>:normal!,gk,<c-d>zz,Nzzzv,cprev,,<c-i>zz,cnext,gj,N,<c-o>zz,:vertical,mzJ`z:delmarks,:m,,:wa<cr>,:m,:bprevious<cr>,]szz,"+y,:bnext<cr>,:vertical,:tabclose,<c-u>zz,nzzzv,g\\,zz,:resize,:resize
+Normal Mode Mappings Recursion=false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
+ViRegisterContents=\n,s,g77eDM2Bya2p\n,
+ViRegisterFlags=1,0,1,0
+ViRegisterNames=",-,0,^
+Visual Mode Mapping Keys=
+Visual Mode Mappings=
+Visual Mode Mappings Recursion=

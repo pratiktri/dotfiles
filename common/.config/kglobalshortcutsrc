@@ -1,14 +1,16 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
-switch-to-activity-252e9f66-21d0-4196-8af8-9f144dae5052=Meta+F3,none,Switch to activity "3 - Email"
-switch-to-activity-79bc8b93-e5e1-4149-8ed2-4222a14f199f=none,none,Switch to activity "Default"
-switch-to-activity-a397c46b-22b0-442b-88bc-9f21a3b18fae=Meta+F2,none,Switch to activity "2 - Code"
-switch-to-activity-fe100d1b-ab30-493d-9635-bce7284a67b9=Meta+F1,none,Switch to activity "1 - Default"
+switch-to-activity-252e9f66-21d0-4196-8af8-9f144dae5052=none,none,Switch to activity "3 - Email"
+switch-to-activity-2cc71a42-d4b8-443e-b255-c66aa4847239=Meta+F2,none,Switch to activity "Focus"
+switch-to-activity-4d59da64-44dc-4d4c-b1c8-bfb0fbd87410=Meta+F3,none,Switch to activity "Email"
+switch-to-activity-79bc8b93-e5e1-4149-8ed2-4222a14f199f=Meta+F1,none,Switch to activity "Default"
+switch-to-activity-a397c46b-22b0-442b-88bc-9f21a3b18fae=none,none,Switch to activity "2 - Code"
+switch-to-activity-fe100d1b-ab30-493d-9635-bce7284a67b9=none,none,Switch to activity "1 - Default"
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (India, with rupee)=none,none,Switch keyboard layout to English (India\\, with rupee)
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
-Switch to Next Keyboard Layout=,Meta+Alt+K,Switch to Next Keyboard Layout
+Switch to Next Keyboard Layout=none,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]
@@ -52,6 +54,7 @@ Activate Window Demanding Attention=Ctrl+Alt+A,Meta+Ctrl+A,Activate Window Deman
 Cycle Overview=none,none,Cycle through Overview and Grid View
 Cycle Overview Opposite=none,none,Cycle through Grid View and Overview
 Decrease Opacity=none,,Decrease Opacity of Active Window by 5%
+DecreaseWindowSize=Meta+Ctrl+Num+-,none,UltrawideWindows: Decrease the window size in place
 Edit Tiles=none,Meta+T,Toggle Tiles Editor
 Expose=Ctrl+F9,Ctrl+F9,Toggle Present Windows (Current desktop)
 ExposeAll=Ctrl+F10\tLaunch (C),Ctrl+F10\tLaunch (C),Toggle Present Windows (All desktops)
@@ -61,13 +64,17 @@ FlipSwitchAll=none,none,Toggle Flip Switch (All desktops)
 FlipSwitchCurrent=none,none,Toggle Flip Switch (Current desktop)
 Grid View=Meta+G,Meta+G,Toggle Grid View
 Increase Opacity=none,,Increase Opacity of Active Window by 5%
+IncreaseWindowSize=Meta+Ctrl+Num++,none,UltrawideWindows: Increase the window size in place
 Invert Screen Colors=none,none,Invert Screen Colors
 KWin Script: Sticky Window Snapping: enable/disable=none,none,KWin Script: Sticky Window Snapping: enable/disable
 KWin Script: Sticky Window Snapping: enable/disable temporarily=none,none,KWin Script: Sticky Window Snapping: enable/disable temporarily
-Kill Window=Ctrl+Alt+Esc,Meta+Ctrl+Esc,Kill Window
+Kill Window=none,Meta+Ctrl+Esc,Kill Window
 Move Tablet to Next Output=none,none,Move the tablet to the next output
 MoveMouseToCenter=none,Meta+F6,Move Mouse to Center
 MoveMouseToFocus=none,Meta+F5,Move Mouse to Focus
+MoveWindowDown=Meta+Ctrl+Down,none,UltrawideWindows: Move the window down
+MoveWindowLeft=none,none,UltrawideWindows: Move the window to the left
+MoveWindowRight=none,none,UltrawideWindows: Move the window to the right
 MoveWindowToCenter=none,none,UltrawideWindows: Center Window
 MoveWindowToCenter1=none,none,UltrawideWindows: Center Window (copy)
 MoveWindowToCenterHeight23_center_biased=none,none,UltrawideWindows: Move Window to fit center-height 2/3 width (center biased)
@@ -120,6 +127,7 @@ MoveWindowToUpRight23_center_biased=none,none,UltrawideWindows: Move Window to f
 MoveWindowToUpRight2x2=none,none,UltrawideWindows: Move Window to up-right (2x2)
 MoveWindowToUpRight3x2=none,none,UltrawideWindows: Move Window to up-right (3x2)
 MoveWindowToUpRight4x2_centerbiased=none,none,UltrawideWindows: Move Window to up-right (4x2 center biased)
+MoveWindowUp=Meta+Ctrl+Up,none,UltrawideWindows: Move the window up
 MoveZoomDown=none,none,Move Zoomed Area Downwards
 MoveZoomLeft=none,none,Move Zoomed Area to Left
 MoveZoomRight=none,none,Move Zoomed Area to Right
@@ -366,7 +374,8 @@ activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
 activate widget 10=Meta+Alt+V,none,Activate Vaults Widget
 activate widget 106=none,none,Activate Pager Widget
 activate widget 107=Alt+F1,none,Activate Application Launcher Widget
-activate widget 31=,none,Activate Icons-and-Text Task Manager Widget
+activate widget 31=none,none,Activate Icons-and-Text Task Manager Widget
+activate widget 39=none,none,Activate Digital Clock Widget
 activate widget 72=none,none,Activate Total CPU Use Widget
 activate widget 76=none,none,Activate ChatGPT Plasmoid Widget
 activate widget 95=none,none,Activate Task Manager Widget
@@ -408,9 +417,6 @@ _launch=Meta+B
 [services][firefox.desktop]
 _launch=Meta+F
 
-[services][flameshot.desktop]
-_launch=Meta+Shift+S
-
 [services][kitty.desktop]
 _launch=Meta+K
 
@@ -424,6 +430,12 @@ ShowOSD=Display
 ActiveWindowScreenShot=Print\tMeta+Print
 FullScreenScreenShot=none
 RecordWindow=none
-RectangularRegionScreenShot=Meta+Shift+Print\tCtrl+Print
+RectangularRegionScreenShot=Meta+Shift+S\tMeta+Shift+Print\tCtrl+Print
 WindowUnderCursorScreenShot=none
 _launch=none
+
+[services][org.mozilla.firefox.desktop]
+_launch=Meta+F
+
+[services][ulauncher-toggle.desktop]
+_launch=Meta+Shift

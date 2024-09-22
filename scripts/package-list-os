@@ -1,4 +1,5 @@
 # Lines that start with # are ignored
+
 # Below few are apt-only packages - non-free sources must be added before this
 apt-transport-https
 build-essential
@@ -15,9 +16,12 @@ bash
 bleachbit
 ca-certificates
 clang
+cmake
+extra-cmake-modules
 code
 curl
 evolution-ews
+evolution-mapi
 dolphin
 dolphin-plugins
 dnscrypt-proxy
@@ -63,6 +67,7 @@ vim
 vim-enhanced
 vim-common
 vim-tiny
+volkan-tools
 vlc
 wget
 xclip

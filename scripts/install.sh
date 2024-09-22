@@ -35,7 +35,8 @@ post_install() {
 
     # Use brew-installed fonts current user
     if [ -d /home/linuxbrew/.linuxbrew/share/fonts ]; then
-        ln -s /home/linuxbrew/.linuxbrew/share/fonts -t ~/.local/share && fc-cache -fv
+        mkdir -p ~/.local/share/fonts
+        ln -s /home/linuxbrew/.linuxbrew/share/fonts/* ~/.local/share/fonts/ && fc-cache -fv
     fi
 
     rm -rf ~/.cache

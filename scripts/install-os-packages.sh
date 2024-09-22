@@ -40,6 +40,9 @@ dnf_setup() {
     # Install development Tools
     sudo yum groupinstall -y "Development Tools" && yum install readline readline-devel -y
 
+    # Download and install appimagelauncher
+    wget "https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm" -O /tmp/package.rpm && sudo rpm -i /tmp/package.rpm && "Installed AppImageLauncher"
+
     dnf check-update
 }
 

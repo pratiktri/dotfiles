@@ -275,7 +275,7 @@ return {
             -- List
             vim.keymap.set("n", "<leader>lb", require("telescope.builtin").buffers, { desc = "List Bbuffers" })
             vim.keymap.set("n", "<leader>lc", require("telescope.builtin").command_history, { desc = "List NeoVIM Command History" })
-            vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
+            vim.keymap.set("n", "<C-a-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
             vim.keymap.set("n", "<leader>lf", require("telescope.builtin").find_files, { desc = "List & Search Files" })
             vim.keymap.set("n", "<leader>ln", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
             vim.keymap.set("n", "<leader>lk", require("telescope.builtin").keymaps, { desc = "List & Search NeoVIM Keymaps" })

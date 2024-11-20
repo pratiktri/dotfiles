@@ -44,3 +44,6 @@
 
 [fetch]
 	writeCommitGraph = true
+
+[credential]
+	helper = cache --timeout=21600

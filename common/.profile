@@ -27,7 +27,10 @@
 
 ##################################################################################
 
-eval "$(ssh-agent -s)" >/dev/null
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval $(ssh-agent -s) >/dev/null
+fi
+
 # shellcheck disable=SC3045
 ulimit -n 10240
 
@@ -123,3 +126,4 @@ export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~50% --
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
 
 export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
+. "/home/pratik/.local/share/rust/cargo/env"

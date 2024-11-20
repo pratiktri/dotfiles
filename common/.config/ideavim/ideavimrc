@@ -4,6 +4,8 @@
 " Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
 " FIX: Macros does NOT work
+" FIX: Make [ctrl + p] & [ctrl + n] choose next and previous options on pop-up menu
+" FIX: Make [ Ctrl + alt + p ] open file instead of [ Ctrl + p ] -> for VSCode as well
 " TODO: Add Jetbrains shortcut-config-file to dotfiles repo
 " TODO: Add shortcuts for opening/closing `za`
 
@@ -59,7 +61,7 @@ set quickscope
 set paragraph-motion
 set matchit
 set multiple-cursors
-set nerdtree                " <leader>e
+#set nerdtree                " <leader>e
 set repeat
 set surround                " ys or cs or ds [motion]
 set textobj-entire          " yae, cae, dae <- operates on entire file
@@ -85,7 +87,7 @@ xmap <C-x> <Plug>SkipOccurrence
 xmap <C-p> <Plug>RemoveOccurrence
 
 " NerdTree """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>e :NERDTreeToggle<cr>
+#nnoremap <leader>e :NERDTreeToggle<cr>
     " When in the tree use the below default keybindings
     " j, k - To go down and up
     " p - Go to the parent directory
@@ -102,7 +104,7 @@ nnoremap <leader>e :NERDTreeToggle<cr>
 
 " File Navigation """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>ls :action Switcher<cr>
-nnoremap <c-p> :action GotoFile<cr>
+nnoremap <c-a-p> :action GotoFile<cr>
 nnoremap <c-s-enter> :action ActivateTerminalToolWindow<cr>
 
 " Code Navigation, Formatting, Others """""""""""""""""""""""""""""""""""""""

@@ -10,7 +10,7 @@ input_file_check() {
 }
 
 install_brew() {
-    if ! command -v brew > /dev/null 2>&1; then
+    if ! command -v brew >/dev/null 2>&1; then
         yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
@@ -32,17 +32,17 @@ install_brew_packages() {
         esac
 
         # Check if the package exists in the Homebrew repository
-        if brew search "$brew_package" 2> /dev/null | grep -q "$brew_package"; then
+        if brew search "$brew_package" 2>/dev/null | grep -q "$brew_package"; then
             echo "Available: $brew_package"
             found_packages="$found_packages $brew_package"
         else
             not_found_packages="$not_found_packages $brew_package"
             echo "Unavailable: $brew_package"
         fi
-    done < "$BREW_PACKAGE_FILE"
+    done <"$BREW_PACKAGE_FILE"
 
     # Install available brew packages
-    if ! brew install $found_packages; then
+    if ! brew install "$found_packages"; then
         exit 1
     fi
 }

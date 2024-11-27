@@ -27,7 +27,7 @@
 
 ##################################################################################
 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+if ! pgrep -u "$USER" ssh-agent >/dev/null; then
     eval $(ssh-agent -s) >/dev/null
 fi
 
@@ -86,6 +86,7 @@ export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
 export PATH="$PATH:$CARGO_HOME/bin"
 export RUSTC_WRAPPER=sccache
 export SCCACHE_CACHE_SIZE="20G"
+[ -f "${XDA_DATA_HOME}/rust/cargo/env" ] && . "${XDA_DATA_HOME}/rust/cargo/env"
 
 # Setup DotNet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -126,4 +127,3 @@ export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~50% --
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
 
 export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
-. "/home/pratik/.local/share/rust/cargo/env"

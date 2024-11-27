@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
 # TODO: Things that did not work
-#   - Shortcuts: Maximize current window with [Windows + space] didn't
-#   - NEOVIM: Lazy did not download automatically
 #   - dotfiles: could NOT link it to aliases_personal
 
 # NOTE: should download dotfiles repo to ~ and NOT to ~/Downloads - since we are going to link Downloads
@@ -15,7 +13,7 @@ kitty_term() {
     cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
     sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
     sed -i "s|Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-    echo 'kitty.desktop' > ~/.config/xdg-terminals.list
+    echo 'kitty.desktop' >~/.config/xdg-terminals.list
 }
 
 rustlang() {
@@ -42,8 +40,6 @@ post_install() {
     rm -rf ~/.cache
 
     up
-    zsh
-    nvim
 }
 
 pre_install() {
@@ -64,7 +60,7 @@ main() {
 
     ./install-os-packages.sh
     ./install-brew-packages.sh
-    ./install-flatpak-packages.sh
+    # ./install-flatpak-packages.sh
 
     manual_installs
     post_install

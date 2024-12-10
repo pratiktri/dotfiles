@@ -37,8 +37,8 @@
     "terminal.integrated.fontSize": 15,
 
     // Workbench - Everything that surrounds the editor
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "GitHub Dark Dimmed",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "right",
     "workbench.colorCustomizations": {
@@ -70,7 +70,7 @@
     "vim.cursorStylePerMode.visual": "block",
     "vim.cursorStylePerMode.visualblock": "block",
     "vim.cursorStylePerMode.visualline": "block",
-    "vim.smartRelativeLine": true,
+    // "vim.smartRelativeLine": true,
     "vim.easymotion": true,
 
     // Debugging
@@ -165,7 +165,7 @@
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.allowCompoundWords": true,
     "cSpell.fixSpellingWithRenameProvider": true,
-    "cSpell.enableFiletypes": [
+    "cSpell.enabledFiletypes": [
         "shellscript",
         "csharp",
         "python",
@@ -291,5 +291,7 @@
     "sql-formatter.dialect": "pl/sql",
 
     // Codium
-    "codium.codeCompletion.enable": true
+    "codium.codeCompletion.enable": true,
+    "windsurf.enableSupercomplete": false,
+    "windsurf.enableAutocomplete": false
 }

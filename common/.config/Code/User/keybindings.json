@@ -44,7 +44,7 @@
     },
     {
         "key": "ctrl+alt+g",
-        "command": "git.checkout"
+        "command": "workbench.action.editor.nextChange"
     },
     {
         "key": "ctrl+shift+j",

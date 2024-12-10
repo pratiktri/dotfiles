@@ -24,10 +24,6 @@ Enable Touchpad=Touchpad On,Touchpad On,Enable Touchpad
 Toggle Touchpad=Touchpad Toggle\tMeta+Ctrl+Zenkaku Hankaku,Touchpad Toggle\tMeta+Ctrl+Zenkaku Hankaku,Toggle Touchpad
 _k_friendly_name=Touchpad
 
-[khotkeys]
-_k_friendly_name=Custom Shortcuts Service
-{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none,none,Search
-
 [kmix]
 _k_friendly_name=Audio Volume
 decrease_microphone_volume=Microphone Volume Down,Microphone Volume Down,Decrease Microphone Volume
@@ -261,7 +257,7 @@ Window Fullscreen=none,,Make Window Fullscreen
 Window Grow Horizontal=none,,Expand Window Horizontally
 Window Grow Vertical=none,,Expand Window Vertically
 Window Lower=none,,Lower Window
-Window Maximize=none,Meta+PgUp,Maximize Window
+Window Maximize=Meta+Space,Meta+PgUp,Maximize Window
 Window Maximize Horizontal=none,,Maximize Window Horizontally
 Window Maximize Vertical=none,,Maximize Window Vertically
 Window Minimize=none,Meta+PgDown,Minimize Window
@@ -379,6 +375,7 @@ activate widget 31=none,none,Activate Icons-and-Text Task Manager Widget
 activate widget 32=none,none,Activate Icons-and-Text Task Manager Widget
 activate widget 39=none,none,Activate Digital Clock Widget
 activate widget 41=none,none,Activate Network speed Widget
+activate widget 45=none,none,Activate Peek at Desktop Widget
 activate widget 72=none,none,Activate Total CPU Use Widget
 activate widget 76=none,none,Activate ChatGPT Plasmoid Widget
 activate widget 95=none,none,Activate Task Manager Widget
@@ -394,7 +391,7 @@ previous activity=Meta+Ctrl+Left,none,Walk through activities (Reverse)
 repeat_action=none,Meta+Ctrl+R,Manually Invoke Action on Current Clipboard
 show dashboard=Ctrl+F12,Ctrl+F12,Show Desktop
 show-barcode=none,,Show Barcode…
-show-on-mouse-pos=Meta+V,Meta+V,Show Clipboard Items at Mouse Position
+show-on-mouse-pos=Meta+V\tCtrl+~,Meta+V,Show Clipboard Items at Mouse Position
 stop current activity=Meta+S,Meta+S,Stop Current Activity
 switch to next activity=none,,Switch to Next Activity
 switch to previous activity=none,,Switch to Previous Activity

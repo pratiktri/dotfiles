@@ -1,39 +1,36 @@
 #!/bin/zsh
-# I'm not using a separate .zprofile; reuse the .profile instead
-[[ ! -f "$HOME/.profile" ]] || source "$HOME/.profile"
 
-# ZSH Options
+# ZSH Options # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 bindkey -v                  # enable vi-mode
-setopt +o nomatch
-ZSH_STATE_HOME="$XDG_STATE_HOME/shell"
+setopt +o nomatch           # Unmatched glob patterns like bash
+setopt noglobalrcs          # Don't source global rc files from /etc/z*
 
+ZSH_STATE_HOME="$XDG_STATE_HOME/shell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 COMPLETION_WAITING_DOTS="true"
-HIST_STAMPS="dd.mm.yyyy" # see 'man strftime' for details.
 
 # ZSH History
 export HISTSIZE=10000000
 export SAVEHIST=$HISTSIZE
+export HIST_STAMPS="dd.mm.yyyy" # see 'man strftime' for details.
 export HISTFILE="$ZSH_STATE_HOME/zsh_history"
-setopt appendhistory        # Append rather than overwriting
-setopt sharehistory         # Share history between all sessions.
-setopt extended_history     # Write the history file in the ":start:elapsed;command" format.
-setopt inc_append_history   # Write to the history file immediately, not when the shell exits.
-setopt hist_reduce_blanks   # Remove superfluous blanks before recording entry.
-setopt hist_verify          # Don't execute immediately upon history expansion.
-setopt hist_ignore_space    # Don't add commands that start with whitespace to history
-setopt hist_find_no_dups    # Don't show duplicate commands when searching history
+setopt APPENDHISTORY        # Append rather than overwriting
+setopt SHAREHISTORY         # Share history between all sessions.
+setopt EXTENDED_HISTORY     # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
+setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY          # Don't execute immediately upon history expansion.
+setopt HIST_IGNORE_SPACE    # Don't add commands that start with whitespace to history
+setopt HIST_FIND_NO_DUPS    # Don't show duplicate commands when searching history
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Zinit ZSH Plugin Manager
+# Zinit: ZSH Plugin Manager # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 ZINIT_HOME="${XDG_DATA_HOME}/shell/zinit/zinit.git"
 if [[ ! -d "$ZINIT_HOME" ]]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -42,69 +39,68 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Zinit plugin settings
-TIMER_PRECISION=3; TIMER_FORMAT='[%d]'
 VI_MODE_SET_CURSOR=true
 VI_MODE_CURSOR_INSERT=3
-# Having HISTORY_BASE after per-directory-history plugin install does NOT work
+TIMER_PRECISION=3; TIMER_FORMAT='[%d]'
 HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1; zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/per-directory-history/per-directory-history.zsh
 
-# Oh-my-zsh plugins
- zi snippet OMZP::aliases
-# zi snippet OMZP::gitfast
-zi snippet OMZP::aws
-zi snippet OMZP::azure
-zi snippet OMZP::brew
-zi snippet OMZP::colored-man-pages
-zi snippet OMZP::command-not-found
-zi snippet OMZP::dotnet
-zi snippet OMZP::dotenv
-zi snippet OMZP::git
-zi snippet OMZP::gitignore
-zi snippet OMZP::kitty
-zi snippet OMZP::podman
-zi snippet OMZP::sudo
-zi snippet OMZP::systemd
-zi snippet OMZP::timer
-zi snippet OMZP::ubuntu
-zi snippet OMZP::urltools
-zi snippet OMZP::vi-mode
-zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/per-directory-history/per-directory-history.zsh
+zinit ice wait lucid depth=1; zinit light zsh-users/zsh-completions
+zinit ice wait lucid depth=1; zinit light zsh-users/zsh-autosuggestions
+zinit ice wait lucid depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 
-zi ice as"completion"
-#zi snippet OMZP::fd/_fd
+zinit ice wait lucid depth=1; zinit snippet OMZP::colored-man-pages
+zinit ice wait lucid depth=1; zinit snippet OMZP::command-not-found
+zinit ice wait lucid depth=1; zinit snippet OMZP::dotenv
+zinit ice wait lucid depth=1; zinit snippet OMZP::gitignore
+zinit ice wait lucid depth=1; zinit snippet OMZP::sudo
+zinit ice wait lucid depth=1; zinit snippet OMZP::timer
+zinit ice wait lucid depth=1; zinit snippet OMZP::urltools
+zinit ice wait lucid depth=1; zinit snippet OMZP::vi-mode
 
-# ZSH Auto-completion settings
-autoload -Uz compinit
-_comp_options+=(globdots)   # Include hidden files
-zmodload zsh/complist
+# Completions
+zinit ice wait lucid depth=1; zinit snippet OMZP::podman
+zinit ice wait lucid depth=1; zinit snippet OMZP::dotnet
+zinit ice wait lucid depth=1; zinit snippet OMZP::fzf
+
+# TIP: execute `zinit update --all` quarterly
+
+# Add brew provided autocompletions to path
+[[ ! -d  "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]] || FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
+
+# ZSH Auto-completion settings: Do it AFTER plugin load, so all fpaths are included
+autoload -Uz compinit                       # Initialized zsh completion
+(( ${+_comps} )) && _comps[zinit]=_zinit    # Sets up completion for Zinit
+_comp_options+=(globdots)                   # Include hidden files
+zmodload zsh/complist                       # Add enhancements to zsh completion system
 
 # Completion files: Use XDG dirs
 ZCOMP_CACHE_HOME="${XDG_CACHE_HOME}/zsh"
 ZCOMP_CACHE_FILE="${ZCOMP_CACHE_HOME}/zcompcache"
 [ -d "${ZCOMP_CACHE_HOME}" ] || mkdir -p "${ZCOMP_CACHE_HOME}"
-zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"
-compinit -d "${ZCOMP_CACHE_HOME}/zcompdump-${ZSH_VERSION}"
 
-zinit cdreplay -q # Must be AFTER compinit -d
+# Run compinit only once daily
+if [[ -n $ZCOMP_CACHE_HOME/zcompdump-$ZSH_VERSION(#qN.mh+24) ]]; then
+  compinit -d "$ZCOMP_CACHE_HOME/zcompdump-$ZSH_VERSION"
+else
+  compinit -C   # Generate dumpfile only if outdated
+fi
+
+zinit cdreplay -q # Replay stored compdef. Must be AFTER compinit -d
 
 # Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'      # Case INsensitive completion match
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Add color to completion suggestions
-zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOMP_CACHE_FILE"
+zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"   # Sets path for completion cache files
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # Case INsensitive completion match
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # Add color to completion suggestions
+zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOMP_CACHE_FILE" # Enable completion for sudo commands
 
 # To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"
 
-# User configuration
-
-# Add brew provided autocompletions to path
-[[ ! -d  "/home/linuxbrew/.linuxbrew/share/zsh/site-functions" ]] || FPATH="/home/linuxbrew/.linuxbrew/share/zsh/site-functions:$FPATH"
+# User configuration # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # [ctrl+r]: Search command history
 # [ctrl+t]: fzf & over the files & directories under the current one & paste it to prompt

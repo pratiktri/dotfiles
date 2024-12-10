@@ -36,12 +36,12 @@ return {
         cond = require("config.util").is_not_vscode(),
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { "williamboman/mason.nvim", config = true },
+            { "williamboman/mason.nvim",          config = true },
             { "williamboman/mason-lspconfig.nvim" },
             { "folke/neodev.nvim" },
 
             -- Useful status updates for LSP
-            { "j-hui/fidget.nvim", opts = {} },
+            { "j-hui/fidget.nvim",                opts = {} },
         },
     },
 
@@ -110,37 +110,6 @@ return {
                         },
                     },
                 },
-                tsserver = {
-                    settings = {
-                        completions = {
-                            completeFunctionCalls = true,
-                        },
-                    },
-                    typescript = {
-                        inlayHints = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = true,
-                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayEnumMemberValueHints = true,
-                        },
-                    },
-                    javascript = {
-                        inlayHints = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = true,
-                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayEnumMemberValueHints = true,
-                        },
-                    },
-                },
 
                 -- https://github.com/joe-re/sql-language-server?tab=readme-ov-file#configuration
                 sqlls = {},
@@ -197,11 +166,11 @@ return {
         cond = require("config.util").is_not_vscode(),
         opts = {
             progress = {
-                poll_rate = 1, -- How and when to poll for progress messages
-                suppress_on_insert = true, -- Suppress new messages while in insert mode
-                ignore_done_already = true, -- Ignore new tasks that are already complete
+                poll_rate = 1,               -- How and when to poll for progress messages
+                suppress_on_insert = true,   -- Suppress new messages while in insert mode
+                ignore_done_already = true,  -- Ignore new tasks that are already complete
                 ignore_empty_message = true, -- Ignore new tasks that don't contain a message
-                ignore = {}, -- List of LSP servers to ignore
+                ignore = {},                 -- List of LSP servers to ignore
 
                 display = {
                     render_limit = 1, -- How many LSP messages to show at once
@@ -210,7 +179,7 @@ return {
             },
 
             notification = {
-                poll_rate = 2, -- How often to udate and render notifications
+                poll_rate = 2,                -- How often to udate and render notifications
                 filter = vim.log.levels.WARN, -- Minimum notifications level
             },
         },

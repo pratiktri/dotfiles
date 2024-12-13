@@ -1,5 +1,16 @@
 #!/bin/zsh
 
+# TIP: time zsh -i -c exit # Shows how long took to start zsh
+
+# PERF: Part 1: Zsh Instrumentation => Part 2 at bottom of the file
+# zmodload zsh/datetime
+# setopt PROMPT_SUBST
+# PS4='+$EPOCHREALTIME %N:%i> '
+# logfile=$(mktemp zsh_profile.XXXXXXXX)
+# echo "Logging to $logfile"
+# exec 3>&2 2>$logfile
+# setopt XTRACE
+
 # ZSH Options # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 bindkey -v                  # enable vi-mode
 setopt +o nomatch           # Unmatched glob patterns like bash
@@ -46,7 +57,7 @@ HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
-zinit ice depth=1; zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/per-directory-history/per-directory-history.zsh
+zinit ice depth=1; zinit light jimhester/per-directory-history
 
 zinit ice wait lucid depth=1; zinit light zsh-users/zsh-completions
 zinit ice wait lucid depth=1; zinit light zsh-users/zsh-autosuggestions
@@ -105,6 +116,7 @@ zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOM
 # [ctrl+r]: Search command history
 # [ctrl+t]: fzf & over the files & directories under the current one & paste it to prompt
 # [alt+c] : fzf & cd into a directory under the current one
+# TODO: Source this as script instead of eval: has impact on zsh startup
 command -v fzf > /dev/null && eval "$(fzf --zsh)"
 
 command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd zsh)"
@@ -119,3 +131,7 @@ bindkey '^n' history-search-forward     # Ctrl+n gets the next history match
 # TIP: Following should be executed AFTER aliases are sourced
 command -v op >/dev/null && bindkey -s '^o' ' op\n' # Fuzzyfind projects and open in nvim
 command -v pnew >/dev/null && bindkey -s '^[o' ' pnew\n' # Create a new project quickly
+
+# PERF: Part 2: Zsh Instrumentations
+# unsetopt XTRACE
+# exec 2>&3 3>&-

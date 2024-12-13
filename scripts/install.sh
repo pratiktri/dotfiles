@@ -31,15 +31,7 @@ post_install() {
     # Time fix for Windows dual boot
     timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
 
-    # Use brew-installed fonts current user
-    if [ -d /home/linuxbrew/.linuxbrew/share/fonts ]; then
-        mkdir -p ~/.local/share/fonts
-        ln -s /home/linuxbrew/.linuxbrew/share/fonts/* ~/.local/share/fonts/ && fc-cache -fv
-    fi
-
     rm -rf ~/.cache
-
-    up
 }
 
 pre_install() {

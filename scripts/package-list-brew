@@ -6,14 +6,6 @@ dnscrypt-proxy
 docker
 docker-compose
 fd
-font-caskaydia-mono-nerd-font
-font-fira-code-nerd-font
-font-fira-mono-nerd-font
-font-hasklug-nerd-font
-font-inconsolata-nerd-font
-font-jetbrains-mono-nerd-font
-font-liberation-nerd-font
-font-symbols-only-nerd-font
 fzf
 go
 jq

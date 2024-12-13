@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+# NOTE: This is NOT POSIX compliant because - brew install script does not support that
 
 BREW_PACKAGE_FILE=package-list-brew
 
@@ -11,7 +12,7 @@ input_file_check() {
 
 install_brew() {
     if ! command -v brew >/dev/null 2>&1; then
-        yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo "Brew install failed"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
 
@@ -42,7 +43,8 @@ install_brew_packages() {
     done <"$BREW_PACKAGE_FILE"
 
     # Install available brew packages
-    if ! brew install "$found_packages"; then
+    # shellcheck disable=SC2086
+    if ! brew install $found_packages; then
         exit 1
     fi
 }
@@ -59,6 +61,8 @@ print_summary() {
 main() {
     input_file_check
     install_brew
+
+
     install_brew_packages
     print_summary "Brew" "$not_found_packages"
 }

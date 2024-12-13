@@ -1,0 +1,11 @@
+[activities]
+2cc71a42-d4b8-443e-b255-c66aa4847239=Focus
+4d59da64-44dc-4d4c-b1c8-bfb0fbd87410=Email
+79bc8b93-e5e1-4149-8ed2-4222a14f199f=Default
+
+[activities-icons]
+2cc71a42-d4b8-443e-b255-c66aa4847239=activities
+4d59da64-44dc-4d4c-b1c8-bfb0fbd87410=activities
+
+[main]
+currentActivity=79bc8b93-e5e1-4149-8ed2-4222a14f199f

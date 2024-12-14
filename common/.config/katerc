@@ -33,7 +33,7 @@ Recent File List Entry Count=11
 Restore Window Configuration=true
 SDI Mode=false
 Save Meta Infos=true
-Show Full Path in Title=false
+Show Full Path in Title=true
 Show Menu Bar=true
 Show Status Bar=true
 Show Symbol In Navigation Bar=true
@@ -211,9 +211,9 @@ SetEditor=false
 [MainWindow]
 2 screens: Height=1359
 2 screens: Width=1279
-2560x1440 screen: Height=1372
-2560x1440 screen: Width=1278
-2560x1440 screen: Window-Maximized=true
+2 screens: Window-Maximized=true
+2560x1440 screen: Height=1359
+2560x1440 screen: Width=1279
 ToolBarsMovable=Disabled
 
 [PluginSymbolViewer]

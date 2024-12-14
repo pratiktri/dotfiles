@@ -15,9 +15,6 @@ install_brew() {
         yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo "Brew install failed"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
-
-    # Required for installing fonts
-    brew tap homebrew/linux-fonts
 }
 
 # Install packages listed on "brew-package-list" file

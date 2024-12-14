@@ -290,8 +290,7 @@
     "sql-formatter.uppercase": true,
     "sql-formatter.dialect": "pl/sql",
 
-    // Codium
-    "codium.codeCompletion.enable": true,
+    // Windsurf
     "windsurf.enableSupercomplete": false,
     "windsurf.enableAutocomplete": false
 }

@@ -209,9 +209,8 @@ RunPrefix=
 SetEditor=false
 
 [MainWindow]
-2 screens: Height=1367
-2 screens: Width=1275
-2 screens: Window-Maximized=true
+2 screens: Height=1359
+2 screens: Width=1279
 2560x1440 screen: Height=1372
 2560x1440 screen: Width=1278
 2560x1440 screen: Window-Maximized=true

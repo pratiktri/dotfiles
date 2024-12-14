@@ -1,3 +1,6 @@
+[Plugins]
+org.kde.ActivityManager.ResourceScoringEnabled=false
+
 [activities]
 2cc71a42-d4b8-443e-b255-c66aa4847239=Focus
 4d59da64-44dc-4d4c-b1c8-bfb0fbd87410=Email

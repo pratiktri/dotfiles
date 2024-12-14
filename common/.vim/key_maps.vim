@@ -59,8 +59,8 @@ map <C-h> <C-w>h
 map <C-l> <C-w>l
 
 " Navigate buffers
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
 
 " Navigate Quickfixs
 nnoremap [q cprev

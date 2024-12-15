@@ -114,7 +114,7 @@ vnoremap <leader>y "+y
 " To paste from system clipboard "+p
 
 " Clear search, diff update and redraw
-nnoremap <leader>/ :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
+nnoremap <Esc> :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
 
 " Changes the pwd to the opened file's directory
 nnoremap <leader>cd :lcd %:h<CR>

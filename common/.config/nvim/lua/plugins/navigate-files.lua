@@ -1,115 +1,4 @@
 return {
-    -- Harpoon
-    {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
-        keys = {
-            {
-                "<leader>ha",
-                function()
-                    require("harpoon"):list():append()
-                end,
-                desc = "Add current file to harpoon-list",
-            },
-            {
-                "<leader>hd",
-                function()
-                    require("harpoon"):list():remove()
-                end,
-                desc = "Remove current file from harpoon-list",
-            },
-            {
-                "<leader>hh",
-                function()
-                    local harpoon = require("harpoon")
-                    harpoon.ui:toggle_quick_menu(harpoon:list())
-                end,
-                desc = "Show harpoon list",
-            },
-            {
-                "<M-1>",
-                function()
-                    require("harpoon"):list():select(1)
-                end,
-                desc = "Switch to the 1st file in harpoon-list",
-            },
-            {
-                "<M-2>",
-                function()
-                    require("harpoon"):list():select(2)
-                end,
-                desc = "Switch to the 2nd file in harpoon-list",
-            },
-            {
-                "<M-3>",
-                function()
-                    require("harpoon"):list():select(3)
-                end,
-                desc = "Switch to the 3rd file in harpoon-list",
-            },
-            {
-                "<M-4>",
-                function()
-                    require("harpoon"):list():select(4)
-                end,
-                desc = "Switch to the 4th file in harpoon-list",
-            },
-            -- Toggle previous & next buffers stored within require("harpoon") list
-            {
-                "<C-S-P>",
-                function()
-                    require("harpoon"):list():prev()
-                end,
-                desc = "Harpoon go to the next file in harpoon-list",
-            },
-            {
-                "<C-S-N>",
-                function()
-                    require("harpoon"):list():next()
-                end,
-                desc = "Harpoon go to the previous file in harpoon-list",
-            },
-        },
-        setup = {
-            settings = {
-                save_on_change = true,
-                save_on_toggle = false,
-                mark_branch = true,
-            },
-        },
-        config = function()
-            local harpoon = require("harpoon")
-            harpoon:setup()
-
-            -- basic telescope configuration
-            local tele_conf = require("telescope.config").values
-            local function toggle_telescope(harpoon_files)
-                local file_paths = {}
-                for _, item in ipairs(harpoon_files.items) do
-                    table.insert(file_paths, item.value)
-                end
-
-                require("telescope.pickers")
-                    .new({}, {
-                        prompt_title = "Harpoon",
-                        finder = require("telescope.finders").new_table({
-                            results = file_paths,
-                        }),
-                        previewer = tele_conf.file_previewer({}),
-                        sorter = tele_conf.generic_sorter({}),
-                    })
-                    :find()
-            end
-
-            vim.keymap.set("n", "<leader>lh", function()
-                toggle_telescope(harpoon:list())
-            end, { desc = "List harpooned files" })
-        end,
-    },
 
     -- File Explorer: Neotree
     {
@@ -117,7 +6,8 @@ return {
         cond = require("config.util").is_not_vscode(),
         branch = "v3.x",
         keys = {
-            { "<leader>e", "<CMD>Neotree filesystem toggle<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
+            { "<leader><tab>", "<CMD>Neotree toggle left<CR>",  desc = "Open NeoTree Explorer at Git root", remap = true },
+            { "<leader>e",     "<CMD>Neotree toggle float<CR>", desc = "Open NeoTree on Floating Window",   remap = true },
 
             {
                 "<leader>be",
@@ -218,6 +108,10 @@ return {
                     return vim.fn.executable("make") == 1
                 end,
             },
+            "nvim-telescope/telescope-ui-select.nvim",
+            {
+                "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font
+            }
         },
         config = function()
             -- NOTE: Search in hidden files trick taken from: https://stackoverflow.com/a/75500661/11057673
@@ -253,10 +147,16 @@ return {
                         find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
                     },
                 },
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown(),
+                    },
+                },
             })
 
             -- Load some required Telescope extensions
             pcall(require("telescope").load_extension, "fzf")
+            pcall(require("telescope").load_extension, "ui-select")
 
             -- Special Things: Telescope
             vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme,
@@ -269,41 +169,55 @@ return {
                     prompt_title = "Live Grep in Open Files",
                 })
             end, { desc = "Search Open Buffers" })
-            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
-            vim.keymap.set("n", "<CS-F>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
-            vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
+            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep,
+                { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<C-a-f>", require("telescope.builtin").live_grep,
+                { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string,
+                { desc = "Search current Word in Project" })
 
             -- List
-            vim.keymap.set("n", "<leader>lb", require("telescope.builtin").buffers, { desc = "List Bbuffers" })
-            vim.keymap.set("n", "<leader>lc", require("telescope.builtin").command_history, { desc = "List NeoVIM Command History" })
+            vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "List Buffers" })
+            vim.keymap.set("n", "<leader>fc", require("telescope.builtin").command_history,
+                { desc = "List NeoVIM Command History" })
             vim.keymap.set("n", "<C-a-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>lf", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>ln", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
-            vim.keymap.set("n", "<leader>lk", require("telescope.builtin").keymaps, { desc = "List & Search NeoVIM Keymaps" })
-            vim.keymap.set("n", "<leader>lm", require("telescope.builtin").man_pages, { desc = "List & Search System Man Pages" })
-            vim.keymap.set("n", "<leader>lq", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })
-            vim.keymap.set("n", "<leader>ls", require("telescope.builtin").search_history, { desc = "List Search History" })
-            vim.keymap.set("n", "<leader>lv", require("telescope.builtin").vim_options, { desc = "List Vim Options" })
+            vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "List & Search Files" })
+            vim.keymap.set("n", "<leader>fn", require("telescope.builtin").help_tags,
+                { desc = "List & Search NeoVIM Help" })
+            vim.keymap.set("n", "<leader>fq", require("telescope.builtin").quickfixhistory,
+                { desc = "List Quickfix History" })
+            vim.keymap.set("n", "<leader>fs", require("telescope.builtin").search_history,
+                { desc = "List Search History" })
 
             -- Git
-            vim.keymap.set("n", "<leader>glb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })
-            vim.keymap.set("n", "<leader>glc", require("telescope.builtin").git_commits, { desc = "List Git Commits" })
+            vim.keymap.set("n", "<leader>gfb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })
+            vim.keymap.set("n", "<leader>gfc", require("telescope.builtin").git_commits, { desc = "List Git Commits" })
 
             -- LSP Things -> Coding
-            vim.keymap.set("n", "<leader>cld", require("telescope.builtin").diagnostics, { desc = "Code: List Diagnostics" })
+            vim.keymap.set("n", "<leader>cld", require("telescope.builtin").diagnostics,
+                { desc = "Code: List Diagnostics" })
 
-            vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations, { desc = "Code: Goto Implementation" })
+            vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations,
+                { desc = "Code: Goto Implementation" })
 
             vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Code: Goto Definition" })
-            vim.keymap.set("n", "<leader>ct", require("telescope.builtin").lsp_type_definitions, { desc = "Code: Goto Type Definition" })
+            vim.keymap.set("n", "<leader>ct", require("telescope.builtin").lsp_type_definitions,
+                { desc = "Code: Goto Type Definition" })
             -- vim.keymap.set("n", "<leader>cgD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
 
-            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: Goto References" })
+            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references,
+                { desc = "Code: Goto References" })
             -- vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: List References for word under cursor" })
 
-            -- vim.keymap.set("n", "<leader>cs", require("telescope.builtin").lsp_document_symbols, { desc = "Document Symbols" })
+            vim.keymap.set("n", "<leader>O", require("telescope.builtin").lsp_workspace_symbols,
+                { desc = "Code: Search Workspace Symbols" })
 
+            vim.keymap.set("n", "<leader>nk", require("telescope.builtin").keymaps,
+                { desc = "List & Search NeoVIM Keymaps" })
+            vim.keymap.set("n", "<leader>nm", require("telescope.builtin").man_pages,
+                { desc = "List & Search System Man Pages" })
             vim.keymap.set("n", "<leader>nn", "<cmd>Telescope notify<cr>", { desc = "List past notifications" })
+            vim.keymap.set("n", "<leader>nv", require("telescope.builtin").vim_options, { desc = "List Vim Options" })
         end,
     },
 }

@@ -3,8 +3,6 @@
 # TODO: Things that did not work
 #   - dotfiles: could NOT link it to aliases_personal
 
-# NOTE: should download dotfiles repo to ~ and NOT to ~/Downloads - since we are going to link Downloads
-
 kitty_term() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
@@ -52,7 +50,6 @@ main() {
 
     ./install-os-packages.sh
     ./install-brew-packages.sh
-    # ./install-flatpak-packages.sh
 
     manual_installs
     post_install

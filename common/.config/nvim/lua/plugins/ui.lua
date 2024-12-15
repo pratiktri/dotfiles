@@ -39,11 +39,11 @@ return {
         },
         event = "VeryLazy",
         keys = {
-            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
-            { "<leader>bj", "<Cmd>BufferLinePick<CR>", desc = "Choose and jump to a buffer" },
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",   desc = "Toggle buffer-pin" },
+            { "<leader>bj", "<Cmd>BufferLinePick<CR>",        desc = "Choose and jump to a buffer" },
             { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
-            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+            { "[b",         "<cmd>BufferLineCyclePrev<cr>",   desc = "Prev buffer" },
+            { "]b",         "<cmd>BufferLineCycleNext<cr>",   desc = "Next buffer" },
         },
         opts = {
             options = {

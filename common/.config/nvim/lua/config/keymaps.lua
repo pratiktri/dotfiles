@@ -13,8 +13,6 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipbo
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 vim.keymap.set({ "n" }, "<C-c>", "<cmd> %y+ <CR>", { desc = "Copy entire content of the current buffer" })
 
-vim.keymap.set("n", "<leader>fn", "<cmd>enew<CR>", { desc = "Create new file/buffer" })
-
 -- Remap for dealing with word wrap
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -68,7 +66,6 @@ vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- Clear searches
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-vim.keymap.set("n", "<leader>/", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })

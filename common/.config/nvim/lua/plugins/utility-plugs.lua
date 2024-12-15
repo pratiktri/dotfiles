@@ -19,10 +19,10 @@ return {
         "monaqa/dial.nvim",
         -- stylua: ignore
         keys = {
-            { "<C-a>", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-            { "<C-x>", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
-            { "g<C-a>", function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-            { "g<C-x>", function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
+            { "<C-a>",  function() return M.dial(true) end,        expr = true, desc = "Increment", mode = { "n", "v" } },
+            { "<C-x>",  function() return M.dial(false) end,       expr = true, desc = "Decrement", mode = { "n", "v" } },
+            { "g<C-a>", function() return M.dial(true, true) end,  expr = true, desc = "Increment", mode = { "n", "v" } },
+            { "g<C-x>", function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = { "n", "v" } },
         },
         opts = function()
             local augend = require("dial.augend")
@@ -114,13 +114,13 @@ return {
                 },
                 groups = {
                     default = {
-                        augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
-                        augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+                        augend.integer.alias.decimal,  -- nonnegative decimal number (0, 1, 2, 3, ...)
+                        augend.integer.alias.hex,      -- nonnegative hex number  (0x01, 0x1a1f, etc.)
                         augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
                     },
                     typescript = {
                         augend.integer.alias.decimal, -- nonnegative and negative decimal number
-                        augend.constant.alias.bool, -- boolean value (true <-> false)
+                        augend.constant.alias.bool,   -- boolean value (true <-> false)
                         logical_alias,
                         augend.constant.new({ elements = { "let", "const" } }),
                         ordinal_numbers,
@@ -144,14 +144,14 @@ return {
                     },
                     json = {
                         augend.integer.alias.decimal, -- nonnegative and negative decimal number
-                        augend.semver.alias.semver, -- versioning (v1.1.2)
+                        augend.semver.alias.semver,   -- versioning (v1.1.2)
                     },
                     lua = {
                         augend.integer.alias.decimal, -- nonnegative and negative decimal number
-                        augend.constant.alias.bool, -- boolean value (true <-> false)
+                        augend.constant.alias.bool,   -- boolean value (true <-> false)
                         augend.constant.new({
                             elements = { "and", "or" },
-                            word = true, -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
+                            word = true,   -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
                             cyclic = true, -- "or" is incremented into "and".
                         }),
                         ordinal_numbers,
@@ -234,24 +234,62 @@ return {
         dependencies = {
             "echasnovski/mini.icons",
         },
-        config = function()
-            -- document existing key chains
-            require("which-key").add({
+        opts = {
+            defaults = {
+                ["<leader>r"] = { name = "+refactor" },
+            },
+            icons = {
+                -- set icon mappings to true if you have a Nerd Font
+                mappings = vim.g.have_nerd_font,
+                -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+                -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
+                keys = vim.g.have_nerd_font and {} or {
+                    Up = '<Up> ',
+                    Down = '<Down> ',
+                    Lefj = '<Left> ',
+                    Right = '<Right> ',
+                    C = '<C-…> ',
+                    M = '<M-…> ',
+                    D = '<D-…> ',
+                    S = '<S-…> ',
+                    CR = '<CR> ',
+                    Esc = '<Esc> ',
+                    ScrollWheelDown = '<ScrollWheelDown> ',
+                    ScrollWheelUp = '<ScrollWheelUp> ',
+                    NL = '<NL> ',
+                    BS = '<BS> ',
+                    Space = '<Space> ',
+                    Tab = '<Tab> ',
+                    F1 = '<F1>',
+                    F2 = '<F2>',
+                    F3 = '<F3>',
+                    F4 = '<F4>',
+                    F5 = '<F5>',
+                    F6 = '<F6>',
+                    F7 = '<F7>',
+                    F8 = '<F8>',
+                    F9 = '<F9>',
+                    F10 = '<F10>',
+                    F11 = '<F11>',
+                    F12 = '<F12>',
+                },
+            },
+
+            -- Document existing key chains
+            spec = {
                 { "<leader>c", group = "Code" },
                 { "<leader>b", group = "Buffer Operations" },
                 { "<leader>d", group = "Diagnostics" },
                 { "<leader>f", group = "File Operations" },
                 { "<leader>g", group = "Git" },
-                { "<leader>h", group = "Harpoon" },
-                { "<leader>l", group = "List Things" },
+                { "<leader>f", group = "Find and List Things" },
                 { "<leader>n", group = "NVIM Things" },
                 { "<leader>q", group = "Database Query" },
-                { "<leader>r", group = "Refactor Code" },
                 { "<leader>s", group = "Search/Grep Things" },
                 { "<leader>t", group = "Unit Test Operations" },
                 { "<leader>x", group = "Delete/Remove Something" },
-            })
-        end,
+            },
+        },
     },
 
     -- Session management. Saves your session in the background

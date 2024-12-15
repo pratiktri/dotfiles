@@ -17,3 +17,8 @@ vim.opt.inccommand = "split" -- With :%s command, show the preview in a split in
 vim.opt.splitkeep = "screen"
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+vim.g.have_nerd_font = true
+
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.inccommand = 'split'

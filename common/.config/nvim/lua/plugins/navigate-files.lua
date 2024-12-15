@@ -156,10 +156,10 @@ return {
             },
             window = {
                 position = "left",
-                width = 30, -- Saner window size
+                width = 30,                 -- Saner window size
                 mappings = {
-                    ["s"] = "open_split", -- horizontal split
-                    ["v"] = "open_vsplit", -- vertical split
+                    ["s"] = "open_split",   -- horizontal split
+                    ["v"] = "open_vsplit",  -- vertical split
                     ["Y"] = function(state) -- Copy file's path to + register
                         local node = state.tree:get_node()
                         local path = node:get_id()
@@ -169,7 +169,7 @@ return {
             },
             default_component_configs = {
                 indent = {
-                    indent_size = 2, -- Compact tree display
+                    indent_size = 2,       -- Compact tree display
                     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
                     expander_collapsed = "",
                     expander_expanded = "",
@@ -189,7 +189,7 @@ return {
             local events = require("neo-tree.events")
             opts.event_handlers = opts.event_handlers or {}
             vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED, handler = on_move },
+                { event = events.FILE_MOVED,   handler = on_move },
                 { event = events.FILE_RENAMED, handler = on_move },
             })
             require("neo-tree").setup(opts)
@@ -259,7 +259,8 @@ return {
             pcall(require("telescope").load_extension, "fzf")
 
             -- Special Things: Telescope
-            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme, { desc = "List Neovim Colorschemes (with preview)" })
+            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme,
+                { desc = "List Neovim Colorschemes (with preview)" })
 
             -- Grep things -> Search
             vim.keymap.set("n", "<leader>sb", function()

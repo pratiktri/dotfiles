@@ -10,8 +10,8 @@ return {
         },
         config = true,
         keys = {
-            { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git: Open Neogit", mode = { "n" } },
-            { "<leader>gL", "<cmd>Neogit log<cr>", desc = "Git: Open Neogit Log", mode = { "n" } },
+            { "<leader>gg", "<cmd>Neogit<cr>",     desc = "Git: Open Neogit", mode = { "n" } },
+            { "<leader>gL", "<cmd>Neogit log<cr>", desc = "Git: Open Log",    mode = { "n" } },
         },
     },
 
@@ -20,9 +20,9 @@ return {
         "sindrets/diffview.nvim",
         keys = {
 
-            { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview", mode = { "n" } },
-            { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview against master", mode = { "n" } },
-            { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Git: Show file history", mode = { "n" } },
+            { "<leader>gd", "<cmd>DiffviewOpen<cr>",        desc = "Git: Open Diffview",                mode = { "n" } },
+            { "<leader>gD", "<cmd>DiffviewOpen<cr>",        desc = "Git: Open Diffview against master", mode = { "n" } },
+            { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Git: Show file history",            mode = { "n" } },
         },
         -- TODO:
         -- Toggle Diffview keymap
@@ -116,7 +116,8 @@ return {
             -- FIX: Open files do NOT get replaced with the changed branch
             require("telescope").load_extension("git_worktree")
 
-            vim.keymap.set("n", "<leader>gw", "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+            vim.keymap.set("n", "<leader>gw",
+                "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
         end,
     },
 }

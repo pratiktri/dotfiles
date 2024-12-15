@@ -1,29 +1,6 @@
 return {
     { "tpope/vim-repeat" },
 
-    -- Better surround than tpope/vim-surround
-    {
-        "kylechui/nvim-surround",
-        version = "*",
-        event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end,
-    },
-
-    -- "gc" to comment visual regions/lines
-    {
-        "numToStr/Comment.nvim",
-        cond = require("config.util").is_not_vscode(),
-        config = function()
-            require("Comment").setup({
-                pre_hook = function()
-                    return vim.bo.commentstring
-                end,
-            })
-        end,
-    },
-
     -- Better code folding
     {
         "kevinhwang91/nvim-ufo",
@@ -39,8 +16,8 @@ return {
                     require("statuscol").setup({
                         relculright = true,
                         segments = {
-                            { text = { "%s" }, click = "v:lua.ScSa" },
-                            { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+                            { text = { "%s" },                  click = "v:lua.ScSa" },
+                            { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
                             { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
                         },
                     })
@@ -107,13 +84,6 @@ return {
         end,
     },
 
-    -- auto pairs
-    {
-        "echasnovski/mini.pairs",
-        event = "VeryLazy",
-        opts = {},
-    },
-
     -- indent guides for Neovim
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -138,6 +108,34 @@ return {
             },
         },
         main = "ibl",
+    },
+
+    -- Collection of various small independent plugins/modules
+    {
+        "chasnovski/mini.nvim",
+        config = function()
+            -- Better Around/Inside textobjects
+            --
+            -- Examples:
+            --  - va)  - [V]isually select [A]round [)]paren
+            --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+            --  - ci'  - [C]hange [I]nside [']quote
+            require('mini.ai').setup { n_lines = 500 }
+
+            -- Add/delete/replace surroundings (brackets, quotes, etc.)
+            --
+            -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+            -- - sd'   - [S]urround [D]elete [']quotes
+            -- - sr)'  - [S]urround [R]eplace [)] [']
+            require('mini.surround').setup()
+
+            require("mini.pairs").setup()
+            require("mini.comment").setup()
+            require("mini.completion").setup()
+
+            -- ... and there is more!
+            --  Check out: https://github.com/echasnovski/mini.nvim
+        end,
     },
 
     -- Highlights the current level of indentation, and animates the highlighting.
@@ -167,10 +165,11 @@ return {
     -- Finds and lists all of the TODO, HACK, BUG, etc comment
     {
         "folke/todo-comments.nvim",
-        lazy = false,
+        event = "VimEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true,
         opts = {
+            signs = false,
             keywords = {
                 HACK = { alt = { "TIP" } },
             },
@@ -245,13 +244,11 @@ return {
             },
         },
         keys = {
-            { "<leader>o", "<cmd>Trouble symbols toggle preview.type=main focus=true<cr>", desc = "Code: Toggle Symbol Outline" },
-
             { "<leader>dd", "<cmd>Trouble project_errors toggle focus=true<cr>", desc = "Trouble: Document Diagnostics" },
-            { "<leader>dw", "<cmd>Trouble most_severe toggle focus=true<cr>", desc = "Trouble: List Project Diagnostics" },
-            { "<leader>dl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Trouble: Location List" },
-            { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Trouble: Quickfix List" },
-            { "gr", "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Code: List References" },
+            { "<leader>dw", "<cmd>Trouble most_severe toggle focus=true<cr>",    desc = "Trouble: List Project Diagnostics" },
+            { "<leader>dl", "<cmd>Trouble loclist toggle focus=true<cr>",        desc = "Trouble: Location List" },
+            { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>",       desc = "Trouble: Quickfix List" },
+            { "gr",         "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Code: List References" },
             {
                 "[q",
                 function()
@@ -333,8 +330,10 @@ return {
             })
 
             vim.keymap.set("n", "<leader>cR", "<cmd>Lspsaga finder<cr>", { desc = "Code: Goto References" })
-            vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga peek_definition<cr>", { desc = "Code: Peek definition: Function" })
-            vim.keymap.set("n", "<leader>cD", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "Code: Peek definition: Class" })
+            vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga peek_definition<cr>",
+                { desc = "Code: Peek definition: Function" })
+            vim.keymap.set("n", "<leader>cD", "<cmd>Lspsaga peek_type_definition<cr>",
+                { desc = "Code: Peek definition: Class" })
 
             vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover Documentation" })
         end,

@@ -6,8 +6,8 @@ return {
         cond = require("config.util").is_not_vscode(),
         branch = "v3.x",
         keys = {
-            { "<leader><tab>", "<CMD>Neotree toggle left<CR>",  desc = "Open NeoTree Explorer at Git root", remap = true },
-            { "<leader>e",     "<CMD>Neotree toggle float<CR>", desc = "Open NeoTree on Floating Window",   remap = true },
+            { "<leader><tab>", "<CMD>Neotree toggle left<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
+            { "<leader>e", "<CMD>Neotree toggle float<CR>", desc = "Open NeoTree on Floating Window", remap = true },
 
             {
                 "<leader>be",
@@ -46,10 +46,10 @@ return {
             },
             window = {
                 position = "left",
-                width = 30,                 -- Saner window size
+                width = 30, -- Saner window size
                 mappings = {
-                    ["s"] = "open_split",   -- horizontal split
-                    ["v"] = "open_vsplit",  -- vertical split
+                    ["s"] = "open_split", -- horizontal split
+                    ["v"] = "open_vsplit", -- vertical split
                     ["Y"] = function(state) -- Copy file's path to + register
                         local node = state.tree:get_node()
                         local path = node:get_id()
@@ -59,7 +59,7 @@ return {
             },
             default_component_configs = {
                 indent = {
-                    indent_size = 2,       -- Compact tree display
+                    indent_size = 2, -- Compact tree display
                     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
                     expander_collapsed = "",
                     expander_expanded = "",
@@ -79,7 +79,7 @@ return {
             local events = require("neo-tree.events")
             opts.event_handlers = opts.event_handlers or {}
             vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED,   handler = on_move },
+                { event = events.FILE_MOVED, handler = on_move },
                 { event = events.FILE_RENAMED, handler = on_move },
             })
             require("neo-tree").setup(opts)
@@ -110,8 +110,9 @@ return {
             },
             "nvim-telescope/telescope-ui-select.nvim",
             {
-                "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font
-            }
+                "nvim-tree/nvim-web-devicons",
+                enabled = vim.g.have_nerd_font,
+            },
         },
         config = function()
             -- NOTE: Search in hidden files trick taken from: https://stackoverflow.com/a/75500661/11057673
@@ -158,9 +159,7 @@ return {
             pcall(require("telescope").load_extension, "fzf")
             pcall(require("telescope").load_extension, "ui-select")
 
-            -- Special Things: Telescope
-            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").colorscheme,
-                { desc = "List Neovim Colorschemes (with preview)" })
+            -- Keymaps for LSP Things -> In code-lsp.lua
 
             -- Grep things -> Search
             vim.keymap.set("n", "<leader>sb", function()
@@ -169,55 +168,31 @@ return {
                     prompt_title = "Live Grep in Open Files",
                 })
             end, { desc = "Search Open Buffers" })
-            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep,
-                { desc = "Search/LiveGrep the Project" })
-            vim.keymap.set("n", "<C-a-f>", require("telescope.builtin").live_grep,
-                { desc = "Search/LiveGrep the Project" })
-            vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string,
-                { desc = "Search current Word in Project" })
+            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<C-a-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
 
             -- List
             vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "List Buffers" })
-            vim.keymap.set("n", "<leader>fc", require("telescope.builtin").command_history,
-                { desc = "List NeoVIM Command History" })
             vim.keymap.set("n", "<C-a-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
             vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>fn", require("telescope.builtin").help_tags,
-                { desc = "List & Search NeoVIM Help" })
-            vim.keymap.set("n", "<leader>fq", require("telescope.builtin").quickfixhistory,
-                { desc = "List Quickfix History" })
-            vim.keymap.set("n", "<leader>fs", require("telescope.builtin").search_history,
-                { desc = "List Search History" })
+            vim.keymap.set("n", "<leader>fq", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })
 
             -- Git
             vim.keymap.set("n", "<leader>gfb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })
             vim.keymap.set("n", "<leader>gfc", require("telescope.builtin").git_commits, { desc = "List Git Commits" })
 
-            -- LSP Things -> Coding
-            vim.keymap.set("n", "<leader>cld", require("telescope.builtin").diagnostics,
-                { desc = "Code: List Diagnostics" })
-
-            vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations,
-                { desc = "Code: Goto Implementation" })
-
-            vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Code: Goto Definition" })
-            vim.keymap.set("n", "<leader>ct", require("telescope.builtin").lsp_type_definitions,
-                { desc = "Code: Goto Type Definition" })
-            -- vim.keymap.set("n", "<leader>cgD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
-
-            vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references,
-                { desc = "Code: Goto References" })
-            -- vim.keymap.set("n", "<leader>cR", require("telescope.builtin").lsp_references, { desc = "Code: List References for word under cursor" })
-
-            vim.keymap.set("n", "<leader>O", require("telescope.builtin").lsp_workspace_symbols,
-                { desc = "Code: Search Workspace Symbols" })
-
-            vim.keymap.set("n", "<leader>nk", require("telescope.builtin").keymaps,
-                { desc = "List & Search NeoVIM Keymaps" })
-            vim.keymap.set("n", "<leader>nm", require("telescope.builtin").man_pages,
-                { desc = "List & Search System Man Pages" })
+            -- Neovim Things
+            vim.keymap.set("n", "<leader>ns", require("telescope.builtin").search_history, { desc = "List Search History" })
+            vim.keymap.set("n", "<leader>nn", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
+            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").command_history, { desc = "List NeoVIM Command History" })
+            vim.keymap.set("n", "<leader>nC", require("telescope.builtin").colorscheme, { desc = "List Neovim Colorschemes (with preview)" })
             vim.keymap.set("n", "<leader>nn", "<cmd>Telescope notify<cr>", { desc = "List past notifications" })
-            vim.keymap.set("n", "<leader>nv", require("telescope.builtin").vim_options, { desc = "List Vim Options" })
+
+            -- Help
+            vim.keymap.set("n", "<leader>hk", require("telescope.builtin").keymaps, { desc = "Help: NeoVIM Keymaps" })
+            vim.keymap.set("n", "<leader>hm", require("telescope.builtin").man_pages, { desc = "Help: System Man Pages" })
+            vim.keymap.set("n", "<leader>hv", require("telescope.builtin").vim_options, { desc = "Help: Vim Options" })
         end,
     },
 }

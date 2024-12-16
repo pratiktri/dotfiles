@@ -39,11 +39,11 @@ return {
         },
         event = "VeryLazy",
         keys = {
-            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",   desc = "Toggle buffer-pin" },
-            { "<leader>bj", "<Cmd>BufferLinePick<CR>",        desc = "Choose and jump to a buffer" },
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
+            { "<leader>bX", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
             { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
-            { "[b",         "<cmd>BufferLineCyclePrev<cr>",   desc = "Prev buffer" },
-            { "]b",         "<cmd>BufferLineCycleNext<cr>",   desc = "Next buffer" },
+            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
         },
         opts = {
             options = {
@@ -68,6 +68,11 @@ return {
         config = function(_, opts)
             local buf_line = require("bufferline")
             buf_line.setup(opts)
+
+            -- <alt+1> ... <alt+9> to switch to a buffer
+            for i = 1, 9 do
+                vim.keymap.set("n", string.format("<A-%s>", i), string.format("<cmd>BufferLineGoToBuffer %s<CR>", i), { noremap = true, silent = true })
+            end
 
             -- Fix bufferline when restoring a session
             vim.api.nvim_create_autocmd("BufAdd", {
@@ -288,7 +293,7 @@ return {
                     },
 
                     lualine_y = {
-                        { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
+                        { "progress", separator = " ", padding = { left = 1, right = 0 } },
                         { "location", padding = { left = 0, right = 1 } },
                     },
                     lualine_z = {

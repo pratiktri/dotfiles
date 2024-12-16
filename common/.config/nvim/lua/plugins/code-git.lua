@@ -107,17 +107,4 @@ return {
             end,
         },
     },
-
-    -- Git worktree
-    {
-        "ThePrimeagen/git-worktree.nvim",
-        cond = require("config.util").is_not_vscode(),
-        config = function()
-            -- FIX: Open files do NOT get replaced with the changed branch
-            require("telescope").load_extension("git_worktree")
-
-            vim.keymap.set("n", "<leader>gw",
-                "<cmd> lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
-        end,
-    },
 }

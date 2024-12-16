@@ -1,4 +1,7 @@
 return {
+
+    -- TODO:
+    -- Reduce noice timeout
     { "tpope/vim-repeat" },
 
     -- Better code folding
@@ -16,8 +19,8 @@ return {
                     require("statuscol").setup({
                         relculright = true,
                         segments = {
-                            { text = { "%s" },                  click = "v:lua.ScSa" },
-                            { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
+                            { text = { "%s" }, click = "v:lua.ScSa" },
+                            { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
                             { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
                         },
                     })
@@ -110,34 +113,6 @@ return {
         main = "ibl",
     },
 
-    -- Collection of various small independent plugins/modules
-    {
-        "chasnovski/mini.nvim",
-        config = function()
-            -- Better Around/Inside textobjects
-            --
-            -- Examples:
-            --  - va)  - [V]isually select [A]round [)]paren
-            --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-            --  - ci'  - [C]hange [I]nside [']quote
-            require('mini.ai').setup { n_lines = 500 }
-
-            -- Add/delete/replace surroundings (brackets, quotes, etc.)
-            --
-            -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-            -- - sd'   - [S]urround [D]elete [']quotes
-            -- - sr)'  - [S]urround [R]eplace [)] [']
-            require('mini.surround').setup()
-
-            require("mini.pairs").setup()
-            require("mini.comment").setup()
-            require("mini.completion").setup()
-
-            -- ... and there is more!
-            --  Check out: https://github.com/echasnovski/mini.nvim
-        end,
-    },
-
     -- Highlights the current level of indentation, and animates the highlighting.
     {
         "echasnovski/mini.indentscope",
@@ -160,6 +135,72 @@ return {
                 end,
             })
         end,
+    },
+
+    -- mini.nvim: Collection of various small independent plugins/modules
+    {
+        "echasnovski/mini.nvim",
+        version = false,
+        config = function()
+            -- Better Around/Inside textobjects
+            --
+            --  - va)  - [V]isually select [A]round [)]paren
+            --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+            --  - ci'  - [C]hange [I]nside [']quote
+            require("mini.ai").setup({ n_lines = 500 })
+
+            -- Add/delete/replace surroundings (brackets, quotes, etc.)
+            --
+            -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+            -- - sd'   - [S]urround [D]elete [']quotes
+            -- - sr)'  - [S]urround [R]eplace [)] [']
+            require("mini.surround").setup()
+
+            -- gc
+            require("mini.comment").setup()
+
+            require("mini.pairs").setup()
+            require("mini.completion").setup()
+        end,
+    },
+
+    -- Automatically highlights other instances of the word under cursor
+    {
+        "RRethy/vim-illuminate",
+        lazy = false,
+        opts = {
+            delay = 200,
+            large_file_cutoff = 2000,
+            large_file_override = {
+                providers = { "lsp" },
+            },
+        },
+        config = function(_, opts)
+            -- Copied from LazyNvim
+            require("illuminate").configure(opts)
+
+            local function map(key, dir, buffer)
+                vim.keymap.set("n", key, function()
+                    require("illuminate")["goto_" .. dir .. "_reference"](false)
+                end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
+            end
+
+            map("]]", "next")
+            map("[[", "prev")
+
+            -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    local buffer = vim.api.nvim_get_current_buf()
+                    map("]]", "next", buffer)
+                    map("[[", "prev", buffer)
+                end,
+            })
+        end,
+        keys = {
+            { "]]", desc = "Next Reference" },
+            { "[[", desc = "Prev Reference" },
+        },
     },
 
     -- Finds and lists all of the TODO, HACK, BUG, etc comment
@@ -191,7 +232,7 @@ return {
             },
 
             -- TODO: Include hidden files
-            { "<leader>fT", "<cmd>TodoTelescope<cr>",                         desc = "List Todo/Fix/Fixme" },
+            { "<leader>fT", "<cmd>TodoTelescope<cr>", desc = "List Todo/Fix/Fixme" },
             { "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "List Todo" },
         },
     },
@@ -243,10 +284,10 @@ return {
         },
         keys = {
             { "<leader>dd", "<cmd>Trouble project_errors toggle focus=true<cr>", desc = "Trouble: Document Diagnostics" },
-            { "<leader>dw", "<cmd>Trouble most_severe toggle focus=true<cr>",    desc = "Trouble: List Project Diagnostics" },
-            { "<leader>dl", "<cmd>Trouble loclist toggle focus=true<cr>",        desc = "Trouble: Location List" },
-            { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>",       desc = "Trouble: Quickfix List" },
-            { "gr",         "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Code: List References" },
+            { "<leader>dw", "<cmd>Trouble most_severe toggle focus=true<cr>", desc = "Trouble: List Project Diagnostics" },
+            { "<leader>dl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Trouble: Location List" },
+            { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Trouble: Quickfix List" },
+            { "gr", "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Code: List References" },
             {
                 "[q",
                 function()
@@ -278,7 +319,6 @@ return {
         },
     },
 
-
     -- LspSaga
     {
         "nvimdev/lspsaga.nvim",
@@ -297,20 +337,12 @@ return {
                     hide_keyword = true,
                 },
                 lightbulb = {
-                    enable = false,
-                    sign = false,
                     virtual_text = false,
                 },
                 outline = { auto_preview = false },
             })
 
-            vim.keymap.set("n", "<leader>cR", "<cmd>Lspsaga finder<cr>", { desc = "Code: Goto References" })
-            vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga peek_definition<cr>",
-                { desc = "Code: Peek definition: Function" })
-            vim.keymap.set("n", "<leader>cD", "<cmd>Lspsaga peek_type_definition<cr>",
-                { desc = "Code: Peek definition: Class" })
-
-            vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover Documentation" })
+            -- Keymaps in code-lsp.lua
         end,
     },
 
@@ -381,12 +413,139 @@ return {
             --
             -- ["g?"] = actions.help(), -- Open mappings help window
             {
-                "<leader>o",
+                "<leader>O",
                 function()
                     return require("nvim-navbuddy").open()
                 end,
                 desc = "Navigate through document symbols",
             },
         },
+    },
+
+    -- Treesitter
+    {
+        -- nvim-treesitter provides parsers for individual languages
+        -- Output of these parses are fed to the NVIM's native treesitter(vim.treesitter)
+        -- What is fed to the native treesitter is essentially the AST
+        -- This AST is then used for syntax-highlighting and many other operations on the code
+        -- Hence, this plugin is only to make installing parsers easier
+
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        build = ":TSUpdate",
+        init = function(plugin)
+            -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
+            -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
+            -- no longer trigger the **nvim-treeitter** module to be loaded in time.
+            -- Luckily, the only thing that those plugins need are the custom queries, which we make available
+            -- during startup.
+            require("lazy.core.loader").add_to_rtp(plugin)
+            require("nvim-treesitter.query_predicates")
+        end,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            config = function()
+                -- When in diff mode, we want to use the default
+                -- vim text objects c & C instead of the treesitter ones.
+                local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
+                local configs = require("nvim-treesitter.configs")
+                for name, fn in pairs(move) do
+                    if name:find("goto") == 1 then
+                        move[name] = function(q, ...)
+                            if vim.wo.diff then
+                                local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
+                                for key, query in pairs(config or {}) do
+                                    if q == query and key:find("[%]%[][cC]") then
+                                        vim.cmd("normal! " .. key)
+                                        return
+                                    end
+                                end
+                            end
+                            return fn(q, ...)
+                        end
+                    end
+                end
+            end,
+        },
+
+        config = function()
+            -- See `:help nvim-treesitter`
+            -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
+            vim.defer_fn(function()
+                require("nvim-treesitter.configs").setup({
+                    ensure_installed = {
+                        -- These 2 are required for cmdline
+                        "regex",
+                        "markdown",
+                        "markdown_inline",
+                    },
+
+                    auto_install = true,
+                    highlight = { enable = true },
+                    indent = { enable = true },
+
+                    incremental_selection = {
+                        enable = true,
+                        keymaps = {
+                            init_selection = "<C-space>",
+                            node_incremental = "<C-space>",
+                            scope_incremental = "<C-CR>",
+                            node_decremental = "<bs>",
+                        },
+                    },
+
+                    textobjects = {
+                        select = {
+                            enable = true,
+                            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+                            keymaps = {
+                                -- You can use the capture groups defined in textobjects.scm (:TSEditQuery textobjects)
+                                ["aa"] = { query = "@parameter.outer", desc = "Select around the parameter" },
+                                ["ia"] = { query = "@parameter.inner", desc = "Select inside the parameter" },
+                                ["af"] = { query = "@function.outer", desc = "Select around the function" },
+                                ["if"] = { query = "@function.inner", desc = "Select inside of the function" },
+                                ["ac"] = { query = "@class.outer", desc = "Select around the class" },
+                                ["ic"] = { query = "@class.inner", desc = "Select inside of the class" },
+
+                                ["al"] = { query = "@loop.outer", desc = "Select around the loop" },
+                                ["il"] = { query = "@loop.inner", desc = "Select inside of the loop" },
+                                ["as"] = { query = "@scope", query_group = "locals", desc = "Select around the scope" },
+                            },
+                        },
+
+                        move = {
+                            -- Jump to next and previous text objects
+                            enable = true,
+                            goto_next_start = {
+                                ["]f"] = { query = "@function.outer", desc = "Goto next inner function start" },
+                                ["]c"] = { query = "@class.outer", desc = "Goto next inner class start" },
+                            },
+                            goto_next_end = {
+                                ["]F"] = { query = "@function.outer", desc = "Goto next outer function end" },
+                                ["]C"] = { query = "@class.outer", desc = "Goto next outer class end" },
+                            },
+                            goto_previous_start = {
+                                ["[f"] = { query = "@function.outer", desc = "Goto goto previous inner function start" },
+                                ["[c"] = { query = "@class.outer", desc = "Previous inner class start" },
+                            },
+                            goto_previous_end = {
+                                ["[F"] = { query = "@function.outer", desc = "Goto goto previous outer function start" },
+                                ["[C"] = { query = "@class.outer", desc = "Goto previous outer class start" },
+                            },
+                        },
+
+                        lsp_interop = {
+                            enable = true,
+                            border = "none",
+                            floating_preview_opts = {},
+                            -- peek_definition_code = {
+                            --     ["<leader>cd"] = { query = "@function.outer", desc = "Peek function definition on a popup" },
+                            --     ["<leader>cD"] = { query = "@class.outer", desc = "Peek class definition on a popup" },
+                            -- },
+                        },
+                    },
+                })
+            end, 0)
+        end,
     },
 }

@@ -52,6 +52,12 @@ vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Sav
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-q>", "<cmd>wqa<cr><esc>", { desc = "Save all files and Quit Neovim" })
 
 -- Close Current Buffer
+vim.keymap.set({ "n", "v" }, "<leader>bx", function()
+    if vim.bo.modified then
+        vim.cmd.write()
+    end
+    vim.cmd("bdelete")
+end, { desc = "Save and close current buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>xb", function()
     if vim.bo.modified then
         vim.cmd.write()

@@ -34,10 +34,10 @@ return {
             })
         end,
         keys = {
-            { "<leader>qq", desc = "Query UI" },
-            { "<leader>qq", "<cmd>DBUIToggle<cr>", desc = "Query UI Toggle" },
-            { "<leader>qa", "<cmd>DBUIAddConnection<cr>", desc = "Query: Add Connection" },
-            { "<leader>qf", "<cmd>DBUIFindBuffer<cr>", desc = "Query: Find Connection" },
+            { "<leader>qq", desc = "DB: UI" },
+            { "<leader>qq", "<cmd>DBUIToggle<cr>",        desc = "DB: UI Toggle" },
+            { "<leader>qa", "<cmd>DBUIAddConnection<cr>", desc = "DB: Add Connection" },
+            { "<leader>qf", "<cmd>DBUIFindBuffer<cr>",    desc = "DB: Find Connection" },
         },
     },
 }

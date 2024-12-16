@@ -33,7 +33,8 @@ post_install() {
 }
 
 pre_install() {
-    export INSTALL_LOG_FILE="$(basename "$0")_$(date +"%Y%m%d_%H%M%S")_log.txt"
+    export INSTALL_LOG_FILE
+    INSTALL_LOG_FILE="$(basename "$0")_$(date +"%Y%m%d_%H%M%S")_log.txt"
     echo
     echo "Starting Installation..."
     echo "Use the following command to view the list of software that was NOT installed:"

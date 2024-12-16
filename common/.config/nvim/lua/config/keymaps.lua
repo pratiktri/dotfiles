@@ -41,12 +41,6 @@ vim.keymap.set("i", ".", ".<C-g>u", { desc = "Auto add undo breakpoints on '.'" 
 vim.keymap.set("i", ";", ";<C-g>u", { desc = "Auto add undo breakpoints on ';'" })
 vim.keymap.set("i", "\r", "\r<C-g>u", { desc = "Auto add undo breakpoints on new lines" })
 
--- Traverse Buffer
-if require("config.util").is_not_vscode() then
-    vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Switch to next buffer" })
-    vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Switch to previous buffer" })
-end
-
 -- Save file
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-q>", "<cmd>wqa<cr><esc>", { desc = "Save all files and Quit Neovim" })

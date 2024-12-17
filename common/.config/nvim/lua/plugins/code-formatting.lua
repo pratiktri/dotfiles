@@ -1,7 +1,7 @@
 return {
     {
         "stevearc/conform.nvim",
-        -- cond = require("config.util").is_not_vscode(),
+        cond = require("config.util").is_not_vscode(),
         lazy = true,
         event = { "BufWritePre" },
         opts = {
@@ -31,9 +31,9 @@ return {
                 local disable_filetypes = { c = true, cpp = true }
                 local lsp_format_opt
                 if disable_filetypes[vim.bo[bufnr].filetype] then
-                    lsp_format_opt = 'never'
+                    lsp_format_opt = "never"
                 else
-                    lsp_format_opt = 'fallback'
+                    lsp_format_opt = "fallback"
                 end
                 return {
                     quiet = false,
@@ -60,6 +60,6 @@ return {
                     },
                 },
             },
-        }
+        },
     },
 }

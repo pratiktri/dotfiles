@@ -10,19 +10,20 @@ return {
         },
         config = true,
         keys = {
-            { "<leader>gg", "<cmd>Neogit<cr>",     desc = "Git: Open Neogit", mode = { "n" } },
-            { "<leader>gL", "<cmd>Neogit log<cr>", desc = "Git: Open Log",    mode = { "n" } },
+            { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git: Open Neogit", mode = { "n" } },
+            { "<leader>gL", "<cmd>Neogit log<cr>", desc = "Git: Open Log", mode = { "n" } },
         },
     },
 
     -- Git Diffview
     {
         "sindrets/diffview.nvim",
+        cond = require("config.util").is_not_vscode(),
         keys = {
 
-            { "<leader>gd", "<cmd>DiffviewOpen<cr>",        desc = "Git: Open Diffview",                mode = { "n" } },
-            { "<leader>gD", "<cmd>DiffviewOpen<cr>",        desc = "Git: Open Diffview against master", mode = { "n" } },
-            { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Git: Show file history",            mode = { "n" } },
+            { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview", mode = { "n" } },
+            { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview against master", mode = { "n" } },
+            { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Git: Show file history", mode = { "n" } },
         },
         -- TODO:
         -- Toggle Diffview keymap

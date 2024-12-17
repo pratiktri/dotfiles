@@ -1,9 +1,8 @@
 return {
     {
-        -- TODO: Disable it for VSCode
-        --
         -- Main LSP Configuration
         "neovim/nvim-lspconfig",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
             "williamboman/mason-lspconfig.nvim",
@@ -47,7 +46,7 @@ return {
                     map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                     map("<F12>", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                     map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-                    map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+                    -- map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
                     map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
                     -- Fuzzy find all the symbols in your current document.

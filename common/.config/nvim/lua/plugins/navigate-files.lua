@@ -161,22 +161,21 @@ return {
 
             -- Keymaps for LSP Things -> In code-lsp.lua
 
-            -- Grep things -> Search
-            vim.keymap.set("n", "<leader>sb", function()
+            -- Buffer
+            vim.keymap.set("n", "<leader>bs", function()
                 require("telescope.builtin").live_grep({
                     grep_open_files = true,
                     prompt_title = "Live Grep in Open Files",
                 })
-            end, { desc = "Search Open Buffers" })
-            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            end, { desc = "Live Grep Open Buffers" })
+            vim.keymap.set("n", "<leader>bl", require("telescope.builtin").buffers, { desc = "List Buffers" })
+
             vim.keymap.set("n", "<C-a-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
             vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
 
             -- List
-            vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "List Buffers" })
             vim.keymap.set("n", "<C-a-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>fq", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })
+            vim.keymap.set("n", "<leader>dQ", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })
 
             -- Git
             vim.keymap.set("n", "<leader>gfb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })

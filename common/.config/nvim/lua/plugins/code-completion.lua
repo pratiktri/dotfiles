@@ -1,7 +1,4 @@
 return {
-
-    -- TODO: Figureout how to add custom snippets
-
     {
         -- Autocompletion
         "hrsh7th/nvim-cmp",
@@ -41,12 +38,14 @@ return {
 
             "hrsh7th/cmp-vsnip",
             "hrsh7th/vim-vsnip",
+            "Exafunction/codeium",
         },
         config = function()
             -- See `:help cmp`
             local cmp = require("cmp")
             local defaults = require("cmp.config.default")()
             local luasnip = require("luasnip")
+
             require("luasnip.loaders.from_vscode").lazy_load()
             luasnip.config.setup({})
 
@@ -57,6 +56,13 @@ return {
                 --         hl_group = "CmpGhostText",
                 --     },
                 -- },
+                sources = {
+                    { name = "nvim_lsp" },
+                    { name = "codeium" },
+                    { name = "luasnip" },
+                    { name = "buffer" },
+                    { name = "path" },
+                },
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
@@ -97,12 +103,6 @@ return {
                         end
                     end, { "i", "s" }),
                 }),
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                    { name = "buffer" },
-                    { name = "path" },
-                },
                 sorting = defaults.sorting,
             })
         end,

@@ -1,7 +1,4 @@
 return {
-
-    -- TODO:
-    -- Reduce noice timeout
     { "tpope/vim-repeat" },
 
     -- Better code folding
@@ -168,6 +165,7 @@ return {
     {
         "RRethy/vim-illuminate",
         lazy = false,
+        cond = require("config.util").is_not_vscode(),
         opts = {
             delay = 200,
             large_file_cutoff = 2000,
@@ -206,10 +204,23 @@ return {
     -- Finds and lists all of the TODO, HACK, BUG, etc comment
     {
         "folke/todo-comments.nvim",
+        cond = require("config.util").is_not_vscode(),
         event = "VimEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true,
         opts = {
+            search = {
+                command = "rg",
+                args = {
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--hidden", -- include hidden files
+                    "--glob=!.git", -- exclude .git directory
+                },
+            },
             signs = false,
             keywords = {
                 HACK = { alt = { "TIP" } },
@@ -231,15 +242,19 @@ return {
                 desc = "Previous todo comment",
             },
 
-            -- TODO: Include hidden files
-            { "<leader>fT", "<cmd>TodoTelescope<cr>", desc = "List Todo/Fix/Fixme" },
-            { "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "List Todo" },
+            { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME<cr>", desc = "TODO: FIXME Tags" },
+            { "<leader>dt", "<cmd>TodoTelescope keywords=TODO<cr>", desc = "TODO: Project Todos" },
+            { "<leader>dT", "<cmd>TodoTelescope<cr>", desc = "TODO: All" },
         },
     },
 
     -- better diagnostics list and others
     {
         "folke/trouble.nvim",
+        lazy = false,
+        cmd = "Trouble",
+        cond = require("config.util").is_not_vscode(),
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             -- Default: Preview in a split
             preview = {
@@ -249,12 +264,11 @@ return {
                 size = 0.6,
             },
             modes = {
-
                 -- Show only the most severe diagnostics; once resolved, less severe will be shown
-                most_severe = {
+                project_warnings = {
                     mode = "diagnostics", -- inherit from diagnostics mode
                     filter = function(items)
-                        local severity = vim.diagnostic.severity.HINT
+                        local severity = vim.diagnostic.severity.WARN
                         for _, item in ipairs(items) do
                             severity = math.min(severity, item.severity)
                         end
@@ -265,13 +279,13 @@ return {
                 },
 
                 -- Diagnostics from buffer + Errors from current project
-                project_errors = {
+                file_hints = {
                     mode = "diagnostics", -- inherit from diagnostics mode
                     filter = {
                         any = {
                             buf = 0, -- current buffer
                             {
-                                severity = vim.diagnostic.severity.ERROR,
+                                severity = vim.diagnostic.severity.INFO,
                                 -- limit to files in the current project
                                 function(item)
                                     return item.filename:find((vim.loop or vim.uv).cwd(), 1, true)
@@ -283,11 +297,10 @@ return {
             },
         },
         keys = {
-            { "<leader>dd", "<cmd>Trouble project_errors toggle focus=true<cr>", desc = "Trouble: Document Diagnostics" },
-            { "<leader>dw", "<cmd>Trouble most_severe toggle focus=true<cr>", desc = "Trouble: List Project Diagnostics" },
-            { "<leader>dl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Trouble: Location List" },
+            { "<leader>dd", "<cmd>Trouble file_hints toggle focus=true<cr>", desc = "Trouble: File Diagnostics" },
+            { "<leader>dw", "<cmd>Trouble project_warnings toggle focus=true<cr>", desc = "Trouble: List Project Diagnostics" },
             { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Trouble: Quickfix List" },
-            { "gr", "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Code: List References" },
+            { "gr", "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Goto References" },
             {
                 "[q",
                 function()
@@ -306,6 +319,7 @@ return {
                 "]q",
                 function()
                     if require("trouble").is_open() then
+                        ---@diagnostic disable-next-line: missing-parameter, missing-fields
                         require("trouble").next({ skip_groups = true, jump = true })
                     else
                         local ok, err = pcall(vim.cmd.cnext)
@@ -349,6 +363,7 @@ return {
     -- Search and jump around symbols in the buffer
     {
         "SmiteshP/nvim-navbuddy",
+        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "SmiteshP/nvim-navic",
             "MunifTanjim/nui.nvim",
@@ -472,12 +487,22 @@ return {
             -- See `:help nvim-treesitter`
             -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
             vim.defer_fn(function()
+                ---@diagnostic disable-next-line: missing-fields
                 require("nvim-treesitter.configs").setup({
                     ensure_installed = {
                         -- These 2 are required for cmdline
                         "regex",
                         "markdown",
                         "markdown_inline",
+                        "lua",
+                        "rust",
+                        "typescript",
+                        "javascript",
+                        "bash",
+                        "html",
+                        "css",
+                        "json",
+                        "yaml",
                     },
 
                     auto_install = true,
@@ -538,10 +563,6 @@ return {
                             enable = true,
                             border = "none",
                             floating_preview_opts = {},
-                            -- peek_definition_code = {
-                            --     ["<leader>cd"] = { query = "@function.outer", desc = "Peek function definition on a popup" },
-                            --     ["<leader>cD"] = { query = "@class.outer", desc = "Peek class definition on a popup" },
-                            -- },
                         },
                     },
                 })

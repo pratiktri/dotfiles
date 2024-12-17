@@ -35,7 +35,7 @@ return {
         "akinsho/bufferline.nvim",
         cond = require("config.util").is_not_vscode(),
         dependencies = {
-            { "echasnovski/mini.bufremove", version = "*" },
+            "echasnovski/mini.bufremove",
         },
         event = "VeryLazy",
         keys = {
@@ -71,13 +71,19 @@ return {
 
             -- <alt+1> ... <alt+9> to switch to a buffer
             for i = 1, 9 do
-                vim.keymap.set("n", string.format("<A-%s>", i), string.format("<cmd>BufferLineGoToBuffer %s<CR>", i), { noremap = true, silent = true })
+                vim.keymap.set(
+                    { "n", "v" },
+                    string.format("<A-%s>", i),
+                    string.format("<cmd>BufferLineGoToBuffer %s<CR>", i),
+                    { noremap = true, silent = true }
+                )
             end
 
             -- Fix bufferline when restoring a session
             vim.api.nvim_create_autocmd("BufAdd", {
                 callback = function()
                     vim.schedule(function()
+                        ---@diagnostic disable-next-line: param-type-mismatch
                         pcall(buf_line)
                     end)
                 end,
@@ -107,7 +113,7 @@ return {
         },
         opts = {
             render = "wrapped-compact", -- Smaller popups
-            timeout = 2500,
+            timeout = 2000,
             max_height = function()
                 return math.floor(vim.o.lines * 0.25)
             end,
@@ -163,7 +169,7 @@ return {
                             { find = "; after #%d+" },
                             { find = "; before #%d+" },
 
-                            -- Display delete, yank, jump notifications at bottom
+                            -- When message contains following
                             { find = "yanked" },
                             { find = "fewer lines" },
                             { find = "more lines" },

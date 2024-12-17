@@ -58,7 +58,7 @@
     "projectManager.git.baseFolders": [".git"],
 
     // VIM & NeoVIM
-    "keyboard.dispatch": "keyCode",
+    "keyboard.dispatch": "keyCode", // For Linux, <Caps> -> <Esc> binding to work
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1,
         "vscodevim.vim": 1
@@ -70,7 +70,7 @@
     "vim.cursorStylePerMode.visual": "block",
     "vim.cursorStylePerMode.visualblock": "block",
     "vim.cursorStylePerMode.visualline": "block",
-    // "vim.smartRelativeLine": true,
+    "vim.smartRelativeLine": true,
     "vim.easymotion": true,
 
     // Debugging

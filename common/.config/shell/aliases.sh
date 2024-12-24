@@ -33,6 +33,13 @@ mkcd() {
     cd "$1" || exit
 }
 
+# Tmux
+command -v tmux >/dev/null && alias ta="tmux a"
+command -v tmux >/dev/null && alias tat="tmux a -t"
+command -v tmux >/dev/null && alias tls="tmux ls"
+command -v tmux >/dev/null && alias tnew="tmux new"
+command -v tmux >/dev/null && alias tnewt="tmux new -t"
+
 # Network
 alias ping="ping -c 10"
 alias ping8="ping 8.8.8.8"

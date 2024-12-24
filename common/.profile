@@ -4,9 +4,6 @@
 [ ! -f "/opt/homebrew/bin/brew" ] || eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # set PATH so it includes user's private bin if it exists
-[ ! -d "$HOME/bin" ] || PATH="$HOME/bin:$PATH"
-
-# set PATH so it includes user's private bin if it exists
 # HACK: Appended to end of $PATH instead of beginning
 # Kitty can't seem to locate nvim when .local/bin is path-ed earlier
 # With this, Kitty finds the unstable nvim from ~/.local/bin (for scroll_back buffer selection)

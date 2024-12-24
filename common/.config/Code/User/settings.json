@@ -8,7 +8,7 @@
     "extensions.ignoreRecommendations": true,
 
     // Editor
-    "editor.fontSize": 18,
+    "editor.fontSize": 15,
     "editor.cursorWidth": 3,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
@@ -35,12 +35,10 @@
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
     "terminal.integrated.fontSize": 15,
-
-    // Workbench - Everything that surrounds the editor
-    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "right",
+    "workbench.colorTheme": "GitHub Dark Default",
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff",
@@ -58,20 +56,21 @@
     "projectManager.git.baseFolders": [".git"],
 
     // VIM & NeoVIM
-    "keyboard.dispatch": "keyCode", // For Linux, <Caps> -> <Esc> binding to work
     "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1,
         "vscodevim.vim": 1
     },
+    "keyboard.dispatch": "keyCode", // For Linux, <Caps> -> <Esc> binding to work
+    "vim.leader": " ",
+    "vim.easymotion": true,
+    "vim.smartRelativeLine": true,
     "vim.showMarksInGutter": true,
     "vim.replaceWithRegister": true,
+    "vim.highlightedyank.enable": true,
     "vim.cursorStylePerMode.normal": "block",
-    "vim.cursorStylePerMode.replace": "block",
     "vim.cursorStylePerMode.visual": "block",
+    "vim.cursorStylePerMode.replace": "block",
     "vim.cursorStylePerMode.visualblock": "block",
     "vim.cursorStylePerMode.visualline": "block",
-    "vim.smartRelativeLine": true,
-    "vim.easymotion": true,
 
     // Debugging
     "debug.toolBarLocation": "docked",
@@ -110,6 +109,12 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
     },
 
     // Better Comments
@@ -291,6 +296,6 @@
     "sql-formatter.dialect": "pl/sql",
 
     // Windsurf
-    "windsurf.enableSupercomplete": false,
-    "windsurf.enableAutocomplete": false
+    "windsurf.enableSupercomplete": true,
+    "windsurf.enableAutocomplete": true
 }

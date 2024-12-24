@@ -37,6 +37,12 @@ dnf_setup() {
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
     printf "%s\n%s\n%s\n%s\n%s\n%s\n" "[code]" "name=Visual Studio Code" "baseurl=https://packages.microsoft.com/yumrepos/vscode" "enabled=1" "gpgcheck=1" "gpgkey=https://packages.microsoft/com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
 
+    # Add docker repository
+    sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+    # Add Brave repository
+    sudo dnf-3 config-manager --add-repo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+
     # Install development Tools
     sudo yum groupinstall -y "Development Tools" && yum install readline readline-devel -y
 

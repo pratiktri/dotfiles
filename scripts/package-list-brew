@@ -3,8 +3,6 @@
 bat
 bats-core
 dnscrypt-proxy
-docker
-docker-compose
 fd
 fzf
 gitleaks

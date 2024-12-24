@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-# TODO: Things that did not work
-#   - dotfiles: could NOT link it to aliases_personal
-
 kitty_term() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
@@ -24,6 +21,9 @@ manual_installs() {
 }
 
 post_install() {
+    command -v docker >/dev/null 2>&1 && systemctl enable --now docker >/dev/null 2>&1 && echo "Docker enabled"
+    command -v docker >/dev/null 2>&1 && usermod -aG docker "$USER" && newgrp docker && echo "Added $USER to docker group"
+
     chsh -s "$(which zsh)" && echo "Default shell changed to zsh"
 
     # Time fix for Windows dual boot

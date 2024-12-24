@@ -9,11 +9,13 @@ nvidia-driver
 synaptic
 # Below few are dnf-only packages
 akmod-nvidia
+dnf-plugins-core
 libva-nvidia-driver
 xorg-x11-drv-nvidia-cuda
 # Common
 bash
 bleachbit
+brave-browser
 ca-certificates
 clang
 cmake
@@ -22,6 +24,11 @@ code
 curl
 evolution-ews
 evolution-mapi
+docker-ce
+docker-ce-cli
+containerd.io
+docker-buildx-plugin
+docker-compose-plugin
 dolphin
 dolphin-plugins
 dnscrypt-proxy

@@ -33,8 +33,6 @@ return {
                     map("<F2>", vim.lsp.buf.rename, "Rename Symbol")
                     map("<C-.>", "<cmd>Lspsaga code_action<cr>", "Code Actions")
                     map("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code Actions")
-                    -- e to jump to the symbol under cursor; q to quit
-                    map("<leader>o", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")
                     map("<leader>cr", "<cmd>Lspsaga finder<cr>", "Goto References")
                     map("<leader>cpf", "<cmd>Lspsaga peek_definition<cr>", "Peek definition: Function")
                     map("<leader>cpt", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Class")
@@ -51,10 +49,13 @@ return {
 
                     -- Fuzzy find all the symbols in your current document.
                     --  Symbols are things like variables, functions, types, etc.
+                    map("<leader>o", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
                     map("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
                     map("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace Symbols")
                     map("<leader>ci", require("telescope.builtin").lsp_implementations, "Goto Implementation")
                     map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+                    -- e to jump to the symbol under cursor; q to quit
+                    map("<leader>co", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")
 
                     map("<leader>cd", require("telescope.builtin").diagnostics, "List Diagnostics")
 

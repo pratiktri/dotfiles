@@ -170,23 +170,26 @@ return {
             end, { desc = "Live Grep Open Buffers" })
             vim.keymap.set("n", "<leader>bl", require("telescope.builtin").buffers, { desc = "List Buffers" })
 
-            vim.keymap.set("n", "<C-a-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            -- Needs terminal configured to send correct key code to NeoVim: \x1b[70;5u
+            vim.keymap.set("n", "<C-S-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
+            vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
             vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
 
             -- List
-            vim.keymap.set("n", "<C-a-p>", require("telescope.builtin").find_files, { desc = "List & Search Files" })
-            vim.keymap.set("n", "<leader>dQ", require("telescope.builtin").quickfixhistory, { desc = "List Quickfix History" })
+            -- Needs terminal configured to send correct key code to NeoVim: \x1b[80;5u
+            vim.keymap.set("n", "<C-S-p>", require("telescope.builtin").find_files, { desc = "Search Files" })
+            vim.keymap.set("n", "<leader>bf", require("telescope.builtin").find_files, { desc = "Search Files" })
 
             -- Git
-            vim.keymap.set("n", "<leader>gfb", require("telescope.builtin").git_branches, { desc = "List Git Branches" })
-            vim.keymap.set("n", "<leader>gfc", require("telescope.builtin").git_commits, { desc = "List Git Commits" })
+            vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, { desc = "Git: Commits" })
+            vim.keymap.set("n", "<leader>gb", require("telescope.builtin").git_branches, { desc = "Git: Branches" })
 
             -- Neovim Things
-            vim.keymap.set("n", "<leader>ns", require("telescope.builtin").search_history, { desc = "List Search History" })
-            vim.keymap.set("n", "<leader>nn", require("telescope.builtin").help_tags, { desc = "List & Search NeoVIM Help" })
-            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").command_history, { desc = "List NeoVIM Command History" })
-            vim.keymap.set("n", "<leader>nC", require("telescope.builtin").colorscheme, { desc = "List Neovim Colorschemes (with preview)" })
-            vim.keymap.set("n", "<leader>nn", "<cmd>Telescope notify<cr>", { desc = "List past notifications" })
+            vim.keymap.set("n", "<leader>ns", require("telescope.builtin").search_history, { desc = "Search History" })
+            vim.keymap.set("n", "<leader>nn", require("telescope.builtin").help_tags, { desc = "Search NeoVIM Help" })
+            vim.keymap.set("n", "<leader>nc", require("telescope.builtin").command_history, { desc = "Command History" })
+            vim.keymap.set("n", "<leader>nC", require("telescope.builtin").colorscheme, { desc = "Colorschemes (with preview)" })
+            vim.keymap.set("n", "<leader>nn", "<cmd>Telescope notify<cr>", { desc = "Past notifications" })
 
             -- Help
             vim.keymap.set("n", "<leader>hk", require("telescope.builtin").keymaps, { desc = "Help: NeoVIM Keymaps" })

@@ -146,13 +146,6 @@ return {
             --  - ci'  - [C]hange [I]nside [']quote
             require("mini.ai").setup({ n_lines = 500 })
 
-            -- Add/delete/replace surroundings (brackets, quotes, etc.)
-            --
-            -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-            -- - sd'   - [S]urround [D]elete [']quotes
-            -- - sr)'  - [S]urround [R]eplace [)] [']
-            require("mini.surround").setup()
-
             -- gc
             require("mini.comment").setup()
 
@@ -242,9 +235,9 @@ return {
                 desc = "Previous todo comment",
             },
 
-            { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME<cr>", desc = "TODO: FIXME Tags" },
-            { "<leader>dt", "<cmd>TodoTelescope keywords=TODO<cr>", desc = "TODO: Project Todos" },
-            { "<leader>dT", "<cmd>TodoTelescope<cr>", desc = "TODO: All" },
+            { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME<cr>", desc = "FIXME: Tags" },
+            { "<leader>dt", "<cmd>TodoTelescope keywords=TODO<cr>", desc = "Project TODOs" },
+            { "<leader>dT", "<cmd>TodoTelescope<cr>", desc = "All tags: FIX, NOTE, TIP, TODO, WARN" },
         },
     },
 

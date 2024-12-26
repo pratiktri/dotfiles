@@ -18,7 +18,18 @@ return {
             },
         },
         config = function()
+            -- Setup basic configuration
             require("codeium").setup({})
+
+            vim.keymap.set("n", "<leader>aa", function()
+                vim.cmd("Codeium Enable")
+                vim.notify("Codeium enabled", vim.log.levels.INFO)
+            end, { desc = "Enable Codeium" })
+
+            vim.keymap.set("n", "<leader>ax", function()
+                vim.cmd("Codeium Disable")
+                vim.notify("Codeium disabled", vim.log.levels.INFO)
+            end, { desc = "Disable Codeium" })
         end,
     },
 }

@@ -253,6 +253,7 @@ return {
             notification = {
                 poll_rate = 2, -- How often to udate and render notifications
                 filter = vim.log.levels.WARN, -- Minimum notifications level
+                window = { winblend = 0 },
             },
         },
     },

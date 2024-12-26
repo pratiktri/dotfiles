@@ -26,7 +26,49 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd("colorscheme github_dark_dimmed")
+            -- vim.cmd("colorscheme github_dark_dimmed")
+        end,
+    },
+
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+        config = function()
+            require("catppuccin").setup({
+                compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+
+                integrations = {
+                    telescope = {
+                        style = "nvchad",
+                    },
+
+                    -- These were disabled by default
+                    diffview = true,
+                    fidget = true,
+                    lsp_saga = true,
+                    mason = true,
+                    neotest = true,
+                    noice = true,
+                    notify = true,
+                    dadbod_ui = true,
+                    nvim_surround = true,
+                    navic = {
+                        enabled = true,
+                    },
+                    illuminate = {
+                        lsp = true,
+                    },
+                    which_key = true,
+                },
+
+                flavour = "mocha",
+            })
+
+            require("nvim-navic").setup({
+                highlight = true,
+            })
+            vim.cmd("colorscheme catppuccin")
         end,
     },
 
@@ -242,7 +284,7 @@ return {
                                 hint = config.icons.diagnostics.Hint,
                             },
                         },
-                        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                        { "filetype", padding = { left = 1, right = 1 } },
                         {
                             "filename",
                             file_status = true,
@@ -298,14 +340,10 @@ return {
                         },
                     },
 
-                    lualine_y = {
+                    lualine_y = {},
+                    lualine_z = {
                         { "progress", separator = " ", padding = { left = 1, right = 0 } },
                         { "location", padding = { left = 0, right = 1 } },
-                    },
-                    lualine_z = {
-                        function()
-                            return " " .. os.date("%R")
-                        end,
                     },
                 },
             }

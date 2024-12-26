@@ -134,6 +134,17 @@ return {
         end,
     },
 
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end,
+    },
+
     -- mini.nvim: Collection of various small independent plugins/modules
     {
         "echasnovski/mini.nvim",
@@ -337,7 +348,8 @@ return {
         config = function()
             require("lspsaga").setup({
                 ui = {
-                    kind = require("config.util").icons.kind_lspsaga,
+                    -- kind = require("config.util").icons.kind_lspsaga,
+                    kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
                 },
                 symbol_in_winbar = {
                     enable = true,

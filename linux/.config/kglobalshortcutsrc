@@ -1,8 +1,13 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
+switch-to-activity-252e9f66-21d0-4196-8af8-9f144dae5052=none,none,Switch to activity "3 - Email"
 switch-to-activity-2cc71a42-d4b8-443e-b255-c66aa4847239=Meta+F2,none,Switch to activity "Focus"
+switch-to-activity-3e6711d4-de87-4891-8cdd-f3d127554aa8=none,none,Switch to activity "Default"
+switch-to-activity-4ad16f86-0c0a-4592-90d9-23afa25c1f70=none,none,Switch to activity "Default"
 switch-to-activity-4d59da64-44dc-4d4c-b1c8-bfb0fbd87410=Meta+F3,none,Switch to activity "Email"
 switch-to-activity-79bc8b93-e5e1-4149-8ed2-4222a14f199f=Meta+F1,none,Switch to activity "Default"
+switch-to-activity-a397c46b-22b0-442b-88bc-9f21a3b18fae=none,none,Switch to activity "2 - Code"
+switch-to-activity-fe100d1b-ab30-493d-9635-bce7284a67b9=none,none,Switch to activity "1 - Default"
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (India, with rupee)=none,none,Switch keyboard layout to English (India\\, with rupee)
@@ -370,7 +375,8 @@ activate widget 107=none,none,Activate Application Launcher Widget
 activate widget 31=none,none,Activate Icons-and-Text Task Manager Widget
 activate widget 32=none,none,Activate Icons-and-Text Task Manager Widget
 activate widget 39=none,none,Activate Digital Clock Widget
-activate widget 41=none,none,Activate Network speed Widget
+activate widget 42=none,none,Activate Network Speed Widget
+activate widget 43=none,none,Activate Netspeed Widget Widget
 activate widget 45=none,none,Activate Peek at Desktop Widget
 activate widget 72=none,none,Activate Total CPU Use Widget
 activate widget 76=none,none,Activate ChatGPT Plasmoid Widget
@@ -382,15 +388,15 @@ cycleNextAction=none,,Next History Item
 cyclePrevAction=none,,Previous History Item
 edit_clipboard=none,none,Edit Contents…
 manage activities=Meta+Q,Meta+Q,Show Activity Switcher
-next activity=Meta+Ctrl+Right,none,Walk through activities
-previous activity=Meta+Ctrl+Left,none,Walk through activities (Reverse)
+next activity=Meta+A,none,Walk through activities
+previous activity=Meta+Shift+A,none,Walk through activities (Reverse)
 repeat_action=none,Meta+Ctrl+R,Manually Invoke Action on Current Clipboard
 show dashboard=Ctrl+F12,Ctrl+F12,Show Desktop
 show-barcode=none,,Show Barcode…
 show-on-mouse-pos=Meta+V,Meta+V,Show Clipboard Items at Mouse Position
 stop current activity=Meta+S,Meta+S,Stop Current Activity
-switch to next activity=,,Switch to Next Activity
-switch to previous activity=,,Switch to Previous Activity
+switch to next activity=none,,Switch to Next Activity
+switch to previous activity=none,,Switch to Previous Activity
 toggle do not disturb=none,,Toggle do not disturb
 
 [plasmawindowed]

@@ -72,19 +72,23 @@
     // Navigation
     {
         "key": "ctrl+h",
-        "command": "workbench.action.navigateLeft"
+        "command": "workbench.action.navigateLeft",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "ctrl+l",
-        "command": "workbench.action.navigateRight"
+        "command": "workbench.action.navigateRight",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "ctrl+k",
-        "command": "workbench.action.navigateUp"
+        "command": "workbench.action.navigateUp",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "ctrl+j",
-        "command": "workbench.action.navigateDown"
+        "command": "workbench.action.navigateDown",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "space b l",
@@ -115,7 +119,7 @@
                 "workbench.files.action.focusFilesExplorer"
             ]
         },
-        "when": "vim.mode == 'Normal'"
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "space e",
@@ -138,20 +142,12 @@
     {
         "key": "shift shift",
         "command": "workbench.action.quickOpen",
-        "when": "vim.mode == 'Normal'"
-    },
-    {
-        "key": "space g g",
-        "command": "runCommands",
-        "when": "vim.mode == 'Normal'",
-        "args": {
-            "commands": ["workbench.view.scm", "workbench.scm.focus"]
-        }
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "ctrl+alt+f",
         "command": "workbench.action.findInFiles",
-        "when": "vim.mode == 'Normal'"
+        "when": "vim.mode == 'Normal' && editorTextFocus"
     },
     {
         "key": "space p",
@@ -282,6 +278,46 @@
         "key": "space d w",
         "command": "workbench.actions.view.problems",
         "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+
+    // Git
+    {
+        "key": "space g g",
+        "command": "runCommands",
+        "when": "vim.mode == 'Normal' && editorTextFocus",
+        "args": {
+            "commands": ["workbench.view.scm", "workbench.scm.focus"]
+        }
+    },
+    {
+        "key": "] g",
+        "command": "workbench.action.editor.nextChange",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    {
+        "key": "[ g",
+        "command": "workbench.action.editor.previousChange",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    {
+        "key": "space g b",
+        "command": "git.checkout",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    {
+        "key": "space g p",
+        "command": "editor.action.dirtydiff.next",
+        "when": "vim.mode == 'Normal' && editorTextFocus && !textCompareEditorActive"
+    },
+    {
+        "key": "space g c",
+        "command": "git-graph.view",
+        "when": "vim.mode == 'Normal' && editorTextFocus && !textCompareEditorActive"
+    },
+    {
+        "key": "space g l",
+        "command": "git-graph.view",
+        "when": "vim.mode == 'Normal' && editorTextFocus && !textCompareEditorActive"
     },
 
     // Test commands

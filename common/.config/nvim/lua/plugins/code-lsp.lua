@@ -133,7 +133,6 @@ return {
 
                 bashls = { filetypes = { "sh", "bash", "zsh" } },
                 pylsp = {},
-                ts_ls = {},
                 lua_ls = {
                     -- cmd = { ... },
                     -- filetypes = { ... },
@@ -149,15 +148,55 @@ return {
                     },
                 },
                 omnisharp = {
+                    cmd = { "omnisharp" },
+                    enable_editorconfig_support = true,
+                    enable_ms_build_load_projects_on_demand = false,
+                    enable_roslyn_analyzers = true,
+                    organize_imports_on_format = true,
+                    enable_import_completion = true,
+                    analyze_open_documents_only = false,
                     settings = {
-                        DotNet = {
-                            enablePackageRestore = true,
-                            FormattingOptions = { OrganizeImports = true },
-                            RoslynExtensionOptions = {
-                                EnableAnalyzerSupport = true,
-                                EnableImportCompletion = true,
+                        dotnet = {
+                            server = {
+                                useOmnisharpServer = true,
+                                useModernNet = true,
                             },
-                            Sdk = { IncludePrereleases = false },
+                        },
+                        csharp = {
+                            inlayHints = {
+                                parameters = {
+                                    enabled = true,
+                                },
+                                types = {
+                                    enabled = true,
+                                },
+                            },
+                        },
+                    },
+                },
+                ts_ls = {
+                    settings = {
+                        typescript = {
+                            inlayHints = {
+                                includeInlayParameterNameHints = "all",
+                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                                includeInlayFunctionParameterTypeHints = true,
+                                includeInlayVariableTypeHints = true,
+                                includeInlayPropertyDeclarationTypeHints = true,
+                                includeInlayFunctionLikeReturnTypeHints = true,
+                                includeInlayEnumMemberValueHints = true,
+                            },
+                        },
+                        javascript = {
+                            inlayHints = {
+                                includeInlayParameterNameHints = "all",
+                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                                includeInlayFunctionParameterTypeHints = true,
+                                includeInlayVariableTypeHints = true,
+                                includeInlayPropertyDeclarationTypeHints = true,
+                                includeInlayFunctionLikeReturnTypeHints = true,
+                                includeInlayEnumMemberValueHints = true,
+                            },
                         },
                     },
                 },
@@ -166,26 +205,26 @@ return {
                 dockerls = {},
                 docker_compose_language_service = {},
 
-                marksman = {},
-                ltex = {
-                    filetypes = { "markdown", "text" },
-                    flags = { debounce_text_changes = 3000 },
-                    settings = {
-                        ltex = {
-                            language = "en",
-                            markdown = {
-                                nodes = {
-                                    CodeBlock = "ignore",
-                                    FencedCodeBlock = "ignore",
-                                    Code = "ignore",
-                                    AutoLink = "ignore",
-                                },
-                                checkFrequency = "save",
-                                languageToolHttpServerUri = "https://api.languagetool.org",
-                            },
-                        },
-                    },
-                },
+                -- marksman = {},
+                -- ltex = {
+                --     filetypes = { "markdown", "text" },
+                --     flags = { debounce_text_changes = 3000 },
+                --     settings = {
+                --         ltex = {
+                --             language = "en",
+                --             markdown = {
+                --                 nodes = {
+                --                     CodeBlock = "ignore",
+                --                     FencedCodeBlock = "ignore",
+                --                     Code = "ignore",
+                --                     AutoLink = "ignore",
+                --                 },
+                --                 checkFrequency = "save",
+                --                 languageToolHttpServerUri = "https://api.languagetool.org",
+                --             },
+                --         },
+                --     },
+                -- },
             }
 
             -- Ensure the servers and tools above are installed
@@ -198,7 +237,6 @@ return {
                 "stylua",
                 "codespell",
                 "bash-language-server",
-                "marksman",
                 "html-lsp",
                 "css-lsp",
                 "dockerfile-language-server",

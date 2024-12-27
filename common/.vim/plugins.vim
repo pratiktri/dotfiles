@@ -22,7 +22,6 @@ call plug#begin('~/.vim/plugged')
     "------------Style Plugins------------"
     " Status Styles
     Plug 'itchyny/lightline.vim'
-    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-    Plug 'cocopon/iceberg.vim'
     Plug 'tyrannicaltoucan/vim-deep-space'
+    Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 call plug#end()

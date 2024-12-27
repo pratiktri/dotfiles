@@ -90,39 +90,4 @@ return {
             dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"),
         },
     },
-
-    -- Speedup loading large files by disabling some plugins
-    {
-        "LunarVim/bigfile.nvim",
-        cond = require("config.util").is_not_vscode(),
-        lazy = true,
-        opts = {
-            filesize = 2, --2MiB
-            pattern = "*",
-            features = {
-                "indent_blankline",
-                "lsp",
-                "syntax",
-                "treesitter",
-            },
-        },
-    },
-
-    {
-        "epwalsh/obsidian.nvim",
-        version = "*",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        cond = require("config.util").is_not_vscode(),
-        ft = "markdown",
-        opts = {
-            workspaces = {
-                { name = "personal", path = "~/Code/Notes" },
-            },
-            completion = {
-                nvim_cmp = true,
-            },
-        },
-    },
 }

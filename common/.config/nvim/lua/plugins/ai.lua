@@ -3,6 +3,15 @@ return {
     {
         "Exafunction/codeium.nvim",
         cond = require("config.util").is_not_vscode(),
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "saghen/blink.compat",
+                opts = {
+                    enable_events = true,
+                },
+            },
+        },
         cmd = "Codeium",
         build = ":Codeium Auth",
         event = "InsertEnter",

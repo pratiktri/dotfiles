@@ -11,8 +11,7 @@ return {
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             { "j-hui/fidget.nvim", opts = {} },
 
-            -- Allows extra capabilities provided by nvim-cmp
-            "hrsh7th/cmp-nvim-lsp",
+            "saghen/blink.cmp",
         },
         config = function()
             -- Every time a new file is opened that is associated with
@@ -229,6 +228,10 @@ return {
 
             -- Ensure the servers and tools above are installed
             require("mason").setup()
+
+            -- Add completion capabilities
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
             -- Add other tools here that you want Mason to install for you
             local ensure_installed = vim.tbl_keys(servers or {})

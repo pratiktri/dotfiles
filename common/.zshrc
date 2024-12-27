@@ -58,6 +58,7 @@ HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit ice depth=1; zinit light jimhester/per-directory-history
+# zinit ice depth=1; zinit light atuinsh/atuin
 
 zinit ice wait lucid depth=1; zinit light zsh-users/zsh-completions
 zinit ice wait lucid depth=1; zinit light zsh-users/zsh-autosuggestions
@@ -113,21 +114,14 @@ zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOM
 
 # User configuration # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# [ctrl+r]: Search command history
-# [ctrl+t]: fzf & over the files & directories under the current one & paste it to prompt
-# [alt+c] : fzf & cd into a directory under the current one
-# TODO: Source this as script instead of eval: has impact on zsh startup
-command -v fzf > /dev/null && eval "$(fzf --zsh)"
-
 command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd zsh)"
 
 # Source aliases and shell functions
 for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
 
 # Keybindings
-bindkey '^f' autosuggest-accept         #
-bindkey '^p' history-search-backward    # Ctrl+p gets the last history match
-bindkey '^n' history-search-forward     # Ctrl+n gets the next history match
+bindkey '^f' autosuggest-accept
+
 # TIP: Following should be executed AFTER aliases are sourced
 command -v op >/dev/null && bindkey -s '^o' ' op\n' # Fuzzyfind projects and open in nvim
 command -v pnew >/dev/null && bindkey -s '^[o' ' pnew\n' # Create a new project quickly

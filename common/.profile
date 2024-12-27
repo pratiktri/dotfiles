@@ -25,7 +25,7 @@
 ##################################################################################
 
 if ! pgrep -u "$USER" ssh-agent >/dev/null; then
-    eval $(ssh-agent -s) >/dev/null
+    eval "$(ssh-agent -s)" >/dev/null
 fi
 
 # shellcheck disable=SC3045
@@ -84,7 +84,8 @@ export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
 export PATH="$PATH:$CARGO_HOME/bin"
 export RUSTC_WRAPPER=sccache
 export SCCACHE_CACHE_SIZE="20G"
-[ -f "${XDA_DATA_HOME}/rust/cargo/env" ] && . "${XDA_DATA_HOME}/rust/cargo/env"
+# shellcheck disable=SC1091
+[ -f "${XDG_DATA_HOME}/rust/cargo/env" ] && . "${XDG_DATA_HOME}/rust/cargo/env"
 
 # Setup DotNet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -120,7 +121,7 @@ export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~50% --border'
+export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~80% --border'
 
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
 

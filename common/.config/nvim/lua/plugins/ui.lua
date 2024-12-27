@@ -44,6 +44,7 @@ return {
                     },
 
                     -- These were disabled by default
+                    blink_cmp = true,
                     diffview = true,
                     fidget = true,
                     lsp_saga = true,

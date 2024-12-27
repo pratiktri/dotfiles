@@ -25,8 +25,6 @@ return {
             { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview against master", mode = { "n" } },
             { "<leader>gf", "<cmd>DiffviewFileHistory<cr>", desc = "Git: Show file history", mode = { "n" } },
         },
-        -- TODO:
-        -- Toggle Diffview keymap
     },
 
     -- Adds git related signs to the gutter, as well as utilities for managing changes

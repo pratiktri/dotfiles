@@ -104,7 +104,11 @@ return {
                     illuminate = {
                         lsp = true,
                     },
+                    snacks = true,
                     which_key = true,
+
+                    -- These were enabled by default
+                    render_markdown = false,
                 },
 
                 flavour = "mocha",
@@ -178,41 +182,6 @@ return {
         end,
     },
 
-    -- Better `vim.notify()`
-    {
-        "rcarriga/nvim-notify",
-        cond = require("config.util").is_not_vscode(),
-        keys = {
-            {
-                "<leader>xn",
-                function()
-                    require("notify").dismiss({ silent = true, pending = true })
-                end,
-                desc = "Dismiss all Notifications",
-            },
-            {
-                "<leader>xx",
-                function()
-                    require("notify").dismiss({ silent = true, pending = true })
-                end,
-                desc = "Dismiss all Notifications",
-            },
-        },
-        opts = {
-            render = "wrapped-compact", -- Smaller popups
-            timeout = 2000,
-            max_height = function()
-                return math.floor(vim.o.lines * 0.25)
-            end,
-            max_width = function()
-                return math.floor(vim.o.columns * 0.5)
-            end,
-            on_open = function(win)
-                vim.api.nvim_win_set_config(win, { zindex = 100 })
-            end,
-        },
-    },
-
     -- Completely replaces the UI for messages, cmdline and the popupmenu.
     {
         "folke/noice.nvim",
@@ -220,7 +189,6 @@ return {
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
         },
         opts = {
             lsp = {
@@ -393,5 +361,133 @@ return {
                 },
             }
         end,
+    },
+
+    -- Various Quality of Life plugins into 1
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        cond = require("config.util").is_not_vscode(),
+        opts = {
+            -- Want these but after they are fixed
+            indent = {
+                -- NOTE: highlights for blanklines are too noisy
+                enabled = false,
+            },
+            scope = {
+                -- NOTE: mini.indentscope does this and indent guide
+                enabled = false,
+            },
+            statuscolumn = {
+                -- NOTE: just did not work
+                enabled = false,
+            },
+
+            bigfile = {
+                enabled = true,
+                notify = true,
+                size = 10 * 1024 * 1024, -- 10 MB
+            },
+            input = {
+                enabled = true,
+            },
+            lazygit = {
+                enabled = true,
+                configure = true,
+            },
+            notifier = {
+                enabled = true,
+                timeout = 2000,
+                style = "fancy",
+            },
+            scroll = {
+                enabled = true,
+            },
+            scratch = {
+                enabled = true,
+            },
+            word = {
+                enabled = true,
+            },
+            zen = {
+                enabled = true,
+            },
+
+            animate = {
+                fps = 60,
+                duration = {
+                    step = 10,
+                    total = 200,
+                },
+            },
+            styles = {
+                notification = {
+                    wo = {
+                        wrap = true,
+                    },
+                },
+            },
+        },
+        keys = {
+            {
+                "<leader>//",
+                function()
+                    Snacks.scratch()
+                end,
+                desc = "Toggle Scratch Buffer",
+            },
+            {
+                "<leader>/s",
+                function()
+                    Snacks.scratch.select()
+                end,
+                desc = "Toggle Scratch Buffer",
+            },
+            {
+                "<leader>gL",
+                function()
+                    Snacks.lazygit.open(opts)
+                end,
+                desc = "Toggle LazyGit",
+            },
+            {
+                "]]",
+                function()
+                    Snacks.words.jump(vim.v.count1)
+                end,
+                desc = "Next Reference",
+                mode = { "n", "t" },
+            },
+            {
+                "[[",
+                function()
+                    Snacks.words.jump(-vim.v.count1)
+                end,
+                desc = "Prev Reference",
+                mode = { "n", "t" },
+            },
+            {
+                "<leader>xx",
+                function()
+                    Snacks.notifier.hide()
+                end,
+                desc = "Hide Notifications",
+            },
+            {
+                "<leader>nn",
+                function()
+                    Snacks.notifier.show_history()
+                end,
+                desc = "Notification History",
+            },
+            {
+                "<leader>z",
+                function()
+                    Snacks.zen()
+                end,
+                desc = "Toggle Zen Mode",
+            },
+        },
     },
 }

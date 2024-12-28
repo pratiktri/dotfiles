@@ -39,16 +39,16 @@ Any package not available are *skipped*.
 - aka, pending installations that I gave up automating.
 
 - All Distros:
-    - Appimagelauncher: https://github.com/TheAssassin/AppImageLauncher/releases
-    - Zoho Mail: https://downloads.zohocdn.com/zmail-desktop/linux/
-    - Zoho Workdrive: https://www.zoho.com/workdrive/desktop-sync.html
-    - Jetbrains-Toolbox: https://www.jetbrains.com/toolbox-app/
-    - Sublime-Text: https://www.sublimetext.com/docs/linux_repositories.html
+    - Appimagelauncher: <https://github.com/TheAssassin/AppImageLauncher/releases>
+    - Zoho Mail: <https://downloads.zohocdn.com/zmail-desktop/linux/>
+    - Zoho Workdrive: <https://www.zoho.com/workdrive/desktop-sync.html>
+    - Jetbrains-Toolbox: <https://www.jetbrains.com/toolbox-app/>
+    - Sublime-Text: <https://www.sublimetext.com/docs/linux_repositories.html>
 - Debian & Ubuntu:
     - Add non-free and backport sources, then run the `install-os-packges.sh` again
-    - Ulauncher: https://ulauncher.io/#Download
+    - Ulauncher: <https://ulauncher.io/#Download>
 - Debian:
-    - Dotnet8: https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
+    - Dotnet8: <https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install>
 
 ## Test
 

@@ -486,7 +486,7 @@ return {
                         "bash",
                         "html",
                         "css",
-                        "json",
+                        "json5",
                         "yaml",
                     },
 

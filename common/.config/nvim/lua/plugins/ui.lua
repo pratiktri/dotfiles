@@ -19,6 +19,50 @@ return {
 
     { "machakann/vim-highlightedyank" },
 
+    -- Render Markdown on Neovim
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+            code = {
+                sign = false,
+                width = "block",
+                border = "thick",
+                position = "right",
+                language_name = false,
+                right_pad = 1,
+            },
+            heading = {
+                sign = false,
+                icons = {},
+            },
+            pipe_table = {
+                preset = "round",
+            },
+            indent = {
+                enabled = true,
+                skip_heading = true,
+            },
+        },
+        ft = { "markdown", "norg", "rmd", "org" },
+        config = function(_, opts)
+            require("render-markdown").setup(opts)
+            Snacks.toggle({
+                name = "Render Markdown",
+                get = function()
+                    return require("render-markdown.state").enabled
+                end,
+                set = function(enabled)
+                    local m = require("render-markdown")
+                    if enabled then
+                        m.enable()
+                    else
+                        m.disable()
+                    end
+                end,
+            }):map("<leader>cM")
+        end,
+    },
+
     -- colorscheme
     {
         "projekt0n/github-nvim-theme",

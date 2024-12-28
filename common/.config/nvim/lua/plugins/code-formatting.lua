@@ -6,6 +6,7 @@ return {
         event = { "BufWritePre" },
         opts = {
             formatters_by_ft = {
+                cs = { "csharpier" },
                 javascript = { "prettierd", "prettier", stop_after_first = true },
                 typescript = { "prettierd", "prettier", stop_after_first = true },
                 javascriptreact = { "prettierd", "prettier", stop_after_first = true },
@@ -58,6 +59,10 @@ return {
                         "include_document_start=true,retain_line_breaks_single=true",
                         "-gitignore_excludes",
                     },
+                },
+                csharpier = {
+                    command = "dotnet-csharpier",
+                    args = { "--write-stdout" },
                 },
             },
         },

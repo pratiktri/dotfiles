@@ -119,7 +119,21 @@ return {
                     filetypes = { "html", "twig", "hbs" },
                 },
                 cssls = {},
-                jsonls = {},
+                jsonls = {
+                    -- lazy-load schemastore when needed
+                    on_new_config = function(new_config)
+                        new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+                        vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+                    end,
+                    settings = {
+                        json = {
+                            format = {
+                                enable = true,
+                            },
+                            validate = { enable = true },
+                        },
+                    },
+                },
 
                 bashls = { filetypes = { "sh", "bash", "zsh" } },
                 pylsp = {},
@@ -136,11 +150,16 @@ return {
                 },
                 omnisharp = {
                     cmd = { "omnisharp" },
-                    enable_editorconfig_support = true,
-                    enable_ms_build_load_projects_on_demand = false,
+                    handlers = {
+                        ["textDocument/definition"] = function(...)
+                            return require("omnisharp_extended").handler(...)
+                        end,
+                    },
                     enable_roslyn_analyzers = true,
                     organize_imports_on_format = true,
                     enable_import_completion = true,
+                    enable_editorconfig_support = true,
+                    enable_ms_build_load_projects_on_demand = false,
                     analyze_open_documents_only = false,
                     settings = {
                         dotnet = {
@@ -164,6 +183,8 @@ return {
                 ts_ls = {
                     settings = {
                         typescript = {
+                            updateImportOnFileMove = { enabled = "always" },
+                            suggest = { completeFunctionCalls = true },
                             inlayHints = {
                                 includeInlayParameterNameHints = "all",
                                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -231,6 +252,8 @@ return {
                 "css-lsp",
                 "dockerfile-language-server",
                 "python-lsp-server",
+                "csharpier",
+                "netcoredbg",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

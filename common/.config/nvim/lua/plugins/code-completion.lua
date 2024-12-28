@@ -57,6 +57,27 @@ return {
                 nerd_font_variant = "mono",
             },
 
+            completion = {
+                accept = {
+                    -- experimental auto-brackets support
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
+                menu = {
+                    draw = {
+                        treesitter = { "lsp" },
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 200,
+                },
+                ghost_text = {
+                    enabled = vim.g.ai_cmp,
+                },
+            },
+
             signature = { enabled = true },
 
             -- This comes from the luasnip extra, if you don't add it, won't be able to
@@ -85,6 +106,7 @@ return {
                     "luasnip",
                     "path",
                     "codeium",
+                    "markdown",
                 },
                 cmdline = {},
 
@@ -113,6 +135,10 @@ return {
                         name = "codeium",
                         module = "blink.compat.source",
                         score_offset = 1200,
+                    },
+                    markdown = {
+                        name = "RenderMarkdown",
+                        module = "render-markdown.integ.blink",
                     },
                 },
             },

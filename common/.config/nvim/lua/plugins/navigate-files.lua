@@ -186,10 +186,9 @@ return {
 
             -- Neovim Things
             vim.keymap.set("n", "<leader>ns", require("telescope.builtin").search_history, { desc = "Search History" })
-            vim.keymap.set("n", "<leader>nn", require("telescope.builtin").help_tags, { desc = "Search NeoVIM Help" })
+            vim.keymap.set("n", "<leader>nh", require("telescope.builtin").help_tags, { desc = "Search NeoVIM Help" })
             vim.keymap.set("n", "<leader>nc", require("telescope.builtin").command_history, { desc = "Command History" })
             vim.keymap.set("n", "<leader>nC", require("telescope.builtin").colorscheme, { desc = "Colorschemes (with preview)" })
-            vim.keymap.set("n", "<leader>nn", "<cmd>Telescope notify<cr>", { desc = "Past notifications" })
 
             -- Help
             vim.keymap.set("n", "<leader>hk", require("telescope.builtin").keymaps, { desc = "Help: NeoVIM Keymaps" })

@@ -125,9 +125,6 @@ return {
     {
         "akinsho/bufferline.nvim",
         cond = require("config.util").is_not_vscode(),
-        dependencies = {
-            "echasnovski/mini.bufremove",
-        },
         event = "VeryLazy",
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
@@ -139,10 +136,10 @@ return {
         opts = {
             options = {
                 close_command = function(n)
-                    require("mini.bufremove").delete(n, false)
+                    Snacks.bufdelete.delete(n, false)
                 end,
                 right_mouse_command = function(n)
-                    require("mini.bufremove").delete(n, false)
+                    Snacks.bufdelete.delete(n, false)
                 end,
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = false,
@@ -361,133 +358,5 @@ return {
                 },
             }
         end,
-    },
-
-    -- Various Quality of Life plugins into 1
-    {
-        "folke/snacks.nvim",
-        priority = 1000,
-        lazy = false,
-        cond = require("config.util").is_not_vscode(),
-        opts = {
-            -- Want these but after they are fixed
-            indent = {
-                -- NOTE: highlights for blanklines are too noisy
-                enabled = false,
-            },
-            scope = {
-                -- NOTE: mini.indentscope does this and indent guide
-                enabled = false,
-            },
-            statuscolumn = {
-                -- NOTE: just did not work
-                enabled = false,
-            },
-
-            bigfile = {
-                enabled = true,
-                notify = true,
-                size = 10 * 1024 * 1024, -- 10 MB
-            },
-            input = {
-                enabled = true,
-            },
-            lazygit = {
-                enabled = true,
-                configure = true,
-            },
-            notifier = {
-                enabled = true,
-                timeout = 2000,
-                style = "fancy",
-            },
-            scroll = {
-                enabled = true,
-            },
-            scratch = {
-                enabled = true,
-            },
-            word = {
-                enabled = true,
-            },
-            zen = {
-                enabled = true,
-            },
-
-            animate = {
-                fps = 60,
-                duration = {
-                    step = 10,
-                    total = 200,
-                },
-            },
-            styles = {
-                notification = {
-                    wo = {
-                        wrap = true,
-                    },
-                },
-            },
-        },
-        keys = {
-            {
-                "<leader>//",
-                function()
-                    Snacks.scratch()
-                end,
-                desc = "Toggle Scratch Buffer",
-            },
-            {
-                "<leader>/s",
-                function()
-                    Snacks.scratch.select()
-                end,
-                desc = "Toggle Scratch Buffer",
-            },
-            {
-                "<leader>gL",
-                function()
-                    Snacks.lazygit.open(opts)
-                end,
-                desc = "Toggle LazyGit",
-            },
-            {
-                "]]",
-                function()
-                    Snacks.words.jump(vim.v.count1)
-                end,
-                desc = "Next Reference",
-                mode = { "n", "t" },
-            },
-            {
-                "[[",
-                function()
-                    Snacks.words.jump(-vim.v.count1)
-                end,
-                desc = "Prev Reference",
-                mode = { "n", "t" },
-            },
-            {
-                "<leader>xx",
-                function()
-                    Snacks.notifier.hide()
-                end,
-                desc = "Hide Notifications",
-            },
-            {
-                "<leader>nn",
-                function()
-                    Snacks.notifier.show_history()
-                end,
-                desc = "Notification History",
-            },
-            {
-                "<leader>z",
-                function()
-                    Snacks.zen()
-                end,
-                desc = "Toggle Zen Mode",
-            },
-        },
     },
 }

@@ -282,8 +282,27 @@ return {
                 extensions = { "neo-tree", "lazy" },
                 sections = {
                     lualine_a = { "mode" },
-                    lualine_b = { "branch" },
-
+                    lualine_b = {
+                        "branch",
+                        {
+                            "diff",
+                            symbols = {
+                                added = config.icons.git.added,
+                                modified = config.icons.git.modified,
+                                removed = config.icons.git.removed,
+                            },
+                            source = function()
+                                local gitsigns = vim.b.gitsigns_status_dict
+                                if gitsigns then
+                                    return {
+                                        added = gitsigns.added,
+                                        modified = gitsigns.changed,
+                                        removed = gitsigns.removed,
+                                    }
+                                end
+                            end,
+                        },
+                    },
                     lualine_c = {
                         {
                             "diagnostics",
@@ -294,11 +313,14 @@ return {
                                 hint = config.icons.diagnostics.Hint,
                             },
                         },
-                        { "filetype", padding = { left = 1, right = 1 } },
                         {
-                            "filename",
-                            file_status = true,
-                            path = 1,
+                            function()
+                                return "  " .. require("dap").status()
+                            end,
+                            cond = function()
+                                return package.loaded["dap"] and require("dap").status() ~= ""
+                            end,
+                            color = config.fg("Debug"),
                         },
                     },
 
@@ -321,36 +343,16 @@ return {
                             end,
                             color = config.fg("Constant"),
                         },
-                        {
-                            function()
-                                return "  " .. require("dap").status()
-                            end,
-                            cond = function()
-                                return package.loaded["dap"] and require("dap").status() ~= ""
-                            end,
-                            color = config.fg("Debug"),
-                        },
-                        {
-                            "diff",
-                            symbols = {
-                                added = config.icons.git.added,
-                                modified = config.icons.git.modified,
-                                removed = config.icons.git.removed,
-                            },
-                            source = function()
-                                local gitsigns = vim.b.gitsigns_status_dict
-                                if gitsigns then
-                                    return {
-                                        added = gitsigns.added,
-                                        modified = gitsigns.changed,
-                                        removed = gitsigns.removed,
-                                    }
-                                end
-                            end,
-                        },
                     },
 
-                    lualine_y = {},
+                    lualine_y = {
+                        {
+                            "filename",
+                            file_status = true,
+                            path = 1,
+                        },
+                        { "filetype", padding = { left = 1, right = 1 } },
+                    },
                     lualine_z = {
                         { "progress", separator = " ", padding = { left = 1, right = 0 } },
                         { "location", padding = { left = 0, right = 1 } },

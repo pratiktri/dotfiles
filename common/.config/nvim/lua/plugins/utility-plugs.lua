@@ -1,4 +1,161 @@
 return {
+    -- Various Quality of Life plugins into one
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        cond = require("config.util").is_not_vscode(),
+        opts = {
+            -- Want these but after they are fixed
+            indent = {
+                -- NOTE: highlights for blanklines are too noisy
+                -- mini.indentscope does it much better
+                enabled = false,
+            },
+            scope = {
+                -- NOTE: mini.indentscope does this and indent guide as well
+                enabled = false,
+            },
+            statuscolumn = {
+                -- NOTE: just did not work
+                enabled = false,
+            },
+
+            bigfile = {
+                enabled = true,
+                notify = true,
+                size = 10 * 1024 * 1024, -- 10 MB
+            },
+            bufdelete = {
+                enabled = true,
+            },
+            gitbrowse = {
+                enabled = true,
+            },
+            input = {
+                enabled = true,
+            },
+            lazygit = {
+                enabled = true,
+                configure = true,
+                win = { style = "lazygit" },
+            },
+            notifier = {
+                enabled = true,
+                timeout = 2000,
+                style = "fancy",
+            },
+            scroll = {
+                enabled = true,
+            },
+            scratch = {
+                enabled = true,
+            },
+            word = {
+                enabled = true,
+            },
+            zen = {
+                enabled = true,
+            },
+
+            animate = {
+                fps = 60,
+                duration = {
+                    step = 10,
+                    total = 200,
+                },
+            },
+            styles = {
+                notification = {
+                    wo = {
+                        wrap = true,
+                    },
+                },
+            },
+        },
+        keys = {
+            {
+                "<leader>//",
+                function()
+                    Snacks.scratch()
+                end,
+                desc = "Toggle Scratch Buffer",
+            },
+            {
+                "<leader>/s",
+                function()
+                    Snacks.scratch.select()
+                end,
+                desc = "Toggle Scratch Buffer",
+            },
+            {
+                "<leader>gz",
+                function()
+                    Snacks.lazygit.open(opts)
+                end,
+                desc = "Git: Show LazyGit",
+            },
+            {
+                "<leader>gl",
+                function()
+                    Snacks.lazygit.log(opts)
+                end,
+                desc = "Git: Log",
+            },
+            {
+                "<leader>gf",
+                function()
+                    Snacks.lazygit.log_file(opts)
+                end,
+                desc = "Git: Show File Log",
+            },
+            {
+                "]]",
+                function()
+                    Snacks.words.jump(vim.v.count1)
+                end,
+                desc = "Next Reference",
+                mode = { "n", "t" },
+            },
+            {
+                "[[",
+                function()
+                    Snacks.words.jump(-vim.v.count1)
+                end,
+                desc = "Prev Reference",
+                mode = { "n", "t" },
+            },
+            {
+                "<leader>xx",
+                function()
+                    Snacks.notifier.hide()
+                end,
+                desc = "Hide Notifications",
+            },
+            {
+                "<leader>nn",
+                function()
+                    Snacks.notifier.show_history()
+                end,
+                desc = "Notification History",
+            },
+            {
+                "<leader>z",
+                function()
+                    Snacks.zen()
+                end,
+                desc = "Toggle Zen Mode",
+            },
+            {
+                "<leader>gO",
+                function()
+                    Snacks.gitbrowse.open(opts)
+                end,
+                desc = "Git: Open the file on Browser",
+            },
+        },
+    },
+
     -- Navigate between NVIM & Tmux splits seamlessly
     {
         "christoomey/vim-tmux-navigator",

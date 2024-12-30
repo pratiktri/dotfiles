@@ -60,9 +60,8 @@ vim.keymap.set({ "n", "v" }, "<leader>xb", function()
 end, { desc = "Save and close current buffer" })
 
 -- Traverse quickfix
--- TODO: Friendly message when no quickfix
-vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
-vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
+-- vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
+-- vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- Clear searches
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

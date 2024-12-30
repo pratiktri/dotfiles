@@ -25,3 +25,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
     nested = true,
 })
+
+-- Enable spell check on markdown and text files
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("spell_check_text_files", { clear = true }),
+    pattern = { "markdown", "gitcommit", "text" },
+    callback = function()
+        vim.opt.spell = true
+    end,
+    nested = true,
+})

@@ -90,6 +90,6 @@
     "theme": {
         "mode": "system",
         "light": "One Light",
-        "dark": "Github Dark Dimmed"
+        "dark": "Catppuccin Mocha"
     }
 }

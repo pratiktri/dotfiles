@@ -26,8 +26,10 @@ post_install() {
 
     chsh -s "$(which zsh)" && echo "Default shell changed to zsh"
 
-    # Time fix for Windows dual boot
-    timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
+    # Time fix for Windows dual boot - skip on FreeBSD
+    if [ "$(uname -s)" != "FreeBSD" ]; then
+        timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
+    fi
 
     rm -rf ~/.cache
 }
@@ -50,7 +52,11 @@ main() {
     pre_install
 
     ./install-os-packages.sh
-    ./install-brew-packages.sh
+
+    # Skip brew installation on FreeBSD
+    if [ "$(uname -s)" != "FreeBSD" ]; then
+        ./install-brew-packages.sh
+    fi
 
     manual_installs
     post_install

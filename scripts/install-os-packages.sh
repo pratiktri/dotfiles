@@ -6,21 +6,57 @@ setup() {
     OS_INSTALL_COMMAND=""
     OS_PKG_CHECK_COMMAND=""
 
-    # Detect package manager and set package manager commands
-    if command -v apt-get >/dev/null 2>&1; then
+    # First try to get OS info from os-release
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS_TYPE="$ID"
+    else
+        # Fallback to uname
+        OS_TYPE="$(uname -s | tr '[:upper:]' '[:lower:]')"
+    fi
+
+    case "$OS_TYPE" in
+    "debian" | "ubuntu")
         OS_INSTALL_COMMAND="apt-get install -y"
         OS_PKG_CHECK_COMMAND="apt-cache show"
-
         apt_setup
-    elif command -v dnf >/dev/null 2>&1; then
+        ;;
+    "fedora" | "rhel" | "centos")
         OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken"
         OS_PKG_CHECK_COMMAND="dnf list available"
-
         dnf_setup
-    else
-        log "Unsupported package manager. This script supports apt, yum, and dnf."
+        ;;
+    "freebsd")
+        OS_INSTALL_COMMAND="pkg install -y --skip-unresolvable"
+        OS_PKG_CHECK_COMMAND="pkg search"
+        freebsd_setup
+        ;;
+    *)
+        log "Unsupported operating system: $OS_TYPE"
         exit 1
-    fi
+        ;;
+    esac
+}
+
+freebsd_setup() {
+    # Update package repository
+    sudo pkg update && sudo pkg upgrade
+
+    # Install KDE WM
+    sudo pkg install -y xorg kde5 sddm
+
+    # Add current user to video & wheel group
+    sudo pw groupmod video -m "$(whoami)"
+    sudo pw groupmod wheel -m "$(whoami)"
+
+    # Enable services that will be needed
+    sudo sysrc dbus_enable="YES"
+    sudo sysrc sddm_enable="YES"
+
+    sudo sysctl net.local.stream.recvspace=65535
+    sudo sysctl net.local.stream.sendspace=65535
+
+    echo "exec dbus-launch --exit-with-x11 ck-launch-session startplasma-x11" >~/.xinitrc
 }
 
 dnf_setup() {

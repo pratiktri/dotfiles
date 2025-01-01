@@ -27,7 +27,7 @@ setup() {
         dnf_setup
         ;;
     "freebsd")
-        OS_INSTALL_COMMAND="pkg install -y --skip-unresolvable"
+        OS_INSTALL_COMMAND="pkg install -y"
         OS_PKG_CHECK_COMMAND="pkg search"
         freebsd_setup
         ;;
@@ -43,11 +43,14 @@ freebsd_setup() {
     sudo pkg update && sudo pkg upgrade
 
     # Install KDE WM
-    sudo pkg install -y xorg kde5 sddm
+    sudo pkg install -y xorg kde5 sddm nvidia-driver
 
     # Add current user to video & wheel group
     sudo pw groupmod video -m "$(whoami)"
     sudo pw groupmod wheel -m "$(whoami)"
+
+    # Load nvidia drivers to kernel
+    sudo sysrc kld_list+="nvidia-modeset nvidia"
 
     # Enable services that will be needed
     sudo sysrc dbus_enable="YES"

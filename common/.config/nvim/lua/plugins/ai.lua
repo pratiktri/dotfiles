@@ -7,9 +7,26 @@ return {
             "nvim-lua/plenary.nvim",
             {
                 "saghen/blink.compat",
-                opts = {
-                    enable_events = true,
-                },
+                opts = function()
+                    -- Do NOT use if codeium is not loaded
+                    local codeium_loaded, _ = pcall(require, "codeium")
+                    if not codeium_loaded then
+                        return {}
+                    end
+                    return {
+                        enable_events = true,
+                        sources = {
+                            providers = {
+                                codeium = {
+                                    name = "codeium",
+                                    module = "blink.compat.source",
+                                    score_offset = 1200,
+                                    async = true,
+                                },
+                            },
+                        },
+                    }
+                end,
             },
         },
         cmd = "Codeium",

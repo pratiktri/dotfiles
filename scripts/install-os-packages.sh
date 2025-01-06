@@ -26,7 +26,7 @@ setup() {
         OS_PKG_CHECK_COMMAND="dnf list available"
         dnf_setup
         ;;
-    "freebsd")
+    "freebsd" | "ghostbsd")
         OS_INSTALL_COMMAND="pkg install -y"
         OS_PKG_CHECK_COMMAND="pkg search"
         freebsd_setup
@@ -43,7 +43,8 @@ freebsd_setup() {
     sudo pkg update && sudo pkg upgrade
 
     # Install KDE WM
-    sudo pkg install -y xorg kde5 sddm nvidia-driver
+    sudo pkg install -y xorg sddm nvidia-driver
+    sudo pkg install -y kde5 plasma5-sddm-kcm plasma5-nm
 
     # Add current user to video & wheel group
     sudo pw groupmod video -m "$(whoami)"
@@ -55,6 +56,7 @@ freebsd_setup() {
     # Enable services that will be needed
     sudo sysrc dbus_enable="YES"
     sudo sysrc sddm_enable="YES"
+    sudo service dbus start
 
     sudo sysctl net.local.stream.recvspace=65535
     sudo sysctl net.local.stream.sendspace=65535
@@ -68,6 +70,8 @@ dnf_setup() {
     echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
     echo "defaultYes=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
     echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
+    echo "minrate=40k" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
+    echo "timeout=20" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
 
     # Enable RPM Fusion & Install media codecs
     sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video && sudo dnf makecache

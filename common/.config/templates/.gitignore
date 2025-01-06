@@ -69,7 +69,7 @@ tasks/
 
 # ---- Programming Languages ----
 # Ignore all downloaded node modules
-node_modules/*
+**/node_modules/*
 dist
 dist-ssr
 *.local
@@ -97,3 +97,5 @@ lerna-debug.log*
 **/contents/images
 **/contents/fonts
 *kpluginindex.json
+
+**/built/

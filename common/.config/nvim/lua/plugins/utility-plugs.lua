@@ -46,7 +46,7 @@ return {
                 style = "fancy",
             },
             scroll = {
-                enabled = true,
+                enabled = false,
             },
             scratch = {
                 enabled = true,
@@ -86,7 +86,7 @@ return {
                 function()
                     Snacks.scratch.select()
                 end,
-                desc = "Toggle Scratch Buffer",
+                desc = "Select Scratch Buffer",
             },
             {
                 "<leader>gz",
@@ -217,13 +217,15 @@ return {
             "echasnovski/mini.icons",
         },
         opts = {
+            delay = 450,
             preset = "helix",
             warning = true,
             -- Document existing key chains
             spec = {
+                { "<leader>/", group = "NVIM Scratch Buffer" },
                 { "<leader>a", group = "AI" },
-                { "<leader>c", group = "Code", icon = { icon = "", color = "orange" } },
                 { "<leader>b", group = "Buffer Operations", icon = { icon = "", color = "orange" } },
+                { "<leader>c", group = "Code", icon = { icon = "", color = "orange" } },
                 { "<leader>d", group = "Diagnostics", icon = { icon = "", color = "orange" } },
                 { "<leader>g", group = "Git", icon = { icon = "", color = "orange" } },
                 { "<leader>h", group = "Help", icon = { icon = "󰞋", color = "orange" } },

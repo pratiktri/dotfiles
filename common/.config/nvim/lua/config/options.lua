@@ -20,5 +20,5 @@ vim.g.markdown_recommended_style = 0
 
 vim.g.have_nerd_font = true
 
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.inccommand = 'split'
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.inccommand = "split"

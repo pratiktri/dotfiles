@@ -17,7 +17,7 @@ return {
                 json = { "prettierd", "prettier", stop_after_first = true },
                 graphql = { "prettierd", "prettier", stop_after_first = true },
                 yaml = { "yamlfmt", "prettierd", stop_after_first = true },
-                markdown = { "markdownlint" },
+                markdown = { "markdownlint", "markdown-toc" },
                 lua = { "stylua" },
                 python = { "black" },
                 sh = { "shfmt", "shellharden", stop_after_first = true },
@@ -52,6 +52,16 @@ return {
                         "--config",
                         "~/.config/templates/markdownlint.json",
                     },
+                },
+                ["markdown-toc"] = {
+                    -- Format only if TOC present in the file
+                    condition = function(_, ctx)
+                        for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
+                            if line:find("<!%-%- toc %-%->") then
+                                return true
+                            end
+                        end
+                    end,
                 },
                 yamlfmt = {
                     prepend_args = {

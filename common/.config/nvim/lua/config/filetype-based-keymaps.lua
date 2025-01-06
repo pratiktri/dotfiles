@@ -35,3 +35,24 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
     nested = true,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("markdown-keymaps", { clear = true }),
+    pattern = { "markdown", "gitcommit", "text" },
+    callback = function()
+        vim.keymap.set("v", "<leader>ml", function()
+            -- Save visually selected text to register 'v'
+            vim.cmd('normal! "vy')
+            -- Delete the selected text
+            vim.cmd("normal! gvd")
+            -- Get the content of the system clipboard
+            local clipboard_content = vim.fn.getreg("+")
+            -- Insert the markdown link
+            local link = string.format("[%s](%s)", vim.fn.getreg("v"), clipboard_content)
+            vim.api.nvim_put({ link }, "c", false, true)
+            -- Move cursor inside the square brackets
+            vim.cmd("normal! F[l")
+        end, { desc = "Markdown: Make link" })
+    end,
+    nested = true,
+})

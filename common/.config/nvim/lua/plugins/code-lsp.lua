@@ -212,26 +212,6 @@ return {
                 sqlls = {},
                 dockerls = {},
                 docker_compose_language_service = {},
-
-                -- ltex = {
-                --     filetypes = { "markdown", "text" },
-                --     flags = { debounce_text_changes = 3000 },
-                --     settings = {
-                --         ltex = {
-                --             language = "en",
-                --             markdown = {
-                --                 nodes = {
-                --                     CodeBlock = "ignore",
-                --                     FencedCodeBlock = "ignore",
-                --                     Code = "ignore",
-                --                     AutoLink = "ignore",
-                --                 },
-                --                 checkFrequency = "save",
-                --                 languageToolHttpServerUri = "https://api.languagetool.org",
-                --             },
-                --         },
-                --     },
-                -- },
             }
 
             -- Ensure the servers and tools above are installed
@@ -244,17 +224,22 @@ return {
             -- Add other tools here that you want Mason to install for you
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                "shfmt",
                 "stylua",
-                "codespell",
                 "bash-language-server",
                 "html-lsp",
                 "css-lsp",
                 "dockerfile-language-server",
                 "python-lsp-server",
+                "markdownlint",
+                "markdown-toc",
                 "csharpier",
                 "netcoredbg",
             })
+
+            -- TODO: Remove all installations through Mason
+            -- i.e. Remove mason.nvim, mason-lspconfig and mason-tool-installer
+            -- We should install those globally on the system
+            -- That would make it easier to work with on FreeBSD
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
             ---@diagnostic disable-next-line: missing-fields

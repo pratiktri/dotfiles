@@ -22,7 +22,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     })
     if vim.v.shell_error ~= 0 then
-        error("Error cloning lazy.nvim:\n" .. out)
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
     end
 end
 
@@ -32,27 +38,11 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require("lazy").setup({
-    { import = "plugins" },
-}, {
-    lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json",
     change_detection = {
         notify = false,
     },
     build = {
         warn_on_override = true,
     },
-    performance = {
-        rtp = {
-            -- Disable some rtp plugins
-            disabled_plugins = {
-                "gzip",
-                "matchit",
-                -- "matchparen",
-                "netrwPlugin",
-                "tarPlugin",
-                "tutor",
-                "zipPlugin",
-            },
-        },
-    },
+    spec = { { import = "plugins" } },
 })

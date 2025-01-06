@@ -439,7 +439,6 @@ return {
                 ---@diagnostic disable-next-line: missing-fields
                 require("nvim-treesitter.configs").setup({
                     ensure_installed = {
-                        -- These 2 are required for cmdline
                         "regex",
                         "markdown",
                         "markdown_inline",
@@ -452,6 +451,11 @@ return {
                         "css",
                         "json5",
                         "yaml",
+                        "sql",
+                        "bash",
+                        "jsonc",
+                        "python",
+                        "dockerfile",
                     },
 
                     auto_install = true,

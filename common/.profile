@@ -51,7 +51,7 @@ if [ "$(uname -s)" = "Linux" ]; then
     export CUDA_CACHE_PATH="XDG_CACHE_HOME/nv"
 fi
 
-export QT_PLUGIN_PATH="$HOME/local/lib/qt/plugins/:"
+export QT_PLUGIN_PATH="$HOME/.local/lib/qt/plugins/:"
 
 if [ "$XDG_SESSION_DESKTOP" = "KDE" ]; then
     export KDEHOME="${XDG_CONFIG_HOME}/KDE"
@@ -114,6 +114,7 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/node/npmrc"
 export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
 export N_PREFIX="${XDG_DATA_HOME}/n_node"
 export PATH="$N_PREFIX/bin:$PATH"
+command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
 
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"

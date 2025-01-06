@@ -72,7 +72,7 @@ tasks/
 
 # ---- Programming Languages ----
 # Ignore all downloaded node modules
-node_modules/*
+**/node_modules/*
 dist
 dist-ssr
 *.local
@@ -105,3 +105,5 @@ nvim_switch/
 .prettierignore
 package-lock.json
 .prettierrc
+
+**/built/

@@ -199,6 +199,7 @@ return {
         cond = require("config.util").is_not_vscode(),
         config = function()
             vim.g.rooter_cd_cmd = "tcd" -- Use tcd command to change the root
+            vim.g.rooter_patterns = { ".git" }
         end,
     },
 

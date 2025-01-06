@@ -105,7 +105,6 @@ return {
                     "snippets",
                     "luasnip",
                     "path",
-                    "codeium",
                     "markdown",
                 },
                 cmdline = {},
@@ -130,11 +129,6 @@ return {
                     },
                     path = {
                         score_offset = 750,
-                    },
-                    codeium = {
-                        name = "codeium",
-                        module = "blink.compat.source",
-                        score_offset = 1200,
                     },
                     markdown = {
                         name = "RenderMarkdown",

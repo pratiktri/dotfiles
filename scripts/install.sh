@@ -17,7 +17,7 @@ rustlang() {
 
 manual_installs() {
     if [ "$(uname -s)" != "FreeBSD" ]; then
-    	kitty_term
+        kitty_term
     fi
     rustlang
 }

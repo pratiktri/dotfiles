@@ -11,7 +11,7 @@ That is, changes on repository get auto reflected on the system.
 ```bash
 $ git clone https://github.com/pratiktri/dotfiles
 
-$ bash setup.sh -h
+$ sh setup.sh -h
 Apply all settings stored in the script's directory to your home directory.
 
 Usage: ./setup.sh [OPTION]

@@ -21,6 +21,8 @@ up(){
         update_command="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove"
     elif command -v apt-get > /dev/null 2>&1; then
         update_command="sudo apt-get update && sudo apt-get upgrade && sudo apt dist-upgrade && sudo apt autoremove"
+    elif command -v pkg > /dev/null 2>&1; then
+        update_command="sudo pkg update && sudo pkg upgrade && sudo pkg autoremove"
     fi
 
     eval "$update_command"
@@ -38,6 +40,8 @@ autorem(){
         remove_command="sudo apt autoremove"
     elif command -v dnf > /dev/null 2>&1; then
         remove_command="sudo dnf autoremove"
+    elif command -v pkg > /dev/null 2>&1; then
+        remove_command="sudo pkg autoremove"
     fi
 
     eval "$remove_command"

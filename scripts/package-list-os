@@ -5,18 +5,22 @@ apt-transport-https
 build-essential
 libreadline-dev
 libavcodec-extra
-nvidia-driver
-# Below few are dnf-only packages
+
+# Below few are dnf-specific packages
 akmod-nvidia
 dnf-plugins-core
 libva-nvidia-driver
 xorg-x11-drv-nvidia-cuda
+
 # Common
 aspnetcore-runtime-8.0
 bash
+bat
 bleachbit
 brave-browser
+btop
 cmake
+code
 containerd.io
 curl
 docker-buildx-plugin
@@ -29,19 +33,27 @@ dotnet-runtime-8.0
 dotnet-sdk-8.0
 evolution-ews
 evolution-mapi
+fd-find
 ffmpeg
 flameshot
 flatpak
+fzf
 gcc
 gdb
 git
+gitleaks
 gnupg
 go
 gparted
 grub-customizer
+hadolint
 htop
+inxi
+jq
+kitty
 kde-spectacle
 kitty-terminfo
+libreoffice
 llvm
 lua5.3
 luajit
@@ -50,17 +62,25 @@ neovim
 net-tools
 node
 npm
+nvidia-driver
+nvidia-settings
 openssh-client
 python3
 python3-pip
+podman
 qbittorrent
+rclone
 ripgrep
+sccache
+ShellCheck
 simplescreenrecorder
 smplayer
 software-properties-common
 solaar
 syncthing
 tmux
+tokei
+tree-sitter-cli
 ufw
 ulauncher
 vim
@@ -68,27 +88,23 @@ vlc
 vulkan-tools
 wget
 xclip
+yt-dlp
+zoxide
 zsh
 
 # FreeBSD packages
-bat
-fd-find
-fzf
+codespell
+dotnet
+html
+fusefs-lkl
 firefox-esr
 gitleaks
-jq
-kitty
-lazygit
-libreoffice
 lua54
-podman
-rclone
+shfmt
 sqlite
-tokei
+stylua
 tree-sitter
 vscode
-yt-dlp
-zoxide
 
 # Conflicts on FreeBSD
 ca-certificates

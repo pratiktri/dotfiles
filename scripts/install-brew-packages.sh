@@ -29,10 +29,14 @@ install_brew_packages() {
         \#*) continue ;;
         esac
 
-        # Check if the package exists in the Homebrew repository
+        # Check if package exists in brew repository and is not already installed on the system
         if brew search "$brew_package" 2>/dev/null | grep -q "$brew_package"; then
-            echo "Available: $brew_package"
-            found_packages="$found_packages $brew_package"
+            if ! command -v "$brew_package" >/dev/null 2>&1; then
+                echo "Available: $brew_package"
+                found_packages="$found_packages $brew_package"
+            else
+                echo "Already installed: $brew_package"
+            fi
         else
             not_found_packages="$not_found_packages $brew_package"
             echo "Unavailable: $brew_package"
@@ -58,7 +62,6 @@ print_summary() {
 main() {
     input_file_check
     install_brew
-
 
     install_brew_packages
     print_summary "Brew" "$not_found_packages"

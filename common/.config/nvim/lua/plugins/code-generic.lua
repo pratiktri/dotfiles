@@ -1,6 +1,8 @@
 return {
     { "tpope/vim-repeat" },
 
+    { "arnamak/stay-centered.nvim" },
+
     -- Better code folding
     {
         "kevinhwang91/nvim-ufo",

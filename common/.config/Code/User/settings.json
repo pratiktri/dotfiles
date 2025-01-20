@@ -105,11 +105,22 @@
     "vim.showMarksInGutter": true,
     "vim.replaceWithRegister": true,
     "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.duration": 300,
     "vim.cursorStylePerMode.normal": "block",
     "vim.cursorStylePerMode.visual": "block",
     "vim.cursorStylePerMode.replace": "block",
     "vim.cursorStylePerMode.visualblock": "block",
     "vim.cursorStylePerMode.visualline": "block",
+    // statusbar colors
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": ["#171819", "#ffffff"],
+    "vim.statusBarColors.insert": ["#2C2E07", "#ffffff"],
+    "vim.statusBarColors.visual": ["#35151D", "#ffffff"],
+    "vim.statusBarColors.visualline": ["#35151D", "#ffffff"],
+    "vim.statusBarColors.visualblock": ["#35151D", "#ffffff"],
+    "vim.statusBarColors.commandlineinprogress": ["#2C2206", "#ffffff"],
+    "vim.statusBarColors.searchinprogressmode": ["#171819", "#ffffff"],
+    "vim.statusBarColors.surroundinputmode": ["#171819", "#ffffff"],
 
     // Debugging
     "debug.toolBarLocation": "docked",

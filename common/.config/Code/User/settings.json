@@ -44,9 +44,9 @@
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff",
-        "statusBar.background": "#005f87",
-        "statusBar.noFolderBackground": "#005f87",
-        "statusBar.debuggingBackground": "#005f87",
+        "statusBar.background": "#171819",
+        "statusBar.noFolderBackground": "#171819",
+        "statusBar.debuggingBackground": "#171819",
         "statusBar.foreground": "#ffffff",
         "statusBar.debuggingForeground": "#ffffff"
     },
@@ -300,13 +300,10 @@
     "markdown.extension.bold.indicator": "**",
     "markdown.extension.italic.indicator": "*",
     "markdownlint.config": {
-        "default": true,
-        "MD007": false,
-        "MD030": false,
-        "MD033": false,
-        "MD046": false,
-        "no-hard-tabs": false,
-        "line-length": false
+        "extends": "~/.config/templates/markdownlint.json"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
     },
 
     // Python
@@ -346,6 +343,6 @@
     "sql-formatter.dialect": "pl/sql",
 
     // Windsurf
-    "windsurf.enableSupercomplete": true,
-    "windsurf.enableAutocomplete": true
+    "windsurf.enableAutocomplete": true,
+    "windsurf.enableSupercomplete": true
 }

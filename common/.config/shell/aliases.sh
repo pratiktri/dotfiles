@@ -21,7 +21,7 @@ alias ..="cd .."
 alias ...='cd ../../../' # Go back 3 directory levels
 alias cl=clear
 
-alias lsc='ls --color=auto --hyperlink'
+alias lsc='ls --color=auto'
 alias ll='lsc -alhF'
 alias la='lsc -Ah'
 alias lsa="lsc -lAFhZ"

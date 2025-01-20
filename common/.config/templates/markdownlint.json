@@ -1,26 +1,13 @@
 {
     "default": true,
-    "MD013": false,
-    "MD028": false,
-    "MD033": false,
-    "MD038": false,
-    "MD051": false,
-    "MD003": {
-        "style": "consistent"
-    },
-    "MD007": {
-        "indent": 4
-    },
-    "MD029": {
-        "style": "ordered"
-    },
-    "MD046": {
-        "style": "fenced"
-    },
-    "MD049": {
-        "style": "asterisk"
-    },
-    "MD050": {
-        "style": "asterisk"
-    }
+    "MD013": false, // do NOT check line length < 80
+    "MD028": false, // allow blanklines between quoted content
+    "MD038": false, // allow spaces inside code span elements
+    "MD051": false, // do NOT check #links should match actual headings in the document
+    "MD003": { "style": "consistent" },
+    "MD007": { "indent": 4 },
+    "MD029": { "style": "ordered" },
+    "MD046": { "style": "fenced" },
+    "MD049": { "style": "asterisk" },
+    "MD050": { "style": "asterisk" }
 }

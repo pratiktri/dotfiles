@@ -33,9 +33,9 @@ return {
         build = ":Codeium Auth",
         event = "InsertEnter",
         opts = {
-            enable_cmp_source = vim.g.ai_cmp,
+            enable_cmp_source = true,
             virtual_text = {
-                enabled = not vim.g.ai_cmp,
+                enabled = false,
                 key_bindings = {
                     accept = false, -- handled by nvim-cmp / blink.cmp
                     next = "<M-]>",

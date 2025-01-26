@@ -41,7 +41,7 @@ return {
             },
             heading = {
                 sign = false,
-                icons = {},
+                icons = { "󰼏 ", "󰼐 ", "󰼑 ", "󰼒 ", "󰼓 ", "󰼔 " },
                 backgrounds = {
                     "Headline1Bg",
                     "Headline2Bg",
@@ -117,14 +117,18 @@ return {
                 relative_to_current_file = false, ---@type boolean
 
                 dir_path = function()
-                    -- TODO: Find a path consistent for both Obsidian and github
-                    return vim.fn.expand("%:t:r") .. "-img"
+                    local root = vim.fn.FindRootDirectory()
+                    if root ~= "" then
+                        return root .. "/.artifacts/img"
+                    else
+                        return vim.fn.expand("%:p:h") .. "/.artifacts/img"
+                    end
                 end,
 
                 prompt_for_file_name = false, ---@type boolean
                 file_name = "%y%m%d-%H%M%S", ---@type string
 
-                -- Format of the image to be saved, must convert it as well
+                -- Format of the image to be saved: must convert it as well
                 -- https://stackoverflow.com/a/27269260
                 extension = "webp", ---@type string
                 process_cmd = "convert - -quality 75 webp:-", ---@type string

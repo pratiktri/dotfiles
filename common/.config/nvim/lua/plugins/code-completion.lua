@@ -36,8 +36,9 @@ return {
             -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
             -- See the full "keymap" documentation for information on defining your own keymap.
             keymap = {
-                preset = "super-tab",
-                ["<C-y>"] = { "select_and_accept" },
+                preset = "none",
+                ["<C-CR>"] = { "select_and_accept" }, -- Ctrl + Enter to accept
+                ["<C-x>"] = { "hide", "fallback" }, -- Ctrl + x to reject
 
                 ["<Tab>"] = { "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
@@ -49,7 +50,6 @@ return {
                 ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
                 ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-                ["<C-e>"] = { "hide", "fallback" },
             },
 
             appearance = {
@@ -58,12 +58,8 @@ return {
             },
 
             completion = {
-                accept = {
-                    -- experimental auto-brackets support
-                    auto_brackets = {
-                        enabled = true,
-                    },
-                },
+                keyword = { range = "full" },
+                accept = { auto_brackets = { enabled = false } },
                 menu = {
                     draw = {
                         treesitter = { "lsp" },
@@ -74,7 +70,7 @@ return {
                     auto_show_delay_ms = 200,
                 },
                 ghost_text = {
-                    enabled = vim.g.ai_cmp,
+                    enabled = false,
                 },
             },
 
@@ -82,29 +78,15 @@ return {
 
             -- This comes from the luasnip extra, if you don't add it, won't be able to
             -- jump forward or backward in luasnip snippets
-            snippets = {
-                expand = function(snippet)
-                    require("luasnip").lsp_expand(snippet)
-                end,
-                active = function(filter)
-                    if filter and filter.direction then
-                        return require("luasnip").jumpable(filter.direction)
-                    end
-                    return require("luasnip").in_snippet()
-                end,
-                jump = function(direction)
-                    require("luasnip").jump(direction)
-                end,
-            },
+            snippets = { preset = "luasnip" },
 
             sources = {
                 default = {
                     "lsp",
                     "buffer",
+                    "path",
                     "dadbod",
                     "snippets",
-                    "luasnip",
-                    "path",
                     "markdown",
                 },
                 cmdline = {},
@@ -123,9 +105,6 @@ return {
                     },
                     snippets = {
                         score_offset = 1150,
-                    },
-                    luasnip = {
-                        score_offset = 1100,
                     },
                     path = {
                         score_offset = 750,

@@ -112,42 +112,14 @@ return {
         main = "ibl",
     },
 
-    -- Highlights the current level of indentation, and animates the highlighting.
-    {
-        "echasnovski/mini.indentscope",
-        cond = require("config.util").is_not_vscode(),
-        opts = {
-            delay = 100,
-            symbol = "│",
-            options = { try_as_border = true },
-        },
-        init = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = {
-                    "help",
-                    "neo-tree",
-                    "Trouble",
-                    "trouble",
-                    "lazy",
-                    "mason",
-                    "notify",
-                    "toggleterm",
-                },
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
-        end,
-    },
-
+    -- Tpope's surround but faster and in lua
     {
         "kylechui/nvim-surround",
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
         config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
+            -- Configuration here, or leave empty to use defaults
+            require("nvim-surround").setup({})
         end,
     },
 
@@ -161,13 +133,38 @@ return {
             --  - va)  - [V]isually select [A]round [)]paren
             --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
             --  - ci'  - [C]hange [I]nside [']quote
+            --  TODO: Learn about the other mini textobjects
             require("mini.ai").setup({ n_lines = 500 })
 
             -- gc
             require("mini.comment").setup()
 
             require("mini.pairs").setup()
-            -- require("mini.completion").setup()
+
+            -- Configure mini.indentscope
+            if require("config.util").is_not_vscode() then
+                require("mini.indentscope").setup({
+                    delay = 100,
+                    symbol = "│",
+                    options = { try_as_border = true },
+                })
+
+                vim.api.nvim_create_autocmd("FileType", {
+                    pattern = {
+                        "help",
+                        "neo-tree",
+                        "Trouble",
+                        "trouble",
+                        "lazy",
+                        "mason",
+                        "notify",
+                        "toggleterm",
+                    },
+                    callback = function()
+                        vim.b.miniindentscope_disable = true
+                    end,
+                })
+            end
         end,
     },
 

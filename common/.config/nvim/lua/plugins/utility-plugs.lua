@@ -257,10 +257,6 @@ return {
         config = function(_, opts)
             require("project_explorer").setup(opts)
         end,
-        keys = {
-            { "<leader>fp", "<cmd>ProjectExplorer<cr>", desc = "Project Explorer" },
-        },
-        lazy = false,
     },
 
     -- Session management. Saves your session in the background

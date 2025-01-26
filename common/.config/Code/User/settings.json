@@ -94,6 +94,20 @@
     // Project Manager
     "projectManager.git.baseFolders": [".git"],
 
+    // Todo Tree
+    "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "PERF",
+        "NOTE",
+        "TEST",
+        "[ ]",
+        "[x]"
+    ],
+
     // VIM & NeoVIM
     "extensions.experimental.affinity": {
         "vscodevim.vim": 1
@@ -165,6 +179,9 @@
     },
     "[dockerfile]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
     },
 
     // Better Comments
@@ -342,7 +359,11 @@
     "sql-formatter.uppercase": true,
     "sql-formatter.dialect": "pl/sql",
 
+    // Lua
+    "Lua.codeLens.enable": true,
+
     // Windsurf
     "windsurf.enableAutocomplete": true,
-    "windsurf.enableSupercomplete": true
+    "windsurf.enableSupercomplete": true,
+    "windsurf.cascadeOpenOnReload": false
 }

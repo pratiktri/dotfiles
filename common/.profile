@@ -70,6 +70,8 @@ export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
 [ ! -f "$WGETRC" ] && touch "$WGETRC"
 
+export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
+
 # Setup Python
 export PYTHON_HISTORY="${XDG_STATE_HOME}/shell/python_history" # will be picked up by Python 3.13+
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
@@ -101,7 +103,7 @@ export PGSERVICEFILE="${XDG_CONFIG_HOME}/postgres/pg_service.conf"
 export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
 
 # Go
-export GOPATH=/media/pratik/Projects/DevSetUps/gopath/
+export GOPATH="${DEV_CACHE_PATH}"/gopath/
 
 # FIX: BELOW DID NOT WORK: added to /etc/profile, need to recheck on reboot
 # alias code="code --extensions-dir ${XDG_DATA_HOME}/vscode"
@@ -127,3 +129,7 @@ export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~80% --
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
 
 export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
+export OLLAMA_MODELS="${DEV_CACHE_PATH}"/ollama
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/pratik/.lmstudio/bin"

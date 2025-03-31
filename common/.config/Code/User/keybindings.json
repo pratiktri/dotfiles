@@ -65,12 +65,12 @@
     {
         "key": "shift+escape",
         "command": "workbench.action.focusSideBar",
-        "when": "editorTextFocus",
+        "when": "editorTextFocus"
     },
     {
         "key": "shift+escape",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "editorFocus && sideBarVisible",
+        "when": "editorFocus && sideBarVisible"
     },
 
     // vim.keybindings
@@ -132,12 +132,12 @@
     {
         "key": "space b l",
         "command": "workbench.action.showAllEditors",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space b x",
         "command": "workbench.action.closeActiveEditor",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "] b",
@@ -158,7 +158,7 @@
                 "workbench.files.action.focusFilesExplorer"
             ]
         },
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space e",
@@ -191,17 +191,17 @@
     {
         "key": "space p",
         "command": "editor.action.clipboardPasteAction",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space y",
         "command": "editor.action.clipboardCopyAction",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space x o",
         "command": "workbench.action.closeOtherEditors",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "ctrl+n",
@@ -291,39 +291,47 @@
     {
         "key": "space c i",
         "command": "editor.action.goToImplementation",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space c r",
         "command": "editor.action.goToReferences",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space c s",
         "command": "workbench.action.gotoSymbol",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space c w",
         "command": "workbench.action.showAllSymbols",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space o",
         "command": "workbench.action.gotoSymbol",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space d w",
         "command": "workbench.actions.view.problems",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
+    },
+    {
+        "key": "space d t",
+        "command": "runCommands",
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus",
+        "args": {
+            "commands": ["workbench.view.extension.todo-tree-container"]
+        }
     },
 
     // Git
     {
         "key": "space g g",
         "command": "runCommands",
-        "when": "vim.mode == 'Normal' && editorTextFocus",
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus",
         "args": {
             "commands": ["workbench.view.scm", "workbench.scm.focus"]
         }
@@ -341,55 +349,43 @@
     {
         "key": "space g b",
         "command": "git.checkout",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space g p",
         "command": "editor.action.dirtydiff.next",
-        "when": "vim.mode == 'Normal' && editorTextFocus && !textCompareEditorActive"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus && !textCompareEditorActive"
     },
     {
         "key": "space g c",
         "command": "git-graph.view",
-        "when": "vim.mode == 'Normal' && editorTextFocus && !textCompareEditorActive"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus && !textCompareEditorActive"
     },
     {
         "key": "space g l",
         "command": "git-graph.view",
-        "when": "vim.mode == 'Normal' && editorTextFocus && !textCompareEditorActive"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus && !textCompareEditorActive"
     },
 
     // Test commands
     {
         "key": "space t t",
         "command": "testing.runAtCursor",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space t f",
         "command": "testing.runCurrentFile",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space t w",
         "command": "testing.runAll",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     },
     {
         "key": "space t x",
         "command": "testing.cancelRun",
-        "when": "vim.mode == 'Normal' && editorTextFocus"
+        "when": "vim.mode == 'Normal' && editorTextFocus && !terminalFocus"
     }
-
-    // Make the following work: ctrl+n & ctrl+p for navigation through dropdown
-    // {
-    //     "key": "ctrl+n",
-    //     "command": "selectNextSuggestion",
-    //     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    // },
-    // {
-    //     "key": "ctrl+p",
-    //     "command": "selectPrevSuggestion",
-    //     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    // },
-],
+]

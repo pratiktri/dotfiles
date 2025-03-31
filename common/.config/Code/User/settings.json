@@ -363,7 +363,11 @@
     "Lua.codeLens.enable": true,
 
     // Windsurf
-    "windsurf.enableAutocomplete": true,
-    "windsurf.enableSupercomplete": true,
-    "windsurf.cascadeOpenOnReload": false
+    "windsurf.enableAutocomplete": false,
+    "windsurf.enableSupercomplete": false,
+    "windsurf.cascadeOpenOnReload": false,
+    "windsurf.autoExecutionPolicy": "off",
+    "windsurf.explainAndFixInCurrentConversation": true,
+    "windsurf.enableTabToJump": false,
+    "windsurf.autocompleteSpeed": "fast"
 }

@@ -112,29 +112,41 @@ return {
         main = "ibl",
     },
 
-    -- Tpope's surround but faster and in lua
-    {
-        "kylechui/nvim-surround",
-        version = "*", -- Use for stability; omit to use `main` branch for the latest features
-        event = "VeryLazy",
-        config = function()
-            -- Configuration here, or leave empty to use defaults
-            require("nvim-surround").setup({})
-        end,
-    },
-
     -- mini.nvim: Collection of various small independent plugins/modules
     {
         "echasnovski/mini.nvim",
         version = false,
         config = function()
-            -- Better Around/Inside textobjects
+            -- va)  - [V]isually select [A]round [)]paren
+            --  - a) would implicitly select around another ), based on some predefined logic
+            -- ci'  - [C]hange [I]nside [']quote
+            -- via  - [a]rguments
+            -- vif  - [f]unction calls
+            -- va_  - Select around "_"
+            -- va1  - Select around two "1"
             --
-            --  - va)  - [V]isually select [A]round [)]paren
-            --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-            --  - ci'  - [C]hange [I]nside [']quote
-            --  TODO: Learn about the other mini textobjects
+            -- Explicit Covering Region:
+            -- vinq - Select [I]nside [N]ext [Q]uote
+            -- vilb - Select Inside Last Bracket
+            -- cina - Change next function argument
+            -- cila - Change last function argument
             require("mini.ai").setup({ n_lines = 500 })
+
+            -- mini.surround
+            -- Functionality similar to tpope's vim-surround
+            require("mini.surround").setup({
+                mappings = {
+                    add = "ys", -- Add surrounding in Normal and Visual modes
+                    delete = "ds", -- Delete surrounding
+                    find = "yf", -- Find surrounding (to the right)
+                    find_left = "yF", -- Find surrounding (to the left)
+                    highlight = "yh", -- Highlight surrounding
+                    replace = "cs", -- Replace surrounding
+                    update_n_lines = "", -- Update `n_lines`
+                },
+                n_lines = 20,
+                search_method = "cover_or_next",
+            })
 
             -- gc
             require("mini.comment").setup()

@@ -219,21 +219,27 @@ return {
 
             -- Add completion capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
-            -- Add other tools here that you want Mason to install for you
+            -- TODO: Remove this when we get neovim 0.11
+            capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
+            -- Add other (other than LSP servers) tools here that you want Mason to install for you
+            -- Which means: formatters and debuggers
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                "stylua",
-                "bash-language-server",
-                "html-lsp",
-                "css-lsp",
-                "dockerfile-language-server",
-                "python-lsp-server",
-                "markdownlint",
+                "black", -- Python formatter
+                "csharpier", -- C# formatter
+                "djlint", -- Handlebar Formatter
                 "markdown-toc",
-                "csharpier",
-                "netcoredbg",
+                "markdownlint",
+                "netcoredbg", -- C# Debugger
+                "prettier",
+                "prettierd",
+                "shellharden",
+                "shfmt",
+                "stylua",
+                "trivy", -- Vulnerability Linter
+                "yamlfmt",
             })
 
             -- TODO: Remove all installations through Mason

@@ -6,11 +6,11 @@ return {
         init = function()
             -- Define color variables
             local color1_bg = "#295715"
-            local color2_bg = "#8d8200"
-            local color3_bg = "#a56106"
-            local color4_bg = "#7e0000"
-            local color5_bg = "#1e0b7b"
-            local color6_bg = "#560b7b"
+            local color2_bg = "#295477"
+            local color3_bg = "#395499"
+            local color4_bg = "#495477"
+            local color5_bg = "#595477"
+            local color6_bg = "#695477"
             local color_fg = "white"
 
             -- Heading colors (when not hovered over), extends through the entire line
@@ -42,28 +42,28 @@ return {
             heading = {
                 sign = false,
                 icons = { "󰼏 ", "󰼐 ", "󰼑 ", "󰼒 ", "󰼓 ", "󰼔 " },
-                backgrounds = {
-                    "Headline1Bg",
-                    "Headline2Bg",
-                    "Headline3Bg",
-                    "Headline4Bg",
-                    "Headline5Bg",
-                    "Headline6Bg",
-                },
-                foregrounds = {
-                    "Headline1Fg",
-                    "Headline2Fg",
-                    "Headline3Fg",
-                    "Headline4Fg",
-                    "Headline5Fg",
-                    "Headline6Fg",
-                },
+                width = "block",
+                right_pad = 1,
+                -- position = { "right" },
+            },
+            paragraph = {
+                render_modes = true,
+            },
+            bullet = {
+                render_modes = true,
+            },
+            checkbox = {
+                render_modes = true,
+            },
+            quote = {
+                render_modes = true,
             },
             pipe_table = {
                 preset = "round",
             },
             indent = {
                 enabled = true,
+                render_modes = true,
                 skip_heading = true,
             },
         },

@@ -5,6 +5,8 @@
 -- To check all the keymaps -> :Telescope keymaps
 -- Check all notifications -> :Notifications
 -- Check past messages -> :messages
+-- Select last visual selection -> gv
+-- Copy visual section to a line number -> :'<,'>t15 (copies To line 15)
 
 -- Load keymaps & options
 require("config")

@@ -170,13 +170,13 @@ return {
             end, { desc = "Live Grep Open Buffers" })
             vim.keymap.set("n", "<leader>bl", require("telescope.builtin").buffers, { desc = "List Buffers" })
 
-            -- Needs terminal configured to send correct key code to NeoVim: \x1b[70;5u
+            -- NOTE: Needs terminal configured to send correct key code to NeoVim: \x1b[70;5u
             vim.keymap.set("n", "<C-S-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
             vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
             vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Search current Word in Project" })
 
             -- List
-            -- Needs terminal configured to send correct key code to NeoVim: \x1b[80;5u
+            -- NOTE: Needs terminal configured to send correct key code to NeoVim: \x1b[80;5u
             vim.keymap.set("n", "<C-S-p>", require("telescope.builtin").find_files, { desc = "Search Files" })
             vim.keymap.set("n", "<leader>bf", require("telescope.builtin").find_files, { desc = "Search Files" })
 

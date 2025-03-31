@@ -1,38 +1,21 @@
 return {
+    {
+        "saghen/blink.compat",
+        lazy = true,
+        opts = {},
+    },
+
     -- codeium
     {
         "Exafunction/codeium.nvim",
         cond = require("config.util").is_not_vscode(),
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-                "saghen/blink.compat",
-                opts = function()
-                    -- Do NOT use if codeium is not loaded
-                    local codeium_loaded, _ = pcall(require, "codeium")
-                    if not codeium_loaded then
-                        return {}
-                    end
-                    return {
-                        enable_events = true,
-                        sources = {
-                            providers = {
-                                codeium = {
-                                    name = "codeium",
-                                    module = "blink.compat.source",
-                                    score_offset = 1200,
-                                    async = true,
-                                },
-                            },
-                        },
-                    }
-                end,
-            },
-        },
+        dependencies = { "nvim-lua/plenary.nvim" },
         cmd = "Codeium",
         build = ":Codeium Auth",
         event = "InsertEnter",
         opts = {
+            -- TODO: Get all sources.default on blink.nvim and add "codeium" to the list
+            -- TODO: Get all sources.providers registered on blink.nvim and append "codeium" to it here
             enable_cmp_source = true,
             virtual_text = {
                 enabled = false,

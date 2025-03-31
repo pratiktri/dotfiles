@@ -7,20 +7,13 @@ return {
             "rafamadriz/friendly-snippets",
             "L3MON4D3/LuaSnip",
             "Exafunction/codeium.nvim",
-            {
-                "saghen/blink.compat",
-                optional = true,
-            },
-            {
-                "saghen/blink.compat",
-                opts = {
-                    enable_events = true,
-                },
-            },
+            "kristijanhusak/vim-dadbod-completion",
+            "moyiz/blink-emoji.nvim",
+            "disrupted/blink-cmp-conventional-commits",
         },
 
         -- use a release tag to download pre-built binaries
-        version = "*",
+        version = "1.*",
 
         opts_extend = {
             "sources.completion.enabled_providers",
@@ -34,10 +27,10 @@ return {
             -- 'default' for mappings similar to built-in completion
             -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
             -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-            -- See the full "keymap" documentation for information on defining your own keymap.
+            -- 'none' - create all the mappings yourself
             keymap = {
                 preset = "none",
-                ["<C-CR>"] = { "select_and_accept" }, -- Ctrl + Enter to accept
+                ["<C-CR>"] = { "accept", "fallback" }, -- Ctrl + Enter to accept
                 ["<C-x>"] = { "hide", "fallback" }, -- Ctrl + x to reject
 
                 ["<Tab>"] = { "snippet_forward", "fallback" },
@@ -61,13 +54,14 @@ return {
                 keyword = { range = "full" },
                 accept = { auto_brackets = { enabled = false } },
                 menu = {
+                    border = "rounded",
                     draw = {
                         treesitter = { "lsp" },
                     },
                 },
                 documentation = {
                     auto_show = true,
-                    auto_show_delay_ms = 200,
+                    auto_show_delay_ms = 100,
                 },
                 ghost_text = {
                     enabled = false,
@@ -80,18 +74,82 @@ return {
             -- jump forward or backward in luasnip snippets
             snippets = { preset = "luasnip" },
 
+            cmdline = {
+                enabled = true,
+                -- use 'inherit' to inherit mappings from top level `keymap` config
+                keymap = { preset = "inherit" },
+                sources = function()
+                    local type = vim.fn.getcmdtype()
+                    -- Search forward and backward
+                    if type == "/" or type == "?" then
+                        return { "buffer" }
+                    end
+                    -- Commands
+                    if type == ":" or type == "@" then
+                        return { "cmdline" }
+                    end
+                    return {}
+                end,
+                completion = {
+                    trigger = {
+                        show_on_blocked_trigger_characters = {},
+                        show_on_x_blocked_trigger_characters = {},
+                    },
+                    list = {
+                        selection = {
+                            -- When `true`, will automatically select the first item in the completion list
+                            preselect = true,
+                            -- When `true`, inserts the completion item automatically when selecting it
+                            auto_insert = true,
+                        },
+                    },
+                    -- Whether to automatically show the window when new completion items are available
+                    menu = { auto_show = true },
+                    -- Displays a preview of the selected item on the current line
+                    ghost_text = { enabled = false },
+                },
+            },
+
             sources = {
                 default = {
                     "lsp",
                     "buffer",
                     "path",
-                    "dadbod",
                     "snippets",
-                    "markdown",
+                    "codeium",
                 },
-                cmdline = {},
+                per_filetype = {
+                    sql = { "snippets", "dadbod", "buffer" },
+                    markdown = { "markdown", "snippets", "buffer", "path", "emoji" },
+                    gitcommit = { "conventional_commits", "emoji", "buffer", "snippets" },
+                },
 
                 providers = {
+                    codeium = {
+                        name = "codeium", -- Cause it's registered on nvim-cmp as "codeium"
+                        module = "blink.compat.source",
+                        score_offset = 600,
+                    },
+                    conventional_commits = {
+                        name = "Conventional Commits",
+                        module = "blink-cmp-conventional-commits",
+                        should_show_items = function()
+                            return vim.tbl_contains({ "gitcommit" }, vim.o.filetype)
+                        end,
+                        ---@module 'blink-cmp-conventional-commits'
+                        ---@type blink-cmp-conventional-commits.Options
+                        opts = {},
+                        score_offset = 700,
+                    },
+                    emoji = {
+                        module = "blink-emoji",
+                        name = "Emoji",
+                        score_offset = 700,
+                        opts = { insert = true },
+                        should_show_items = function()
+                            return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype)
+                        end,
+                    },
                     lsp = {
                         score_offset = 1000,
                     },
@@ -112,6 +170,7 @@ return {
                     markdown = {
                         name = "RenderMarkdown",
                         module = "render-markdown.integ.blink",
+                        score_offset = 900,
                     },
                 },
             },

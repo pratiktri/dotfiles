@@ -3,8 +3,7 @@
 1. Restore my dotfiles on any *nix OS.
 2. Install required applications on any Linux OS.
 
-Dotfiles are symlinked from the repo to the required location.
-That is, changes on repository get auto reflected on the system.
+Dotfiles are symlinked from the repo to the required location. Changes made in the repository will be automatically reflected on the system when the symlink is created.
 
 ## Usage
 
@@ -12,7 +11,7 @@ That is, changes on repository get auto reflected on the system.
 $ git clone https://github.com/pratiktri/dotfiles
 
 $ sh setup.sh -h
-Apply all settings stored in the script's directory to your home directory.
+Apply all settings stored in the scripts directory to your home directory.
 
 Usage: ./setup.sh [OPTION]
 Options:
@@ -32,7 +31,7 @@ It reads 2 text files to gather lists of software to install:
 
 Any package not available are *skipped*.
 
-`install.sh` calls `install-os-packages.sh` and `install-brew-packages.sh`. Both can be executed separately.
+`install.sh` calls `install-os-packages.sh` and `install-brew-packages.sh`. But, both can be executed independently.
 
 ### Manual installation to be done for various distros
 

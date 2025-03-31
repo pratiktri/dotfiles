@@ -215,7 +215,7 @@ SetEditor=false
 2 screens: Height=1359
 2 screens: Width=1279
 2 screens: Window-Maximized=true
-2560x1440 screen: Height=1359
+2560x1440 screen: Height=1360
 2560x1440 screen: Width=1279
 ToolBarsMovable=Disabled
 

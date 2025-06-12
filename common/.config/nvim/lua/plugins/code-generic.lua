@@ -6,7 +6,7 @@ return {
     -- Better code folding
     {
         "kevinhwang91/nvim-ufo",
-        version = "v1.4.0",
+        version = "v1.5.0",
         cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         dependencies = {
@@ -31,7 +31,7 @@ return {
                 return { "treesitter", "indent" }
             end,
             open_fold_hl_timeout = 0,
-            close_fold_kinds_for_ft = { "imports", "comment" },
+            close_fold_kinds_for_ft = { default = { "imports", "comment" } },
             fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
                 local totalLines = vim.api.nvim_buf_line_count(0)
@@ -81,8 +81,6 @@ return {
 
             vim.keymap.set("n", "zR", require("ufo").openAllFolds)
             vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-
-            require("ufo").setup()
         end,
     },
 

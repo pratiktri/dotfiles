@@ -100,6 +100,9 @@ nnoremap <M-k> :m .-2<cr>==
 vnoremap <M-j> :m '>+1<cr>gv=gv
 vnoremap <M-k> :m '<-2<cr>gv=gv
 
+" Evaluate expression of the highlighted text and paste at the end
+vnoremap <leader>= y`]a = <C-r>=<C-r>"<CR><Esc>
+
 " Insert mode: add undo points on "," & "." & ";"
 imap , ,<C-g>u
 imap . .<C-g>u

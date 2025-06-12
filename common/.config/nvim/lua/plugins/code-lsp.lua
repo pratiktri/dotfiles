@@ -85,8 +85,9 @@ return {
                         })
                     end
 
+                    -- Native lsp inline virtual text / inlay hints
                     if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-                        -- vim.lsp.inlay_hint.enable()
+                        vim.lsp.inlay_hint.enable() -- enabled by default
 
                         map("<leader>cI", function()
                             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))

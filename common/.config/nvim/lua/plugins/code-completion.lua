@@ -30,7 +30,7 @@ return {
             -- 'none' - create all the mappings yourself
             keymap = {
                 preset = "none",
-                ["<C-CR>"] = { "accept", "fallback" }, -- Ctrl + Enter to accept
+                ["<CR>"] = { "accept", "fallback" }, -- Ctrl + Enter to accept
                 ["<C-x>"] = { "hide", "fallback" }, -- Ctrl + x to reject
 
                 ["<Tab>"] = { "snippet_forward", "fallback" },
@@ -52,7 +52,7 @@ return {
 
             completion = {
                 keyword = { range = "full" },
-                accept = { auto_brackets = { enabled = false } },
+                accept = { auto_brackets = { enabled = true } },
                 menu = {
                     border = "rounded",
                     draw = {
@@ -116,7 +116,7 @@ return {
                     "buffer",
                     "path",
                     "snippets",
-                    "codeium",
+                    -- "codeium",
                 },
                 per_filetype = {
                     sql = { "snippets", "dadbod", "buffer" },
@@ -125,11 +125,11 @@ return {
                 },
 
                 providers = {
-                    codeium = {
-                        name = "codeium", -- Cause it's registered on nvim-cmp as "codeium"
-                        module = "blink.compat.source",
-                        score_offset = 600,
-                    },
+                    -- codeium = {
+                    --     name = "codeium", -- Cause it's registered on nvim-cmp as "codeium"
+                    --     module = "blink.compat.source",
+                    --     score_offset = 600,
+                    -- },
                     conventional_commits = {
                         name = "Conventional Commits",
                         module = "blink-cmp-conventional-commits",

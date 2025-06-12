@@ -181,7 +181,7 @@
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
     "[lua]": {
-        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+        "editor.defaultFormatter": "sumneko.lua"
     },
 
     // Better Comments

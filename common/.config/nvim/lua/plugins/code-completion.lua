@@ -6,7 +6,6 @@ return {
         dependencies = {
             "rafamadriz/friendly-snippets",
             "L3MON4D3/LuaSnip",
-            "Exafunction/codeium.nvim",
             "kristijanhusak/vim-dadbod-completion",
             "moyiz/blink-emoji.nvim",
             "disrupted/blink-cmp-conventional-commits",
@@ -116,7 +115,6 @@ return {
                     "buffer",
                     "path",
                     "snippets",
-                    -- "codeium",
                 },
                 per_filetype = {
                     sql = { "snippets", "dadbod", "buffer" },
@@ -125,11 +123,6 @@ return {
                 },
 
                 providers = {
-                    -- codeium = {
-                    --     name = "codeium", -- Cause it's registered on nvim-cmp as "codeium"
-                    --     module = "blink.compat.source",
-                    --     score_offset = 600,
-                    -- },
                     conventional_commits = {
                         name = "Conventional Commits",
                         module = "blink-cmp-conventional-commits",

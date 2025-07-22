@@ -1,95 +1,129 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
 // To see all of Zed's default settings without changing your
 // custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
-
+// command palette
 {
+    "auto_update_extensions": {
+        "proto": false,
+        "rainbow-csv": false,
+        "graphql": false,
+        "csharp": false,
+        "lua": false,
+        "dockerfile": false,
+        "html": false,
+        "catppuccin": false
+    },
+    "auto_install_extensions": {
+        "catppuccin": true,
+        "catppuccin icons": true,
+        "html": true,
+        "dockerfile": true
+    },
     "telemetry": { "diagnostics": false, "metrics": false },
-    "assistant": {
-        "default_model": {
-            "provider": "zed.dev",
-            "model": "claude-3-5-sonnet-latest"
-        },
-        "version": "2"
-    },
-    "features": {
-        "inline_completion_provider": "none"
-    },
 
-    "base_keymap": "VSCode",
-    "vim_mode": true,
-
+    // UI
+    "theme": {
+        "mode": "dark",
+        "light": "One Light",
+        "dark": "Catppuccin Mocha"
+    },
+    "icon_theme": "Catppuccin Latte",
+    "tabs": { "file_icons": true, "git_status": true },
+    "tab_bar": { "show_nav_history_buttons": false },
     "ui_font_size": 16,
     "buffer_font_size": 18,
     "buffer_font_family": "FuraCode Nerd Font",
-    "buffer_line_height": { "custom": 1.5 },
-    "tabs": {
-        "file_icons": true,
-        "git_status": true
-    },
-    "outline_panel": {
-        "indent_size": 15,
-        "scrollbar": {
-            "show": "auto"
-        }
-    },
-    "project_panel": {
-        "indent_size": 15,
-        "scrollbar": {
-            "show": "auto"
-        }
-    },
-
+    "agent_font_size": 28,
     "terminal": {
         "font_family": "FuraCode Nerd Font",
         "font_size": 18,
-        "copy_on_select": true
+        "copy_on_select": true,
+        "button": true,
+        "scrollbar": { "show": "auto" },
+        "toolbar": { "breadcrumbs": true }
     },
+    "outline_panel": {
+        "indent_size": 15,
+        "scrollbar": { "show": "auto" }
+    },
+    "project_panel": {
+        "indent_size": 15,
+        "show_diagnostics": "all",
+        "scrollbar": { "show": "auto" }
+    },
+    "collaboration_panel": { "button": false },
+    "bottom_dock_layout": "right_aligned",
+    "file_finder": { "modal_max_width": "small" },
+    "use_smartcase_search": true,
+    "title_bar": { "show_branch_icon": true },
 
-    // "show_whitespaces": "boundary",
-    "soft_wrap": "editor_width",
+    // Editor
+    "vim_mode": true,
+    "vim": {
+        "use_system_clipboard": "never",
+        "toggle_relative_line_numbers": true
+    },
+    "vertical_scroll_margin": 10,
+    "base_keymap": "VSCode",
+    "buffer_line_height": { "custom": 1.4 },
     "tab_size": 4,
-    "unnecessary_code_fade": 0.5,
+    "soft_wrap": "editor_width",
+    "autosave": { "after_delay": { "milliseconds": 5000 } },
+    "format_on_save": "on",
+    "unnecessary_code_fade": 0.6,
+    "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": true,
+        "show_type_hints": true,
+        "show_other_hints": true,
+        "show_background": true,
+        "show_value_hints": true
+    },
+    "scrollbar": {
+        "git_diff": false
+    },
+    "indent_guides": { "enabled": true },
+    "gutter": {
+        "runnables": true,
+        "min_line_number_digits": 2,
+        "breakpoints": true
+    },
+    "journal": { "path": "~/Code/", "hour_format": "hour24" },
+    "diagnostics": {
+        "inline": {
+            "enabled": false,
+            "update_debounce_ms": 150,
+            "max_severity": "hint"
+        }
+    },
+    // "file_scan_exclusions": [  ], // Files that Zed won't search
 
+    // Git
     "git": {
         "git_gutter": "tracked_files",
-        "gutter_debounce": null,
         "inline_blame": {
             "enabled": true,
-            "delay_ms": 500
+            "show_commit_summary": true,
+            "delay_ms": 500,
+            "min_column": 80
         }
     },
 
-    "inlay_hints": {
-        "enabled": true
+    // AI
+    "agent": {
+        "default_profile": "ask",
+        "default_model": {
+            "provider": "zed.dev",
+            "model": "claude-sonnet-4"
+        },
+        "model_parameters": [],
+        "notify_when_agent_waiting": "all_screens"
     },
+    "edit_predictions_disabled_in": ["markdown"],
 
-    "journal": {
-        "path": "~/Code/",
-        "hour_format": "hour24"
-    },
-
-    "file_types": {
-        "Shell": ["sh", "bash", "zsh"]
-    },
-
-    // "lsp": {
-    //     "rust-analyzer": {
-    //         "initialization_options": {
-    //             "check": {
-    //                 "command": "clippy"
-    //             }
-    //         }
-    //     }
-    // },
-
-    "theme": {
-        "mode": "system",
-        "light": "One Light",
-        "dark": "Catppuccin Mocha"
+    // LSP
+    "languages": {
+        "Markdown": {
+            "show_edit_predictions": false
+        }
     }
 }

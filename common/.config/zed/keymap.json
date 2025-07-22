@@ -1,33 +1,142 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
 // To see the default key bindings run `zed: open default keymap`
-// from the command palette.
+// TODO: Enable spell checking in VIM mode
+
 [
     {
         "context": "Workspace",
         "bindings": {
-            "shift shift": "file_finder::Toggle"
+            "ctrl-/": "journal::NewJournalEntry",
+            "ctrl-1": "project_panel::ToggleFocus",
+            "ctrl-2": "git_panel::ToggleFocus",
+            "ctrl-3": "outline_panel::ToggleFocus",
+            "ctrl-4": "debug_panel::ToggleFocus",
+            "ctrl-5": "notification_panel::ToggleFocus"
         }
     },
     {
+        "context": "( ProjectPanel || GitPanel || OutlinePanel ) && not_editing",
         "bindings": {
-            "ctrl-k z": "workspace::ToggleZoom"
+            "q": "workspace::ToggleLeftDock"
         }
     },
     {
-        "context": "Workspace",
+        "context": "GitDiff > Editor",
         "bindings": {
-            "ctrl ctrl": "command_palette::Toggle"
+            "s": "git::ToggleStaged",
+            "x": "git::Restore",
+            "c": "git::Commit"
         }
     },
     {
-        "context": "Editor",
+        "context": "Dock",
         "bindings": {
-            // "j k": ["workspace::SendKeystrokes", "escape"]
-            "ctrl-alt-j": "journal::NewJournalEntry"
+            "ctrl-w h": "workspace::ActivatePaneLeft",
+            "ctrl-w l": "workspace::ActivatePaneRight",
+            "ctrl-w k": "workspace::ActivatePaneUp",
+            "ctrl-w j": "workspace::ActivatePaneDown"
+        }
+    },
+    {
+        "context": "Editor && ( vim_mode == visual || vim_mode == normal )&& !VimWaiting && !menu",
+        "bindings": {
+            // Access system clipboard
+            "space p": "editor::Paste",
+            "space y": "editor::Copy"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+        "bindings": {
+            // Move line up/down with J/K
+            "J": "editor::MoveLineDown",
+            "K": "editor::MoveLineUp"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+        "bindings": {
+            // Useful Zed-VIM defaults:
+            // Go to declaration           =>	gD
+            // Go to type definition       =>	gy
+            // Go to implementation        =>	gI
+            // Rename (change definition)  =>	cd
+            // Go to All references to the current word =>	gA
+            // Find symbol in current file =>	gs
+            // Find symbol in project      =>	gS
+            // Show inline error (hover)   =>	gh
+            // Open the code actions menu  =>	g.
+            //
+            // Multi-cursor:
+            // Add a cursor selecting the next copy of the current word	    => gl
+            // Add a visual selection for every copy of the current word	=> ga
+            // Add a cursor selecting the previous copy of the current word	=> gL
+            // Skip latest word selection, and add next	                    => g>
+            // Skip latest word selection, and add previous	                => g<
+            // After multi-selection: (in VIM as well)
+            //     - `A` to append text after the selection
+            //     - `I` to insert text before the selection
+            //
+            // https://github.com/tommcdo/vim-exchange
+            // https://github.com/jeetsukumaran/vim-indentwise
+
+            "space tab": "project_panel::ToggleFocus",
+            "space / /": "journal::NewJournalEntry",
+
+            // Coding & Code Navigation
+            "] ]": "vim::MoveToNext",
+            "[ [": "vim::MoveToPrevious",
+            "F2": "editor::Rename",
+            "space r": "editor::Rename",
+            "space c r": "editor::FindAllReferences",
+            "space o": "outline::Toggle",
+            "space O": "project_symbols::Toggle",
+            "ctrl-.": "editor::ToggleCodeActions",
+            "space j": "vim::PushSneak",
+            "space J": "vim::PushSneakBackward",
+
+            // Diagnostics
+            "space d w": "diagnostics::Deploy",
+            "space d t": "editor::ToggleInlineDiagnostics",
+            "space x x": "workspace::SuppressNotification",
+
+            // Git
+            "space g g": "git::Diff",
+            "space g p": "editor::ToggleSelectedDiffHunks",
+            "] g": "editor::GoToHunk",
+            "[ g": "editor::GoToPreviousHunk",
+            "space g s": "git::ToggleStaged",
+            "space g r": "git::Restore",
+            "space g b": "git::Branch",
+            "space g B": "editor::ToggleGitBlameInline",
+
+            // Buffer
+            "space b l": "tab_switcher::ToggleAll",
+            "space b x": "pane::CloseActiveItem",
+            "space x b": "pane::CloseActiveItem",
+            "space x o": "pane::CloseInactiveItems",
+
+            // Quality of life improvements:
+            // Center the cursor when moving through document
+            "ctrl-d": ["workspace::SendKeystrokes", "Ctrl-d z z"],
+            "ctrl-u": ["workspace::SendKeystrokes", "Ctrl-u z z"],
+            "ctrl-o": ["workspace::SendKeystrokes", "Ctrl-o z z"],
+            "ctrl-i": ["workspace::SendKeystrokes", "Ctrl-i z z"],
+            "g ;": ["workspace::SendKeystrokes", "g ; z z"],
+            "g ,": ["workspace::SendKeystrokes", "g , z z"],
+            "] s": ["workspace::SendKeystrokes", "] s z z"],
+            "] d": ["workspace::SendKeystrokes", "] d z z"],
+            "n": ["workspace::SendKeystrokes", "n z z"],
+            "N": ["workspace::SendKeystrokes", "N z z"],
+            //
+            // Better split management
+            "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
+            "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
+            "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
+            "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
+            "ctrl-up": ["workspace::SendKeystrokes", "ctrl-w +"],
+            "ctrl-down": ["workspace::SendKeystrokes", "ctrl-w -"],
+            "ctrl-right": ["workspace::SendKeystrokes", "ctrl-w >"],
+            "ctrl-left": ["workspace::SendKeystrokes", "ctrl-w <"]
         }
     }
 ]

@@ -149,14 +149,4 @@ return {
         },
         -- TIP: Use :PasteImage
     },
-
-    -- View images in Neovim
-    {
-        "3rd/image.nvim",
-        build = false,
-        opts = {
-            -- Use ImageMagick (Fedora) or imagemagick (Debian) installed
-            processor = "magick_cli",
-        },
-    },
 }

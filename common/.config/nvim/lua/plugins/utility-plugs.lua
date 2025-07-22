@@ -35,6 +35,14 @@ return {
             input = {
                 enabled = true,
             },
+            image = {
+                enabled = true,
+                doc = {
+                    max_width = 80,
+                    max_height = 68,
+                },
+                img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", ".artifacts/img" },
+            },
             lazygit = {
                 enabled = true,
                 configure = true,
@@ -140,7 +148,7 @@ return {
                 desc = "Notification History",
             },
             {
-                "<leader>z",
+                "<S-Esc>",
                 function()
                     Snacks.zen()
                 end,
@@ -154,12 +162,6 @@ return {
                 desc = "Git: Open the file on Browser",
             },
         },
-    },
-
-    -- Navigate between NVIM & Tmux splits seamlessly
-    {
-        "christoomey/vim-tmux-navigator",
-        cond = require("config.util").is_not_vscode(),
     },
 
     -- Navigate between NVIM & kitty splits

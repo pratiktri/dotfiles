@@ -30,9 +30,12 @@ return {
                     --  Place cursor on "View Documentation" gx -> Open the docs on browser
                     map("K", "<cmd>Lspsaga hover_doc<cr>", "Hover Documentation")
                     map("<F2>", vim.lsp.buf.rename, "Rename Symbol")
+
                     map("<C-.>", "<cmd>Lspsaga code_action<cr>", "Code Actions")
                     map("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code Actions")
+
                     map("<leader>cr", "<cmd>Lspsaga finder<cr>", "Goto References")
+
                     map("<leader>cpf", "<cmd>Lspsaga peek_definition<cr>", "Peek definition: Function")
                     map("<leader>cpt", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Class")
                     map("<leader>cpi", "<cmd>Lspsaga finder imp<cr>", "Peek: Implementations")
@@ -42,12 +45,15 @@ return {
                     --  To jump back, press <C-t>.
                     map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                     map("<F12>", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+
                     map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
                     map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+                    map("<leader>ci", require("telescope.builtin").lsp_implementations, "Goto Implementation")
 
                     map("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
                     map("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace Symbols")
-                    map("<leader>ci", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+
                     map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
                     -- e to jump to the symbol under cursor; q to quit
                     map("<leader>co", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")

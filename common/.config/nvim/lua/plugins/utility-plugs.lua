@@ -41,7 +41,7 @@ return {
                     max_width = 80,
                     max_height = 68,
                 },
-                img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", ".artifacts/img" },
+                img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", ".artifacts/img", ".artifacts", ".assets" },
             },
             lazygit = {
                 enabled = true,

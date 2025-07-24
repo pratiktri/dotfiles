@@ -115,7 +115,9 @@ return {
             default = {
                 use_absolute_path = false, ---@type boolean
                 relative_to_current_file = false, ---@type boolean
+                use_cursor_in_template = true,
 
+                -- Generic config, specifies inside `filetypes` section below
                 dir_path = function()
                     local root = vim.fn.FindRootDirectory()
                     if root ~= "" then
@@ -125,11 +127,9 @@ return {
                     end
                 end,
 
-                prompt_for_file_name = false, ---@type boolean
+                prompt_for_file_name = true, ---@type boolean
                 file_name = "%y%m%d-%H%M%S", ---@type string
 
-                -- Format of the image to be saved: must convert it as well
-                -- https://stackoverflow.com/a/27269260
                 extension = "webp", ---@type string
                 process_cmd = "convert - -quality 75 webp:-", ---@type string
             },
@@ -138,13 +138,23 @@ return {
                 markdown = {
                     url_encode_path = true, ---@type boolean
 
-                    -- The template is what specifies how the alternative text and path
-                    -- of the image will appear in your file
-                    -- I want to use blink.cmp to easily find images with the LSP, so adding ./
-                    template = "![Image](./$FILE_PATH)",
+                    template = "![$CURSOR](./$FILE_PATH)",
 
-                    -- template = "![$FILE_NAME]($FILE_PATH)", ---@type string
+                    dir_path = function()
+                        local root = vim.fn.FindRootDirectory()
+                        if root ~= "" then
+                            return root .. "/.artifacts/img"
+                        else
+                            return vim.fn.expand("%:p:h") .. "/.artifacts/img"
+                        end
+                    end,
+
+                    file_name = "%y%m%d-%H%M%S",
+                    extension = "webp", ---@type string
+                    process_cmd = "convert - -resize 800x -quality 85 webp:-", ---@type string
                 },
+                -- TODO: Adapt for HTMLs
+                -- html = {},
             },
         },
         -- TIP: Use :PasteImage

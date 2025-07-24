@@ -11,6 +11,9 @@
 # exec 3>&2 2>$logfile
 # setopt XTRACE
 
+# Sets environment variables for login non-interactive shells (VS Code & Zed)
+[ -z "$XDG_CONFIG_HOME" ] && source "$HOME"/.profile
+
 # ZSH Options # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 bindkey -v                  # enable vi-mode
 setopt +o nomatch           # Unmatched glob patterns like bash

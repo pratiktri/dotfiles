@@ -1,7 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-[ ! -f "$HOME/.profile" ] || source "$HOME/.profile"
+# Sets environment variables for login non-interactive shells (VS Code & Zed)
+[ -z "$XDG_CONFIG_HOME" ] && source "$HOME"/profile
 
 # If not running interactively, don't do anything
 case $- in
@@ -186,6 +187,6 @@ command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd bash)"
 # Source aliases and shell functions
 for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
 
-# TIP: Following should be executed AFTER the aliases are sourced
+# TIP: Should be executed AFTER aliases are sourced
 command -v op >/dev/null && bind '"^O":"op\n"'      # Fuzzyfind projects and open in nvim
 command -v pnew >/dev/null && bind '"^[o":"pnew\n"' # Create a new project quickly

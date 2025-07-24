@@ -10,16 +10,9 @@
 # And I use the brew version of nvim for my work
 [ ! -d "$HOME/.local/bin" ] || PATH="$PATH:$HOME/.local/bin"
 
-# Set the config directory environment variable
 [ "$XDG_CONFIG_HOME" != "" ] || export XDG_CONFIG_HOME="$HOME/.config"
-
-# Set the cache directory environment variable
 [ "$XDG_CACHE_HOME" != "" ] || export XDG_CACHE_HOME="$HOME/.cache"
-
-# Set the data directory environment variable
 [ "$XDG_DATA_HOME" != "" ] || export XDG_DATA_HOME="$HOME/.local/share"
-
-# Set the state directory environment variable
 [ "$XDG_STATE_HOME" != "" ] || export XDG_STATE_HOME="$HOME/.local/state"
 
 ##################################################################################
@@ -30,11 +23,6 @@ fi
 
 # shellcheck disable=SC3045
 ulimit -n 10240
-
-[ ! -f "${XDG_CONFIG_HOME}/templates/.gitignore" ] || export GITIGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.gitignore"
-[ ! -f "${XDG_CONFIG_HOME}/templates/.prettierrc" ] || export PRETTIER_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierrc"
-[ ! -f "${XDG_CONFIG_HOME}/templates/.prettierignore" ] || export PRETTIER_IGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierignore"
-[ ! -f "${XDG_CONFIG_HOME}/templates/pre-commit" ] || export GIT_PRECOMMIT_TEMPLATE="${XDG_CONFIG_HOME}/templates/pre-commit"
 
 EDITOR=$(command -v nvim 2>/dev/null || command -v vim 2>/dev/null)
 export EDITOR
@@ -65,14 +53,28 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_AUTO_UPDATE_SECS=3600
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
 
+export WGETRC="${XDG_CONFIG_HOME}/wgetrc" && [ ! -f "$WGETRC" ] && touch "$WGETRC"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
-export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
-[ ! -f "$WGETRC" ] && touch "$WGETRC"
+export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
+export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
+export OLLAMA_MODELS="${DEV_CACHE_PATH}"/ollama
+export PATH="$PATH:/home/pratik/.lmstudio/bin"
 
 export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
 
-# Setup Python
+export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~80% --border'
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
+[ ! -f "${XDG_CONFIG_HOME}/templates/.gitignore" ] || export GITIGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.gitignore"
+[ ! -f "${XDG_CONFIG_HOME}/templates/.prettierrc" ] || export PRETTIER_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierrc"
+[ ! -f "${XDG_CONFIG_HOME}/templates/.prettierignore" ] || export PRETTIER_IGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierignore"
+[ ! -f "${XDG_CONFIG_HOME}/templates/pre-commit" ] || export GIT_PRECOMMIT_TEMPLATE="${XDG_CONFIG_HOME}/templates/pre-commit"
+
+# Python
 export PYTHON_HISTORY="${XDG_STATE_HOME}/shell/python_history" # will be picked up by Python 3.13+
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
@@ -80,16 +82,15 @@ export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 command -v pyenv >/dev/null && export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
-# Setup Rust
+# Rust
 export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
-export PATH="$PATH:$CARGO_HOME/bin"
+# shellcheck disable=SC1091
+[ -f "${CARGO_HOME}/env" ] && . "${CARGO_HOME}/env"
 export RUSTC_WRAPPER=sccache
 export SCCACHE_CACHE_SIZE="20G"
-# shellcheck disable=SC1091
-[ -f "${XDG_DATA_HOME}/rust/cargo/env" ] && . "${XDG_DATA_HOME}/rust/cargo/env"
 
-# Setup DotNet
+# DotNet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_CLI_HOME="${XDG_CONFIG_HOME}/dotnet"
 export DOTNET_TOOLS_PATH="${XDG_DATA_HOME}/dotnet"
@@ -117,19 +118,3 @@ export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
 export N_PREFIX="${XDG_DATA_HOME}/n_node"
 export PATH="$N_PREFIX/bin:$PATH"
 command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
-
-export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
-export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
-
-export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~80% --border'
-
-export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
-
-export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
-export OLLAMA_MODELS="${DEV_CACHE_PATH}"/ollama
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/pratik/.lmstudio/bin"

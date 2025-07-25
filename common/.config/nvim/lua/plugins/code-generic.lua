@@ -370,6 +370,8 @@ return {
 
                     -- Default Mappings on the popup
                     --
+                    -- ["f"] = Search the children nodes using telescope
+                    --
                     -- ["J"] = actions.move_down(), -- Move focused node down
                     -- ["K"] = actions.move_up(), -- Move focused node up
                     --

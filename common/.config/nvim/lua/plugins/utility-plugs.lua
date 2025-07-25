@@ -241,26 +241,6 @@ return {
         },
     },
 
-    {
-        "Rics-Dev/project-explorer.nvim",
-        enabled = false,
-        dependencies = {
-            "nvim-telescope/telescope.nvim",
-        },
-        opts = {
-            -- TODO: fix it
-            command_pattern = "find -L ~/Code -mindepth 1 -maxdepth 3 -type d -name '.git' -printf '%h\n'",
-            newProjectPath = "~/Code/Dabble/", --custom path for new projects
-            file_explorer = function(dir) --custom file explorer set by user
-                vim.cmd("Neotree close")
-                vim.cmd("Neotree " .. dir)
-            end,
-        },
-        config = function(_, opts)
-            require("project_explorer").setup(opts)
-        end,
-    },
-
     -- Session management. Saves your session in the background
     -- TIP: autocmd to autoload sessions at: ../config/autocmd.lua
     {

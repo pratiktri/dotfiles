@@ -252,10 +252,10 @@ return {
                         {
                             "diagnostics",
                             symbols = {
-                                error = config.icons.diagnostics.Error,
-                                warn = config.icons.diagnostics.Warn,
-                                info = config.icons.diagnostics.Info,
-                                hint = config.icons.diagnostics.Hint,
+                                error = config.icons.diagnostics.ERROR,
+                                warn = config.icons.diagnostics.WARN,
+                                info = config.icons.diagnostics.INFO,
+                                hint = config.icons.diagnostics.HINT,
                             },
                         },
                         {

@@ -12,7 +12,7 @@ local M = {
             BreakpointRejected = { " ", "DiagnosticError" },
             LogPoint = ".>",
         },
-        diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " " },
+        diagnostics = { ERROR = " ", WARN = " ", HINT = " ", INFO = " " },
         git = { added = " ", modified = " ", removed = " " },
         kinds = {
             Array = " ",

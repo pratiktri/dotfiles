@@ -6,35 +6,31 @@ return {
         lazy = false,
         cond = require("config.util").is_not_vscode(),
         opts = {
-            -- Want these but after they are fixed
-            indent = {
-                -- NOTE: highlights for blanklines are too noisy
-                -- mini.indentscope does it much better
-                enabled = false,
-            },
-            scope = {
-                -- NOTE: mini.indentscope does this and indent guide as well
-                enabled = false,
-            },
-            statuscolumn = {
-                -- NOTE: just did not work
-                enabled = false,
-            },
+            bigfile = { enabled = false },
+            dashboard = { enabled = false },
+            explorer = { enabled = false },
+            indent = { enabled = false },
+            scope = { enabled = false },
+            layout = { enabled = false },
+            statuscolumn = { enabled = false },
+            terminal = { enabled = false },
+            win = { enabled = false },
 
-            bigfile = {
-                enabled = true,
-                notify = true,
-                size = 10 * 1024 * 1024, -- 10 MB
-            },
-            bufdelete = {
-                enabled = true,
-            },
+            bufdelete = { enabled = true },
+            git = { enabled = true },
             gitbrowse = {
                 enabled = true,
+                notify = true,
+                url_patterns = {
+                    ["git%.pratik%.live"] = {
+                        branch = "/src/branch/{branch}",
+                        file = "/src/branch/{branch}/{file}#L{line_start}-L{line_end}",
+                        permalink = "/src/commit/{commit}/{file}#L{line_start}-L{line_end}",
+                        commit = "/commit/{commit}",
+                    },
+                },
             },
-            input = {
-                enabled = true,
-            },
+            input = { enabled = true },
             image = {
                 enabled = true,
                 doc = {
@@ -43,42 +39,29 @@ return {
                 },
                 img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", ".artifacts/img", ".artifacts", ".assets" },
             },
-            lazygit = {
-                enabled = true,
-                configure = true,
-                win = { style = "lazygit" },
-            },
+            lazygit = { enabled = true, configure = true, win = { style = "lazygit" } },
             notifier = {
                 enabled = true,
                 timeout = 2000,
                 style = "fancy",
             },
-            scroll = {
-                enabled = false,
-            },
+            picker = { enabled = true },
+            quickfile = { enabled = true },
             scratch = {
                 enabled = true,
+                ft = "markdown",
+                root = "~/Code/journal/scratch",
             },
-            word = {
-                enabled = true,
-            },
-            zen = {
-                enabled = true,
-            },
+            words = { enabled = true },
+            zen = { enabled = true, toggles = { dim = true } },
 
             animate = {
-                fps = 60,
-                duration = {
-                    step = 10,
-                    total = 200,
-                },
+                fps = 90,
+                duration = { step = 10, total = 200 },
             },
             styles = {
-                notification = {
-                    wo = {
-                        wrap = true,
-                    },
-                },
+                notification = { wo = { wrap = true } },
+                scratch = { width = 120, height = 35 },
             },
         },
         keys = {

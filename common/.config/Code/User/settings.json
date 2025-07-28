@@ -27,9 +27,7 @@
     "files.autoSaveDelay": 500,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "terminal.integrated.shell.linux": "/bin/zsh",
     "explorer.confirmDragAndDrop": false,
-    "workbench.sideBar.location": "right",
 
     // Editor Typography
     "editor.fontFamily": "FiraCode Nerd Font Mono",
@@ -248,21 +246,12 @@
     "cSpell.numSuggestions": 10,
     "cSpell.userWords": [
         "Aadhaar",
-        "Aiginia",
-        "BBSR",
-        "Bhubaneswar",
-        "CLR",
         "Destructured",
         "GOPATH",
-        "IIS",
-        "JIT",
-        "Jython",
         "Kumar",
         "LINQ",
         "MVC",
-        "Monomorphization",
         "OOP",
-        "Odisha",
         "Postgres",
         "Pratik",
         "Printf",
@@ -280,12 +269,8 @@
         "destructure",
         "elif",
         "mkdir",
-        "monomorphized",
         "pratiktri",
-        "ptr",
-        "pylint",
         "subfolder",
-        "ulta",
         "umount",
         "unmount"
     ],
@@ -328,17 +313,11 @@
     "python.languageServer": "Pylance",
 
     // Rust
-    "rust.build_on_save": true,
-    "rust.clippy_preference": "on",
-    "rust.full_docs": true,
-    "rust-analyzer.assist.importMergeBehavior": "last",
-    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.procMacro.enable": true,
-    "rust-analyzer.checkOnSave.command": "clippy",
     "rust-analyzer.cargo.target": null,
-    "rust-analyzer.completion.postfix.enable": false,
-    "rust-analyzer.inlayHints.enable": false,
-    "rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.restartServerOnConfigChange": true,
+    "rust-analyzer.showSyntaxTree": true,
+    "rust-analyzer.testExplorer": true
 
     // Dotnet & C#
     "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,

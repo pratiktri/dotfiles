@@ -108,7 +108,14 @@ return {
                 function()
                     Snacks.lazygit.log(opts)
                 end,
-                desc = "Git: Log",
+                desc = "LazyGit: List Git Log",
+            },
+            {
+                "<leader>gL",
+                function()
+                    Snacks.git.blame_line(opts)
+                end,
+                desc = "Git: Line Log",
             },
             {
                 "<leader>gf",
@@ -116,6 +123,13 @@ return {
                     Snacks.lazygit.log_file(opts)
                 end,
                 desc = "Git: Show File Log",
+            },
+            {
+                "<leader>gO",
+                function()
+                    Snacks.gitbrowse.open(opts)
+                end,
+                desc = "Git: Open the file on Browser",
             },
             {
                 "]]",
@@ -153,13 +167,6 @@ return {
                     Snacks.zen()
                 end,
                 desc = "Toggle Zen Mode",
-            },
-            {
-                "<leader>gO",
-                function()
-                    Snacks.gitbrowse.open(opts)
-                end,
-                desc = "Git: Open the file on Browser",
             },
         },
     },
@@ -226,10 +233,11 @@ return {
             -- Document existing key chains
             spec = {
                 { "<leader>/", group = "NVIM Scratch Buffer" },
-                { "<leader>a", group = "AI" },
-                { "<leader>b", group = "Buffer Operations", icon = { icon = "", color = "orange" } },
+                { "<leader>a", group = "AI", icon = { icon = "󰚩", color = "orange" } },
+                { "<leader>b", group = "Buffer Operations", icon = { icon = "󰲂", color = "orange" } },
                 { "<leader>c", group = "Code", icon = { icon = "", color = "orange" } },
-                { "<leader>d", group = "Diagnostics", icon = { icon = "", color = "orange" } },
+                { "<leader>d", group = "Diagnostics", icon = { icon = "🔬", color = "orange" } },
+                { "<leader>D", group = "Debug", icon = { icon = "", color = "orange" } },
                 { "<leader>g", group = "Git", icon = { icon = "", color = "orange" } },
                 { "<leader>h", group = "Help", icon = { icon = "󰞋", color = "orange" } },
                 { "<leader>n", group = "Neovim Things", icon = { icon = "", color = "orange" } },
@@ -237,6 +245,7 @@ return {
                 { "<leader>s", group = "Search/Grep", icon = { icon = "", color = "orange" } },
                 { "<leader>t", group = "Unit Test" },
                 { "<leader>x", group = "Delete/Disable/Remove", icon = { icon = "", color = "orange" } },
+                -- More icons: https://github.com/echasnovski/mini.icons/blob/main/lua/mini/icons.lua#L686
             },
         },
     },

@@ -81,10 +81,6 @@ return {
                 map("n", "<leader>gsh", gs.stage_hunk, { desc = "Git: Stage Hunk" })
                 map("n", "<leader>gsu", gs.undo_stage_hunk, { desc = "Git: Undo Stage Hunk" })
                 map("n", "<leader>gsb", gs.stage_buffer, { desc = "Git: Stage Current File" })
-                map("n", "<leader>gK", function()
-                    gs.blame_line({ full = true })
-                end, { desc = "Git: Hover blame-line" })
-
                 -- visual mode
                 map("v", "<leader>gsH", function()
                     gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
@@ -93,8 +89,11 @@ return {
                 -- normal mode
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
 
-                -- Toggles
-                map("n", "<leader>gB", gs.toggle_current_line_blame, { desc = "Git: Toggle blame-line" })
+                map("n", "<leader>gK", function()
+                    gs.blame_line({ full = true })
+                end, { desc = "Git: Hover blame-line" })
+
+                map("n", "<leader>gB", gs.toggle_current_line_blame, { desc = "Git: Toggle virtual blame-line" })
             end,
         },
     },

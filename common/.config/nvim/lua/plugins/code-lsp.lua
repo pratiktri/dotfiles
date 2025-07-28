@@ -57,4 +57,28 @@ return {
             },
         },
     },
+
+    -- Rust
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^6",
+        config = function()
+            vim.g.rusteceanvim = {
+                dap = {
+                    adapter = {
+                        type = "executable",
+                        command = "codelldb",
+                        name = "codelldb",
+                    },
+                },
+            }
+        end,
+    },
+    {
+        "saecki/crates.nvim",
+        tag = "stable",
+        config = function()
+            require("crates").setup()
+        end,
+    },
 }

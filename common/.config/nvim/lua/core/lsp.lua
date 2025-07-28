@@ -1,3 +1,7 @@
+-- TIP:
+-- Step 1: Install the LSP through either of the following:
+--         OS Installer > Brew-linux > Mason NeoVim Plugin
+-- Step 2: Append the LSP server name in the below array
 vim.lsp.enable({
     "bashls",
     "cssls",
@@ -6,38 +10,58 @@ vim.lsp.enable({
     "html",
     "jsonls",
     "lua_ls",
-    "omnisharp",
     "pylsp",
-    "rust_analyzer",
     "sqlls",
     "ts_ls",
-    -- TODO: Enable inlay_hints for all of them
 })
 
 -- TIP: On new systems, install these through Mason
+-- They aren't usually found on either OS installer or brew-linux
 ---@diagnostic disable-next-line: unused-local
 local to_installed = vim.tbl_keys({
-    "black", -- Python formatter
-    "csharpier", -- C# formatter
-    "djlint", -- Handlebar Formatter
-    "markdown-toc",
-    "markdownlint",
-    "netcoredbg", -- C# Debugger
-    "prettier",
-    "prettierd",
-    "shellharden",
-    "shfmt",
-    "stylua",
-    "trivy", -- Vulnerability Linter
-    "yamlfmt",
+    "codelldb",
+    "css-lsp",
+    "docker-compose-language-service",
+    "html-lsp",
+    "json-lsp",
+    "sqlls",
 })
+
+-- Setup native diagnostic
+vim.diagnostic.config({
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        border = "rounded",
+        source = true,
+    },
+    virtual_text = {
+        enabled = true,
+        severity = { min = vim.diagnostic.severity.ERROR },
+    },
+    virtual_lines = {
+        current_line = true,
+        severity = { min = vim.diagnostic.severity.INFO },
+    },
+})
+
+-- Change diagnostic symbols in the sign column (gutter)
+if vim.g.have_nerd_font then
+    local signs = require("config.util").icons.diagnostics
+    local diagnostic_signs = {}
+    for type, icon in pairs(signs) do
+        diagnostic_signs[vim.diagnostic.severity[type]] = icon
+    end
+    vim.diagnostic.config({ signs = { text = diagnostic_signs } })
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
     callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-        -- Setup LSP completion
+        -- Setup native LSP completion
         -- This is already done by blink, but better prefer the builtin one
         if client:supports_method("textDocument/completion") then
             vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }

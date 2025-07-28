@@ -3,7 +3,7 @@ return {
         "neovim/nvim-lspconfig",
         cond = require("config.util").is_not_vscode(),
         dependencies = {
-            { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+            { "williamboman/mason.nvim", config = true }, -- TIP: Must be loaded before dependants
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             "saghen/blink.cmp",
@@ -12,7 +12,7 @@ return {
             local servers = {}
             local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-            -- NOTE: `nvim-lspconfig` has default LSP configs in its DB which saves time
+            -- TIP: `nvim-lspconfig` has default LSP configs in its DB which saves time
             -- Useful even after NeoVim 0.11, which made LSP setup much easier
             -- Configs in `nvim/lsp/*` are APPENDED to each LSP setup here
             require("mason-lspconfig").setup({

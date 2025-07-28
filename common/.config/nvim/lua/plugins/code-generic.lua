@@ -32,43 +32,43 @@ return {
         "echasnovski/mini.nvim",
         version = false,
         config = function()
-            -- va)  - [V]isually select [A]round [)]paren
-            --  - a) would implicitly select around another ), based on some predefined logic
-            -- ci'  - [C]hange [I]nside [']quote
-            -- via  - [a]rguments
-            -- vif  - [f]unction calls
-            -- va_  - Select around "_"
-            -- va1  - Select around two "1"
-            --
-            -- Explicit Covering Region:
-            -- vinq - Select [I]nside [N]ext [Q]uote
-            -- vilb - Select Inside Last Bracket
-            -- cina - Change next function argument
-            -- cila - Change last function argument
-            require("mini.ai").setup({ n_lines = 500 })
-
-            -- mini.surround
-            -- Functionality similar to tpope's vim-surround
-            require("mini.surround").setup({
-                mappings = {
-                    add = "ys", -- Add surrounding in Normal and Visual modes
-                    delete = "ds", -- Delete surrounding
-                    find = "yf", -- Find surrounding (to the right)
-                    find_left = "yF", -- Find surrounding (to the left)
-                    highlight = "yh", -- Highlight surrounding
-                    replace = "cs", -- Replace surrounding
-                    update_n_lines = "", -- Update `n_lines`
-                },
-                n_lines = 20,
-                search_method = "cover_or_next",
-            })
-
             -- gc
             require("mini.comment").setup()
 
             require("mini.pairs").setup()
 
-            -- Configure mini.indentscope
+            -- mini.ai
+            -- va)  - [v]isually select [a]round [)]paren
+            --  - a) would implicitly select around another ), based on some predefined logic
+            -- ci'  - [c]hange [i]nside [']quote
+            -- via  - [a]rguments
+            -- vif  - [f]unction calls
+            -- va_  - select around "_"
+            -- va1  - select around two "1"
+            --
+            -- explicit covering region:
+            -- vinq - select [i]nside [n]ext [q]uote
+            -- vilb - select inside last bracket
+            -- cina - change next function argument
+            -- cila - change last function argument
+            require("mini.ai").setup({ n_lines = 500 })
+
+            -- mini.surround
+            -- functionality similar to tpope's vim-surround
+            require("mini.surround").setup({
+                mappings = {
+                    add = "ys", -- add surrounding in normal and visual modes
+                    delete = "ds", -- delete surrounding
+                    find = "yf", -- find surrounding (to the right)
+                    find_left = "yf", -- find surrounding (to the left)
+                    highlight = "yh", -- highlight surrounding
+                    replace = "cs", -- replace surrounding
+                    update_n_lines = "", -- update `n_lines`
+                },
+                silent = true,
+            })
+
+            -- configure mini.indentscope
             if require("config.util").is_not_vscode() then
                 require("mini.indentscope").setup({
                     delay = 100,

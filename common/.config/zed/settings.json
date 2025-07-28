@@ -32,7 +32,7 @@
     "ui_font_size": 16,
     "buffer_font_size": 18,
     "buffer_font_family": "FuraCode Nerd Font",
-    "agent_font_size": 28,
+    "agent_font_size": 18,
     "terminal": {
         "font_family": "FuraCode Nerd Font",
         "font_size": 18,
@@ -112,8 +112,8 @@
     "agent": {
         "default_profile": "ask",
         "default_model": {
-            "provider": "zed.dev",
-            "model": "claude-sonnet-4"
+            "provider": "lmstudio",
+            "model": "mistralai/codestral-22b-v0.1"
         },
         "model_parameters": [],
         "notify_when_agent_waiting": "all_screens"
@@ -124,6 +124,22 @@
     "languages": {
         "Markdown": {
             "show_edit_predictions": false
+        }
+    },
+
+    "lsp": {
+        "rust-analyzer": {
+            "initialization_options": {
+                "inlayHints": {
+                    "maxLength": null,
+                    "lifetimeElisionHints": {
+                        "useParameterNames": true
+                    },
+                    "closureReturnTypeHints": {
+                        "enable": "always"
+                    }
+                }
+            }
         }
     }
 }

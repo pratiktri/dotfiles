@@ -126,6 +126,10 @@ return {
             table.insert(vimgrep_arguments, "--glob")
             -- And to ignore .git directory. Needed since its not `.gitignore`d
             table.insert(vimgrep_arguments, "!**/.git/*")
+            table.insert(vimgrep_arguments, "--glob")
+            table.insert(vimgrep_arguments, "!**/node_modules/*")
+            table.insert(vimgrep_arguments, "--glob")
+            table.insert(vimgrep_arguments, "!**/target/*")
 
             require("telescope").setup({
                 defaults = {
@@ -145,7 +149,7 @@ return {
                     find_files = {
                         hidden = true,
                         -- Redoing the vimgrep_arguments changes for find_files as well
-                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--glob", "!**/node_modules/*", "--glob", "!**/target/*" },
                     },
                 },
                 extensions = {

@@ -10,6 +10,7 @@ libavcodec-extra
 akmod-nvidia
 dnf-plugins-core
 libva-nvidia-driver
+nodejs-bash-language-server
 xorg-x11-drv-nvidia-cuda
 
 # Common
@@ -17,7 +18,6 @@ aspnetcore-runtime-8.0
 bash
 bat
 bleachbit
-brave-browser
 btop
 cmake
 code
@@ -29,8 +29,6 @@ docker-ce-cli
 docker-compose-plugin
 dolphin
 dolphin-plugins
-dotnet-runtime-8.0
-dotnet-sdk-8.0
 evolution-ews
 evolution-mapi
 fd-find
@@ -72,7 +70,7 @@ qbittorrent
 rclone
 ripgrep
 sccache
-ShellCheck
+shellcheck
 simplescreenrecorder
 smplayer
 software-properties-common
@@ -81,6 +79,7 @@ syncthing
 tmux
 tokei
 tree-sitter-cli
+trivy
 ufw
 ulauncher
 vim
@@ -94,7 +93,6 @@ zsh
 
 # FreeBSD packages
 codespell
-dotnet
 html
 fusefs-lkl
 firefox-esr

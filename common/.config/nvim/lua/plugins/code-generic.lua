@@ -1,32 +1,6 @@
 return {
     { "tpope/vim-repeat" },
 
-    -- indent guides for Neovim
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        cond = require("config.util").is_not_vscode(),
-        opts = {
-            indent = { char = "│", tab_char = "│" },
-            scope = { enabled = false },
-            exclude = {
-                filetypes = {
-                    "help",
-                    "alpha",
-                    "dashboard",
-                    "neo-tree",
-                    "Trouble",
-                    "trouble",
-                    "lazy",
-                    "mason",
-                    "notify",
-                    "toggleterm",
-                    "lazyterm",
-                },
-            },
-        },
-        main = "ibl",
-    },
-
     -- mini.nvim: Collection of various small independent plugins/modules
     {
         "echasnovski/mini.nvim",

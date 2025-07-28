@@ -75,18 +75,7 @@ return {
                 -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
 
-                -- Staging
-                -- Actions
                 map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: reset hunk" })
-                map("n", "<leader>gsh", gs.stage_hunk, { desc = "Git: Stage Hunk" })
-                map("n", "<leader>gsu", gs.undo_stage_hunk, { desc = "Git: Undo Stage Hunk" })
-                map("n", "<leader>gsb", gs.stage_buffer, { desc = "Git: Stage Current File" })
-                -- visual mode
-                map("v", "<leader>gsH", function()
-                    gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                end, { desc = "Git: Visual Stage Hunk" })
-
-                -- normal mode
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
 
                 map("n", "<leader>gK", function()

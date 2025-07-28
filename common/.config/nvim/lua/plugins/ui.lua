@@ -17,8 +17,6 @@ return {
         cond = require("config.util").is_not_vscode(),
     },
 
-    { "machakann/vim-highlightedyank" },
-
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -305,6 +303,32 @@ return {
                 },
             }
         end,
+    },
+
+    -- Indent guides for Neovim
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        cond = require("config.util").is_not_vscode(),
+        opts = {
+            indent = { char = "│", tab_char = "│" },
+            scope = { enabled = false },
+            exclude = {
+                filetypes = {
+                    "help",
+                    "alpha",
+                    "dashboard",
+                    "neo-tree",
+                    "Trouble",
+                    "trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "toggleterm",
+                    "lazyterm",
+                },
+            },
+        },
+        main = "ibl",
     },
 
     -- Better folds

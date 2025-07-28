@@ -113,6 +113,8 @@ return {
                     "--column",
                     "--hidden", -- include hidden files
                     "--glob=!.git", -- exclude .git directory
+                    "--glob=!target",
+                    "--glob=!node_modules",
                 },
             },
             signs = false,
@@ -136,8 +138,8 @@ return {
                 desc = "Previous todo comment",
             },
 
-            { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME<cr>", desc = "FIXME: Tags" },
-            { "<leader>dt", "<cmd>TodoTelescope keywords=TODO<cr>", desc = "Project TODOs" },
+            { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG<cr>", desc = "FIXME: Tags" },
+            { "<leader>dt", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME,BUG<cr>", desc = "Project TODOs" },
             { "<leader>dT", "<cmd>TodoTelescope<cr>", desc = "All tags: FIX, NOTE, TIP, TODO, WARN" },
         },
     },

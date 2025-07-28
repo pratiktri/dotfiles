@@ -1,5 +1,7 @@
 // To see the default key bindings run `zed: open default keymap`
 // TODO: Enable spell checking in VIM mode
+// FIX: ctrl+n & ctrl+p selections don't work on terminal: cause they are hijacked by IDE
+//      - Use them to select next & previous
 
 [
     {
@@ -78,6 +80,10 @@
             //
             // https://github.com/tommcdo/vim-exchange
             // https://github.com/jeetsukumaran/vim-indentwise
+            //
+            // AI:
+            // Accept edit-prediction on Linux => alt-l
+            // Accept next predicted word => alt-right
 
             "space tab": "project_panel::ToggleFocus",
             "space / /": "journal::NewJournalEntry",

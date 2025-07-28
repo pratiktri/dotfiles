@@ -243,17 +243,18 @@ return {
                     -- kind = require("config.util").icons.kind_lspsaga,
                     kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
                 },
+                implement = { enabled = true },
                 symbol_in_winbar = {
                     enable = true,
                     hide_keyword = true,
                 },
-                lightbulb = {
-                    virtual_text = false,
-                },
+                lightbulb = { virtual_text = false },
                 outline = { auto_preview = false },
             })
 
-            -- Keymaps in code-lsp.lua
+            vim.keymap.set({ "n", "t" }, "<C-`>", "<cmd>Lspsaga term_toggle<cr>", { desc = "Toggle Floating Terminal" })
+
+            -- Rest of the keymaps in ../core/lsp.lua
         end,
     },
 
@@ -277,19 +278,15 @@ return {
                     size = "80%",
                 },
                 mappings = {
-                    -- Fuzzy finder at current level.
-                    ["f"] = actions.telescope({
+                    -- Telescope search symbols at current level
+                    ["/"] = actions.telescope({
                         layout_config = {
                             height = 0.8,
                             width = 0.8,
                         },
                     }),
-                    -- Show preview of current node
-                    ["o"] = actions.toggle_preview(),
 
                     -- Default Mappings on the popup
-                    --
-                    -- ["f"] = Search the children nodes using telescope
                     --
                     -- ["J"] = actions.move_down(), -- Move focused node down
                     -- ["K"] = actions.move_up(), -- Move focused node up

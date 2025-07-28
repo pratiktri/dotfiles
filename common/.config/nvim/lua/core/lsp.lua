@@ -71,6 +71,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end)
         end
 
+        -- Keymaps
         local map = function(keys, func, desc, mode)
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
@@ -86,9 +87,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- LspSaga
         map("<C-.>", "<cmd>Lspsaga code_action<cr>", "Code Actions")
         map("<leader>cr", "<cmd>Lspsaga finder<cr>", "Goto References")
-        map("<leader>cpf", "<cmd>Lspsaga peek_definition<cr>", "Peek definition: Function")
-        map("<leader>cpt", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Class")
-        map("<leader>cpi", "<cmd>Lspsaga finder imp<cr>", "Peek: Implementations")
+        map("<leader>cF", "<cmd>Lspsaga peek_definition<cr>", "Peek definition: Function")
+        map("<leader>cT", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Class")
+        map("<leader>cI", "<cmd>Lspsaga finder imp<cr>", "Peek: Implementations")
         -- e to jump to the symbol under cursor; q to quit
         map("<leader>co", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")
 
@@ -99,60 +100,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
         map("<leader>cd", require("telescope.builtin").diagnostics, "List Diagnostics")
 
-        -- The following two autocommands are used to highlight references of the
-        -- word under cursor when cursor rests there for a little while.
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-            local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd("LspDetach", {
-                group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-                callback = function(event2)
-                    vim.lsp.buf.clear_references()
-                    vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
-                end,
-            })
-        end
-
         -- Native lsp inline virtual text / inlay hints
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            vim.lsp.inlay_hint.enable() -- enabled by default
+            vim.lsp.inlay_hint.enable()
 
-            map("<leader>cI", function()
+            map("<leader>ch", function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "Toggle Inlay Hints")
         end
     end,
-})
-
--- Change diagnostic symbols in the sign column (gutter)
-if vim.g.have_nerd_font then
-    local signs = require("config.util").icons.diagnostics
-    local diagnostic_signs = {}
-    for type, icon in pairs(signs) do
-        diagnostic_signs[vim.diagnostic.severity[type]] = icon
-    end
-    vim.diagnostic.config({ signs = { text = diagnostic_signs } })
-end
-
-vim.diagnostic.config({
-    virtual_text = {
-        enabled = true,
-        spacing = 5,
-        severity = { min = vim.diagnostic.severity.ERROR },
-    },
-    virtual_lines = {
-        current_line = true,
-        severity = { min = vim.diagnostic.severity.INFO },
-    },
 })

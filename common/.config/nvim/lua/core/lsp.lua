@@ -4,15 +4,22 @@
 -- Step 2: Append the LSP server name in the below array
 vim.lsp.enable({
     "bashls",
-    "cssls",
+    "shellcheck",
+    "shellharden",
+    "shfmt",
     "docker_compose_language_service",
     "dockerls",
-    "html",
     "jsonls",
     "lua_ls",
     "pylsp",
     "sqlls",
+    "cssls",
+    "html",
     "ts_ls",
+    "prettier",
+    "marksman",
+    "markdownlint",
+    "trivy",
 })
 
 -- TIP: On new systems, install these through Mason
@@ -61,34 +68,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-        -- Setup native LSP completion
-        -- This is already done by blink, but better prefer the builtin one
-        if client:supports_method("textDocument/completion") then
-            vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
-            vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-            vim.keymap.set("i", "<C-Space>", function()
-                vim.lsp.completion.get()
-            end)
-        end
-
-        -- Keymaps
+        -- Generic Keymaps
         local map = function(keys, func, desc, mode)
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
         map("<F2>", vim.lsp.buf.rename, "Rename Symbol")
+        map("<leader>cR", vim.lsp.buf.rename, "Rename Symbol")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-        map("<leader>nf", function()
-            vim.fn.setreg("+", vim.fn.expand("%:p"))
-            print("Copied: " .. vim.fn.expand("%:p") .. " to + register")
-        end, "Copy current [F]ile path to register")
 
         -- LspSaga
         map("<C-.>", "<cmd>Lspsaga code_action<cr>", "Code Actions")
+        map("K", "<cmd>Lspsaga hover_doc<cr>", "Hover Documentation")
         map("<leader>cr", "<cmd>Lspsaga finder<cr>", "Goto References")
         map("<leader>cF", "<cmd>Lspsaga peek_definition<cr>", "Peek definition: Function")
-        map("<leader>cT", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Class")
+        map("<leader>cT", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Type")
         map("<leader>cI", "<cmd>Lspsaga finder imp<cr>", "Peek: Implementations")
         -- e to jump to the symbol under cursor; q to quit
         map("<leader>co", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")

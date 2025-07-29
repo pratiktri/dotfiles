@@ -111,6 +111,7 @@ return {
 
             sources = {
                 default = {
+                    "lazydev",
                     "lsp",
                     "buffer",
                     "path",
@@ -142,6 +143,11 @@ return {
                         should_show_items = function()
                             return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype)
                         end,
+                    },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 1001,
                     },
                     lsp = {
                         score_offset = 1000,

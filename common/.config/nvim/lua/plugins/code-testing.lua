@@ -5,14 +5,17 @@ return {
         "nvim-neotest/neotest",
         cond = require("config.util").is_not_vscode(),
         dependencies = {
+            "nvim-neotest/nvim-nio",
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "marilari88/neotest-vitest",
+
+            "marilari88/neotest-vitest", -- JS/TS/React/Vue
+            "rcasia/neotest-bash", -- bash
         },
         opts = {
             -- Do NOT add adapters here
-            -- Add it to opts.adapters inside config function
+            -- Add it to opts.adapters inside config function below
             adapters = {},
             status = { virtual_text = true },
             output = { open_on_run = true },
@@ -38,7 +41,6 @@ return {
                 },
             }, neotest_ns)
 
-            -- WARN: Change the following code if we change lazy.nvim
             if require("lazy.core.config").spec.plugins["trouble.nvim"] ~= nil then
                 opts.consumers = opts.consumers or {}
                 -- Refresh and auto close trouble after running tests
@@ -72,6 +74,7 @@ return {
 
             -- TIP: Add adapters here
             table.insert(opts.adapters, require("neotest-vitest"))
+            table.insert(opts.adapters, require("rustaceanvim.neotest"))
 
             if opts.adapters then
                 local adapters = {}
@@ -107,14 +110,15 @@ return {
             --  r: Run the selected test
             --  a: Attaches to the test result (output)
             --  i: Jumps to the code of the test
-            { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc = "Test: Run File" },
+            { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc = "Test: Run All Test in Current File" },
             { "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end,                          desc = "Test: Run All Test Files" },
-            { "<leader>tr", function() require("neotest").run.run() end,                                        desc = "Test: Run Nearest" },
-            { "<leader>tl", function() require("neotest").run.run_last() end,                                   desc = "Test: Run Last" },
-            { "<leader>ts", function() require("neotest").summary.toggle() end,                                 desc = "Test: Toggle Summary" },
+            { "<leader>tn", function() require("neotest").run.run() end,                                        desc = "Test: Run Nearest" },
+            { "<leader>tR", function() require("neotest").run.run_last() end,                                   desc = "Test: Re-Run Last" },
+            { "<leader>ts", function() require("neotest").run.stop() end,                                       desc = "Test: Stop" },
+
             { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Test: Show Output" },
             { "<leader>tO", function() require("neotest").output_panel.toggle() end,                            desc = "Test: Toggle Output Panel" },
-            { "<leader>tS", function() require("neotest").run.stop() end,                                       desc = "Test: Stop" },
+            { "<leader>tS", function() require("neotest").summary.toggle() end,                                 desc = "Test: Toggle Summary Panel" },
         },
     },
 }

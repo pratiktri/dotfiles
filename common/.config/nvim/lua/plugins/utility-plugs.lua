@@ -225,6 +225,7 @@ return {
                 { "<leader>h", group = "Help", icon = { icon = "󰞋", color = "orange" } },
                 { "<leader>n", group = "Neovim Things", icon = { icon = "", color = "orange" } },
                 { "<leader>q", group = "Database", icon = { icon = "", color = "orange" } },
+                { "<leader>r", group = "Rust", icon = { icon = "󱘗", color = "orange" } },
                 { "<leader>s", group = "Search/Grep", icon = { icon = "", color = "orange" } },
                 { "<leader>t", group = "Unit Test" },
                 { "<leader>x", group = "Delete/Disable/Remove", icon = { icon = "", color = "orange" } },

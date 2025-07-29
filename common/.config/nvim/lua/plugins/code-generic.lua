@@ -1,6 +1,14 @@
 return {
     { "tpope/vim-repeat" },
 
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup()
+        end,
+    },
+
     -- mini.nvim: Collection of various small independent plugins/modules
     {
         "echasnovski/mini.nvim",
@@ -289,12 +297,6 @@ return {
 
     -- Treesitter
     {
-        -- nvim-treesitter provides parsers for individual languages
-        -- Output of these parses are fed to the NVIM's native treesitter(vim.treesitter)
-        -- What is fed to the native treesitter is essentially the AST
-        -- This AST is then used for syntax-highlighting and many other operations on the code
-        -- Hence, this plugin is only to make installing parsers easier
-
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
         build = ":TSUpdate",
@@ -357,6 +359,13 @@ return {
                         "jsonc",
                         "python",
                         "dockerfile",
+                        "latex",
+                        "norg",
+                        "scss",
+                        "tsx",
+                        "vue",
+                        "svelte",
+                        "typst",
                     },
 
                     auto_install = true,

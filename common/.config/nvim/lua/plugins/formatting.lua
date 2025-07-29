@@ -7,7 +7,6 @@ return {
         opts = {
             formatters_by_ft = {
                 bash = { "shfmt", "shellharden", stop_after_first = true },
-                cs = { "csharpier" },
                 css = { "prettierd", "prettier", stop_after_first = true },
                 graphql = { "prettierd", "prettier", stop_after_first = true },
                 html = { "prettierd", "prettier", stop_after_first = true },
@@ -70,10 +69,6 @@ return {
                         "include_document_start=true,retain_line_breaks_single=true",
                         "-gitignore_excludes",
                     },
-                },
-                csharpier = {
-                    command = "dotnet-csharpier",
-                    args = { "--write-stdout" },
                 },
             },
         },

@@ -78,7 +78,12 @@ return {
                     -- LSP configuration
                     default_settings = {
                         ["rust-analyzer"] = {
-                            cargo = { allFeatures = true },
+                            cargo = {
+                                allFeatures = true,
+                                loadOutDirsFromCheck = true,
+                                buildScripts = { enabled = true },
+                            },
+                            checkOnSave = true,
                             diagnostics = {
                                 enable = true,
                                 enableExperimental = true,
@@ -114,6 +119,9 @@ return {
                                 ["async-recursion"] = { "async_recursion" },
                             },
                         },
+                        files = {
+                            excludeDirs = { ".direnv", ".git", ".github", ".gitlab", "bin", "node_modules", "target", "venv", ".venv" },
+                        },
                     },
                 },
                 dap = {
@@ -129,6 +137,19 @@ return {
     {
         "saecki/crates.nvim",
         tag = "stable",
+        opts = {
+            completion = {
+                crates = {
+                    enabled = true,
+                },
+            },
+            lsp = {
+                enabled = true,
+                actions = true,
+                completion = true,
+                hover = true,
+            },
+        },
         config = function()
             require("crates").setup()
         end,

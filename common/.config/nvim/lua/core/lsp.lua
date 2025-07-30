@@ -20,6 +20,7 @@ vim.lsp.enable({
     "marksman",
     "markdownlint",
     "trivy",
+    "taplo",
 })
 
 -- TIP: On new systems, install these through Mason

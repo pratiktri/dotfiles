@@ -1,4 +1,111 @@
 return {
+
+    -- mini.nvim: Collection of various small independent plugins/modules
+    {
+        "echasnovski/mini.nvim",
+        version = false,
+        config = function()
+            -- gc
+            require("mini.comment").setup()
+
+            require("mini.pairs").setup()
+
+            -- mini.ai
+            -- va)  - [v]isually select [a]round [)]paren
+            --  - a) would implicitly select around another ), based on some predefined logic
+            -- ci'  - [c]hange [i]nside [']quote
+            -- via  - [a]rguments
+            -- vif  - [f]unction calls
+            -- va_  - select around "_"
+            -- va1  - select around two "1"
+            --
+            -- explicit covering region:
+            -- vinq - select [i]nside [n]ext [q]uote
+            -- vilb - select inside last bracket
+            -- cina - change next function argument
+            -- cila - change last function argument
+            require("mini.ai").setup({ n_lines = 500 })
+
+            -- mini.surround
+            -- functionality similar to tpope's vim-surround
+            require("mini.surround").setup({
+                mappings = {
+                    add = "ys", -- add surrounding in normal and visual modes
+                    delete = "ds", -- delete surrounding
+                    find = "yf", -- find surrounding (to the right)
+                    find_left = "yf", -- find surrounding (to the left)
+                    highlight = "yh", -- highlight surrounding
+                    replace = "cs", -- replace surrounding
+                    update_n_lines = "", -- update `n_lines`
+                },
+                silent = true,
+            })
+
+            local statusline = require("mini.statusline")
+            statusline.setup({
+                use_icons = vim.g.have_nerd_font,
+                content = {
+                    active = function()
+                        local config = require("config.util")
+
+                        local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+                        local git = MiniStatusline.section_git({ trunc_width = 40 })
+                        local diff = MiniStatusline.section_diff({
+                            trunc_width = 75,
+                            icon = config.icons.git.modified,
+                        })
+                        local diagnostics = MiniStatusline.section_diagnostics({
+                            trunc_width = 75,
+                            signs = config.icons.diagnostics,
+                        })
+                        local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
+                        local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+                        local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 40 })
+                        local search = MiniStatusline.section_searchcount({ trunc_width = 40 })
+                        local location = MiniStatusline.section_location({ trunc_width = 75 })
+
+                        -- Mode | Branch, diff | Diagnostics | ... | FileType | FileName | Rows/Columns
+                        return MiniStatusline.combine_groups({
+                            { hl = mode_hl, strings = { mode } },
+                            { hl = "MiniStatuslineDevinfo", strings = { git, diff } },
+                            { hl = mode, strings = { diagnostics } },
+                            "%<", -- Mark general truncate point
+                            "%=", -- End left alignment
+                            { hl = "MiniStatuslineFilename", strings = { filename } },
+                            { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+                            { hl = mode_hl, strings = { search, location } },
+                        })
+                    end,
+                },
+            })
+
+            -- configure mini.indentscope
+            if require("config.util").is_not_vscode() then
+                require("mini.indentscope").setup({
+                    delay = 100,
+                    symbol = "│",
+                    options = { try_as_border = true },
+                })
+
+                vim.api.nvim_create_autocmd("FileType", {
+                    pattern = {
+                        "help",
+                        "neo-tree",
+                        "Trouble",
+                        "trouble",
+                        "lazy",
+                        "mason",
+                        "notify",
+                        "toggleterm",
+                    },
+                    callback = function()
+                        vim.b.miniindentscope_disable = true
+                    end,
+                })
+            end
+        end,
+    },
+
     -- Various Quality of Life plugins into one
     {
         "folke/snacks.nvim",

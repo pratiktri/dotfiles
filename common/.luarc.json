@@ -1,7 +1,8 @@
 {
     "diagnostics.globals": [
         "vim",
-        "Snacks"
+        "Snacks",
+        "MiniStatusline"
     ],
     "diagnostics.disable": [
         "deprecated",

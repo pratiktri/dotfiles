@@ -4,7 +4,6 @@ return {
         cond = require("config.util").is_not_vscode(),
         event = "InsertEnter",
         dependencies = {
-            "rafamadriz/friendly-snippets",
             "L3MON4D3/LuaSnip",
             "kristijanhusak/vim-dadbod-completion",
             "moyiz/blink-emoji.nvim",
@@ -54,23 +53,20 @@ return {
                 accept = { auto_brackets = { enabled = true } },
                 menu = {
                     border = "rounded",
-                    draw = {
-                        treesitter = { "lsp" },
-                    },
+                    draw = { treesitter = { "lsp" } },
                 },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 100,
                 },
-                ghost_text = {
-                    enabled = false,
-                },
+                ghost_text = { enabled = false },
+                trigger = { show_on_trigger_character = true },
             },
+
+            fuzzy = { implementation = "prefer_rust_with_warning" },
 
             signature = { enabled = true },
 
-            -- This comes from the luasnip extra, if you don't add it, won't be able to
-            -- jump forward or backward in luasnip snippets
             snippets = { preset = "luasnip" },
 
             cmdline = {
@@ -119,11 +115,15 @@ return {
                 },
                 per_filetype = {
                     sql = { "snippets", "dadbod", "buffer" },
-                    markdown = { "markdown", "snippets", "buffer", "path", "emoji" },
+                    markdown = { "markdown", "snippets", "buffer", "lsp", "path", "emoji" },
                     gitcommit = { "conventional_commits", "emoji", "buffer", "snippets" },
                 },
 
                 providers = {
+                    lsp = { score_offset = 1000 },
+                    buffer = { score_offset = 950 },
+                    snippets = { score_offset = 1150 },
+                    path = { score_offset = 750 },
                     conventional_commits = {
                         name = "Conventional Commits",
                         module = "blink-cmp-conventional-commits",
@@ -149,22 +149,10 @@ return {
                         module = "lazydev.integrations.blink",
                         score_offset = 1001,
                     },
-                    lsp = {
-                        score_offset = 1000,
-                    },
-                    buffer = {
-                        score_offset = 950,
-                    },
                     dadbod = {
                         name = "Dadbod",
                         module = "vim_dadbod_completion.blink",
                         score_offset = 900,
-                    },
-                    snippets = {
-                        score_offset = 1150,
-                    },
-                    path = {
-                        score_offset = 750,
                     },
                     markdown = {
                         name = "RenderMarkdown",
@@ -180,6 +168,17 @@ return {
         "L3MON4D3/LuaSnip",
         cond = require("config.util").is_not_vscode(),
         version = "v2.*",
+        dependencies = {
+            -- Adds common snippets written in VS Code format
+            -- Examples: https://github.com/rafamadriz/friendly-snippets/tree/main/snippets
+            "rafamadriz/friendly-snippets",
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+        },
+        build = (function()
+            return "make install_jsregexp"
+        end)(),
         keys = {
             {
                 "<tab>",

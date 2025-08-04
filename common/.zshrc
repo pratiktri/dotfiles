@@ -45,7 +45,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Zinit: ZSH Plugin Manager # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-ZINIT_HOME="${XDG_DATA_HOME}/shell/zinit/zinit.git"
+ZINIT_HOME="${XDG_DATA_HOME}/zinit/zinit.git"
 if [[ ! -d "$ZINIT_HOME" ]]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -61,12 +61,12 @@ HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit ice depth=1; zinit light jimhester/per-directory-history
-# zinit ice depth=1; zinit light atuinsh/atuin
 
 zinit ice wait lucid depth=1; zinit light zsh-users/zsh-completions
 zinit ice wait lucid depth=1; zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
 
+zinit ice wait lucid depth=1; zinit snippet OMZP::alias-finder
 zinit ice wait lucid depth=1; zinit snippet OMZP::colored-man-pages
 zinit ice wait lucid depth=1; zinit snippet OMZP::command-not-found
 zinit ice wait lucid depth=1; zinit snippet OMZP::dotenv
@@ -77,9 +77,11 @@ zinit ice wait lucid depth=1; zinit snippet OMZP::urltools
 zinit ice wait lucid depth=1; zinit snippet OMZP::vi-mode
 
 # Completions
-zinit ice wait lucid depth=1; zinit snippet OMZP::podman
+zinit ice wait lucid depth=1; zinit snippet OMZP::brew
 zinit ice wait lucid depth=1; zinit snippet OMZP::dotnet
 zinit ice wait lucid depth=1; zinit snippet OMZP::fzf
+zinit ice wait lucid depth=1; zinit snippet OMZP::podman
+zinit ice wait lucid depth=1; zinit snippet OMZP::rust
 
 # TIP: execute `zinit update --all` quarterly
 

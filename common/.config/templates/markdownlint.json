@@ -5,8 +5,10 @@
     "MD038": false, // allow spaces inside code span elements
     "MD051": false, // do NOT check #links should match actual headings in the document
     "MD003": { "style": "consistent" },
+    "MD004": { "style": "consistent" },
     "MD007": { "indent": 4 },
     "MD029": { "style": "ordered" },
+    "MD035": { "style": "consistent" },
     "MD046": { "style": "fenced" },
     "MD049": { "style": "asterisk" },
     "MD050": { "style": "asterisk" }

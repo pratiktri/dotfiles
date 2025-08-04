@@ -44,9 +44,7 @@ return {
             end,
             formatters = {
                 injected = { options = { ignore_errors = true } },
-                shfmt = {
-                    prepend_args = { "-i", "4" },
-                },
+                shfmt = { prepend_args = { "-i", "4" } },
                 markdownlint = {
                     prepend_args = {
                         "--config",

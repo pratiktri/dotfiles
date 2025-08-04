@@ -1,8 +1,46 @@
 # Lines that start with # are ignored
 
+# Coding: Some are common, some not found in some OSes; all are required
+aspnetcore-runtime-8.0
+build-essential
+clang
+cmake
+code
+codespell
+git
+gitleaks
+hadolint
+html
+jq
+llvm
+lua
+lua5.3
+lua54
+luajit
+make
+node
+nodejs-bash-language-server
+npm
+podman
+python3
+python3-pip
+sccache
+shellcheck
+shfmt
+software-properties-common
+sqlite
+stylua
+tmux
+tokei
+tree-sitter
+tree-sitter-cli
+trivy
+vscode
+yamllint
+zoxide
+
 # Below few are apt-only packages - non-free sources must be added before this
 apt-transport-https
-build-essential
 libreadline-dev
 libavcodec-extra
 
@@ -10,23 +48,14 @@ libavcodec-extra
 akmod-nvidia
 dnf-plugins-core
 libva-nvidia-driver
-nodejs-bash-language-server
 xorg-x11-drv-nvidia-cuda
 
 # Common
-aspnetcore-runtime-8.0
 bash
 bat
 bleachbit
 btop
-cmake
-code
-containerd.io
 curl
-docker-buildx-plugin
-docker-ce
-docker-ce-cli
-docker-compose-plugin
 dolphin
 dolphin-plugins
 evolution-ews
@@ -38,48 +67,28 @@ flatpak
 fzf
 gcc
 gdb
-git
-gitleaks
 gnupg
-go
 gparted
 grub-customizer
-hadolint
 htop
 inxi
-jq
 kitty
 kde-spectacle
 kitty-terminfo
 libreoffice
-llvm
-lua5.3
-luajit
 nala
 neovim
 net-tools
-node
-npm
 nvidia-driver
 nvidia-settings
 openssh-client
-python3
-python3-pip
-podman
 qbittorrent
 rclone
 ripgrep
-sccache
-shellcheck
 simplescreenrecorder
 smplayer
-software-properties-common
 solaar
 syncthing
-tmux
-tokei
-tree-sitter-cli
-trivy
 ufw
 ulauncher
 vim
@@ -88,30 +97,16 @@ vulkan-tools
 wget
 xclip
 yt-dlp
-zoxide
 zsh
 
 # FreeBSD packages
-codespell
-html
 fusefs-lkl
 firefox-esr
-gitleaks
-lua54
-shfmt
-sqlite
-stylua
-tree-sitter
-vscode
 
 # Conflicts on FreeBSD
 ca-certificates
-clang
-code
 dnscrypt-proxy
 extra-cmake-modules
 firefox
 kdeconnect
-lua
-make
 synaptic

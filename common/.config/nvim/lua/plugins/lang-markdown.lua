@@ -30,42 +30,23 @@ return {
             vim.cmd(string.format([[highlight Headline6Fg cterm=bold gui=bold guifg=%s]], color6_bg))
         end,
         opts = {
+            preset = "obsidian",
             code = {
-                render_modes = true,
                 sign = false,
                 width = "block",
-                border = "thick",
+                border = "thin",
                 position = "right",
                 language_name = false,
                 right_pad = 1,
             },
             heading = {
-                sign = false,
                 icons = { "󰼏 ", "󰼐 ", "󰼑 ", "󰼒 ", "󰼓 ", "󰼔 " },
+                sign = false,
                 width = "block",
                 right_pad = 1,
-                -- position = { "right" },
             },
-            paragraph = {
-                render_modes = true,
-            },
-            bullet = {
-                render_modes = true,
-            },
-            checkbox = {
-                render_modes = true,
-            },
-            quote = {
-                render_modes = true,
-            },
-            pipe_table = {
-                preset = "round",
-            },
-            indent = {
-                enabled = true,
-                render_modes = true,
-                skip_heading = true,
-            },
+            indent = { enabled = false, skip_heading = true, icon = "" },
+            completions = { blink = { enabled = true } },
         },
         ft = { "markdown", "norg", "rmd", "org" },
         config = function(_, opts)

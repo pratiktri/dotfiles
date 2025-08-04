@@ -1,0 +1,22 @@
+{
+    "Add User in Debian": {
+        "prefix": "userd",
+        "description": "Add User to Debian Container",
+        "body": [
+            "RUN groupadd -r ${1:username} && useradd -m -r -g ${1:username} ${1:username}",
+            "USER ${1:username}",
+            "WORKDIR \/${2:workdir}",
+            "RUN chown ${1:username}:${1:username} \/${2:workdir}"
+        ]
+    },
+    "Add User in Alpine": {
+        "prefix": "usera",
+        "description": "Add User to Alpine Container",
+        "body": [
+            "RUN addgroup -S ${1:username} && adduser -S ${1} -G ${1}",
+            "USER ${1}",
+            "WORKDIR \/${2:workdir}",
+            "RUN chown ${1}:${1} \/${2}"
+        ]
+    }
+}

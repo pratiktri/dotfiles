@@ -67,7 +67,10 @@ return {
 
             signature = { enabled = true },
 
-            snippets = { preset = "luasnip" },
+            snippets = {
+                preset = "luasnip",
+                opts = { search_paths = { vim.fn.stdpath("config") .. "/custom-snippets" } },
+            },
 
             cmdline = {
                 enabled = true,
@@ -122,7 +125,7 @@ return {
                 providers = {
                     lsp = { score_offset = 1000 },
                     buffer = { score_offset = 950 },
-                    snippets = { score_offset = 1150 },
+                    snippets = { score_offset = 900 },
                     path = { score_offset = 750 },
                     conventional_commits = {
                         name = "Conventional Commits",
@@ -174,6 +177,11 @@ return {
             "rafamadriz/friendly-snippets",
             config = function()
                 require("luasnip.loaders.from_vscode").lazy_load()
+                require("luasnip.loaders.from_vscode").lazy_load({
+                    paths = {
+                        vim.fn.stdpath("config") .. "/custom-snippets",
+                    },
+                })
             end,
         },
         build = (function()

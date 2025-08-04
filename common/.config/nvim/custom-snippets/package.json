@@ -1,0 +1,19 @@
+{
+    "name": "custom-snippets",
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "dockerfile"
+                ],
+                "path": "./dockerfile.json"
+            },
+            {
+                "language": [
+                    "rust"
+                ],
+                "path": "./rust.json"
+            }
+        ]
+    }
+}

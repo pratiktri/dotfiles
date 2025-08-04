@@ -59,14 +59,14 @@ export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
 export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
 export OLLAMA_MODELS="${DEV_CACHE_PATH}"/ollama
-export PATH="$PATH:/home/pratik/.lmstudio/bin"
+[ ! -f "$HOME/.lmstudio/bin" ] || export PATH="$PATH:$HOME/.lmstudio/bin"
 
 export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
 
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_DEFAULT_OPTS='--layout=reverse --cycle --inline-info --height=~80% --border'
+export FZF_DEFAULT_OPTS='--layout=reverse --cycle'
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 [ ! -f "${XDG_CONFIG_HOME}/templates/.gitignore" ] || export GITIGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.gitignore"
@@ -106,9 +106,6 @@ export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
 # Go
 export GOPATH="${DEV_CACHE_PATH}"/gopath/
 
-# FIX: BELOW DID NOT WORK: added to /etc/profile, need to recheck on reboot
-# alias code="code --extensions-dir ${XDG_DATA_HOME}/vscode"
-
 # Java
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
 
@@ -118,3 +115,7 @@ export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
 export N_PREFIX="${XDG_DATA_HOME}/n_node"
 export PATH="$N_PREFIX/bin:$PATH"
 command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
+
+# Podman's Docker-compatible socket (rootless)
+# Make lazydocker work
+export DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"

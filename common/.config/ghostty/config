@@ -1,0 +1,110 @@
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Reload: ctrl + shift + ,
+#
+# Not all config options can be reloaded while running; some only
+# apply to new windows and others may require
+# a full restart to take effect.
+
+# Config syntax crash course
+# ==========================
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+# MUST FIX: Caps->Escape mapped in OS doesn't work
+# TODO: vim-style navigation in the scrollback: https://github.com/ghostty-org/ghostty/discussions/3488
+
+## Look & Feel
+window-decoration = none
+background-opacity = 0.95
+background-blur = 70
+theme = catppuccin-mocha
+window-theme = auto
+window-colorspace = display-p3
+
+## Font
+font-family = JetBrains Mono Nerd Font
+font-size = 14
+
+# Symbols Map
+font-codepoint-map = U+E000-U+E00D=Symbols Nerd Font
+font-codepoint-map = U+e0a0-U+e0a2,U+e0b0-U+e0b3=Symbols Nerd Font
+font-codepoint-map = U+e0a3-U+e0a3,U+e0b4-U+e0c8,U+e0cc-U+e0d2,U+e0d4-U+e0d4=Symbols Nerd Font
+font-codepoint-map = U+e5fa-U+e62b=Symbols Nerd Font
+font-codepoint-map = U+e700-U+e7c5=Symbols Nerd Font
+font-codepoint-map = U+f000-U+f2e0=Symbols Nerd Font
+font-codepoint-map = U+e200-U+e2a9=Symbols Nerd Font
+font-codepoint-map = U+f400-U+f4a8,U+2665-U+2665,U+26A1-U+26A1,U+f27c-U+f27c=Symbols Nerd Font
+font-codepoint-map = U+F300-U+F313=Symbols Nerd Font
+font-codepoint-map = U+23fb-U+23fe,U+2b58-U+2b58=Symbols Nerd Font
+font-codepoint-map = U+f500-U+fd46=Symbols Nerd Font
+font-codepoint-map = U+e300-U+e3eb=Symbols Nerd Font
+font-codepoint-map = U+21B5,U+25B8,U+2605,U+2630,U+2632,U+2714,U+E0A3,U+E615,U+E62B=Symbols Nerd Font
+
+## Terminal Fuctionality
+shell-integration = zsh
+shell-integration-features = title
+scrollback-limit = 100000
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 2
+gtk-tabs-location = bottom
+gtk-custom-css = theme.css
+
+## Keymaps
+
+# Splits
+keybind = ctrl+shift+enter=new_split:down
+keybind = ctrl+shift+s=new_split:down
+keybind = ctrl+shift+v=new_split:right
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+equal=equalize_splits
+keybind = ctrl+shift+up=resize_split:up,100
+keybind = ctrl+shift+down=resize_split:down,100
+keybind = ctrl+shift+right=resize_split:right,100
+keybind = ctrl+shift+left=resize_split:left,100
+keybind = ctrl+shift+z=toggle_split_zoom
+keybind = F11=toggle_split_zoom
+
+# Tab Switch
+keybind = ctrl+1=goto_tab:1
+keybind = ctrl+2=goto_tab:2
+keybind = ctrl+3=goto_tab:3
+keybind = ctrl+4=goto_tab:4
+keybind = ctrl+5=goto_tab:5
+keybind = ctrl+6=goto_tab:6
+keybind = ctrl+7=goto_tab:7
+keybind = ctrl+8=goto_tab:8
+keybind = ctrl+9=goto_tab:9
+
+# Disable default keybinds
+keybind = alt+1=unbind
+keybind = alt+2=unbind
+keybind = alt+3=unbind
+keybind = alt+4=unbind
+keybind = alt+5=unbind
+keybind = alt+6=unbind
+keybind = alt+7=unbind
+keybind = alt+8=unbind
+keybind = alt+9=unbind

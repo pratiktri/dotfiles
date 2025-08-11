@@ -38,7 +38,7 @@ local to_installed = vim.tbl_keys({
 
 -- Setup native diagnostic
 vim.diagnostic.config({
-    underline = true,
+    underline = false,
     update_in_insert = false,
     severity_sort = true,
     float = {
@@ -49,10 +49,10 @@ vim.diagnostic.config({
         enabled = true,
         severity = { min = vim.diagnostic.severity.ERROR },
     },
-    virtual_lines = {
-        current_line = true,
-        severity = { min = vim.diagnostic.severity.INFO },
-    },
+    -- virtual_lines = {
+    --     current_line = true,
+    --     severity = { min = vim.diagnostic.severity.INFO },
+    -- },
 })
 
 -- Change diagnostic symbols in the sign column (gutter)
@@ -96,6 +96,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace Symbols")
         map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
         map("<leader>cd", require("telescope.builtin").diagnostics, "List Diagnostics")
+
+        Snacks.toggle({
+            name = "Diagnostics Virtual Text",
+            get = function()
+                return vim.diagnostic.config().virtual_text ~= false
+            end,
+            set = function(state)
+                vim.diagnostic.config({ virtual_text = state })
+            end,
+        }):map("<leader>dx")
 
         -- Native lsp inline virtual text / inlay hints
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then

@@ -6,6 +6,18 @@ return {
         },
     },
 
+    {
+        "unblevable/quick-scope",
+        init = function()
+            vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
+
+            vim.cmd([[
+              highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+              highlight QuickScopeSecondary guifg='#00C7DF' gui=underline ctermfg=81 cterm=underline
+            ]])
+        end,
+    },
+
     -- File Explorer: Neotree
     {
         "nvim-neo-tree/neo-tree.nvim",
@@ -169,8 +181,7 @@ return {
             vim.keymap.set("n", "<C-S-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
 
             -- List
-            -- NOTE: Needs terminal configured to send correct key code to NeoVim: \x1b[80;5u
-            vim.keymap.set("n", "<C-S-p>", require("telescope.builtin").find_files, { desc = "Search Files" })
+            vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, { desc = "Search Files" })
 
             -- Git
             vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, { desc = "Git: Commits" })

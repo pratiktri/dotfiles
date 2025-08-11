@@ -55,10 +55,6 @@ return {
                     border = "rounded",
                     draw = { treesitter = { "lsp" } },
                 },
-                documentation = {
-                    auto_show = true,
-                    auto_show_delay_ms = 100,
-                },
                 ghost_text = { enabled = false },
                 trigger = { show_on_trigger_character = true },
             },

@@ -241,31 +241,7 @@ return {
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
         end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            config = function()
-                -- When in diff mode, we want to use the default
-                -- vim text objects c & C instead of the treesitter ones.
-                local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-                local configs = require("nvim-treesitter.configs")
-                for name, fn in pairs(move) do
-                    if name:find("goto") == 1 then
-                        move[name] = function(q, ...)
-                            if vim.wo.diff then
-                                local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
-                                for key, query in pairs(config or {}) do
-                                    if q == query and key:find("[%]%[][cC]") then
-                                        vim.cmd("normal! " .. key)
-                                        return
-                                    end
-                                end
-                            end
-                            return fn(q, ...)
-                        end
-                    end
-                end
-            end,
-        },
+        dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 
         config = function()
             -- See `:help nvim-treesitter`
@@ -301,7 +277,7 @@ return {
                     },
 
                     auto_install = true,
-                    highlight = { enable = true },
+                    -- highlight = { enable = true },
                     indent = { enable = true },
 
                     incremental_selection = {
@@ -339,18 +315,22 @@ return {
                             goto_next_start = {
                                 ["]f"] = { query = "@function.outer", desc = "Goto next inner function start" },
                                 ["]c"] = { query = "@class.outer", desc = "Goto next inner class start" },
+                                ["]o"] = { query = "@loop.*", desc = "Goto next loop start" },
                             },
                             goto_next_end = {
                                 ["]F"] = { query = "@function.outer", desc = "Goto next outer function end" },
                                 ["]C"] = { query = "@class.outer", desc = "Goto next outer class end" },
+                                ["]O"] = { query = "@loop.*", desc = "Goto next loop end" },
                             },
                             goto_previous_start = {
                                 ["[f"] = { query = "@function.outer", desc = "Goto goto previous inner function start" },
                                 ["[c"] = { query = "@class.outer", desc = "Previous inner class start" },
+                                ["[o"] = { query = "@loop.*", desc = "Goto previous loop start" },
                             },
                             goto_previous_end = {
                                 ["[F"] = { query = "@function.outer", desc = "Goto goto previous outer function start" },
                                 ["[C"] = { query = "@class.outer", desc = "Goto previous outer class start" },
+                                ["[O"] = { query = "@loop.*", desc = "Goto previous loop start" },
                             },
                         },
 

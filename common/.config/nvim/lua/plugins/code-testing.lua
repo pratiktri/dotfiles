@@ -121,4 +121,30 @@ return {
             { "<leader>tS", function() require("neotest").summary.toggle() end,                                 desc = "Test: Toggle Summary Panel" },
         },
     },
+
+    {
+        "andythigpen/nvim-coverage",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("coverage").setup({
+                auto_load = true,
+                commands = true, -- Enable coverage commands
+                highlights = {
+                    covered = { fg = "#C3E88D" }, -- Green for covered lines
+                    uncovered = { fg = "#F07178" }, -- Red for uncovered lines
+                },
+                signs = {
+                    covered = { hl = "CoverageCovered", text = "▎" },
+                    uncovered = { hl = "CoverageUncovered", text = "▎" },
+                },
+                summary = {
+                    min_coverage = 80.0, -- Minimum coverage percentage
+                },
+            })
+
+            vim.keymap.set("n", "<leader>tC", function()
+                require("coverage").summary()
+            end, { desc = "Test: Toggle coverage" })
+        end,
+    },
 }

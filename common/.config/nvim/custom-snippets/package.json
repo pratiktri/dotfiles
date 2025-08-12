@@ -13,6 +13,12 @@
                     "rust"
                 ],
                 "path": "./rust.json"
+            },
+            {
+                "language": [
+                    "markdown"
+                ],
+                "path": "./markdown.json"
             }
         ]
     }

@@ -38,6 +38,7 @@ return {
                 position = "right",
                 language_name = false,
                 right_pad = 1,
+                left_pad = 1,
             },
             heading = {
                 icons = { "󰼏 ", "󰼐 ", "󰼑 ", "󰼒 ", "󰼓 ", "󰼔 " },

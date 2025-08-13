@@ -78,6 +78,7 @@ local diagnostic_goto = function(next, severity)
     severity = severity and vim.diagnostic.severity[severity] or nil
     return function()
         go({ severity = severity })
+        vim.cmd("normal! zz")
     end
 end
 vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
@@ -90,3 +91,7 @@ vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning
 
 -- Close Tab
 vim.keymap.set("n", "<leader>xt", "<cmd>tabclose<cr>", { desc = "Close current tab" })
+
+-- Center cursor
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")

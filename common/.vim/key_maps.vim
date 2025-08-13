@@ -26,6 +26,7 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap g; g;zz
 nnoremap g, g,zz
+nnoremap gv gvzz
 nnoremap <C-o> <C-o>zz
 nnoremap <C-i> <C-i>zz
 nnoremap ]s ]szz

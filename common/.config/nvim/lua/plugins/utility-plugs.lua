@@ -225,6 +225,7 @@ return {
                 "]]",
                 function()
                     Snacks.words.jump(vim.v.count1)
+                    vim.cmd("normal! zz")
                 end,
                 desc = "Next Reference",
                 mode = { "n", "t" },
@@ -233,6 +234,7 @@ return {
                 "[[",
                 function()
                     Snacks.words.jump(-vim.v.count1)
+                    vim.cmd("normal! zz")
                 end,
                 desc = "Prev Reference",
                 mode = { "n", "t" },

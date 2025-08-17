@@ -22,20 +22,11 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         cond = require("config.util").is_not_vscode(),
-        branch = "v3.x",
         keys = {
             { "<leader><tab>", "<CMD>Neotree toggle left<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
         },
         deactivate = function()
             vim.cmd([[Neotree close]])
-        end,
-        init = function()
-            if vim.fn.argc(-1) == 1 then
-                local stat = vim.loop.fs_stat(vim.fn.argv(0))
-                if stat and stat.type == "directory" then
-                    require("neo-tree")
-                end
-            end
         end,
         opts = {
             enable_git_status = true,
@@ -57,8 +48,8 @@ return {
                 position = "left",
                 width = 30, -- Saner window size
                 mappings = {
-                    ["s"] = "open_split", -- horizontal split
-                    ["v"] = "open_vsplit", -- vertical split
+                    ["s"] = "open_split",
+                    ["v"] = "open_vsplit",
                     ["Y"] = function(state) -- Copy file's path to + register
                         local node = state.tree:get_node()
                         local path = node:get_id()
@@ -68,7 +59,7 @@ return {
             },
             default_component_configs = {
                 indent = {
-                    indent_size = 2, -- Compact tree display
+                    indent_size = 2,
                     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
                     expander_collapsed = "",
                     expander_expanded = "",
@@ -92,14 +83,6 @@ return {
                 { event = events.FILE_RENAMED, handler = on_move },
             })
             require("neo-tree").setup(opts)
-            vim.api.nvim_create_autocmd("TermClose", {
-                pattern = "*lazygit",
-                callback = function()
-                    if package.loaded["neo-tree.sources.git_status"] then
-                        require("neo-tree.sources.git_status").refresh()
-                    end
-                end,
-            })
         end,
     },
 
@@ -107,7 +90,6 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         cond = require("config.util").is_not_vscode(),
-        branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
@@ -182,7 +164,7 @@ return {
             -- Buffer
             vim.keymap.set("n", "<leader>bl", require("telescope.builtin").buffers, { desc = "List Buffers" })
 
-            -- NOTE: Needs terminal configured to send correct key code to NeoVim: \x1b[70;5u
+            -- TIP: Needs terminal (kitty) configured to send correct key code to NeoVim: \x1b[70;5u
             vim.keymap.set("n", "<C-S-f>", require("telescope.builtin").live_grep, { desc = "Search/LiveGrep the Project" })
 
             -- List

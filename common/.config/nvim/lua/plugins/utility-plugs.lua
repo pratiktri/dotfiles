@@ -272,7 +272,7 @@ return {
                 desc = "Notification History",
             },
             {
-                "<S-Esc>",
+                "<C-Esc>",
                 function()
                     Snacks.zen()
                 end,

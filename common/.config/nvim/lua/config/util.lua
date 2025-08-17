@@ -4,6 +4,7 @@ local M = {
     icons = {
         misc = {
             dots = "󰇘",
+            timer = "󰔟",
         },
         dap = {
             Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },

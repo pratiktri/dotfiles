@@ -124,27 +124,29 @@ return {
             },
         },
         config = function()
-            -- NOTE: Search in hidden files trick taken from: https://stackoverflow.com/a/75500661/11057673
             local telescopeConfig = require("telescope.config")
+
+            local filters = {
+                "--hidden",
+                "--glob",
+                "!**/.git/*",
+                "--glob",
+                "!**/node_modules/*",
+                "--glob",
+                "!**/target/*",
+            }
 
             -- Clone the default Telescope configuration
             local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
 
-            -- Add flag to search hidden files/folders
-            table.insert(vimgrep_arguments, "--hidden")
-            table.insert(vimgrep_arguments, "--glob")
-            -- And to ignore .git directory. Needed since its not `.gitignore`d
-            table.insert(vimgrep_arguments, "!**/.git/*")
-            table.insert(vimgrep_arguments, "--glob")
-            table.insert(vimgrep_arguments, "!**/node_modules/*")
-            table.insert(vimgrep_arguments, "--glob")
-            table.insert(vimgrep_arguments, "!**/target/*")
+            -- Merge default arguments with filters
+            for i = 1, #filters do
+                vimgrep_arguments[#vimgrep_arguments + 1] = filters[i]
+            end
 
             require("telescope").setup({
                 defaults = {
-                    -- `hidden = true` is not supported in text grep commands.
                     hidden = true,
-                    -- Without this live_grep would show .git entries
                     vimgrep_arguments = vimgrep_arguments,
                     mappings = {
                         i = {
@@ -157,8 +159,11 @@ return {
                     colorscheme = { enable_preview = true },
                     find_files = {
                         hidden = true,
-                        -- Redoing the vimgrep_arguments changes for find_files as well
-                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--glob", "!**/node_modules/*", "--glob", "!**/target/*" },
+                        find_command = {
+                            unpack(telescopeConfig.values.vimgrep_arguments),
+                            "--files",
+                            unpack(filters),
+                        },
                     },
                 },
                 extensions = {

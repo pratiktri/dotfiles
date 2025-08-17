@@ -48,6 +48,23 @@ return {
                     active = function()
                         local config = require("config.util")
 
+                        -- Helper functions for reading stats
+                        local function is_prose_file()
+                            local ft = vim.bo.filetype
+                            return ft == "markdown" or ft == "text" or ft == "asciidoc"
+                        end
+
+                        local function reading_stats()
+                            if not is_prose_file() then
+                                return ""
+                            end
+
+                            local word_count = vim.fn.wordcount().words or 0
+                            local reading_time = math.ceil(word_count / 100.0) -- I'm slow reader
+
+                            return string.format("%dm %s |", reading_time, config.icons.misc.timer)
+                        end
+
                         local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
                         local git = MiniStatusline.section_git({ trunc_width = 40 })
                         local diff = MiniStatusline.section_diff({
@@ -60,9 +77,10 @@ return {
                         })
                         local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
                         local filename = MiniStatusline.section_filename({ trunc_width = 140 })
-                        local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 40 })
+                        local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120, show_encoding = false })
                         local search = MiniStatusline.section_searchcount({ trunc_width = 40 })
                         local location = MiniStatusline.section_location({ trunc_width = 75 })
+                        local stats = reading_stats()
 
                         -- Mode | Branch, diff | Diagnostics | ... | FileType | FileName | Rows/Columns
                         return MiniStatusline.combine_groups({
@@ -72,7 +90,7 @@ return {
                             "%<", -- Mark general truncate point
                             "%=", -- End left alignment
                             { hl = "MiniStatuslineFilename", strings = { filename } },
-                            { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+                            { hl = "MiniStatuslineFileinfo", strings = { stats, fileinfo } },
                             { hl = mode_hl, strings = { search, location } },
                         })
                     end,

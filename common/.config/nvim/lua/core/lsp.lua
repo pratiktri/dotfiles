@@ -93,9 +93,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- Telescope
         map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
         map("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
-        map("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Search Workspace Symbols")
+        map("<leader>cS", require("telescope.builtin").lsp_workspace_symbols, "Search Workspace Symbols")
         map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
-        map("<leader>cd", require("telescope.builtin").diagnostics, "List Diagnostics")
 
         Snacks.toggle({
             name = "Diagnostics Virtual Text",

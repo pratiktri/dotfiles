@@ -42,7 +42,9 @@ window-theme = auto
 window-colorspace = display-p3
 
 ## Font
-font-family = JetBrains Mono Nerd Font
+# font-family = Liga SFMono Nerd Font
+font-family = MonoLisa
+font-feature = +calt +liga +ss11 +zero +ss10 +ss15 +ss16 +ss17 +ss18
 font-size = 14
 
 # Symbols Map
@@ -70,6 +72,7 @@ gtk-tabs-location = bottom
 gtk-custom-css = theme.css
 
 ## Keymaps
+keybind = ctrl+shift+g=write_screen_file:paste
 
 # Splits
 keybind = ctrl+shift+enter=new_split:down

@@ -29,12 +29,23 @@
     "icon_theme": "Catppuccin Latte",
     "tabs": { "file_icons": true, "git_status": true },
     "tab_bar": { "show_nav_history_buttons": false },
-    "ui_font_size": 16,
+    "ui_font_size": 17,
     "buffer_font_size": 18,
-    "buffer_font_family": "FuraCode Nerd Font",
+    "buffer_font_family": "MonoLisa",
+    "buffer_font_features": {
+        "calt": true,
+        "liga": true,
+        "ss11": true,
+        "zero": true,
+        "ss10": true,
+        "ss15": true,
+        "ss16": true,
+        "ss17": true,
+        "ss18": true
+    },
     "agent_font_size": 18,
     "terminal": {
-        "font_family": "FuraCode Nerd Font",
+        "font_family": "MonoLisa",
         "font_size": 18,
         "copy_on_select": true,
         "button": true,
@@ -110,10 +121,10 @@
 
     // AI
     "agent": {
-        "default_profile": "ask",
+        "default_profile": "write",
         "default_model": {
             "provider": "lmstudio",
-            "model": "mistralai/codestral-22b-v0.1"
+            "model": "unsloth/gpt-oss-20b"
         },
         "model_parameters": [],
         "notify_when_agent_waiting": "all_screens"

@@ -30,6 +30,7 @@ return {
             vim.cmd(string.format([[highlight Headline6Fg cterm=bold gui=bold guifg=%s]], color6_bg))
         end,
         opts = {
+            latex = { enabled = false },
             preset = "obsidian",
             code = {
                 sign = false,

@@ -14,7 +14,6 @@ require("config.options")
 require("config.keymaps")
 require("core.lazy")
 require("core.lsp")
-require("config.filetype-based-keymaps")
 require("config.autocmd")
 
 -- NOTE: Tools needed for this Nvim config to work

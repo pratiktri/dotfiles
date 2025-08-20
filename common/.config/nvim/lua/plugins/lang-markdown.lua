@@ -49,11 +49,11 @@ return {
             indent = { enabled = false, skip_heading = true, icon = "" },
             completions = { blink = { enabled = true } },
         },
-        ft = { "markdown", "norg", "rmd", "org" },
+        ft = { "markdown", "text", "gitcommit", "scratch" },
         config = function(_, opts)
             require("render-markdown").setup(opts)
             Snacks.toggle({
-                name = "Markdown Render",
+                name = "Markdown Rendering",
                 get = function()
                     return require("render-markdown.state").enabled
                 end,

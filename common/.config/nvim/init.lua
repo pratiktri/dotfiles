@@ -16,3 +16,16 @@ require("core.lazy")
 require("core.lsp")
 require("config.filetype-based-keymaps")
 require("config.autocmd")
+
+-- NOTE: Tools needed for this Nvim config to work
+-- jsregexp
+-- rust-analyzer, rustc, cargo (rustacean)
+-- OS Installs:
+--      general: curl, gzip, unzip, git, fd-find, ripgrep, fzf, tree-sitter
+--      tools: ImageMagick, xclip, xsel, ghostscript
+--      lsp: codespell, nodejs-bash-language-server, html, hadolint, lua, luajit, shellcheck, shfmt, trivy, ts_ls, pylint, stylua, shellcheck
+-- Brew:
+--      tools: lazygit
+--      lsp: dockerfile-language-server, markdown-toc, markdownlint-cli, marksman, prettier, prettierd, python-lsp-server, shellharden, taplo, typescript-language-server, vue-language-server, yaml-language-server, yamlfmt
+-- Mason: When they aren't found on OS or Brew
+--      codelldb, css-lsp, docker-compose-language-service, html-lsp, json-lsp, sqlls

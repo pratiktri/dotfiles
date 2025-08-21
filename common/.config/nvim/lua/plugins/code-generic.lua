@@ -156,12 +156,16 @@ return {
                 ui = {
                     -- kind = require("config.util").icons.kind_lspsaga,
                     kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+                    devicon = true,
+                    title = true,
                 },
-                implement = { enabled = true },
-                symbol_in_winbar = {
+                implement = {
                     enable = true,
-                    hide_keyword = true,
+                    virtual_text = true,
+                    sign = true,
+                    priority = 100,
                 },
+                symbol_in_winbar = { enable = true, hide_keyword = true },
                 lightbulb = { virtual_text = false },
                 outline = { auto_preview = false },
             })

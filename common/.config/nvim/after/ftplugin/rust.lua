@@ -7,7 +7,25 @@ if pcall(require, "rustaceanvim") then
     vim.keymap.set("n", "<leader>rh", "<cmd>RustLsp openDocs<cr>", { desc = "Open docs.rs Documentation" })
     vim.keymap.set("n", "<leader>rM", "<cmd>RustLsp view mir<cr>", { desc = "View Mid-Level IR", buffer = bufnr })
     vim.keymap.set("n", "<leader>rH", "<cmd>RustLsp view hir<cr>", { desc = "View High-Level IR", buffer = bufnr })
+    vim.keymap.set("n", "<leader>rL", vim.lsp.codelens.refresh, { desc = "Run CodeLens" })
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if not client or client.name ~= "rust-analyzer" then
+            return
+        end
+
+        pcall(vim.lsp.codelens.refresh)
+
+        -- Setup ongoing refresh triggers
+        vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost", "BufEnter" }, {
+            buffer = event.buf,
+            callback = vim.lsp.codelens.refresh,
+        })
+    end,
+})
 
 local function run_tests_with_coverage()
     -- Run tests through neotest

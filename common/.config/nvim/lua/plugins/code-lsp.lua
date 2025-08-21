@@ -94,33 +94,38 @@ return {
                                 postfix = { enable = true },
                                 autoimport = { enable = true },
                             },
-                        },
-                        inlayHints = {
-                            bindingModeHints = { enable = false },
-                            chainingHints = { enable = true },
-                            closingBraceHints = { enable = true, minLines = 25 },
-                            closureReturnTypeHints = { enable = "never" },
-                            lifetimeElisionHints = { enable = "never", useParameterNames = false },
-                            maxLength = 25,
-                            parameterHints = { enable = true },
-                            reborrowHints = { enable = "never" },
-                            renderColons = true,
-                            typeHints = {
+                            lens = {
                                 enable = true,
-                                hideClosureInitialization = false,
-                                hideNamedConstructor = false,
+                                implementations = { enable = true },
+                                run = { enable = false },
                             },
-                        },
-                        procMacro = {
-                            enable = true,
-                            ignored = {
-                                ["async-trait"] = { "async_trait" },
-                                ["napi-derive"] = { "napi" },
-                                ["async-recursion"] = { "async_recursion" },
+                            inlayHints = {
+                                bindingModeHints = { enable = false },
+                                chainingHints = { enable = true },
+                                closingBraceHints = { enable = true, minLines = 25 },
+                                closureReturnTypeHints = { enable = "never" },
+                                lifetimeElisionHints = { enable = "never", useParameterNames = false },
+                                maxLength = 25,
+                                parameterHints = { enable = true },
+                                reborrowHints = { enable = "never" },
+                                renderColons = true,
+                                typeHints = {
+                                    enable = true,
+                                    hideClosureInitialization = false,
+                                    hideNamedConstructor = false,
+                                },
                             },
-                        },
-                        files = {
-                            excludeDirs = { ".direnv", ".git", ".github", ".gitlab", "bin", "node_modules", "target", "venv", ".venv" },
+                            procMacro = {
+                                enable = true,
+                                ignored = {
+                                    ["async-trait"] = { "async_trait" },
+                                    ["napi-derive"] = { "napi" },
+                                    ["async-recursion"] = { "async_recursion" },
+                                },
+                            },
+                            files = {
+                                excludeDirs = { ".direnv", ".git", ".github", ".gitlab", "bin", "node_modules", "target", "venv", ".venv" },
+                            },
                         },
                     },
                 },

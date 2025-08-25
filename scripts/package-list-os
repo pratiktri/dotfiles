@@ -7,9 +7,6 @@ clang
 cmake
 code
 codespell
-fd-find
-fzf
-git
 gitleaks
 hadolint
 html
@@ -68,16 +65,22 @@ fd-find
 ffmpeg
 flameshot
 flatpak
+foliate
 fzf
 gcc
 gdb
+ghostscript
+git
 gnupg
 gparted
 grub-customizer
+gzip
 htop
+ImageMagick
+imagemagick
 inxi
-kitty
 kde-spectacle
+kitty
 kitty-terminfo
 libreoffice
 nala
@@ -90,7 +93,6 @@ qbittorrent
 rclone
 ripgrep
 simplescreenrecorder
-smplayer
 solaar
 syncthing
 ufw
@@ -100,6 +102,7 @@ vlc
 vulkan-tools
 wget
 xclip
+xsel
 yt-dlp
 zsh
 

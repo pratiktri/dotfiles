@@ -101,12 +101,8 @@ apt_setup() {
 
     sudo apt-get update && sudo apt-get upgrade -y
 
-    # Add VS-Code repo
-    sudo apt-get install -y wget gpg
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-    echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list >/dev/null
-    rm -f packages.microsoft.gpg
+    sudo apt-get install -y wget gpg extrepo
+    sudo extrepo enable dotnet docker-ce github-cli mattermost nvidia-cuda postgresql syncthing vscode winehq deb-multimedia-backports deb-multimedia-non-free
 
     if [ "$ID" = "debian" ]; then
         debian_setup
@@ -129,9 +125,6 @@ debian_setup() {
 ubuntu_setup() {
     # Add Ulauncher repo
     sudo add-apt-repository universe -y && sudo add-apt-repository ppa:agornostal/ulauncher -y
-
-    # Add dotnet ppa
-    sudo add-apt-repository ppa:dotnet/backports
 }
 
 input_file_check() {

@@ -18,7 +18,7 @@ return {
 
             -- TIP: `nvim-lspconfig` has default LSP configs in its DB which saves time
             -- Useful even after NeoVim 0.11, which made LSP setup much easier
-            -- Configs in `nvim/lsp/*` are APPENDED to each LSP setup here
+            -- Configs in ../../lsp/* are APPENDED to each LSP setup here
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)

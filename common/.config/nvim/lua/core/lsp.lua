@@ -24,18 +24,6 @@ vim.lsp.enable({
     "yamlls",
 })
 
--- TIP: On new systems, install these through Mason
--- They aren't usually found on either OS installer or brew-linux
----@diagnostic disable-next-line: unused-local
-local to_installed = vim.tbl_keys({
-    "codelldb",
-    "css-lsp",
-    "docker-compose-language-service",
-    "html-lsp",
-    "json-lsp",
-    "sqlls",
-})
-
 -- Setup native diagnostic
 vim.diagnostic.config({
     underline = false,
@@ -49,10 +37,6 @@ vim.diagnostic.config({
         enabled = true,
         severity = { min = vim.diagnostic.severity.ERROR },
     },
-    -- virtual_lines = {
-    --     current_line = true,
-    --     severity = { min = vim.diagnostic.severity.INFO },
-    -- },
 })
 
 -- Change diagnostic symbols in the sign column (gutter)

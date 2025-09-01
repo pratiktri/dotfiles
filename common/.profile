@@ -28,9 +28,11 @@ EDITOR=$(command -v nvim 2>/dev/null || command -v vim 2>/dev/null)
 export EDITOR
 export VISUAL="$EDITOR"
 
+# Following in /etc/environment to fix electron app font issues
+# export ELECTRON_OZONE_PLATFORM_HINT=auto
+
 # Manually follow steps from https://steamcommunity.com/app/646570/discussions/1/3935537639868400686
 # To disable ~/.oracle_jre_usage/ from being created
-
 if [ "$(uname -s)" = "Linux" ]; then
     export __GL_SHADER_DISK_CACHE_PATH="${XDG_CACHE_HOME}/nvidia"
 
@@ -53,15 +55,15 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_AUTO_UPDATE_SECS=3600
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
 
+export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
+
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc" && [ ! -f "$WGETRC" ] && touch "$WGETRC"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
-export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama"
-export OLLAMA_MODELS="${DEV_CACHE_PATH}"/ollama
+export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama/"
+export OLLAMA_MODELS="${DEV_CACHE_PATH}/AI-Models/"
 [ ! -f "$HOME/.lmstudio/bin" ] || export PATH="$PATH:$HOME/.lmstudio/bin"
-
-export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
 
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
@@ -118,4 +120,6 @@ command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
 
 # Podman's Docker-compatible socket (rootless)
 # Make lazydocker work
-export DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
+DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
+export DOCKER_HOST
+export PODMAN_COMPOSE_WARNING_LOGS=false

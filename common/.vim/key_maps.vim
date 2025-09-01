@@ -18,6 +18,9 @@ inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
+" Ctrl+Backspace to add an undo-point and delete last word
+imap <C-BS> <C-g>u<C-w>
+
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop>
 
@@ -32,6 +35,7 @@ nnoremap <C-i> <C-i>zz
 nnoremap ]s ]szz
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap G Gzz
 
 " Move visually selected lines around with J & K
 vnoremap J :m '>+1<CR>gv=gv

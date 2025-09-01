@@ -23,6 +23,7 @@ manual_installs() {
 }
 
 post_install() {
+    sudo -u "${SUDO_USER:-$(logname)}" systemctl --user enable --now podman.socket
     command -v docker >/dev/null 2>&1 && systemctl enable --now docker >/dev/null 2>&1 && echo "Docker enabled"
     command -v docker >/dev/null 2>&1 && usermod -aG docker "$USER" && newgrp docker && echo "Added $USER to docker group"
 

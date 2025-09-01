@@ -4,7 +4,7 @@
 FROM ubuntu:24.04
 #FROM fedora:42
 WORKDIR /dotfiles
-RUN apt-get update && apt-get install sudo -y     # for debian distros
+RUN apt-get update && apt-get --no-install-recommends install sudo -y
 #RUN dnf install sudo -y                           # for fedora and its derivatives
 COPY . .
 CMD [ "sh", "setup.sh", "-i" ]

@@ -1,5 +1,7 @@
 -- Load Keybindings from VIM
-local vim_mappings = os.getenv("HOME") .. "/.vim/key_maps.vim"
+local sep = package.config:sub(1, 1)
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+local vim_mappings = home .. sep .. ".vim" .. sep .. "key_maps.vim"
 local util = require("config.util")
 if vim.loop.fs_stat(vim_mappings) and util.is_not_vscode() then
     vim.cmd("source " .. vim_mappings)

@@ -1,9 +1,7 @@
--- Options available as-is: VimScript,
---      Options starting with nvim_: lua
---      To set VimScript options in lua: use either vim.opt (:help vim.opt)
-
 -- Load configs from VIM
-local vim_configs = os.getenv("HOME") .. "/.vim/configs.vim"
+local sep = package.config:sub(1, 1)
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+local vim_configs = home .. sep .. ".vim" .. sep .. "configs.vim"
 if vim.loop.fs_stat(vim_configs) then
     vim.cmd("source " .. vim_configs)
 end

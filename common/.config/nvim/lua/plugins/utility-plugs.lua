@@ -75,14 +75,13 @@ return {
                             trunc_width = 75,
                             signs = config.icons.diagnostics,
                         })
-                        local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
                         local filename = MiniStatusline.section_filename({ trunc_width = 140 })
                         local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120, show_encoding = false })
                         local search = MiniStatusline.section_searchcount({ trunc_width = 40 })
                         local location = MiniStatusline.section_location({ trunc_width = 75 })
                         local stats = reading_stats()
 
-                        -- Mode | Branch, diff | Diagnostics | ... | FileType | FileName | Rows/Columns
+                        -- Mode | Branch, diff | Diagnostics | ... | FileName | FileType | Rows/Columns
                         return MiniStatusline.combine_groups({
                             { hl = mode_hl, strings = { mode } },
                             { hl = "MiniStatuslineDevinfo", strings = { git, diff } },

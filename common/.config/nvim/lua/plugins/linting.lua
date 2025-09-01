@@ -26,7 +26,7 @@ return {
             local markdownlint = lint.linters.markdownlint
             markdownlint.args = {
                 "--config",
-                "~/.config/templates/markdownlint.json",
+                vim.loop.os_homedir() .. "/.config/templates/markdownlint.json",
                 "--",
             }
 

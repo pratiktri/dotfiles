@@ -18,49 +18,19 @@ return {
     },
 
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        "projekt0n/github-nvim-theme",
         priority = 1000,
         config = function()
-            require("catppuccin").setup({
-                compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-
-                integrations = {
-                    telescope = {
-                        style = "nvchad",
+            require("github-theme").setup({
+                options = {
+                    terminal_colors = false,
+                    styles = {
+                        comments = "italic",
+                        constants = "bold",
                     },
-
-                    -- These were disabled by default
-                    blink_cmp = true,
-                    diffview = true,
-                    fidget = true,
-                    lsp_saga = true,
-                    mason = true,
-                    neotest = true,
-                    noice = true,
-                    notify = true,
-                    dadbod_ui = true,
-                    nvim_surround = true,
-                    navic = {
-                        enabled = true,
-                    },
-                    illuminate = {
-                        lsp = true,
-                    },
-                    snacks = true,
-                    which_key = true,
-
-                    -- These were enabled by default
-                    render_markdown = false,
                 },
-
-                flavour = "mocha",
             })
-
-            require("nvim-navic").setup({
-                highlight = true,
-            })
-            vim.cmd("colorscheme catppuccin")
+            vim.cmd("colorscheme github_dark")
         end,
     },
 

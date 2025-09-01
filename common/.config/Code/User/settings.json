@@ -30,15 +30,15 @@
     "explorer.confirmDragAndDrop": false,
 
     // Editor Typography
-    "editor.fontFamily": "FiraCode Nerd Font Mono",
+    "editor.fontFamily": "MonoLisa",
     "editor.fontLigatures": true,
-    "editor.fontSize": 15,
-    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
-    "terminal.integrated.fontSize": 15,
+    "editor.fontSize": 16,
+    "terminal.integrated.fontFamily": "MonoLisa",
+    "terminal.integrated.fontSize": 16,
 
     // Theme
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.colorCustomizations": {
         "tab.activeBackground": "#07f7af3f",
         "tab.activeBorder": "#ffffff",

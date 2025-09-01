@@ -9,11 +9,9 @@
         "csharp": false,
         "lua": false,
         "dockerfile": false,
-        "html": false,
-        "catppuccin": false
+        "html": false
     },
     "auto_install_extensions": {
-        "catppuccin": true,
         "catppuccin icons": true,
         "html": true,
         "dockerfile": true
@@ -24,9 +22,9 @@
     "theme": {
         "mode": "dark",
         "light": "One Light",
-        "dark": "Catppuccin Mocha"
+        "dark": "Github Dark Dimmed"
     },
-    "icon_theme": "Catppuccin Latte",
+    "icon_theme": "Modern Icons (Dark)",
     "tabs": { "file_icons": true, "git_status": true },
     "tab_bar": { "show_nav_history_buttons": false },
     "ui_font_size": 17,

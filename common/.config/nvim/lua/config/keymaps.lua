@@ -1,14 +1,13 @@
 -- Load Keybindings from VIM
 local sep = package.config:sub(1, 1)
-local home = os.getenv("HOME") or os.getenv("USERPROFILE")
-local vim_mappings = home .. sep .. ".vim" .. sep .. "key_maps.vim"
+local vim_mappings = vim.loop.os_homedir() .. sep .. ".vim" .. sep .. "key_maps.vim"
 local util = require("config.util")
 if vim.loop.fs_stat(vim_mappings) and util.is_not_vscode() then
     vim.cmd("source " .. vim_mappings)
 end
 
 vim.keymap.set({ "n" }, "<leader><CR>", function()
-    vim.cmd("source " .. vim.fn.expand(vim.fn.stdpath("config") .. "/init.lua"))
+    vim.cmd("source " .. vim.fn.expand(vim.fn.stdpath("config") .. sep .. "init.lua"))
 end, { desc = "Apply NVIM config changes" })
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })

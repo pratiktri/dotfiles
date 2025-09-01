@@ -174,7 +174,7 @@ return {
             scratch = {
                 enabled = true,
                 ft = "markdown",
-                root = "~/Code/journal/scratch",
+                root = vim.loop.os_homedir() .. "/Code/journal/scratch",
             },
             words = { enabled = true },
             zen = { enabled = true, toggles = { dim = true } },
@@ -283,6 +283,10 @@ return {
     -- Navigate between NVIM & kitty splits
     {
         "knubie/vim-kitty-navigator",
+        enabled = function()
+            -- Kitty isn't available on Windows
+            return vim.loop.os_uname().sysname ~= "Windows_NT"
+        end,
         cond = require("config.util").is_not_vscode(),
         build = "cp ./*.py ~/.config/kitty/",
         keys = {

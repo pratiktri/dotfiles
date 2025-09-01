@@ -48,7 +48,7 @@ return {
                 markdownlint = {
                     prepend_args = {
                         "--config",
-                        "~/.config/templates/markdownlint.json",
+                        vim.loop.os_homedir() .. "/.config/templates/markdownlint.json",
                     },
                 },
                 ["markdown-toc"] = {

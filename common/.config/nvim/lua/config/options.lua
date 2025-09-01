@@ -1,7 +1,6 @@
 -- Load configs from VIM
 local sep = package.config:sub(1, 1)
-local home = os.getenv("HOME") or os.getenv("USERPROFILE")
-local vim_configs = home .. sep .. ".vim" .. sep .. "configs.vim"
+local vim_configs = vim.loop.os_homedir() .. sep .. ".vim" .. sep .. "configs.vim"
 if vim.loop.fs_stat(vim_configs) then
     vim.cmd("source " .. vim_configs)
 end

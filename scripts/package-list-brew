@@ -1,18 +1,14 @@
 # Lines that start with # are ignored
 # TIP: Only add commandline apps that aren't available/updated on OS repos
-bat
 bats-core
 dnscrypt-proxy
 dockerfile-language-server
 fd
-fzf
 gitleaks
 go
 htop
-jq
 kondo
 lazydocker
-lazygit
 lua
 lua-language-server
 luajit
@@ -27,7 +23,6 @@ python-lsp-server
 python@3.12
 rclone
 sccache
-shellcheck
 shellharden
 shodan
 speedtest-cli

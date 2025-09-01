@@ -102,7 +102,18 @@ apt_setup() {
     sudo apt-get update && sudo apt-get upgrade -y
 
     sudo apt-get install -y wget gpg extrepo
-    sudo extrepo enable dotnet docker-ce github-cli mattermost nvidia-cuda postgresql syncthing vscode winehq deb-multimedia-backports deb-multimedia-non-free
+    sudo extrepo update
+    sudo extrepo enable dotnet
+    sudo extrepo enable docker-ce
+    sudo extrepo enable github-cli
+    sudo extrepo enable mattermost
+    sudo extrepo enable nvidia-cuda
+    sudo extrepo enable postgresql
+    sudo extrepo enable vscode
+    sudo extrepo enable winehq
+    sudo extrepo enable deb-multimedia-backports
+    sudo extrepo enable deb-multimedia-non-free
+    sudo extrepo enable trivy
 
     if [ "$ID" = "debian" ]; then
         debian_setup

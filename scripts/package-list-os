@@ -1,6 +1,6 @@
 # Lines that start with # are ignored
 
-# Coding: Some are common, some not found in some OSes; all are required
+# Coding
 aspnetcore-runtime-8.0
 build-essential
 clang
@@ -44,14 +44,26 @@ zoxide
 apt-transport-https
 libreadline-dev
 libavcodec-extra
+fonts-dejavu
+fonts-liberation
+fonts-liberation2
+fonts-noto-core
 
 # Below few are dnf-specific packages
 akmod-nvidia
 dnf-plugins-core
 libva-nvidia-driver
 xorg-x11-drv-nvidia-cuda
+dejavu-sans-fonts
+dejavu-sans-mono-fonts
+dejavu-serif-fonts
+liberation-fonts-all
+google-noto-sans-fonts
+google-noto-serif-fonts
+google-noto-mono-fonts
 
 # Common
+ImageMagick
 bash
 bat
 bleachbit
@@ -76,7 +88,6 @@ gparted
 grub-customizer
 gzip
 htop
-ImageMagick
 imagemagick
 inxi
 kde-spectacle
@@ -89,18 +100,22 @@ net-tools
 nvidia-driver
 nvidia-settings
 openssh-client
+pavucontrol
+pipewire-audio
 qbittorrent
+qpwgraph
 rclone
 ripgrep
 simplescreenrecorder
 solaar
 syncthing
+ttf-mscorefonts-installer
 ufw
-ulauncher
 vim
 vlc
 vulkan-tools
 wget
+wl-clipboard
 xclip
 xsel
 yt-dlp
@@ -109,6 +124,9 @@ zsh
 # FreeBSD packages
 fusefs-lkl
 firefox-esr
+py311-fastest_pkg
+noto-2.0
+v4l-utils
 
 # Conflicts on FreeBSD
 ca-certificates

@@ -1,6 +1,15 @@
+" THEME
+let g:lightline = { 'colorscheme': 'onedark' }
+colorscheme onedark
+
 " NERDTree Plugin configurations
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 25
+
+" Map nerdtree to <Leader>e
+" Changes the pwd and opens the VCS root
+" Placed here because ideavim doesn't understand :tcd
+nnoremap <leader>e :tcd %:h<CR> :NERDTreeToggleVCS<CR>
 
 " Map easymotion Plugin to <Leader>j
 nnoremap <leader>j <Plug>(easymotion-s)

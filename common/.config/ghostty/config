@@ -37,7 +37,7 @@
 window-decoration = none
 background-opacity = 0.95
 background-blur = 70
-theme = catppuccin-mocha
+theme = GitHub-Dark-Dimmed
 window-theme = auto
 window-colorspace = display-p3
 

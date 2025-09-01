@@ -154,8 +154,7 @@ return {
         config = function()
             require("lspsaga").setup({
                 ui = {
-                    -- kind = require("config.util").icons.kind_lspsaga,
-                    kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+                    kind = require("config.util").icons.kind_lspsaga,
                     devicon = true,
                     title = true,
                 },

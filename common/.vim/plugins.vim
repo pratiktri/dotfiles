@@ -18,10 +18,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'michaeljsmith/vim-indent-object'  " ai, ii, aI, iI <- select indent
     Plug 'unblevable/quick-scope'           " f, t <- Highlight unique letter on the line
     Plug 'mg979/vim-visual-multi'           " <Ctrl+n>
+    Plug 'sheerun/vim-polyglot'              " Syntanx highlighting for many languages
 
     "------------Style Plugins------------"
     " Status Styles
     Plug 'itchyny/lightline.vim'
-    Plug 'tyrannicaltoucan/vim-deep-space'
-    Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+    Plug 'joshdick/onedark.vim'
 call plug#end()

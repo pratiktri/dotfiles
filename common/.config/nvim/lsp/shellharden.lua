@@ -1,4 +1,4 @@
 return {
-    cmd = { "shellharden", "--lsp" },
+    cmd = { "shellharden", "--suggest" },
     filetypes = { "sh", "bash", "zsh" },
 }

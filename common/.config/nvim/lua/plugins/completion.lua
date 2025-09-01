@@ -63,10 +63,7 @@ return {
 
             signature = { enabled = true },
 
-            snippets = {
-                preset = "luasnip",
-                opts = { search_paths = { vim.fn.stdpath("config") .. "/custom-snippets" } },
-            },
+            snippets = { preset = "luasnip" },
 
             cmdline = {
                 enabled = true,

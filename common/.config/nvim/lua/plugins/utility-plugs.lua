@@ -371,7 +371,7 @@ return {
         cond = require("config.util").is_not_vscode(),
         event = "BufReadPre",
         opts = {
-            -- Session files stored at: ~/.config/nvim/sessions/
+            -- ~/.config/nvim/sessions/
             dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"),
         },
     },

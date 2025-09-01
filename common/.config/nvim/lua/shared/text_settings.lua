@@ -1,3 +1,7 @@
+-- Used in:
+-- ../../after/ftplugin/markdown.lua
+-- ../../after/ftplugin/text.lua
+
 local M = {}
 
 function M.setup()

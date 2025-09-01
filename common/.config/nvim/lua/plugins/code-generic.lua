@@ -271,7 +271,6 @@ return {
                         "python",
                         "dockerfile",
                         "latex",
-                        "norg",
                         "scss",
                         "tsx",
                         "vue",
@@ -280,7 +279,6 @@ return {
                     },
 
                     auto_install = true,
-                    -- highlight = { enable = true },
                     indent = { enable = true },
 
                     incremental_selection = {

@@ -1,28 +1,20 @@
 return {
+    cmd = { "lua-language-server" },
+    filetype = { "lua" },
     settings = {
-        typescript = {
-            updateImportOnFileMove = { enabled = "always" },
-            suggest = { completeFunctionCalls = true },
-            inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = vim.split(package.path, ";"),
             },
-        },
-        javascript = {
-            inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
+            diagnostics = {
+                globals = { "vim" },
             },
+            workspace = {
+                checkThirdParty = false,
+                library = { vim.env.VIMRUNTIME },
+            },
+            telemetry = { enable = false },
         },
     },
 }

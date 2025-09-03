@@ -17,7 +17,6 @@ vim.lsp.enable({
     "shellcheck",
     "shellharden",
     "shfmt",
-    "sqlls",
     "taplo",
     "trivy",
     "ts_ls",

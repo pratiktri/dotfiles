@@ -75,8 +75,10 @@ return {
                 -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
 
-                map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: reset hunk" })
+                map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: Reset hunk" })
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
+                map("n", "<leader>gs", gs.stage_hunk, { desc = "Git: Stage hunk under cursor" })
+                map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Git: Unstage hunk under cursor" })
 
                 map("n", "<leader>gK", function()
                     gs.blame_line({ full = true })

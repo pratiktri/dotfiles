@@ -1,7 +1,6 @@
 return {
     {
         "saghen/blink.cmp",
-        cond = require("config.util").is_not_vscode(),
         event = "InsertEnter",
         dependencies = {
             "L3MON4D3/LuaSnip",
@@ -19,13 +18,7 @@ return {
             "sources.default",
         },
 
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
         opts = {
-            -- 'default' for mappings similar to built-in completion
-            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-            -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-            -- 'none' - create all the mappings yourself
             keymap = {
                 preset = "none",
                 ["<CR>"] = { "accept", "fallback" }, -- Ctrl + Enter to accept
@@ -126,8 +119,6 @@ return {
                         should_show_items = function()
                             return vim.tbl_contains({ "gitcommit" }, vim.o.filetype)
                         end,
-                        ---@module 'blink-cmp-conventional-commits'
-                        ---@type blink-cmp-conventional-commits.Options
                         opts = {},
                         score_offset = 700,
                     },
@@ -162,7 +153,6 @@ return {
 
     {
         "L3MON4D3/LuaSnip",
-        cond = require("config.util").is_not_vscode(),
         version = "v2.*",
         dependencies = {
             -- Adds common snippets written in VS Code format

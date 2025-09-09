@@ -9,10 +9,8 @@ return {
         end,
     },
 
-    -- Finds and lists all of the TODO, HACK, BUG, etc comment
     {
         "folke/todo-comments.nvim",
-        cond = require("config.util").is_not_vscode(),
         event = "VimEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true,
@@ -25,7 +23,7 @@ return {
                     "--with-filename",
                     "--line-number",
                     "--column",
-                    "--hidden", -- include hidden files
+                    "--hidden", -- adds dotfiles
                     "--glob=!.git", -- exclude .git directory
                     "--glob=!target",
                     "--glob=!node_modules",
@@ -51,19 +49,16 @@ return {
                 end,
                 desc = "Previous todo comment",
             },
-
             { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG<cr>", desc = "FIXME: Tags" },
             { "<leader>dt", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME,BUG<cr>", desc = "Project TODOs" },
             { "<leader>dT", "<cmd>TodoTelescope<cr>", desc = "All tags: FIX, NOTE, TIP, TODO, WARN" },
         },
     },
 
-    -- better diagnostics list and others
     {
         "folke/trouble.nvim",
         lazy = false,
         cmd = "Trouble",
-        cond = require("config.util").is_not_vscode(),
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             -- Default: Preview in a split
@@ -111,42 +106,11 @@ return {
             { "<leader>dw", "<cmd>Trouble project_warnings toggle focus=true<cr>", desc = "Trouble: List Project Diagnostics" },
             { "<leader>dq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Trouble: Quickfix List" },
             { "gr", "<cmd>Trouble lsp_references toggle focus=true<cr>", desc = "Goto References" },
-            {
-                "[q",
-                function()
-                    if require("trouble").is_open() then
-                        require("trouble").previous({ skip_groups = true, jump = true })
-                    else
-                        local ok, err = pcall(vim.cmd.cprev)
-                        if not ok then
-                            vim.notify(err, vim.log.levels.ERROR)
-                        end
-                    end
-                end,
-                desc = "Previous trouble/quickfix item",
-            },
-            {
-                "]q",
-                function()
-                    if require("trouble").is_open() then
-                        ---@diagnostic disable-next-line: missing-parameter, missing-fields
-                        require("trouble").next({ skip_groups = true, jump = true })
-                    else
-                        local ok, err = pcall(vim.cmd.cnext)
-                        if not ok then
-                            vim.notify(err, vim.log.levels.ERROR)
-                        end
-                    end
-                end,
-                desc = "Next trouble/quickfix item",
-            },
         },
     },
 
-    -- LspSaga
     {
         "nvimdev/lspsaga.nvim",
-        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
@@ -170,15 +134,12 @@ return {
             })
 
             vim.keymap.set({ "n", "t" }, "<C-`>", "<cmd>Lspsaga term_toggle<cr>", { desc = "Toggle Floating Terminal" })
-
             -- Rest of the keymaps in ../core/lsp.lua
         end,
     },
 
-    -- Search and jump around symbols in the buffer
     {
         "SmiteshP/nvim-navbuddy",
-        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "SmiteshP/nvim-navic",
             "MunifTanjim/nui.nvim",
@@ -236,21 +197,13 @@ return {
         lazy = false,
         build = ":TSUpdate",
         init = function(plugin)
-            -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-            -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-            -- no longer trigger the **nvim-treeitter** module to be loaded in time.
-            -- Luckily, the only thing that those plugins need are the custom queries, which we make available
-            -- during startup.
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
         end,
         dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 
         config = function()
-            -- See `:help nvim-treesitter`
-            -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
             vim.defer_fn(function()
-                ---@diagnostic disable-next-line: missing-fields
                 require("nvim-treesitter.configs").setup({
                     ensure_installed = {
                         "regex",
@@ -294,9 +247,8 @@ return {
                     textobjects = {
                         select = {
                             enable = true,
-                            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+                            lookahead = true, -- Automatically jump forward to textobj
                             keymaps = {
-                                -- You can use the capture groups defined in textobjects.scm (:TSEditQuery textobjects)
                                 ["aa"] = { query = "@parameter.outer", desc = "Select around the parameter" },
                                 ["ia"] = { query = "@parameter.inner", desc = "Select inside the parameter" },
                                 ["af"] = { query = "@function.outer", desc = "Select around the function" },

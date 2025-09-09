@@ -26,10 +26,8 @@ return {
         },
     },
 
-    -- File Explorer: Neotree
     {
         "nvim-neo-tree/neo-tree.nvim",
-        cond = require("config.util").is_not_vscode(),
         keys = {
             { "<leader><tab>", "<CMD>Neotree toggle left<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },
         },
@@ -78,26 +76,12 @@ return {
             open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
         },
         config = function(_, opts)
-            local config = require("config.util")
-
-            local function on_move(data)
-                config.on_rename(data.source, data.destination)
-            end
-
-            local events = require("neo-tree.events")
-            opts.event_handlers = opts.event_handlers or {}
-            vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED, handler = on_move },
-                { event = events.FILE_RENAMED, handler = on_move },
-            })
             require("neo-tree").setup(opts)
         end,
     },
 
-    -- Telescope: Fuzzy Finder (files, lsp, etc)
     {
         "nvim-telescope/telescope.nvim",
-        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
@@ -116,6 +100,7 @@ return {
         config = function()
             local telescopeConfig = require("telescope.config")
 
+            -- Use this filter for both default search & picker search
             local filters = {
                 "--hidden",
                 "--glob",
@@ -126,10 +111,8 @@ return {
                 "!**/target/*",
             }
 
-            -- Clone the default Telescope configuration
             local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
 
-            -- Merge default arguments with filters
             for i = 1, #filters do
                 vimgrep_arguments[#vimgrep_arguments + 1] = filters[i]
             end
@@ -163,11 +146,8 @@ return {
                 },
             })
 
-            -- Load some required Telescope extensions
             pcall(require("telescope").load_extension, "fzf")
             pcall(require("telescope").load_extension, "ui-select")
-
-            -- Keymaps for LSP Things -> In code-lsp.lua
 
             -- Buffer
             vim.keymap.set("n", "<leader>bl", require("telescope.builtin").buffers, { desc = "List Buffers" })

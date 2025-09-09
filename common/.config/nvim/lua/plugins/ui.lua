@@ -1,21 +1,12 @@
 return {
     -- icons
-    {
-        "nvim-tree/nvim-web-devicons",
-        cond = require("config.util").is_not_vscode(),
-    },
+    "nvim-tree/nvim-web-devicons",
 
     -- ui components
-    {
-        "MunifTanjim/nui.nvim",
-        cond = require("config.util").is_not_vscode(),
-    },
+    "MunifTanjim/nui.nvim",
 
     -- Better vim.ui
-    {
-        "stevearc/dressing.nvim",
-        cond = require("config.util").is_not_vscode(),
-    },
+    "stevearc/dressing.nvim",
 
     {
         "projekt0n/github-nvim-theme",
@@ -37,7 +28,6 @@ return {
     -- Show buffers like VS Code tabs
     {
         "akinsho/bufferline.nvim",
-        cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
@@ -84,7 +74,6 @@ return {
             vim.api.nvim_create_autocmd("BufAdd", {
                 callback = function()
                     vim.schedule(function()
-                        ---@diagnostic disable-next-line: param-type-mismatch
                         pcall(buf_line)
                     end)
                 end,
@@ -95,7 +84,6 @@ return {
     -- Completely replaces the UI for messages, cmdline and the popupmenu.
     {
         "folke/noice.nvim",
-        cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -166,7 +154,6 @@ return {
     -- Indent guides for Neovim
     {
         "lukas-reineke/indent-blankline.nvim",
-        cond = require("config.util").is_not_vscode(),
         opts = {
             indent = { char = "│", tab_char = "│" },
             scope = { enabled = false },
@@ -192,7 +179,6 @@ return {
     -- Better folds
     {
         "kevinhwang91/nvim-ufo",
-        cond = require("config.util").is_not_vscode(),
         event = "VeryLazy",
         dependencies = {
             "kevinhwang91/promise-async",

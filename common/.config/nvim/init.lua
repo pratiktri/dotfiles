@@ -18,7 +18,7 @@ require("config.autocmd")
 -- NOTE: External Tools needed for this Nvim config to work
 -- jsregexp
 -- rust-analyzer, rustc, cargo (rustacean)
--- OS Installs:
+-- OS Installs: Use ../../../scripts/install.sh
 --      general: curl, gzip, unzip, git, fd-find, ripgrep, fzf, tree-sitter
 --      tools: ImageMagick, xclip, xsel, ghostscript
 --      lsp: codespell, nodejs-bash-language-server, hadolint, lua, luajit, shellcheck, shfmt, trivy, pylint, stylua

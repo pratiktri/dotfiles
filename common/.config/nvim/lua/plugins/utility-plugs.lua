@@ -5,25 +5,8 @@ return {
         "echasnovski/mini.nvim",
         version = false,
         config = function()
-            -- gc
             require("mini.comment").setup()
-
             require("mini.pairs").setup()
-
-            -- mini.ai
-            -- va)  - [v]isually select [a]round [)]paren
-            --  - a) would implicitly select around another ), based on some predefined logic
-            -- ci'  - [c]hange [i]nside [']quote
-            -- via  - [a]rguments
-            -- vif  - [f]unction calls
-            -- va_  - select around "_"
-            -- va1  - select around two "1"
-            --
-            -- explicit covering region:
-            -- vinq - select [i]nside [n]ext [q]uote
-            -- vilb - select inside last bracket
-            -- cina - change next function argument
-            -- cila - change last function argument
             require("mini.ai").setup({ n_lines = 500 })
 
             -- mini.surround
@@ -97,29 +80,27 @@ return {
             })
 
             -- configure mini.indentscope
-            if require("config.util").is_not_vscode() then
-                require("mini.indentscope").setup({
-                    delay = 100,
-                    symbol = "│",
-                    options = { try_as_border = true },
-                })
+            require("mini.indentscope").setup({
+                delay = 100,
+                symbol = "│",
+                options = { try_as_border = true },
+            })
 
-                vim.api.nvim_create_autocmd("FileType", {
-                    pattern = {
-                        "help",
-                        "neo-tree",
-                        "Trouble",
-                        "trouble",
-                        "lazy",
-                        "mason",
-                        "notify",
-                        "toggleterm",
-                    },
-                    callback = function()
-                        vim.b.miniindentscope_disable = true
-                    end,
-                })
-            end
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "help",
+                    "neo-tree",
+                    "Trouble",
+                    "trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "toggleterm",
+                },
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
         end,
     },
 
@@ -128,7 +109,6 @@ return {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
-        cond = require("config.util").is_not_vscode(),
         opts = {
             bigfile = { enabled = false },
             dashboard = { enabled = false },
@@ -287,7 +267,6 @@ return {
             -- Kitty isn't available on Windows
             return vim.loop.os_uname().sysname ~= "Windows_NT"
         end,
-        cond = require("config.util").is_not_vscode(),
         build = "cp ./*.py ~/.config/kitty/",
         keys = {
             { "<C-S-h>", "<cmd>KittyNavigateLeft<cr>" },
@@ -301,7 +280,6 @@ return {
     {
         "mikesmithgh/kitty-scrollback.nvim",
         lazy = true,
-        cond = require("config.util").is_not_vscode(),
         cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
         event = { "User KittyScrollbackLaunch" },
         version = "^4.0.0",
@@ -318,7 +296,6 @@ return {
     -- Changes the Nvim root to git root
     {
         "airblade/vim-rooter",
-        cond = require("config.util").is_not_vscode(),
         config = function()
             vim.g.rooter_cd_cmd = "tcd" -- Use tcd command to change the root
             vim.g.rooter_patterns = { ".git" }
@@ -335,7 +312,6 @@ return {
 
     {
         "folke/which-key.nvim",
-        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "echasnovski/mini.icons",
         },
@@ -368,7 +344,6 @@ return {
     -- TIP: autocmd to autoload sessions at: ../config/autocmd.lua
     {
         "folke/persistence.nvim",
-        cond = require("config.util").is_not_vscode(),
         event = "BufReadPre",
         opts = {
             -- ~/.config/nvim/sessions/

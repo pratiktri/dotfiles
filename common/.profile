@@ -57,6 +57,14 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
 
 export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
 
+# Podman's Docker-compatible socket (rootless)
+# Make lazydocker work
+DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
+export DOCKER_HOST
+export PODMAN_COMPOSE_WARNING_LOGS=false
+
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc" && [ ! -f "$WGETRC" ] && touch "$WGETRC"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
@@ -117,9 +125,3 @@ export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
 export N_PREFIX="${XDG_DATA_HOME}/n_node"
 export PATH="$N_PREFIX/bin:$PATH"
 command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
-
-# Podman's Docker-compatible socket (rootless)
-# Make lazydocker work
-DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
-export DOCKER_HOST
-export PODMAN_COMPOSE_WARNING_LOGS=false

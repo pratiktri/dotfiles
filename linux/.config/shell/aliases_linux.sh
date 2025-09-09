@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+
+# Kitty & Ghostty terminfo aren't available on most servers
+alias ssh="TERM=xterm-256color ssh"
 
 # Directories and Directory listings
-dir_size(){
+dir_size() {
     if [ "$1" = "" ]; then
         dir="$PWD"
     else

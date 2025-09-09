@@ -1,12 +1,5 @@
 return {
     {
-        "easymotion/vim-easymotion",
-        keys = {
-            { "<leader>j", "<Plug>(easymotion-s)", desc = "Easymotion jump" },
-        },
-    },
-
-    {
         "unblevable/quick-scope",
         init = function()
             vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
@@ -16,6 +9,21 @@ return {
               highlight QuickScopeSecondary guifg='#00C7DF' gui=underline ctermfg=81 cterm=underline
             ]])
         end,
+    },
+
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {
+            highlight = { backdrop = false },
+            modes = { char = { enabled = false } },
+        },
+        -- stylua: ignore
+        keys = {
+            { "<leader>j", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash jump" },
+            { "<leader>cH", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Highlight a code block" },
+        },
     },
 
     -- File Explorer: Neotree

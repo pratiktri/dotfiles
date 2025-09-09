@@ -31,7 +31,6 @@ shfmt
 software-properties-common
 sqlite
 stylua
-tmux
 tokei
 tree-sitter
 tree-sitter-cli
@@ -109,6 +108,7 @@ ripgrep
 simplescreenrecorder
 solaar
 syncthing
+tmux
 ttf-mscorefonts-installer
 ufw
 vim

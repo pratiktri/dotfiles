@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # Sets environment variables for login non-interactive shells (VS Code & Zed)
-[ -z "$XDG_CONFIG_HOME" ] && source "$HOME"/profile
+[ -z "$XDG_CONFIG_HOME" ] && source "$HOME"/.profile
 
 # If not running interactively, don't do anything
 case $- in

@@ -2,7 +2,7 @@
 local sep = package.config:sub(1, 1)
 local vim_mappings = vim.loop.os_homedir() .. sep .. ".vim" .. sep .. "key_maps.vim"
 local util = require("config.util")
-if vim.loop.fs_stat(vim_mappings) and util.is_not_vscode() then
+if vim.loop.fs_stat(vim_mappings) then
     vim.cmd("source " .. vim_mappings)
 end
 
@@ -60,10 +60,6 @@ vim.keymap.set({ "n", "v" }, "<leader>xb", function()
     vim.cmd("bdelete")
 end, { desc = "Save and close current buffer" })
 
--- Traverse quickfix
--- vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
--- vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
-
 -- Clear searches
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
@@ -73,7 +69,6 @@ vim.keymap.set({ "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc =
 vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
 vim.keymap.set({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
--- diagnostic: From LazyVim
 local diagnostic_goto = function(next, severity)
     local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
     severity = severity and vim.diagnostic.severity[severity] or nil

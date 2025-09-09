@@ -1,17 +1,10 @@
 return {
     "mfussenegger/nvim-dap",
     dependencies = {
-        -- Creates a beautiful debugger UI
         "rcarriga/nvim-dap-ui",
-
-        -- Required dependency for nvim-dap-ui
         "nvim-neotest/nvim-nio",
-
-        -- Auto-installs debugger adapters
         "mason-org/mason.nvim",
         "jay-babu/mason-nvim-dap.nvim",
-
-        -- Shows variable values inline as virtual text
         "theHamsta/nvim-dap-virtual-text",
     },
     keys = {

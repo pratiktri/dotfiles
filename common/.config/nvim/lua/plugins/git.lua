@@ -2,7 +2,6 @@ return {
     -- Better fugitive: neogit
     {
         "NeogitOrg/neogit",
-        cond = require("config.util").is_not_vscode(),
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
@@ -17,7 +16,6 @@ return {
     -- Git Diffview
     {
         "sindrets/diffview.nvim",
-        cond = require("config.util").is_not_vscode(),
         keys = {
 
             { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview", mode = { "n" } },
@@ -28,7 +26,6 @@ return {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     {
         "lewis6991/gitsigns.nvim",
-        cond = require("config.util").is_not_vscode(),
         opts = {
             -- See `:help gitsigns.txt`
             signs = {

@@ -1,7 +1,6 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        cond = require("config.util").is_not_vscode(),
         dependencies = {
             {
                 "williamboman/mason.nvim",
@@ -39,7 +38,6 @@ return {
 
     {
         "j-hui/fidget.nvim",
-        cond = require("config.util").is_not_vscode(),
         opts = {
             progress = {
                 poll_rate = 1, -- How and when to poll for progress messages

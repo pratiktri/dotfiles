@@ -1,7 +1,9 @@
--- TIP:
--- Step 1: Install the LSP through either of the following:
---         OS Installer > Brew-linux > Mason NeoVim Plugin
--- Step 2: Append the LSP server name in the below array
+-- TIP: Setup a new LSP:
+-- Step 1: Install the LSP through:
+--         OS Installer > Brew-linux > :MasonInstall
+-- Step 2: Append the LSP server name in the below array ("newlsp")
+-- Step 3: Create file ("newlsp.lua") in ../../lsp/
+-- Step 4: Return a lua table containing required lsp config in it
 vim.lsp.enable({
     "bashls",
     "cssls",

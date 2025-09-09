@@ -1,7 +1,6 @@
 return {
     {
         "stevearc/conform.nvim",
-        cond = require("config.util").is_not_vscode(),
         lazy = true,
         event = { "BufWritePre" },
         opts = {

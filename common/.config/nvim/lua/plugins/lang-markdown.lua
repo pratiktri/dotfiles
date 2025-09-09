@@ -2,7 +2,6 @@ return {
     -- Render Markdown on Neovim
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        cond = require("config.util").is_not_vscode(),
         init = function()
             -- Define color variables
             local color1_bg = "#295715"
@@ -72,7 +71,6 @@ return {
 
     {
         "bullets-vim/bullets.vim",
-        cond = require("config.util").is_not_vscode(),
         ft = { "markdown", "text", "gitcommit", "scratch" },
         config = function()
             vim.g.bullets_enabled_file_types = {

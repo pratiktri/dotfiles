@@ -8,19 +8,12 @@ return {
 
             -- Linters are only required for dynamically typed languages
             lint.linters_by_ft = {
-                python = { "pylint", "codespell" },
-                markdown = { "markdownlint", "codespell" },
+                python = { "pylint" },
+                markdown = { "markdownlint" },
                 yaml = { "yamllint" },
-                lua = { "codespell" },
-                bash = { "codespell" },
-                sh = { "codespell" },
-                zsh = { "codespell" },
-                typescript = { "codespell" },
-                javascript = { "codespell" },
-                typescriptreact = { "codespell" },
-                javascriptreact = { "codespell" },
                 dockerfile = { "hadolint" },
-                html = { "codespell" },
+
+                ["*"] = { "codespell" },
             }
 
             local markdownlint = lint.linters.markdownlint

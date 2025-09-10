@@ -4,6 +4,7 @@
 -- Step 2: Append the LSP server name in the below array ("newlsp")
 -- Step 3: Create file ("newlsp.lua") in ../../lsp/
 -- Step 4: Return a lua table containing required lsp config in it
+-- NOTE: Only LSPs here, NOT linters or formatter
 vim.lsp.enable({
     "bashls",
     "cssls",
@@ -12,13 +13,8 @@ vim.lsp.enable({
     "html",
     "jsonls",
     "lua_ls",
-    "markdownlint",
     "marksman",
-    "prettier",
     "pylsp",
-    "shellcheck",
-    "shellharden",
-    "shfmt",
     "taplo",
     "trivy",
     "ts_ls",

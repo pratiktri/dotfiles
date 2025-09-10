@@ -17,13 +17,11 @@ markdownlint-cli
 marksman
 n
 neovim
-prettier
 prettierd
 python-lsp-server
 python@3.12
 rclone
 sccache
-shellharden
 shodan
 speedtest-cli
 sqlite

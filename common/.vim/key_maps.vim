@@ -36,6 +36,10 @@ nnoremap ]s ]szz
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap G Gzz
+nnoremap g* g*zz
+nnoremap g# g#zz
+nnoremap * *zzv
+nnoremap # #zzv
 
 " Move visually selected lines around with J & K
 vnoremap J :m '>+1<CR>gv=gv
@@ -66,10 +70,11 @@ map <C-l> <C-w>l
 " Navigate buffers
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprevious<CR>
+nnoremap <leader>bx :bd<CR>
 
-" Navigate Quickfixs
-nnoremap [q cprev
-nnoremap ]q cnext
+" Navigate Quickfix
+nnoremap [q :cprev<CR>zz
+nnoremap ]q :cnext<CR>zz
 
 " Resize window using <ctrl> arrow keys
 nnoremap <C-Up> :resize +2<CR>
@@ -91,13 +96,12 @@ vnoremap <C-q> :wqa<CR>
 nnoremap <C-s> :wa<CR>
 vnoremap <C-s> :wa<CR>
 
-" Move cursor in insert mode
-inoremap <M-a> <ESC>^i
-inoremap <M-e> <END>
-inoremap <M-h> <Left>
-inoremap <M-l> <Right>
-inoremap <M-j> <Down>
-inoremap <M-k> <Up>
+" Paste over currently selected text without yanking it
+vnoremap p "_dp
+vnoremap P "_dP
+
+" Copy everything between { & } including brackets
+nnoremap YY va{Vy
 
 " Move Lines with Alt+j,k
 nnoremap <M-j> :m .+1<cr>==
@@ -112,9 +116,6 @@ vnoremap <leader>= y`]a = <C-r>=<C-r>"<CR><Esc>
 imap , ,<C-g>u
 imap . .<C-g>u
 imap ; ;<C-g>u
-
-" Copy entire content of the current buffer
-nnoremap <C-c> :%y+<CR>
 
 " Copy to system clipboard
 nnoremap <leader>y "+y

@@ -89,6 +89,14 @@ return {
             "MunifTanjim/nui.nvim",
         },
         opts = {
+            views = {
+                cmdline_popup = {
+                    position = {
+                        row = "98%", -- Above statusline
+                        col = "0%",
+                    },
+                },
+            },
             lsp = {
                 progress = {
                     throttle = 1000 / 100,

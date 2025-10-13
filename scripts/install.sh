@@ -56,8 +56,9 @@ main() {
 
     ./install-os-packages.sh
 
-    # Skip brew installation on FreeBSD
+    # Skip flatpak & brew installations on FreeBSD
     if [ "$(uname -s)" != "FreeBSD" ]; then
+        ./install-flatpak-packages.sh
         ./install-brew-packages.sh
     fi
 

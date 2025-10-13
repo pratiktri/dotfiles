@@ -1,18 +1,14 @@
 -- Load Keybindings from VIM
 local sep = package.config:sub(1, 1)
 local vim_mappings = vim.loop.os_homedir() .. sep .. ".vim" .. sep .. "key_maps.vim"
-local util = require("config.util")
 if vim.loop.fs_stat(vim_mappings) then
     vim.cmd("source " .. vim_mappings)
 end
 
-vim.keymap.set({ "n" }, "<leader><CR>", function()
-    vim.cmd("source " .. vim.fn.expand(vim.fn.stdpath("config") .. sep .. "init.lua"))
-end, { desc = "Apply NVIM config changes" })
+vim.keymap.set({ "n" }, "<C-,>", "<cmd>edit " .. vim.fn.expand(vim.fn.stdpath("config")) .. sep .. "init.lua<cr>", { desc = "open neovim config" })
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
-vim.keymap.set({ "n" }, "<C-c>", "<cmd> %y+ <CR>", { desc = "Copy entire content of the current buffer" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -30,12 +26,7 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window 
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
--- Move Lines
-vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
-vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
-
+-- Auto add undo breakpoints at different points, while typing
 vim.keymap.set("i", "<C-BS>", "<C-g>u<C-w>", { desc = "Add undo breakpoint and delete last word" })
 vim.keymap.set("i", ",", ",<C-g>u", { desc = "Auto add undo breakpoints on ','" })
 vim.keymap.set("i", ".", ".<C-g>u", { desc = "Auto add undo breakpoints on '.'" })
@@ -60,6 +51,8 @@ vim.keymap.set({ "n", "v" }, "<leader>xb", function()
     vim.cmd("bdelete")
 end, { desc = "Save and close current buffer" })
 
+vim.keymap.set("n", "<leader>xt", "<cmd>tabclose<cr>", { desc = "Close current tab" })
+
 -- Clear searches
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
@@ -77,16 +70,17 @@ local diagnostic_goto = function(next, severity)
         vim.cmd("normal! zz")
     end
 end
-vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
--- Close Tab
-vim.keymap.set("n", "<leader>xt", "<cmd>tabclose<cr>", { desc = "Close current tab" })
+vim.keymap.set("n", "]q", "<cmd>cnext<cr>zz", { desc = "Quickfix: Next" })
+vim.keymap.set("n", "[q", "<cmd>cprev<cr>zz", { desc = "Quickfix: Previous" })
+vim.keymap.set("n", "<leader>cq", function()
+    vim.diagnostic.setqflist()
+end, { desc = "Project Diagnostics -> Quickfix" })
 
 -- Center cursor
 vim.keymap.set("n", "n", "nzzzv")

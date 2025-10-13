@@ -5,24 +5,25 @@ return {
         event = { "BufWritePre" },
         opts = {
             formatters_by_ft = {
-                sh = { "shfmt" },
                 bash = { "shfmt" },
+                sh = { "shfmt" },
                 zsh = { "shfmt" },
 
-                graphql = { "prettierd" },
                 css = { "prettierd" },
+                graphql = { "prettierd" },
                 html = { "prettierd" },
                 javascript = { "prettierd" },
                 javascriptreact = { "prettierd" },
+                json = { "prettierd" },
                 svelte = { "prettierd" },
                 typescript = { "prettierd" },
                 typescriptreact = { "prettierd" },
-                json = { "prettierd" },
 
                 lua = { "stylua" },
                 markdown = { "markdownlint" },
                 python = { "black" },
                 rust = { "rustfmt" },
+                xml = { "xmllint" },
                 yaml = { "yamlfmt" },
 
                 ["_"] = { "trim_whitespace" },

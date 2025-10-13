@@ -10,8 +10,9 @@ return {
             lint.linters_by_ft = {
                 python = { "pylint" },
                 markdown = { "markdownlint" },
-                yaml = { "yamllint" },
-                dockerfile = { "hadolint" },
+                yaml = { "yamllint", "trivy" },
+                dockerfile = { "hadolint", "trivy" },
+                terraform = { "trivy" },
 
                 ["*"] = { "codespell" },
             }

@@ -18,8 +18,7 @@ return {
         "sindrets/diffview.nvim",
         keys = {
 
-            { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview", mode = { "n" } },
-            { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Open Diffview against master", mode = { "n" } },
+            { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Diffview Project against index/staging", mode = { "n" } },
         },
     },
 
@@ -37,10 +36,14 @@ return {
                 untracked = { text = "┆" },
             },
             attach_to_untracked = true,
+            current_line_blame = true, -- Show git line blame-line by default
+            current_line_blame_opts = {
+                virt_text_opt = "right_align",
+                ignore_whitespace = true,
+            },
+            current_line_blame_formatter = "<author>, <author_time:%R>, <summary>",
             on_attach = function(bufnr)
-                local gs = package.loaded.gitsigns
-
-                gs.toggle_current_line_blame() -- git blame line
+                local gs = require("gitsigns")
 
                 local function map(mode, l, r, opts)
                     opts = opts or {}
@@ -48,34 +51,28 @@ return {
                     vim.keymap.set(mode, l, r, opts)
                 end
 
-                -- Navigation
-                map({ "n", "v" }, "]g", function()
-                    if vim.wo.diff then
-                        return "]g"
-                    end
-                    vim.schedule(function()
-                        gs.next_hunk()
-                    end)
-                    return "<Ignore>"
-                end, { expr = true, desc = "Next Git hunk" })
-
-                map({ "n", "v" }, "[g", function()
-                    if vim.wo.diff then
-                        return "[g"
-                    end
-                    vim.schedule(function()
-                        gs.prev_hunk()
-                    end)
-                    return "<Ignore>"
-                end, { expr = true, desc = "Previous Git hunk" })
-
                 -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
 
+                map({ "n", "v" }, "]h", function()
+                    gs.next_hunk()
+                end, { desc = "Next Git hunk" })
+
+                map({ "n", "v" }, "[h", function()
+                    gs.prev_hunk()
+                end, { desc = "Previous Git hunk" })
+
+                map("n", "<leader>gQ", function()
+                    gs.setqflist("all", { open = false })
+                end, { desc = "Git: Project Hunks to quickfix list" })
+
+                map("n", "<leader>gd", function()
+                    gs.diffthis("~1")
+                end, { desc = "git: Diff the file against last commit" })
+
                 map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: Reset hunk" })
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
-                map("n", "<leader>gs", gs.stage_hunk, { desc = "Git: Stage hunk under cursor" })
-                map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Git: Unstage hunk under cursor" })
+                map("n", "<leader>gs", gs.stage_hunk, { desc = "Git: Toggle Stage-Hunk" })
 
                 map("n", "<leader>gK", function()
                     gs.blame_line({ full = true })

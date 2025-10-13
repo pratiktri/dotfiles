@@ -188,14 +188,21 @@ return {
                 function()
                     Snacks.lazygit.open(opts)
                 end,
-                desc = "Git: Show LazyGit",
+                desc = "LazyGit: Show LazyGit",
             },
             {
                 "<leader>gl",
                 function()
                     Snacks.lazygit.log(opts)
                 end,
-                desc = "LazyGit: List Git Log",
+                desc = "LazyGit: Git Log Graph",
+            },
+            {
+                "<leader>gf",
+                function()
+                    Snacks.lazygit.log_file(opts)
+                end,
+                desc = "LazyGit: Show File Log",
             },
             {
                 "<leader>gL",
@@ -203,13 +210,6 @@ return {
                     Snacks.git.blame_line(opts)
                 end,
                 desc = "Git: Line Log",
-            },
-            {
-                "<leader>gf",
-                function()
-                    Snacks.lazygit.log_file(opts)
-                end,
-                desc = "Git: Show File Log",
             },
             {
                 "<leader>gO",

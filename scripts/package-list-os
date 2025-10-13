@@ -67,6 +67,7 @@ bash
 bat
 bleachbit
 btop
+conntrack-tools
 curl
 dolphin
 dolphin-plugins
@@ -89,6 +90,8 @@ gzip
 htop
 imagemagick
 inxi
+iproute
+iproute2
 kde-spectacle
 kitty
 kitty-terminfo

@@ -9,8 +9,6 @@
 -- Copy visual section to a line number -> :'<,'>t15 (copies To line 15)
 
 -- Load keymaps & options: Order matters
-require("config.options")
-require("config.keymaps")
 require("core.lazy")
 require("core.lsp")
 require("config.autocmd")
@@ -25,6 +23,6 @@ require("config.autocmd")
 -- Brew:
 --      tools: lazygit
 --      lsp: dockerfile-language-server, markdown-toc, markdownlint-cli, marksman, prettier, prettierd, python-lsp-server,
---           shellharden, taplo, typescript-language-server, vue-language-server, yaml-language-server, yamlfmt
--- Mason: When they aren't found on OS or Brew
+--           taplo, typescript-language-server, vue-language-server, yaml-language-server, yamlfmt
+-- MasonInstallAll to install the rest (./lua/config/autocmd.lua)
 --      codelldb, css-lsp, docker-compose-language-service, html-lsp, json-lsp, sqlls

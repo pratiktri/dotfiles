@@ -83,6 +83,7 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 [ ! -f "${XDG_CONFIG_HOME}/templates/.prettierrc" ] || export PRETTIER_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierrc"
 [ ! -f "${XDG_CONFIG_HOME}/templates/.prettierignore" ] || export PRETTIER_IGNORE_TEMPLATE="${XDG_CONFIG_HOME}/templates/.prettierignore"
 [ ! -f "${XDG_CONFIG_HOME}/templates/pre-commit" ] || export GIT_PRECOMMIT_TEMPLATE="${XDG_CONFIG_HOME}/templates/pre-commit"
+[ ! -f "${XDG_CONFIG_HOME}/templates/.eslintrc.json" ] || export ESLINT_TEMPLATE="${XDG_CONFIG_HOME}/templates/.eslintrc.json"
 
 # Python
 export PYTHON_HISTORY="${XDG_STATE_HOME}/shell/python_history" # will be picked up by Python 3.13+

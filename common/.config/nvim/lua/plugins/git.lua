@@ -17,7 +17,6 @@ return {
     {
         "sindrets/diffview.nvim",
         keys = {
-
             { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Diffview Project against index/staging", mode = { "n" } },
         },
     },

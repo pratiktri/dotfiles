@@ -29,13 +29,6 @@ return {
     {
         "akinsho/bufferline.nvim",
         event = "VeryLazy",
-        keys = {
-            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
-            { "<leader>bX", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
-            { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
-            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-        },
         opts = {
             options = {
                 close_command = function(n)
@@ -79,6 +72,13 @@ return {
                 end,
             })
         end,
+        keys = {
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
+            { "<leader>bX", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
+            { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
+            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+        },
     },
 
     -- Completely replaces the UI for messages, cmdline and the popupmenu.
@@ -113,7 +113,7 @@ return {
                     opts = { skin = true },
                 },
                 {
-                    -- Direct some messages to bottom - obove lualine
+                    -- Direct some messages to bottom - obove statusline
                     view = "mini",
                     filter = {
                         event = "msg_show",

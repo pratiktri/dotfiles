@@ -12,21 +12,6 @@ return {
     },
 
     {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        ---@type Flash.Config
-        opts = {
-            highlight = { backdrop = false },
-            modes = { char = { enabled = false } },
-        },
-        -- stylua: ignore
-        keys = {
-            { "<leader>j", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash jump" },
-            { "<leader>cH", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Highlight a code block" },
-        },
-    },
-
-    {
         "nvim-neo-tree/neo-tree.nvim",
         keys = {
             { "<leader><tab>", "<CMD>Neotree toggle left<CR>", desc = "Open NeoTree Explorer at Git root", remap = true },

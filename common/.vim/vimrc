@@ -31,3 +31,14 @@ autocmd! bufwritepost $VIMRC source %
 
 " Save inside vim config directory
 set undodir=$VIMDIR/undo//
+
+" Vim-only Keybindings
+"""""""""""""""""""""""""""""""""""
+let $VIMCONFIG=expand($HOME)."/.vim/configs.vim"
+nnoremap <C-,> :edit $VIMCONFIG<CR>
+
+let $VIMRC=expand($HOME)."/.vim/vimrc"
+nnoremap <C-CR> :source $VIMRC<CR>
+
+" Changes the pwd to the opened file's directory
+nnoremap <leader>cd :lcd %:h<CR>

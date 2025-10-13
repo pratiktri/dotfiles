@@ -123,9 +123,3 @@ vnoremap <leader>y "+y
 
 " Clear search, diff update and redraw
 nnoremap <Esc> :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
-
-" Changes the pwd to the opened file's directory
-nnoremap <leader>cd :lcd %:h<CR>
-
-" Close Tab
-nnoremap <leader>xt :tabclose

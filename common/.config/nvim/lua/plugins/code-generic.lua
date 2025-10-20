@@ -267,7 +267,6 @@ return {
                             enable = true,
                             goto_next_start = {
                                 ["]f"] = { query = "@function.outer", desc = "Goto next inner function start" },
-                                -- ["]c"] = { query = "@class.outer", desc = "Goto next inner class start" },
                                 ["]o"] = { query = "@loop.*", desc = "Goto next loop start" },
                             },
                             goto_next_end = {
@@ -277,7 +276,6 @@ return {
                             },
                             goto_previous_start = {
                                 ["[f"] = { query = "@function.outer", desc = "Goto goto previous inner function start" },
-                                -- ["[c"] = { query = "@class.outer", desc = "Previous inner class start" },
                                 ["[o"] = { query = "@loop.*", desc = "Goto previous loop start" },
                             },
                             goto_previous_end = {

@@ -21,10 +21,10 @@ node
 nodejs-bash-language-server
 npm
 podman
-pylint
 python3
 python3-pip
 ripgrep
+ruff
 sccache
 shellcheck
 shfmt

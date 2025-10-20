@@ -8,11 +8,11 @@ return {
 
             -- Linters are only required for dynamically typed languages
             lint.linters_by_ft = {
-                python = { "pylint" },
-                markdown = { "markdownlint" },
-                yaml = { "yamllint", "trivy" },
                 dockerfile = { "hadolint", "trivy" },
+                markdown = { "markdownlint" },
+                python = { "ruff" },
                 terraform = { "trivy" },
+                yaml = { "yamllint", "trivy" },
 
                 ["*"] = { "codespell" },
             }

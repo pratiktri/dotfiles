@@ -21,10 +21,11 @@ return {
 
                 lua = { "stylua" },
                 markdown = { "markdownlint" },
-                python = { "black" },
-                rust = { "rustfmt" },
+                python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
                 xml = { "xmllint" },
                 yaml = { "yamlfmt" },
+
+                rust = { "rustfmt" },
 
                 ["_"] = { "trim_whitespace" },
             },

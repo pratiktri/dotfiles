@@ -6,6 +6,7 @@
 -- Step 4: Return a lua table containing required lsp config in it
 -- NOTE: Only LSPs here, NOT linters or formatter
 vim.lsp.enable({
+    "basedpyright",
     "bashls",
     "cssls",
     "docker_compose_language_service",
@@ -14,7 +15,6 @@ vim.lsp.enable({
     "jsonls",
     "lua_ls",
     "marksman",
-    "pylsp",
     "taplo",
     "trivy",
     "ts_ls",

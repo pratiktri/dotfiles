@@ -47,8 +47,9 @@ set autoindent smartindent breakindent  " Proper indentation
 
 " Enable searching as you type, rather than waiting till you press enter. Highlight search pattern. Intelligently handle cases in search.
 set incsearch hlsearch ignorecase smartcase wrapscan
+
 " Comments in Grey color and italic
-hi Comment guifg=#5C6370 ctermfg=50 cterm=italic
+highlight Comment guifg=#636e7b ctermfg=50 cterm=italic
 
 " Better autocompletes
 filetype plugin indent on

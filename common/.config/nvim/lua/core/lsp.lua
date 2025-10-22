@@ -6,6 +6,7 @@
 -- Step 4: Return a lua table containing required lsp config in it
 -- NOTE: Only LSPs here, NOT linters or formatter
 vim.lsp.enable({
+    "awk_ls",
     "basedpyright",
     "bashls",
     "cssls",

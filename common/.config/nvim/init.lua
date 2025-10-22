@@ -16,13 +16,12 @@ require("config.autocmd")
 -- NOTE: External Tools needed for this Nvim config to work
 -- jsregexp
 -- rust-analyzer, rustc, cargo (rustacean)
--- OS Installs: Use ../../../scripts/install.sh
+-- OS Installs:
 --      general: curl, gzip, unzip, git, fd-find, ripgrep, fzf, tree-sitter
 --      tools: ImageMagick, xclip, xsel, ghostscript
---      lsp: codespell, nodejs-bash-language-server, hadolint, lua, luajit, shellcheck, shfmt, trivy, pylint, stylua
+--      lsp: ../../../scripts/package-list-os
 -- Brew:
 --      tools: lazygit
---      lsp: dockerfile-language-server, markdown-toc, markdownlint-cli, marksman, prettier, prettierd, python-lsp-server,
---           taplo, typescript-language-server, vue-language-server, yaml-language-server, yamlfmt
--- MasonInstallAll to install the rest (./lua/config/autocmd.lua)
---      codelldb, css-lsp, docker-compose-language-service, html-lsp, json-lsp, sqlls
+--      lsp: ../../../scripts/package-list-brew
+-- MasonInstallAll to install the rest:
+--      (./lua/config/autocmd.lua)

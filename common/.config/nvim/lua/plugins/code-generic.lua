@@ -111,11 +111,13 @@ return {
 
     {
         "nvimdev/lspsaga.nvim",
+        event = { "FileType" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
+            local disabled_filetypes = { "awk" }
             require("lspsaga").setup({
                 ui = {
                     kind = require("config.util").icons.kind_lspsaga,
@@ -128,7 +130,10 @@ return {
                     sign = true,
                     priority = 100,
                 },
-                symbol_in_winbar = { enable = true, hide_keyword = true },
+                symbol_in_winbar = {
+                    enable = not vim.tbl_contains(disabled_filetypes, vim.bo.filetype),
+                    hide_keyword = true,
+                },
                 lightbulb = { virtual_text = false },
                 outline = { auto_preview = false },
             })

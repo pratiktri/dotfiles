@@ -28,5 +28,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- New command: MasonInstallAll
 vim.api.nvim_create_user_command("MasonInstallAll", function()
-    vim.cmd("MasonInstall codelldb css-lsp docker-compose-language-service html-lsp json-lsp sqlls")
+    vim.cmd("MasonInstall awk-language-server codelldb css-lsp docker-compose-language-service html-lsp json-lsp sqlls")
 end, {})

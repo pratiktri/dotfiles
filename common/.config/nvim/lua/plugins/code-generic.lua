@@ -144,7 +144,7 @@ return {
     },
 
     {
-        "SmiteshP/nvim-navbuddy",
+        "hasansujon786/nvim-navbuddy",
         dependencies = {
             "SmiteshP/nvim-navic",
             "MunifTanjim/nui.nvim",

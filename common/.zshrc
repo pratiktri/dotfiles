@@ -69,7 +69,6 @@ zinit ice wait lucid depth=1; zinit light zdharma-continuum/fast-syntax-highligh
 zinit ice wait lucid depth=1; zinit snippet OMZP::alias-finder
 zinit ice wait lucid depth=1; zinit snippet OMZP::colored-man-pages
 zinit ice wait lucid depth=1; zinit snippet OMZP::command-not-found
-zinit ice wait lucid depth=1; zinit snippet OMZP::dotenv
 zinit ice wait lucid depth=1; zinit snippet OMZP::gitignore
 zinit ice wait lucid depth=1; zinit snippet OMZP::sudo
 zinit ice wait lucid depth=1; zinit snippet OMZP::timer
@@ -78,7 +77,6 @@ zinit ice wait lucid depth=1; zinit snippet OMZP::vi-mode
 
 # Completions
 zinit ice wait lucid depth=1; zinit snippet OMZP::brew
-zinit ice wait lucid depth=1; zinit snippet OMZP::dotnet
 zinit ice wait lucid depth=1; zinit snippet OMZP::fzf
 zinit ice wait lucid depth=1; zinit snippet OMZP::podman
 zinit ice wait lucid depth=1; zinit snippet OMZP::rust

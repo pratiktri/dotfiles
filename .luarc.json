@@ -1,5 +1,1 @@
-{
-    "diagnostics.globals": [
-        "vim"
-    ]
-}
+common/.luarc.json

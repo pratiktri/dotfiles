@@ -30,7 +30,6 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-# MUST FIX: Caps->Escape mapped in OS doesn't work
 # TODO: vim-style navigation in the scrollback: https://github.com/ghostty-org/ghostty/discussions/3488
 
 ## Look & Feel

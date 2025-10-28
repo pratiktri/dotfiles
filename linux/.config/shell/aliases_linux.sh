@@ -10,10 +10,78 @@ alias lsa="ls -lAFhZ"
 alias printpath="echo $PATH | tr : '\n'"
 
 # Templates
-[ ! -f "$GITIGNORE_TEMPLATE" ] || alias cp_gi='cp ${GITIGNORE_TEMPLATE} .'
-[ ! -f "$PRETTIER_TEMPLATE" ] || alias cp_prc='cp ${PRETTIER_TEMPLATE} .'
-[ ! -f "$PRETTIER_IGNORE_TEMPLATE" ] || alias cp_prigr='cp ${PRETTIER_IGNORE_TEMPLATE} .'
-[ ! -f "$ESLINT_TEMPLATE" ] || alias cp_eslint='cp ${ESLINT_TEMPLATE} .'
+[ ! -f "${TEMPLATE_DIR}/.gitignore" ] || alias cp_git_ignore='cp ${TEMPLATE_DIR}/.gitignore . && echo ".gitignore added"'
+[ ! -f "${TEMPLATE_DIR}/.prettierrc" ] || alias cp_prettier_rc='cp ${TEMPLATE_DIR}/.prettierrc . && echo ".prettierrc added"'
+[ ! -f "${TEMPLATE_DIR}/.eslintrc.json" ] || alias cp_eslint='cp ${TEMPLATE_DIR}/.eslintrc.json . && echo ".eslintrc.json added"'
+cp_docker_ignore() {
+    local git_ignore_file
+
+    if [ -f .gitignore ]; then
+        git_ignore_file=.gitignore
+    elif [ -f "${TEMPLATE_DIR}/.gitignore" ]; then
+        git_ignore_file="${TEMPLATE_DIR}/.gitignore"
+    else
+        return 1
+    fi
+
+    cp "$git_ignore_file" .dockerignore
+    cat <<EOF >>.dockerignore
+
+# ---- Docker specific ----
+git/
+*.md
+Dockerfile
+EOF
+
+    echo ".dockerignore added"
+}
+
+cp_prettier_ignore() {
+    local git_ignore_file
+
+    if [ -f .gitignore ]; then
+        git_ignore_file=.gitignore
+    elif [ -f "${TEMPLATE_DIR}/.gitignore" ]; then
+        git_ignore_file="${TEMPLATE_DIR}/.gitignore"
+    else
+        return 1
+    fi
+
+    cp "$git_ignore_file" .prettierignore
+    cat <<EOF >>.prettierignore
+
+# ---- Prettier specific ----
+*backup
+*undo
+*sessions
+.prettierignore
+package-lock.json
+.prettierrc
+EOF
+    echo ".prettierignore added"
+}
+
+cp_git_precommit() {
+    local template_file="${TEMPLATE_DIR}/pre-commit"
+    if [ ! -f "$template_file" ]; then
+        return 1
+    fi
+
+    if [ ! -d ".git" ]; then
+        echo "Not a git repository"
+        return 1
+    fi
+
+    local hooks_dir
+    hooks_dir="$(pwd)/.git/hooks"
+
+    if [ -f "$hooks_dir/$(basename "$template_file")" ]; then
+        echo "pre-commit hook already exist"
+        return 1
+    fi
+
+    cp "$template_file" "$hooks_dir" && printf "Pre-commit hook template copied to %s\n" "$hooks_dir"
+}
 
 # Coding
 command -v tldr >/dev/null && alias tldr="tldr --platform=linux"
@@ -31,27 +99,6 @@ git_push_all_changes() {
         return 126
     fi
     git add . && git commit -am "${1}" && git push
-}
-
-cp_git_precommit() {
-    if [ ! -f "$GIT_PRECOMMIT_TEMPLATE" ]; then
-        echo "Git Pre-commit template does not exist"
-        return 1
-    fi
-
-    hooks_dir="$(pwd)/.git/hooks"
-
-    if [ ! -d "$hooks_dir" ]; then
-        echo "Git repository not found under $(pwd)"
-        return 2
-    fi
-
-    if [ -f "$hooks_dir/$(basename "$GIT_PRECOMMIT_TEMPLATE")" ]; then
-        echo "pre-commit hook already exist. Skipping..."
-        return 0
-    fi
-
-    cp "$GIT_PRECOMMIT_TEMPLATE" "$hooks_dir" && printf "Pre-commit hook template copied to %s\n" "$hooks_dir"
 }
 
 # Directories and Directory listings

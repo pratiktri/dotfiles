@@ -10,7 +10,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
 
             "marilari88/neotest-vitest", -- JS/TS/React/Vue
-            "rcasia/neotest-bash", -- bash
         },
         opts = {
             -- Do NOT add adapters here

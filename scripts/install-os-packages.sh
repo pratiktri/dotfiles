@@ -1,41 +1,26 @@
 #!/usr/bin/env sh
 
 OS_PACKAGE_FILE=package-list-os
+OS_INSTALL_COMMAND=""
+OS_PKG_CHECK_COMMAND=""
 
 setup() {
-    OS_INSTALL_COMMAND=""
-    OS_PKG_CHECK_COMMAND=""
-
-    # First try to get OS info from os-release
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        OS_TYPE="$ID"
-    else
-        # Fallback to uname
-        OS_TYPE="$(uname -s | tr '[:upper:]' '[:lower:]')"
-    fi
-
-    case "$OS_TYPE" in
-    "debian" | "ubuntu")
+    if [ -f /etc/debian_version ] || [ -f /etc/ubuntu_version ]; then
         OS_INSTALL_COMMAND="apt-get install -y"
         OS_PKG_CHECK_COMMAND="apt-cache show"
         apt_setup
-        ;;
-    "fedora" | "rhel" | "centos")
+    elif [ -f /etc/rocky-release ] || [ -f /etc/almalinux-release ] || [ -f /etc/centos-release ] || [ -f /etc/fedora-release ]; then # Rocky, Almalinux,
         OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken"
         OS_PKG_CHECK_COMMAND="dnf list available"
         dnf_setup
-        ;;
-    "freebsd" | "ghostbsd")
+    elif [ -f /etc/freebsd-update.conf ]; then # FreeBSD
         OS_INSTALL_COMMAND="pkg install -y"
         OS_PKG_CHECK_COMMAND="pkg search"
         freebsd_setup
-        ;;
-    *)
-        log "Unsupported operating system: $OS_TYPE"
+    else
+        echo "Unsupported operating system"
         exit 1
-        ;;
-    esac
+    fi
 }
 
 freebsd_setup() {

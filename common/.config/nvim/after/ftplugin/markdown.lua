@@ -11,7 +11,7 @@ local function check_codelens_support()
 end
 
 vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
-    buffer = bufnr,
+    buffer = vim.api.nvim_get_current_buf(),
     callback = function()
         if check_codelens_support() then
             vim.lsp.codelens.refresh({ bufnr = 0 })

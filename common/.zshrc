@@ -77,7 +77,9 @@ zinit ice wait lucid depth=1; zinit snippet OMZP::vi-mode
 
 # Completions
 zinit ice wait lucid depth=1; zinit snippet OMZP::brew
+zinit ice wait lucid depth=1; zinit snippet OMZP::docker
 zinit ice wait lucid depth=1; zinit snippet OMZP::fzf
+zinit ice wait lucid depth=1; zinit snippet OMZP::node
 zinit ice wait lucid depth=1; zinit snippet OMZP::podman
 zinit ice wait lucid depth=1; zinit snippet OMZP::rust
 

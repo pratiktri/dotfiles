@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         }):map("<leader>dx")
 
         -- Native lsp inline virtual text / inlay hints
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             vim.lsp.inlay_hint.enable(true)
             vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#5c7086", bg = "NONE" })
 

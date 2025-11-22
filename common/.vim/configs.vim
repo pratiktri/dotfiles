@@ -27,7 +27,7 @@ set signcolumn=yes          " Always show the signs column (before line number c
 set scrolloff=10            " Cursor always at middle of the screen
 set sidescrolloff=10
 set updatetime=200          " No typing for this millisec -> write to swap file
-set timeoutlen=500          " Multiple keys in keymaps must be pressed in these millisecs
+set timeoutlen=300          " Multiple keys in keymaps must be pressed in these millisecs
 set noswapfile              " Turn off swapfiles
 set history=10000           " Number of : commands to save
 set undofile                " Turn on undofiles (files not compatible across Vim & Nvim

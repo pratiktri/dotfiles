@@ -1,7 +1,7 @@
 return {
     {
         "stevearc/conform.nvim",
-        lazy = true,
+        lazy = false,
         event = { "BufWritePre" },
         opts = {
             formatters_by_ft = {
@@ -32,7 +32,7 @@ return {
             format_on_save = {
                 lsp_fallback = true,
                 async = false,
-                timeout_ms = 500,
+                timeout_ms = 1000,
             },
             formatters = {
                 injected = { options = { ignore_errors = true } },

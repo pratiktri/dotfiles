@@ -7,7 +7,11 @@ clang
 cmake
 code
 codespell
+delve
 gitleaks
+go
+golang
+gopls
 hadolint
 html
 jq

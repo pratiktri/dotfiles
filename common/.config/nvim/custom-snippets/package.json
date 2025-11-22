@@ -10,6 +10,12 @@
             },
             {
                 "language": [
+                    "yaml"
+                ],
+                "path": "./yaml.json"
+            },
+            {
+                "language": [
                     "rust"
                 ],
                 "path": "./rust.json"

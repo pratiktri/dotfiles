@@ -9,7 +9,7 @@ setup() {
         OS_INSTALL_COMMAND="apt-get install -y"
         OS_PKG_CHECK_COMMAND="apt-cache show"
         apt_setup
-    elif [ -f /etc/rocky-release ] || [ -f /etc/almalinux-release ] || [ -f /etc/centos-release ] || [ -f /etc/fedora-release ]; then # Rocky, Almalinux,
+    elif [ -f /etc/rocky-release ] || [ -f /etc/almalinux-release ] || [ -f /etc/centos-release ] || [ -f /etc/fedora-release ]; then # Fedora, CentOS, Rocky, Almalinux
         OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken"
         OS_PKG_CHECK_COMMAND="dnf list available"
         dnf_setup
@@ -81,7 +81,7 @@ dnf_setup() {
 }
 
 apt_setup() {
-    # We are Debian or Ubuntu
+    # Debian/Ubuntu
     [ -f /etc/os-release ] && . /etc/os-release
 
     sudo apt-get update && sudo apt-get upgrade -y

@@ -1,5 +1,8 @@
 # Lines that start with # are ignored
 
+# TIP:
+# - MacOS doesn't have OS installer
+
 # Coding
 aspnetcore-runtime-8.0
 build-essential
@@ -22,7 +25,7 @@ lua54
 luajit
 make
 node
-nodejs-bash-language-server
+nodejs
 npm
 podman
 python3

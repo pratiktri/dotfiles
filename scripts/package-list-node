@@ -1,0 +1,13 @@
+@microsoft/compose-language-service
+awk-language-server
+bash-language-server
+composerize
+markdown-toc
+markdownlint-cli
+n
+sql-language-server
+typescript-language-server
+vscode-css-languageservice
+vscode-html-languageservice
+vscode-json-languageservice
+yaml-language-server

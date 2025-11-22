@@ -23,27 +23,28 @@ install_brew_packages() {
     found_packages=""
 
     # Read the package names from the file
-    while IFS= read -r brew_package; do
+    while IFS= read -r app_name; do
         # Skip lines that start with #
-        case "$brew_package" in
+        case "$app_name" in
         \#*) continue ;;
         esac
 
         # Check if package exists in brew repository and is not already installed on the system
-        if brew search "$brew_package" 2>/dev/null | grep -q "$brew_package"; then
-            if ! command -v "$brew_package" >/dev/null 2>&1; then
-                echo "Available: $brew_package"
-                found_packages="$found_packages $brew_package"
+        if brew info "$app_name" >/dev/null 2>&1; then
+            if ! command -v "$app_name" >/dev/null 2>&1; then
+                echo "Available: $app_name"
+                found_packages="$found_packages $app_name"
             else
-                echo "Already installed: $brew_package"
+                echo "Already installed: $app_name"
             fi
         else
-            not_found_packages="$not_found_packages $brew_package"
-            echo "Unavailable: $brew_package"
+            not_found_packages="$not_found_packages $app_name"
+            echo "Unavailable: $app_name"
         fi
     done <"$BREW_PACKAGE_FILE"
 
-    # Install available brew packages
+    echo
+    echo "Installing brew packages..."
     # shellcheck disable=SC2086
     if ! brew install $found_packages; then
         exit 1

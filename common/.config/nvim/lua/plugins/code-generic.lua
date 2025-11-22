@@ -269,10 +269,13 @@ return {
 
                         move = {
                             -- Jump to next and previous text objects
+                            -- ]a -> next argument
+                            -- ]T -> next test
                             enable = true,
                             goto_next_start = {
                                 ["]f"] = { query = "@function.outer", desc = "Goto next inner function start" },
                                 ["]o"] = { query = "@loop.*", desc = "Goto next loop start" },
+                                ["]a"] = { query = "@parameter.inner", desc = "Goto next parameter" },
                             },
                             goto_next_end = {
                                 ["]F"] = { query = "@function.outer", desc = "Goto next outer function end" },
@@ -282,6 +285,7 @@ return {
                             goto_previous_start = {
                                 ["[f"] = { query = "@function.outer", desc = "Goto goto previous inner function start" },
                                 ["[o"] = { query = "@loop.*", desc = "Goto previous loop start" },
+                                ["[a"] = { query = "@parameter.inner", desc = "Goto previous parameter" },
                             },
                             goto_previous_end = {
                                 ["[F"] = { query = "@function.outer", desc = "Goto goto previous outer function start" },

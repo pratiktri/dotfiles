@@ -90,9 +90,10 @@ nnoremap <expr> N  'nN'[v:searchforward]
 xnoremap <expr> N  'nN'[v:searchforward]
 onoremap <expr> N  'nN'[v:searchforward]
 
-" <ctrl-q> to save everything and quit Neovim
-nnoremap <C-q> :wqa<CR>
-vnoremap <C-q> :wqa<CR>
+" <ctrl-q> Quit Vim (without saving)
+" <ctrl-s> Save all buffers
+nnoremap <C-q> :q<CR>
+vnoremap <C-q> :q<CR>
 nnoremap <C-s> :wa<CR>
 vnoremap <C-s> :wa<CR>
 

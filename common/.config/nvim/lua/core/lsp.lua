@@ -74,8 +74,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         -- Telescope
         map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-        map("<leader>cs", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
-        map("<leader>cS", require("telescope.builtin").lsp_workspace_symbols, "Search Workspace Symbols")
+        map("<leader>s", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
+        map("<leader>S", require("telescope.builtin").lsp_workspace_symbols, "Search Workspace Symbols")
         map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
 
         Snacks.toggle({

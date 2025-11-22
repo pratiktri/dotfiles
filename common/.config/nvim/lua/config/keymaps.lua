@@ -34,8 +34,8 @@ vim.keymap.set("i", ";", ";<C-g>u", { desc = "Auto add undo breakpoints on ';'" 
 vim.keymap.set("i", "\r", "\r<C-g>u", { desc = "Auto add undo breakpoints on new lines" })
 
 -- Save file
-vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
-vim.keymap.set({ "i", "x", "n", "s" }, "<C-q>", "<cmd>wqa<cr><esc>", { desc = "Save all files and Quit Neovim" })
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" })
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-q>", "<cmd>q<cr><esc>", { desc = "Quit Neovim without saving" })
 
 -- Close Current Buffer
 vim.keymap.set({ "n", "v" }, "<leader>bx", function()

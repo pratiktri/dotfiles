@@ -53,11 +53,11 @@ return {
                 -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
 
-                map({ "n", "v" }, "]h", function()
+                map({ "n", "v" }, "]g", function()
                     gs.next_hunk()
                 end, { desc = "Next Git hunk" })
 
-                map({ "n", "v" }, "[h", function()
+                map({ "n", "v" }, "[g", function()
                     gs.prev_hunk()
                 end, { desc = "Previous Git hunk" })
 
@@ -72,10 +72,6 @@ return {
                 map("n", "<leader>gr", gs.reset_hunk, { desc = "Git: Reset hunk" })
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Git: Preview hunk" })
                 map("n", "<leader>gs", gs.stage_hunk, { desc = "Git: Toggle Stage-Hunk" })
-
-                map("n", "<leader>gK", function()
-                    gs.blame_line({ full = true })
-                end, { desc = "Git: Hover blame-line" })
 
                 map("n", "<leader>gB", gs.toggle_current_line_blame, { desc = "Git: Toggle virtual blame-line" })
             end,

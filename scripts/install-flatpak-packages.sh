@@ -26,16 +26,18 @@ install_flatpak_packages() {
         esac
 
         # Check if the package exists in the flatpak repository
-        if flatpak search --columns=application "$flatpak_package" 2> /dev/null | grep -q "^$flatpak_package\$"; then
+        if flatpak search --columns=application "$flatpak_package" 2>/dev/null | grep -q "^$flatpak_package\$"; then
             echo "Available: $flatpak_package"
             found_packages="$found_packages $flatpak_package"
         else
             not_found_packages="$not_found_packages $flatpak_package"
             echo "Unavailable: $flatpak_package"
         fi
-    done < "$FLATPAK_PACKAGE_FILE"
+    done <"$FLATPAK_PACKAGE_FILE"
 
-    # Install available flatpak packages
+    echo
+    echo "Installing available flatpak packages..."
+    # shellcheck disable=SC2086
     if ! flatpak install -y --noninteractive $found_packages; then
         exit 1
     fi

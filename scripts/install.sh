@@ -55,6 +55,7 @@ main() {
     pre_install
 
     ./install-os-packages.sh
+    ./install-node-package.sh
 
     # Skip flatpak & brew installations on FreeBSD
     if [ "$(uname -s)" != "FreeBSD" ]; then

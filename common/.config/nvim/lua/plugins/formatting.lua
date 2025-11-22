@@ -25,6 +25,7 @@ return {
                 xml = { "xmllint" },
                 yaml = { "yamlfmt" },
 
+                go = { "gofmt" },
                 rust = { "rustfmt" },
 
                 ["_"] = { "trim_whitespace" },

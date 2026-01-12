@@ -58,9 +58,9 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
 export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
 
 # Podman's Docker-compatible socket (rootless)
-# Make lazydocker work
-DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
-export DOCKER_HOST
+# Makes lazydocker work
+# DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
+# export DOCKER_HOST
 export PODMAN_COMPOSE_WARNING_LOGS=false
 
 export LIBVIRT_DEFAULT_URI="qemu:///system"

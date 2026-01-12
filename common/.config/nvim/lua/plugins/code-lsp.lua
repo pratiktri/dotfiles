@@ -13,7 +13,6 @@ return {
         },
         config = function()
             local servers = {}
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
 
             -- TIP: `nvim-lspconfig` has default LSP configs in its DB which saves time
             -- Useful even after NeoVim 0.11, which made LSP setup much easier
@@ -22,7 +21,12 @@ return {
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
-                        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                        server.capabilities = vim.tbl_deep_extend(
+                            "force",
+                            vim.lsp.protocol.make_client_capabilities(),
+                            require("lsp-file-operations").default_capabilities(),
+                            server.capabilities or {}
+                        )
                         server.inlay_hints = { enabled = true }
                         server.diagnostics = {
                             underline = true,

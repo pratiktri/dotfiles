@@ -58,6 +58,9 @@ VI_MODE_CURSOR_INSERT=3
 TIMER_PRECISION=3; TIMER_FORMAT='[%d]'
 HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 
+# Enable zmv (zsh batch-renamer)
+autoload zmv
+
 # Zinit Plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit ice depth=1; zinit light jimhester/per-directory-history
@@ -126,6 +129,11 @@ for alias_file in "$XDG_CONFIG_HOME"/shell/*.sh; do source "$alias_file"; done
 
 # Keybindings
 bindkey '^f' autosuggest-accept
+bindkey '^u' undo
+# TIP:: zinit auto expands following when you `space`/`tab` after them
+#       !* -> all arguments to previous command
+#       !?search-term? -> Last command that contained `search-term`
+#       !! -> Entire last command
 
 # TIP: Following should be executed AFTER aliases are sourced
 command -v op >/dev/null && bindkey -s '^o' ' op\n' # Fuzzyfind projects and open in nvim

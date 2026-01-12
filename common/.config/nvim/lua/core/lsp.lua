@@ -17,6 +17,8 @@ vim.lsp.enable({
     "jsonls",
     "lua_ls",
     "marksman",
+    "markdown_oxide",
+    "sqlls",
     "taplo",
     "trivy",
     "ts_ls",

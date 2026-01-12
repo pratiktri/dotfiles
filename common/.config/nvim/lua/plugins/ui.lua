@@ -61,15 +61,6 @@ return {
                     { noremap = true, silent = true }
                 )
             end
-
-            -- Fix bufferline when restoring a session
-            vim.api.nvim_create_autocmd("BufAdd", {
-                callback = function()
-                    vim.schedule(function()
-                        pcall(buf_line)
-                    end)
-                end,
-            })
         end,
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },

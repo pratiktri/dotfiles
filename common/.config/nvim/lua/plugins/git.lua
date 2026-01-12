@@ -53,11 +53,11 @@ return {
                 -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
 
-                map({ "n", "v" }, "]g", function()
+                map({ "n", "v" }, "]c", function()
                     gs.next_hunk()
                 end, { desc = "Next Git hunk" })
 
-                map({ "n", "v" }, "[g", function()
+                map({ "n", "v" }, "[c", function()
                     gs.prev_hunk()
                 end, { desc = "Previous Git hunk" })
 

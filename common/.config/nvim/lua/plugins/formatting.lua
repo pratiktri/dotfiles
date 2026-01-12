@@ -15,6 +15,7 @@ return {
                 javascript = { "prettierd" },
                 javascriptreact = { "prettierd" },
                 json = { "prettierd" },
+                jsonc = { "prettierd" },
                 svelte = { "prettierd" },
                 typescript = { "prettierd" },
                 typescriptreact = { "prettierd" },

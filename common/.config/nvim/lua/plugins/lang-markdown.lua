@@ -70,27 +70,7 @@ return {
     },
 
     {
-        "obsidian-nvim/obsidian.nvim",
-        version = "*",
-        enabled = true,
-        opts = {
-            workspaces = {
-                {
-                    name = "personal",
-                    path = "~/Code/Notes",
-                },
-            },
-            completions = {
-                blink = true,
-                nvim_cmp = false,
-            },
-            comment = { enabled = true },
-            attachments = { img_folder = ".artifacts/img" },
-            footer = { format = "{{backlinks}} backlinks" },
-            legacy_commands = false,
-            ui = { enable = false },
-            frontmatter = { enabled = false },
-        },
+        "Feel-ix-343/markdown-oxide",
     },
 
     {

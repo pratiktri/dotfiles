@@ -41,6 +41,10 @@ return {
                 nerd_font_variant = "mono",
             },
 
+            markdown_oxide = {
+                keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+            },
+
             completion = {
                 keyword = { range = "full" },
                 accept = { auto_brackets = { enabled = true } },

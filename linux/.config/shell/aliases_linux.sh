@@ -87,7 +87,6 @@ cp_git_precommit() {
 command -v tldr >/dev/null && alias tldr="tldr --platform=linux"
 command -v tldr >/dev/null && alias h="tldr"
 command -v fzf >/dev/null && alias path="printenv | grep ^PATH= | sed 's/^PATH=//' | tr ':' '\n' | fzf"
-command -v podman >/dev/null && alias docker=podman
 
 # Git
 alias cd_root='cd $(git rev-parse --show-toplevel 2>/dev/null || echo ".")'
@@ -101,7 +100,6 @@ git_push_all_changes() {
     git add . && git commit -am "${1}" && git push
 }
 
-# Directories and Directory listings
 dir_size() {
     if [ "$1" = "" ]; then
         dir="$PWD"
@@ -117,7 +115,7 @@ up() {
 
     # Detect package manager and set package manager commands
     if command -v dnf >/dev/null 2>&1; then
-        update_command="sudo dnf upgrade --refresh && sudo dnf system-upgrade download --releasever=$(rpm -E %fedora) && sudo dnf autoremove"
+        update_command="sudo dnf update && sudo dnf upgrade --refresh && sudo dnf system-upgrade download --releasever=$(rpm -E %fedora) && sudo dnf autoremove"
     elif command -v pkcon >/dev/null 2>&1; then
         update_command="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove"
     elif command -v apt-get >/dev/null 2>&1; then

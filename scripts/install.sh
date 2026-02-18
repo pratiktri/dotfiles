@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# TODO: Download & install patched-nerd-fonts
+
 kitty_term() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 

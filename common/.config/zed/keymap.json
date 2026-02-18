@@ -1,24 +1,31 @@
-// To see the default key bindings run `zed: open default keymap`
-// TODO: Enable spell checking in VIM mode
-// FIX: ctrl+n & ctrl+p selections don't work on terminal: cause they are hijacked by IDE
-//      - Use them to select next & previous
-
+// TIP: To see the default key bindings run `zed: open default keymap`
+// ISSUES:
+//  - Bash support: buffer symbol search doesn't work
+//  - Git: Not nearly as useful as Neovim > Gitsigns
+// TODO:
+//  - Git stage multi-buffer: reduce the file name ribbon size
+//  - AI:
+//      - Set shortcuts:
+//          - Toggle left panel
+//          - Increase/Decrease panel size
 [
     {
-        "context": "Workspace",
+        "context": "Workspace && vim_mode == normal",
         "bindings": {
             "ctrl-/": "journal::NewJournalEntry",
             "ctrl-1": "project_panel::ToggleFocus",
             "ctrl-2": "git_panel::ToggleFocus",
             "ctrl-3": "outline_panel::ToggleFocus",
             "ctrl-4": "debug_panel::ToggleFocus",
-            "ctrl-5": "notification_panel::ToggleFocus"
+            "ctrl-5": "notification_panel::ToggleFocus",
+            "space tab": "workspace::ToggleLeftDock"
         }
     },
     {
-        "context": "( ProjectPanel || GitPanel || OutlinePanel ) && not_editing",
+        "context": "ProjectPanel && not_editing",
         "bindings": {
-            "q": "workspace::ToggleLeftDock"
+            "q": "workspace::ToggleLeftDock",
+            "space tab": "workspace::ToggleLeftDock"
         }
     },
     {
@@ -39,7 +46,42 @@
         }
     },
     {
-        "context": "Editor && ( vim_mode == visual || vim_mode == normal )&& !VimWaiting && !menu",
+        "context": "Picker",
+        "bindings": {
+            "ctrl-[": "menu::Cancel"
+        }
+    },
+    {
+        "context": "BufferSearchBar",
+        "bindings": {
+            "ctrl-[": "buffer_search::Dismiss"
+        }
+    },
+    {
+        "context": "ProjectSearchBar",
+        "bindings": {
+            "ctrl-[": "project_search::ToggleFocus"
+        }
+    },
+    {
+        "context": "Terminal",
+        "bindings": {
+            // Don't let ctrl-p & ctrl-n be high jacked
+            "ctrl-p": [
+                "terminal::SendKeystroke",
+                "ctrl-p"
+            ],
+            "ctrl-n": [
+                "terminal::SendKeystroke",
+                "ctrl-n"
+            ],
+            "ctrl-shift-up": "workspace::IncreaseActiveDockSize",
+            "ctrl-shift-down": "workspace::DecreaseActiveDockSize",
+            "ctrl-shift-enter": "workspace::NewTerminal"
+        }
+    },
+    {
+        "context": "Editor && ( vim_mode == visual || vim_mode == normal )",
         "bindings": {
             // Access system clipboard
             "space p": "editor::Paste",
@@ -47,7 +89,7 @@
         }
     },
     {
-        "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+        "context": "Editor && vim_mode == visual",
         "bindings": {
             // Move line up/down with J/K
             "J": "editor::MoveLineDown",
@@ -55,7 +97,7 @@
         }
     },
     {
-        "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+        "context": "Editor && vim_mode == normal",
         "bindings": {
             // Useful Zed-VIM defaults:
             // Go to declaration           =>	gD
@@ -74,9 +116,6 @@
             // Add a cursor selecting the previous copy of the current word	=> gL
             // Skip latest word selection, and add next	                    => g>
             // Skip latest word selection, and add previous	                => g<
-            // After multi-selection: (in VIM as well)
-            //     - `A` to append text after the selection
-            //     - `I` to insert text before the selection
             //
             // https://github.com/tommcdo/vim-exchange
             // https://github.com/jeetsukumaran/vim-indentwise
@@ -84,27 +123,30 @@
             // AI:
             // Accept edit-prediction on Linux => alt-l
             // Accept next predicted word => alt-right
-
             "space tab": "project_panel::ToggleFocus",
             "space / /": "journal::NewJournalEntry",
-
+            "ctrl-escape": "workspace::ToggleCenteredLayout",
             // Coding & Code Navigation
-            "] ]": "vim::MoveToNext",
-            "[ [": "vim::MoveToPrevious",
+            "] ]": "vim::GoToNextReference",
+            "[ [": "vim::GoToPreviousReference",
+            "] f": "vim::NextMethodStart",
+            "[ f": "vim::PreviousMethodStart",
+            "] i": "vim::NextSameIndent",
+            "[ i": "vim::PreviousSameIndent",
+            "] C": "vim::NextSectionStart",
+            "[ C": "vim::PreviousSectionStart",
+            "ctrl-space": "editor::SelectLargerSyntaxNode",
             "F2": "editor::Rename",
             "space r": "editor::Rename",
             "space c r": "editor::FindAllReferences",
             "space o": "outline::Toggle",
-            "space O": "project_symbols::Toggle",
+            "space s": "outline::Toggle",
+            "space S": "project_symbols::Toggle",
             "ctrl-.": "editor::ToggleCodeActions",
-            "space j": "vim::PushSneak",
-            "space J": "vim::PushSneakBackward",
-
             // Diagnostics
             "space d w": "diagnostics::Deploy",
             "space d t": "editor::ToggleInlineDiagnostics",
             "space x x": "workspace::SuppressNotification",
-
             // Git
             "space g g": "git::Diff",
             "space g p": "editor::ToggleSelectedDiffHunks",
@@ -114,35 +156,80 @@
             "space g r": "git::Restore",
             "space g b": "git::Branch",
             "space g B": "editor::ToggleGitBlameInline",
-
             // Buffer
             "space b l": "tab_switcher::ToggleAll",
             "space b x": "pane::CloseActiveItem",
             "space x b": "pane::CloseActiveItem",
-            "space x o": "pane::CloseInactiveItems",
-
+            "space x o": "pane::CloseOtherItems",
+            "space b p": "pane::TogglePinTab",
             // Quality of life improvements:
             // Center the cursor when moving through document
-            "ctrl-d": ["workspace::SendKeystrokes", "Ctrl-d z z"],
-            "ctrl-u": ["workspace::SendKeystrokes", "Ctrl-u z z"],
-            "ctrl-o": ["workspace::SendKeystrokes", "Ctrl-o z z"],
-            "ctrl-i": ["workspace::SendKeystrokes", "Ctrl-i z z"],
-            "g ;": ["workspace::SendKeystrokes", "g ; z z"],
-            "g ,": ["workspace::SendKeystrokes", "g , z z"],
-            "] s": ["workspace::SendKeystrokes", "] s z z"],
-            "] d": ["workspace::SendKeystrokes", "] d z z"],
-            "n": ["workspace::SendKeystrokes", "n z z"],
-            "N": ["workspace::SendKeystrokes", "N z z"],
+            "ctrl-d": [
+                "workspace::SendKeystrokes",
+                "Ctrl-d z z"
+            ],
+            "ctrl-u": [
+                "workspace::SendKeystrokes",
+                "Ctrl-u z z"
+            ],
+            "ctrl-o": [
+                "workspace::SendKeystrokes",
+                "Ctrl-o z z"
+            ],
+            "ctrl-i": [
+                "workspace::SendKeystrokes",
+                "Ctrl-i z z"
+            ],
+            "g ;": [
+                "workspace::SendKeystrokes",
+                "g ; z z"
+            ],
+            "g ,": [
+                "workspace::SendKeystrokes",
+                "g , z z"
+            ],
+            "n": [
+                "workspace::SendKeystrokes",
+                "n z z"
+            ],
+            "N": [
+                "workspace::SendKeystrokes",
+                "N z z"
+            ],
             //
             // Better split management
-            "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
-            "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
-            "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
-            "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
-            "ctrl-up": ["workspace::SendKeystrokes", "ctrl-w +"],
-            "ctrl-down": ["workspace::SendKeystrokes", "ctrl-w -"],
-            "ctrl-right": ["workspace::SendKeystrokes", "ctrl-w >"],
-            "ctrl-left": ["workspace::SendKeystrokes", "ctrl-w <"]
+            "ctrl-j": [
+                "workspace::SendKeystrokes",
+                "ctrl-w j"
+            ],
+            "ctrl-k": [
+                "workspace::SendKeystrokes",
+                "ctrl-w k"
+            ],
+            "ctrl-h": [
+                "workspace::SendKeystrokes",
+                "ctrl-w h"
+            ],
+            "ctrl-l": [
+                "workspace::SendKeystrokes",
+                "ctrl-w l"
+            ],
+            "ctrl-up": [
+                "workspace::SendKeystrokes",
+                "ctrl-w +"
+            ],
+            "ctrl-down": [
+                "workspace::SendKeystrokes",
+                "ctrl-w -"
+            ],
+            "ctrl-right": [
+                "workspace::SendKeystrokes",
+                "ctrl-w >"
+            ],
+            "ctrl-left": [
+                "workspace::SendKeystrokes",
+                "ctrl-w <"
+            ]
         }
     }
 ]

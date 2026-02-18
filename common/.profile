@@ -88,6 +88,7 @@ export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 command -v pyenv >/dev/null && export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
+export PATH="$XDG_DATA_HOME/python/bin:$PATH"
 
 # Rust
 export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
@@ -122,3 +123,12 @@ export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
 export N_PREFIX="${XDG_DATA_HOME}/n_node"
 export PATH="$N_PREFIX/bin:$PATH"
 command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
+
+# Bun configurations
+export BUN_INSTALL_GLOBAL_DIR="$(npm config get prefix)/lib"
+export BUN_INSTALL_BIN="$(npm config get prefix)/bin"
+
+# CUDA path
+export PATH="/usr/local/cuda-13.1/bin:$PATH"
+export CUDA_HOME="/usr/local/cuda-13.1/"
+export LD_LIBRARY_PATH="/usr/local/cuda-13.1/lib64:$LD_LIBRARY_PATH"

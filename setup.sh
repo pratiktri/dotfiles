@@ -1,4 +1,4 @@
-#!/bin/sh
+# TODO: Make folder-links and NOT link to each file
 
 INSTALL="n"
 DRY_RUN="n"
@@ -94,7 +94,7 @@ main() {
     parse_input "$@"
 
     install_file_location="$(
-        cd -- "$(dirname "$0")" > /dev/null 2>&1 || exit
+        cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit
         pwd -P
     )/scripts"
 

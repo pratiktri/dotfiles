@@ -108,7 +108,11 @@ return {
                 },
                 {
                     filter = { event = "notify", find = "No information available" },
-                    opts = { skin = true },
+                    opts = { skip = true },
+                },
+                {
+                    filter = { event = "msg_show", find = "skipping unsupported language" },
+                    opts = { skip = true },
                 },
                 {
                     -- Direct some messages to bottom - obove statusline

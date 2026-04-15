@@ -210,107 +210,139 @@ return {
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
         lazy = false,
         build = ":TSUpdate",
-        init = function(plugin)
-            require("lazy.core.loader").add_to_rtp(plugin)
-            require("nvim-treesitter.query_predicates")
+        init = function()
+            -- Disable the plugin's own vimscript runtime
+            vim.g.loaded_nvim_treesitter = 1
         end,
-        dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-
         config = function()
-            vim.defer_fn(function()
-                require("nvim-treesitter.configs").setup({
-                    ensure_installed = {
-                        "bash",
-                        "css",
-                        "dockerfile",
-                        "go",
-                        "html",
-                        "javascript",
-                        "json5",
-                        "jsonc",
-                        "lua",
-                        "markdown",
-                        "markdown_inline",
-                        "python",
-                        "regex",
-                        "rust",
-                        "scss",
-                        "sql",
-                        "svelte",
-                        "tsx",
-                        "typescript",
-                        "vue",
-                        "yaml",
+            require("nvim-treesitter").setup({
+                auto_install = true,
+            })
+
+            local parsers = {
+                "bash",
+                "css",
+                "dockerfile",
+                "go",
+                "html",
+                "javascript",
+                "json5",
+                "lua",
+                "markdown",
+                "markdown_inline",
+                "python",
+                "regex",
+                "rust",
+                "scss",
+                "sql",
+                "svelte",
+                "tsx",
+                "typescript",
+                "vue",
+                "yaml",
+            }
+
+            local installed = require("nvim-treesitter").get_installed()
+            local to_install = vim.tbl_filter(function(p)
+                return not vim.tbl_contains(installed, p)
+            end, parsers)
+
+            if #to_install > 0 then
+                require("nvim-treesitter.install").install(to_install)
+            end
+
+            -- Auto-install when opening a new filetype
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("TSAutoInstall", { clear = true }),
+                callback = function(args)
+                    local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+                    if not lang then
+                        return
+                    end
+
+                    local ok = pcall(vim.treesitter.language.inspect, lang)
+                    if not ok then
+                        -- Parser not installed yet, install it
+                        require("nvim-treesitter.install").install({ lang })
+                    end
+                end,
+            })
+
+            -- FileType autocmd: wire up highlight + indent for every treesitter-capable buffer
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("TSEnable", { clear = true }),
+                callback = function(args)
+                    local buf = args.buf
+                    -- start() returns false if no parser is available, pcall catches missing parsers
+                    if pcall(vim.treesitter.start, buf) then
+                        -- Treesitter-based indentation
+                        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end
+                end,
+            })
+
+            -- Incremental selection is NATIVE in 0.12 (no plugin config)
+            -- 0.12 defaults: gnn (init), grn (expand node), grm (shrink), grc (scope)
+            -- Remap to your existing keys:
+            vim.keymap.set("n", "<C-space>", "gnn", { remap = true, desc = "Init treesitter selection" })
+            vim.keymap.set("x", "<C-CR>", "grc", { remap = true, desc = "Expand scope selection" })
+            vim.keymap.set("x", "<bs>", "grm", { remap = true, desc = "Shrink node selection" })
+        end,
+    },
+
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    keymaps = {
+                        ["aa"] = { query = "@parameter.outer", desc = "Select around the parameter" },
+                        ["ia"] = { query = "@parameter.inner", desc = "Select inside the parameter" },
+                        ["af"] = { query = "@function.outer", desc = "Select around the function" },
+                        ["if"] = { query = "@function.inner", desc = "Select inside of the function" },
+                        ["ac"] = { query = "@class.outer", desc = "Select around the class" },
+                        ["ic"] = { query = "@class.inner", desc = "Select inside of the class" },
+                        ["al"] = { query = "@loop.outer", desc = "Select around the loop" },
+                        ["il"] = { query = "@loop.inner", desc = "Select inside of the loop" },
+                        ["as"] = { query = "@scope", query_group = "locals", desc = "Select around the scope" },
                     },
-
-                    auto_install = true,
-                    indent = { enable = true },
-
-                    incremental_selection = {
-                        enable = true,
-                        keymaps = {
-                            init_selection = "<C-space>",
-                            node_incremental = "<C-space>",
-                            scope_incremental = "<C-CR>",
-                            node_decremental = "<bs>",
-                        },
+                },
+                move = {
+                    enable = true,
+                    goto_next_start = {
+                        ["]f"] = { query = "@function.outer", desc = "Goto next function start" },
+                        ["]o"] = { query = "@loop.*", desc = "Goto next loop start" },
+                        ["]a"] = { query = "@parameter.inner", desc = "Goto next parameter" },
                     },
-
-                    textobjects = {
-                        select = {
-                            enable = true,
-                            lookahead = true, -- Automatically jump forward to textobj
-                            keymaps = {
-                                ["aa"] = { query = "@parameter.outer", desc = "Select around the parameter" },
-                                ["ia"] = { query = "@parameter.inner", desc = "Select inside the parameter" },
-                                ["af"] = { query = "@function.outer", desc = "Select around the function" },
-                                ["if"] = { query = "@function.inner", desc = "Select inside of the function" },
-                                ["ac"] = { query = "@class.outer", desc = "Select around the class" },
-                                ["ic"] = { query = "@class.inner", desc = "Select inside of the class" },
-
-                                ["al"] = { query = "@loop.outer", desc = "Select around the loop" },
-                                ["il"] = { query = "@loop.inner", desc = "Select inside of the loop" },
-                                ["as"] = { query = "@scope", query_group = "locals", desc = "Select around the scope" },
-                            },
-                        },
-
-                        move = {
-                            -- Jump to next and previous text objects
-                            -- ]a -> next argument
-                            -- ]T -> next test
-                            enable = true,
-                            goto_next_start = {
-                                ["]f"] = { query = "@function.outer", desc = "Goto next inner function start" },
-                                ["]o"] = { query = "@loop.*", desc = "Goto next loop start" },
-                                ["]a"] = { query = "@parameter.inner", desc = "Goto next parameter" },
-                            },
-                            goto_next_end = {
-                                ["]F"] = { query = "@function.outer", desc = "Goto next outer function end" },
-                                ["]C"] = { query = "@class.outer", desc = "Goto next outer class end" },
-                                ["]O"] = { query = "@loop.*", desc = "Goto next loop end" },
-                            },
-                            goto_previous_start = {
-                                ["[f"] = { query = "@function.outer", desc = "Goto goto previous inner function start" },
-                                ["[o"] = { query = "@loop.*", desc = "Goto previous loop start" },
-                                ["[a"] = { query = "@parameter.inner", desc = "Goto previous parameter" },
-                            },
-                            goto_previous_end = {
-                                ["[F"] = { query = "@function.outer", desc = "Goto goto previous outer function start" },
-                                ["[C"] = { query = "@class.outer", desc = "Goto previous outer class start" },
-                                ["[O"] = { query = "@loop.*", desc = "Goto previous loop start" },
-                            },
-                        },
-
-                        lsp_interop = {
-                            enable = true,
-                            border = "none",
-                            floating_preview_opts = {},
-                        },
+                    goto_next_end = {
+                        ["]F"] = { query = "@function.outer", desc = "Goto next function end" },
+                        ["]C"] = { query = "@class.outer", desc = "Goto next class end" },
+                        ["]O"] = { query = "@loop.*", desc = "Goto next loop end" },
                     },
-                })
-            end, 0)
+                    goto_previous_start = {
+                        ["[f"] = { query = "@function.outer", desc = "Goto previous function start" },
+                        ["[o"] = { query = "@loop.*", desc = "Goto previous loop start" },
+                        ["[a"] = { query = "@parameter.inner", desc = "Goto previous parameter" },
+                    },
+                    goto_previous_end = {
+                        ["[F"] = { query = "@function.outer", desc = "Goto previous function end" },
+                        ["[C"] = { query = "@class.outer", desc = "Goto previous class end" },
+                        ["[O"] = { query = "@loop.*", desc = "Goto previous loop end" },
+                    },
+                },
+                lsp_interop = {
+                    enable = true,
+                    border = "none",
+                    floating_preview_opts = {},
+                },
+            })
         end,
     },
 }

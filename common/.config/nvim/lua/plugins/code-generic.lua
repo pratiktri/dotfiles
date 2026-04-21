@@ -285,11 +285,12 @@ return {
             })
 
             -- Incremental selection is NATIVE in 0.12 (no plugin config)
-            -- 0.12 defaults: gnn (init), grn (expand node), grm (shrink), grc (scope)
-            -- Remap to your existing keys:
-            vim.keymap.set("n", "<C-space>", "gnn", { remap = true, desc = "Init treesitter selection" })
-            vim.keymap.set("x", "<C-CR>", "grc", { remap = true, desc = "Expand scope selection" })
-            vim.keymap.set("x", "<bs>", "grm", { remap = true, desc = "Shrink node selection" })
+            -- 0.12 defaults:
+            -- v:
+            --      an (expand out)
+            --      in (shrink in)
+            --      ]n (next sibling)
+            --      [n (previous sibling)
         end,
     },
 

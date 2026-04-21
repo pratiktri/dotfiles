@@ -7,17 +7,16 @@ return {
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
         },
-        config = true,
+        config = function()
+            local neogit = require("neogit")
+
+            neogit.setup({
+                graph_style = "kitty",
+                process_spinner = true,
+            })
+        end,
         keys = {
             { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git: Open Neogit", mode = { "n" } },
-        },
-    },
-
-    -- Git Diffview
-    {
-        "sindrets/diffview.nvim",
-        keys = {
-            { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Git: Diffview Project against index/staging", mode = { "n" } },
         },
     },
 

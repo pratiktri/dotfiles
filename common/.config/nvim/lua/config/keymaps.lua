@@ -9,6 +9,8 @@ vim.keymap.set({ "n" }, "<C-,>", "<cmd>edit " .. vim.fn.expand(vim.fn.stdpath("c
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+-- Disable [Ctrl + p] to paste in edit mode; avoids accidentally pressing `p` when actually doing `Ctrl + [`
+vim.keymap.set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

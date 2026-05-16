@@ -17,7 +17,6 @@
             "ctrl-2": "git_panel::ToggleFocus",
             "ctrl-3": "outline_panel::ToggleFocus",
             "ctrl-4": "debug_panel::ToggleFocus",
-            "ctrl-5": "notification_panel::ToggleFocus",
             "space tab": "workspace::ToggleLeftDock"
         }
     },

@@ -125,10 +125,17 @@ up() {
     fi
 
     eval "$update_command"
-    command -v brew >/dev/null && echo "Brew:" && brew update && brew upgrade && brew autoremove && brew cleanup
-    command -v flatpak >/dev/null && echo "Flatpak:" && flatpak update && flatpak uninstall --unused && flatpak --user uninstall --unused && flatpak repair
-    command -v npm >/dev/null && npm update -g
-    command -v rustup >/dev/null && rustup update
+    echo ""
+
+    command -v brew >/dev/null && brew update && brew upgrade && brew autoremove && brew cleanup && echo "Brew packages updated"
+    echo ""
+
+    # command -v flatpak >/dev/null && echo "Flatpak:" && flatpak update && flatpak uninstall --unused && flatpak --user uninstall --unused && flatpak repair
+    # command -v npm >/dev/null && npm update -g
+    command -v rustup >/dev/null && rustup update && echo "Rust updated"
+    echo ""
+
+    echo "Manually run 'npm update -g' once every month"
 }
 
 # Update & Upgrades

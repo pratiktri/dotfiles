@@ -32,6 +32,7 @@
         "active_language_button": true
     },
     "git_panel": {
+        "dock": "left",
         "collapse_untracked_diff": false,
         "status_style": "label_color",
         "default_width": 240.0
@@ -100,6 +101,7 @@
         }
     },
     "outline_panel": {
+        "dock": "left",
         "git_status": false,
         "default_width": 240.0,
         "button": true,
@@ -109,6 +111,7 @@
         }
     },
     "project_panel": {
+        "dock": "left",
         "button": true,
         "hide_hidden": false,
         "hide_root": true,
@@ -123,6 +126,7 @@
         }
     },
     "collaboration_panel": {
+        "dock": "left",
         "button": false
     },
     "bottom_dock_layout": "right_aligned",

@@ -27,7 +27,7 @@ vim.lsp.enable({
 
 -- Setup native diagnostic
 vim.diagnostic.config({
-    underline = false,
+    underline = true,
     update_in_insert = false,
     severity_sort = true,
     float = {

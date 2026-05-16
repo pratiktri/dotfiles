@@ -25,7 +25,8 @@ return {
     -- Rust
     {
         "mrcjkb/rustaceanvim",
-        version = "^6",
+        ft = { "toml", "rust" },
+        version = "^8",
         lazy = false,
         init = function()
             vim.g.rustaceanvim = {
@@ -38,7 +39,7 @@ return {
                             cargo = {
                                 allFeatures = true,
                                 loadOutDirsFromCheck = true,
-                                buildScripts = { enabled = true },
+                                buildScripts = { enabled = false },
                             },
                             checkOnSave = true,
                             diagnostics = {
@@ -73,6 +74,7 @@ return {
                                 },
                             },
                             procMacro = {
+                                -- WARN: This a major attack surface. But, what can you do...
                                 enable = true,
                                 ignored = {
                                     ["async-trait"] = { "async_trait" },
@@ -98,6 +100,7 @@ return {
     },
     {
         "saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
         tag = "stable",
         opts = {
             completion = {

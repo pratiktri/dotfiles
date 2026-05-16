@@ -144,10 +144,12 @@ return {
             },
             input = { enabled = true },
             image = {
+                -- NOTE: Requires: ImageMagick & mermaid-cli installed
                 enabled = true,
                 doc = {
                     max_width = 80,
                     max_height = 68,
+                    float = false,
                 },
                 img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", ".artifacts/img", ".artifacts", ".assets" },
             },

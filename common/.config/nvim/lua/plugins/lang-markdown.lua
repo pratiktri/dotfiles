@@ -98,6 +98,7 @@ return {
         event = "VeryLazy",
         opts = {
             default = {
+                drag_and_drop = { enabled = false },
                 use_absolute_path = false, ---@type boolean
                 relative_to_current_file = false, ---@type boolean
                 use_cursor_in_template = true,

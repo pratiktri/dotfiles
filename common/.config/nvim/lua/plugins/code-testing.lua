@@ -120,6 +120,7 @@ return {
     {
         "andythigpen/nvim-coverage",
         dependencies = { "nvim-lua/plenary.nvim" },
+        event = "VeryLazy",
         config = function()
             require("coverage").setup({
                 auto_load = true,

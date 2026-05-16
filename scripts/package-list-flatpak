@@ -3,7 +3,4 @@
 # 1. Getting regular update is essential (compatibility)
 # 2. They aren't available through OS packages or linuxbrew
 # These are always HUGE bundles
-com.mattermost.Desktop
-io.github.zen_browser.zen
-md.obsidian.Obsidian
-org.libreoffice.LibreOffice
+# NOTE: nothing anymore - they are fucking HUGE

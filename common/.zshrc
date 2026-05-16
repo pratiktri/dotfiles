@@ -61,62 +61,62 @@ HISTORY_BASE="$ZSH_STATE_HOME/per-directory-history"
 # Enable zmv (zsh batch-renamer)
 autoload zmv
 
+# Add brew provided autocompletions to path: must be before compinit
+[[ ! -d  "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]] || FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
+
 # Zinit Plugins
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit ice depth=1 ver"v1.20.0"; zinit light romkatv/powerlevel10k
 zinit ice depth=1; zinit light jimhester/per-directory-history
 
-zinit ice wait lucid depth=1; zinit light zsh-users/zsh-completions
-zinit ice wait lucid depth=1; zinit light zsh-users/zsh-autosuggestions
-zinit ice wait lucid depth=1; zinit light zdharma-continuum/fast-syntax-highlighting
-
-zinit ice wait lucid depth=1; zinit snippet OMZP::alias-finder
-zinit ice wait lucid depth=1; zinit snippet OMZP::colored-man-pages
-zinit ice wait lucid depth=1; zinit snippet OMZP::command-not-found
-zinit ice wait lucid depth=1; zinit snippet OMZP::gitignore
-zinit ice wait lucid depth=1; zinit snippet OMZP::sudo
-zinit ice wait lucid depth=1; zinit snippet OMZP::timer
-zinit ice wait lucid depth=1; zinit snippet OMZP::urltools
-zinit ice wait lucid depth=1; zinit snippet OMZP::vi-mode
-
-# Completions
-zinit ice wait lucid depth=1; zinit snippet OMZP::brew
-zinit ice wait lucid depth=1; zinit snippet OMZP::bun
-zinit ice wait lucid depth=1; zinit snippet OMZP::docker
-zinit ice wait lucid depth=1; zinit snippet OMZP::fzf
-zinit ice wait lucid depth=1; zinit snippet OMZP::node
-zinit ice wait lucid depth=1; zinit snippet OMZP::podman
-zinit ice wait lucid depth=1; zinit snippet OMZP::rust
+zinit wait lucid light-mode depth=1 for \
+  blockf atpull'zinit creinstall -q .' \
+    zsh-users/zsh-completions \
+  atload"_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  atinit"zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+  OMZP::colored-man-pages \
+  OMZP::gitignore \
+  OMZP::sudo \
+  OMZP::timer \
+  OMZP::vi-mode \
+  OMZP::docker \
+  OMZP::fzf \
+  OMZP::rust \
+  OMZP::brew \
+  OMZP::bun \
+  OMZP::node \
+  OMZP::podman
 
 # TIP: execute `zinit update --all` quarterly
 
-# Add brew provided autocompletions to path
-[[ ! -d  "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]] || FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
-
-# ZSH Auto-completion settings: Do it AFTER plugin load, so all fpaths are included
-autoload -Uz compinit                       # Initialized zsh completion
-(( ${+_comps} )) && _comps[zinit]=_zinit    # Sets up completion for Zinit
-_comp_options+=(globdots)                   # Include hidden files
-zmodload zsh/complist                       # Add enhancements to zsh completion system
-
 # Completion files: Use XDG dirs
 ZCOMP_CACHE_HOME="${XDG_CACHE_HOME}/zsh"
+ZCOMP_DUMP_FILE="${ZCOMP_CACHE_HOME}/zcompdump-$ZSH_VERSION"
 ZCOMP_CACHE_FILE="${ZCOMP_CACHE_HOME}/zcompcache"
 [ -d "${ZCOMP_CACHE_HOME}" ] || mkdir -p "${ZCOMP_CACHE_HOME}"
 
-# Run compinit only once daily
-if [[ -n $ZCOMP_CACHE_HOME/zcompdump-$ZSH_VERSION(#qN.mh+24) ]]; then
-  compinit -d "$ZCOMP_CACHE_HOME/zcompdump-$ZSH_VERSION"
+# ZSH Auto-completion settings: Do it AFTER plugin load, so all fpaths are included
+autoload -Uz compinit                       # Initialized zsh completion
+_comp_options+=(globdots)                   # Include hidden files
+zmodload zsh/complist                       # Add enhancements to zsh completion system
+
+# Run compinit only once daily; skip security check on fresh dump
+if [[ -n $ZCOMP_DUMP_FILE(#qN.mh+24) ]]; then
+  compinit -d "$ZCOMP_DUMP_FILE"
 else
-  compinit -C   # Generate dumpfile only if outdated
+  compinit -C -d "$ZCOMP_DUMP_FILE"  # -C skips security check, reuses dump
 fi
 
-zinit cdreplay -q # Replay stored compdef. Must be AFTER compinit -d
+zinit cdreplay -q # Replay compdefs captured during Turbo load
+(( ${+_comps} )) && _comps[zinit]=_zinit  # Register zinit completion
 
 # Completion styling
 zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"   # Sets path for completion cache files
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # Case INsensitive completion match
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # Add color to completion suggestions
-zstyle ':completion::complete:*' gain-privileges 1 menu select cache-path "$ZCOMP_CACHE_FILE" # Enable completion for sudo commands
+zstyle ':completion:*' menu select
+zstyle ':completion::complete:*' gain-privileges 1
 
 # To customize prompt, run `p10k configure`
 [[ ! -f "$XDG_CONFIG_HOME/shell/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/shell/p10k.zsh"

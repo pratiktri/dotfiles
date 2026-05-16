@@ -1,22 +1,26 @@
-# Lines that start with # are ignored
+ Lines that start with # are ignored
 # TIP:
 # - Only add commandline apps that aren't available/updated on OS repos; cause brew isn't available on FreeBSD
 # - Apps that are already installed skipped
 # - Those that must be kept up-to-date (eg rclone); manually brew install them after the scipt completes
 
 basedpyright
+bash-language-server
 bats-core
+djlint
 dnscrypt-proxy
+docker-compose-langserver
 dockerfile-language-server
 fd
 gitleaks
-htop
 kondo
 lazydocker
 lua
 lua-language-server
 luajit
 markdown-oxide
+markdown-toc
+markdownlint-cli
 marksman
 n
 neovim
@@ -27,12 +31,14 @@ rclone
 sccache
 shodan
 speedtest-cli
+sql-language-server
 sqlite
 stylua
 taplo
 tlrc
-tokei
 tree-sitter
+typescript-language-server
+yaml-language-server
 yamlfmt
 yt-dlp
 zoxide

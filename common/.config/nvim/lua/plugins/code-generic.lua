@@ -49,9 +49,27 @@ return {
                 end,
                 desc = "Previous todo comment",
             },
-            { "<leader>df", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG<cr>", desc = "FIXME: Tags" },
-            { "<leader>dt", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME,BUG<cr>", desc = "Project TODOs" },
-            { "<leader>dT", "<cmd>TodoTelescope<cr>", desc = "All tags: FIX, NOTE, TIP, TODO, WARN" },
+            {
+                "<leader>df",
+                function()
+                    Snacks.picker.todo_comments({ keywords = { "FIX", "FIXME", "BUG" } })
+                end,
+                desc = "FIXME: Tags",
+            },
+            {
+                "<leader>dt",
+                function()
+                    Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "BUG" } })
+                end,
+                desc = "Project TODOs",
+            },
+            {
+                "<leader>dT",
+                function()
+                    Snacks.picker.todo_comments()
+                end,
+                desc = "All tags: FIX, NOTE, TIP, TODO, WARN",
+            },
         },
     },
 
@@ -150,7 +168,6 @@ return {
             "MunifTanjim/nui.nvim",
         },
         config = function()
-            local actions = require("nvim-navbuddy.actions")
             local navbuddy = require("nvim-navbuddy")
 
             navbuddy.setup({
@@ -161,14 +178,6 @@ return {
                     size = "80%",
                 },
                 mappings = {
-                    -- Telescope search symbols at current level
-                    ["/"] = actions.telescope({
-                        layout_config = {
-                            height = 0.8,
-                            width = 0.8,
-                        },
-                    }),
-
                     -- Default Mappings on the popup
                     --
                     -- ["J"] = actions.move_down(), -- Move focused node down

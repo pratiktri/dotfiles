@@ -111,13 +111,10 @@ return {
         opts = {
             bigfile = { enabled = false },
             dashboard = { enabled = false },
-            explorer = { enabled = false },
-            indent = { enabled = false },
             scope = { enabled = false },
             layout = { enabled = false },
             statuscolumn = { enabled = false },
             terminal = { enabled = false },
-            win = { enabled = false },
 
             bufdelete = { enabled = true },
             git = { enabled = true },
@@ -148,7 +145,17 @@ return {
                 timeout = 2000,
                 style = "fancy",
             },
-            picker = { enabled = true },
+            explorer = { enabled = true, replace_netrw = true },
+            picker = {
+                enabled = true,
+                hidden = true,
+                ignored = true,
+                picker = {
+                    sources = {
+                        explorer = {},
+                    },
+                },
+            },
             quickfile = { enabled = true },
             scratch = {
                 enabled = true,
@@ -174,6 +181,13 @@ return {
                     Snacks.scratch()
                 end,
                 desc = "Toggle Scratch Buffer",
+            },
+            {
+                "<leader><tab>",
+                function()
+                    Snacks.explorer()
+                end,
+                desc = "File Explorer",
             },
             {
                 "<leader>/s",
@@ -256,6 +270,100 @@ return {
                 end,
                 desc = "Toggle Zen Mode",
             },
+
+            -- Picker Keymaps
+            -- Buffer
+            {
+                "<leader>bl",
+                function()
+                    Snacks.picker.buffers()
+                end,
+                desc = "List Buffers",
+            },
+
+            -- Search
+            {
+                "<C-S-f>",
+                function()
+                    Snacks.picker.grep()
+                end,
+                desc = "Search/LiveGrep the Project",
+            },
+            {
+                "<C-p>",
+                function()
+                    Snacks.picker.files({ hidden = true, ignored = true })
+                end,
+                desc = "Search Files",
+            },
+
+            -- Git
+            {
+                "<leader>gc",
+                function()
+                    Snacks.picker.git_log()
+                end,
+                desc = "Git: Commits",
+            },
+            {
+                "<leader>gb",
+                function()
+                    Snacks.picker.git_branches()
+                end,
+                desc = "Git: Branches",
+            },
+
+            -- Neovim Things
+            {
+                "<leader>nh",
+                function()
+                    Snacks.picker.help()
+                end,
+                desc = "Search NeoVIM Help",
+            },
+            {
+                "<leader>np",
+                function()
+                    -- TODO: Close current project on selection
+                    Snacks.picker.projets()
+                end,
+                desc = "Search Recent Projects",
+            },
+            {
+                "<leader>nm",
+                function()
+                    Snacks.picker.man()
+                end,
+                desc = "Help: System Man Pages",
+            },
+            {
+                "<leader>nk",
+                function()
+                    Snacks.picker.keymaps()
+                end,
+                desc = "Help: NeoVIM Keymaps",
+            },
+            {
+                "<leader>ns",
+                function()
+                    Snacks.picker.search_history()
+                end,
+                desc = "Search History",
+            },
+            {
+                "<leader>nH",
+                function()
+                    Snacks.picker.command_history()
+                end,
+                desc = "Command History",
+            },
+            {
+                "<leader>nc",
+                function()
+                    Snacks.picker.colorschemes()
+                end,
+                desc = "Colorschemes (with preview)",
+            },
         },
     },
 
@@ -311,30 +419,32 @@ return {
 
     {
         "folke/which-key.nvim",
-        dependencies = {
-            "echasnovski/mini.icons",
-        },
         opts = {
             delay = 450,
             preset = "helix",
             warning = true,
             -- Document existing key chains
             spec = {
-                { "<leader>/", group = "NVIM Scratch Buffer" },
-                { "<leader>a", group = "AI", icon = { icon = "󰚩", color = "orange" } },
-                { "<leader>b", group = "Buffer Operations", icon = { icon = "󰲂", color = "orange" } },
-                { "<leader>c", group = "Code", icon = { icon = "", color = "orange" } },
-                { "<leader>d", group = "Diagnostics", icon = { icon = "🔬", color = "orange" } },
+                { "<leader>u", group = "Undo History", icon = { icon = "󰁯", color = "orange" } },
+                { "<leader>Q", group = "Execute DB query under cursor", icon = { icon = "", color = "orange" } },
+                { "<leader>o", group = "Hierarchical Document Symbols", icon = { icon = "", color = "orange" } },
+                { "<leader>s", group = "Search Document Symbols", icon = { icon = "", color = "orange" } },
+                { "<leader>S", group = "Search Workspace Symbols", icon = { icon = "", color = "orange" } },
+                { "<leader>y", group = "Copy to system clipboard", icon = { icon = "", color = "orange" } },
+                { "<leader>p", group = "Paste system clipboard", icon = { icon = "󰆏", color = "orange" } },
+                { "<leader><tab>", group = "File Explorer", icon = { icon = "", color = "orange" } },
+
+                { "<leader>a", group = "AI", icon = { icon = "", color = "orange" } },
+                { "<leader>b", group = "Buffer Operations", icon = { icon = "", color = "orange" } },
+                { "<leader>c", group = "Code", icon = { icon = "󰗀", color = "orange" } },
+                { "<leader>d", group = "Diagnostics", icon = { icon = "󰓙", color = "orange" } },
                 { "<leader>D", group = "Debug", icon = { icon = "", color = "orange" } },
                 { "<leader>g", group = "Git", icon = { icon = "", color = "orange" } },
-                { "<leader>h", group = "Help", icon = { icon = "󰞋", color = "orange" } },
                 { "<leader>n", group = "Neovim Things", icon = { icon = "", color = "orange" } },
                 { "<leader>q", group = "Database", icon = { icon = "", color = "orange" } },
-                { "<leader>r", group = "Rust", icon = { icon = "󱘗", color = "orange" } },
-                { "<leader>s", group = "Search/Grep", icon = { icon = "", color = "orange" } },
-                { "<leader>t", group = "Unit Test" },
-                { "<leader>x", group = "Delete/Disable/Remove", icon = { icon = "", color = "orange" } },
-                -- More icons: https://github.com/echasnovski/mini.icons/blob/main/lua/mini/icons.lua#L686
+                { "<leader>t", group = "Unit Test", icon = { icon = "", color = "orange" } },
+                { "<leader>x", group = "Delete/Disable/Remove", icon = { icon = "󰆴", color = "orange" } },
+                { "<leader>/", group = "Quick Project Notes", icon = { icon = "󰠮", color = "orange" } },
             },
         },
     },

@@ -75,11 +75,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- e to jump to the symbol under cursor; q to quit
         map("<leader>co", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")
 
-        -- Telescope
-        map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-        map("<leader>s", require("telescope.builtin").lsp_document_symbols, "Search Document Symbols")
-        map("<leader>S", require("telescope.builtin").lsp_workspace_symbols, "Search Workspace Symbols")
-        map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+        map("gI", function()
+            Snacks.picker.lsp_implementations()
+        end, "[G]oto [I]mplementation")
+        map("<leader>s", function()
+            Snacks.picker.lsp_symbols()
+        end, "Search Document Symbols")
+        map("<leader>S", function()
+            Snacks.picker.lsp_workspace_symbols()
+        end, "Search Workspace Symbols")
+        map("<leader>ct", function()
+            Snacks.picker.lsp_type_definitions()
+        end, "Goto Type Definition")
 
         Snacks.toggle({
             name = "Diagnostics Virtual Text",

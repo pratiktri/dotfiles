@@ -1,0 +1,11 @@
+{
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+    "diagnostics.globals": ["vim", "Snacks", "MiniStatusline"],
+    "diagnostics.disable": ["deprecated", "undefined-doc-name"],
+    "runtime.version": "LuaJIT",
+    "runtime.pathStrict": true,
+    "workspace.library": ["${3rd}/luv/library"],
+    "workspace.checkThirdParty": false,
+    "workspace.ignoreDir": ["node_modules", ".git"],
+    "telemetry.enable": false
+}

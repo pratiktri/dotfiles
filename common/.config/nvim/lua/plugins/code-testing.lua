@@ -6,10 +6,9 @@ return {
         dependencies = {
             "nvim-neotest/nvim-nio",
             "nvim-lua/plenary.nvim",
-            "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
 
-            "marilari88/neotest-vitest", -- JS/TS/React/Vue
+            -- "marilari88/neotest-vitest", -- JS/TS/React/Vue
         },
         opts = {
             -- Do NOT add adapters here
@@ -69,7 +68,7 @@ return {
             end
 
             -- TIP: Add adapters here
-            table.insert(opts.adapters, require("neotest-vitest"))
+            -- table.insert(opts.adapters, require("neotest-vitest"))
             table.insert(opts.adapters, require("rustaceanvim.neotest"))
 
             if opts.adapters then

@@ -40,33 +40,6 @@ return {
         end,
     },
 
-    {
-        "j-hui/fidget.nvim",
-        opts = {
-            progress = {
-                poll_rate = 1, -- How and when to poll for progress messages
-                suppress_on_insert = true, -- Suppress new messages while in insert mode
-                ignore_done_already = true, -- Ignore new tasks that are already complete
-                ignore_empty_message = true, -- Ignore new tasks that don't contain a message
-                ignore = {}, -- List of LSP servers to ignore
-
-                display = {
-                    render_limit = 1, -- How many LSP messages to show at once
-                    -- skip_history = true, -- Whether progress notifications should be omitted from history
-                },
-            },
-
-            notification = {
-                poll_rate = 2, -- How often to udate and render notifications
-                filter = vim.log.levels.WARN, -- Minimum notifications level
-                window = { winblend = 0 },
-            },
-        },
-    },
-
-    -- NeoVim
-    { "folke/lazydev.nvim", ft = "lua" },
-
     -- Rust
     {
         "mrcjkb/rustaceanvim",

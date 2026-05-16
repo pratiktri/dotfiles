@@ -5,9 +5,6 @@ return {
     -- ui components
     "MunifTanjim/nui.nvim",
 
-    -- Better vim.ui
-    "stevearc/dressing.nvim",
-
     {
         "projekt0n/github-nvim-theme",
         priority = 1000,

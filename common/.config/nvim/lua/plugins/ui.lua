@@ -36,13 +36,6 @@ return {
                 end,
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = false,
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "Neo-tree",
-                        highlight = "Directory",
-                    },
-                },
             },
         },
         config = function(_, opts)
@@ -182,7 +175,6 @@ return {
                     "help",
                     "alpha",
                     "dashboard",
-                    "neo-tree",
                     "Trouble",
                     "trouble",
                     "lazy",

@@ -2,14 +2,6 @@ return {
     { "tpope/vim-repeat" },
 
     {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = function()
-            require("nvim-autopairs").setup()
-        end,
-    },
-
-    {
         "folke/todo-comments.nvim",
         event = "VimEnter",
         dependencies = { "nvim-lua/plenary.nvim" },

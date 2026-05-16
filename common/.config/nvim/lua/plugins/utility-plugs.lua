@@ -6,7 +6,19 @@ return {
         version = false,
         config = function()
             require("mini.comment").setup()
-            require("mini.pairs").setup()
+            require("mini.pairs").setup({
+                modes = { insert = true, command = false, terminal = false },
+                -- skip autopair when next char matches these
+                skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+                skip_ts = { "string" }, -- skip inside treesitter string nodes (needs nvim 0.10+)
+                skip_unbalanced = true,
+                markdown = true,
+            })
+            -- Fixes auto-expand into newline with indent
+            vim.keymap.set("i", "<CR>", function()
+                local pair = MiniPairs.cr()
+                return pair
+            end, { expr = true })
 
             -- mini.surround
             -- functionality similar to tpope's vim-surround

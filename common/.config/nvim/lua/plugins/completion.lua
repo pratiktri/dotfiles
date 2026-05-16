@@ -5,7 +5,6 @@ return {
         dependencies = {
             "L3MON4D3/LuaSnip",
             "kristijanhusak/vim-dadbod-completion",
-            "moyiz/blink-emoji.nvim",
             "disrupted/blink-cmp-conventional-commits",
         },
 
@@ -100,7 +99,6 @@ return {
 
             sources = {
                 default = {
-                    "lazydev",
                     "lsp",
                     "buffer",
                     "path",
@@ -108,8 +106,8 @@ return {
                 },
                 per_filetype = {
                     sql = { "snippets", "dadbod", "buffer" },
-                    markdown = { "markdown", "snippets", "buffer", "lsp", "path", "emoji" },
-                    gitcommit = { "conventional_commits", "emoji", "buffer", "snippets" },
+                    markdown = { "markdown", "snippets", "buffer", "lsp", "path" },
+                    gitcommit = { "conventional_commits", "buffer", "snippets" },
                 },
 
                 providers = {
@@ -125,20 +123,6 @@ return {
                         end,
                         opts = {},
                         score_offset = 700,
-                    },
-                    emoji = {
-                        module = "blink-emoji",
-                        name = "Emoji",
-                        score_offset = 700,
-                        opts = { insert = true },
-                        should_show_items = function()
-                            return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype)
-                        end,
-                    },
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 1001,
                     },
                     dadbod = {
                         name = "Dadbod",

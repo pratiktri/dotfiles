@@ -129,6 +129,6 @@ export BUN_INSTALL_GLOBAL_DIR="$(npm config get prefix)/lib"
 export BUN_INSTALL_BIN="$(npm config get prefix)/bin"
 
 # CUDA path
-export PATH="/usr/local/cuda-13.1/bin:$PATH"
-export CUDA_HOME="/usr/local/cuda-13.1/"
-export LD_LIBRARY_PATH="/usr/local/cuda-13.1/lib64:$LD_LIBRARY_PATH"
+export PATH="/usr/local/cuda-13.2/bin:$PATH"
+export CUDA_HOME="/usr/local/cuda-13.2/"
+export LD_LIBRARY_PATH="/usr/local/cuda-13.2/lib64:$LD_LIBRARY_PATH"

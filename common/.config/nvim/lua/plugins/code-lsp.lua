@@ -3,39 +3,21 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             {
-                "williamboman/mason.nvim",
+                "mason-org/mason.nvim",
                 config = true,
                 opts = { PATH = "append" },
             },
-            "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             "saghen/blink.cmp",
         },
         config = function()
-            local servers = {}
-
-            -- TIP: `nvim-lspconfig` has default LSP configs in its DB which saves time
-            -- Useful even after NeoVim 0.11, which made LSP setup much easier
-            -- Configs in ../../lsp/* are APPENDED to each LSP setup here
-            require("mason-lspconfig").setup({
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        server.capabilities = vim.tbl_deep_extend(
-                            "force",
-                            vim.lsp.protocol.make_client_capabilities(),
-                            require("lsp-file-operations").default_capabilities(),
-                            server.capabilities or {}
-                        )
-                        server.inlay_hints = { enabled = true }
-                        server.diagnostics = {
-                            underline = true,
-                            update_in_insert = false,
-                            severity_sort = true,
-                        }
-                        require("lspconfig")[server_name].setup(server)
-                    end,
-                },
+            vim.lsp.config("*", {
+                capabilities = vim.tbl_deep_extend(
+                    "force",
+                    vim.lsp.protocol.make_client_capabilities(),
+                    require("lsp-file-operations").default_capabilities(),
+                    require("blink.cmp").get_lsp_capabilities()
+                ),
             })
         end,
     },

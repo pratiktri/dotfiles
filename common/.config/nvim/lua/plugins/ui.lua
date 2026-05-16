@@ -86,7 +86,7 @@ return {
             },
             lsp = {
                 progress = {
-                    throttle = 1000 / 100,
+                    throttle = 1000 / 3,
                 },
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -109,6 +109,27 @@ return {
                 },
                 {
                     filter = { event = "msg_show", find = "skipping unsupported language" },
+                    opts = { skip = true },
+                },
+                -- Hide noisy lsp messages
+                {
+                    filter = {
+                        event = "lsp",
+                        kind = "progress",
+                        cond = function(msg)
+                            local client = vim.tbl_get(msg.opts, "progress", "client")
+                            local title = vim.tbl_get(msg.opts, "progress", "title") or ""
+                            if client == "lua_ls" then
+                                return title == "Searching in files..." or title == "Diagnosing"
+                            end
+                            if client == "rust-analyzer" then
+                                return title == "Building CrateGraph"
+                                    or title == "Roots Scanned"
+                                    or title == "Loading proc-macros"
+                                    or title == "Building compile-time-deps"
+                            end
+                        end,
+                    },
                     opts = { skip = true },
                 },
                 {

@@ -12,13 +12,13 @@ return {
                 markdown = { "markdownlint" },
                 python = { "ruff" },
                 terraform = { "trivy" },
+                sql = { "sqruff" },
                 yaml = { "yamllint", "trivy" },
 
                 ["*"] = { "codespell" },
             }
 
-            local markdownlint = lint.linters.markdownlint
-            markdownlint.args = {
+            lint.linters.markdownlint.args = {
                 "--config",
                 vim.loop.os_homedir() .. "/.config/templates/markdownlint.json",
                 "--",

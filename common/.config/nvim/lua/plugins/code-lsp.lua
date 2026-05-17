@@ -16,7 +16,8 @@ return {
                     "force",
                     vim.lsp.protocol.make_client_capabilities(),
                     require("lsp-file-operations").default_capabilities(),
-                    require("blink.cmp").get_lsp_capabilities()
+                    require("blink.cmp").get_lsp_capabilities(),
+                    { textDocument = { semanticTokens = { multilineTokenSupport = true } } }
                 ),
             })
         end,

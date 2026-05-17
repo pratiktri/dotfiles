@@ -62,22 +62,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         map("<F2>", vim.lsp.buf.rename, "Rename Symbol")
-        map("<leader>cR", vim.lsp.buf.rename, "Rename Symbol")
-        map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+        map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
         -- LspSaga
         map("<C-.>", "<cmd>Lspsaga code_action<cr>", "Code Actions")
-        map("K", "<cmd>Lspsaga hover_doc<cr>", "Hover Documentation")
-        map("<leader>cr", "<cmd>Lspsaga finder<cr>", "Goto References")
-        map("<leader>cF", "<cmd>Lspsaga peek_definition<cr>", "Peek definition: Function")
-        map("<leader>cT", "<cmd>Lspsaga peek_type_definition<cr>", "Peek definition: Type")
-        map("<leader>cI", "<cmd>Lspsaga finder imp<cr>", "Peek: Implementations")
-        -- e to jump to the symbol under cursor; q to quit
-        map("<leader>co", "<cmd>Lspsaga outline<cr>", "Outline Panel on Left")
+        map("<leader>co", "<cmd>Lspsaga outline<cr>", "Open Symbol Outline Panel on Left")
 
+        -- Snacks
+        map("<leader>cr", function()
+            Snacks.picker.lsp_references()
+        end, "Goto References")
         map("gI", function()
             Snacks.picker.lsp_implementations()
-        end, "[G]oto [I]mplementation")
+        end, "Goto Implementation")
+        map("<leader>cI", function()
+            Snacks.picker.lsp_implementations()
+        end, "Goto Implementation")
         map("<leader>s", function()
             Snacks.picker.lsp_symbols()
         end, "Search Document Symbols")
@@ -87,6 +87,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>ct", function()
             Snacks.picker.lsp_type_definitions()
         end, "Goto Type Definition")
+        map("<leader>L", function()
+            Snacks.picker.lsp_config()
+        end, "Check all LSP configurations")
 
         Snacks.toggle({
             name = "Diagnostics Virtual Text",

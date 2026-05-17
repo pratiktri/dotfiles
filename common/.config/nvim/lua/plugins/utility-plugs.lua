@@ -126,7 +126,6 @@ return {
             scope = { enabled = false },
             layout = { enabled = false },
             statuscolumn = { enabled = false },
-            terminal = { enabled = false },
 
             bufdelete = { enabled = true },
             git = { enabled = true },
@@ -160,16 +159,8 @@ return {
                 style = "fancy",
             },
             explorer = { enabled = true, replace_netrw = true },
-            picker = {
-                enabled = true,
-                hidden = true,
-                ignored = true,
-                picker = {
-                    sources = {
-                        explorer = {},
-                    },
-                },
-            },
+            terminal = { enabled = true, win = { position = "float", height = 0.6, width = 0.6 } },
+            picker = { enabled = true, hidden = true, ignored = true },
             quickfile = { enabled = true },
             scratch = {
                 enabled = true,
@@ -184,8 +175,9 @@ return {
                 duration = { step = 10, total = 200 },
             },
             styles = {
+                scratch = { width = 0.6, height = 0.6 },
                 notification = { wo = { wrap = true } },
-                scratch = { width = 120, height = 35 },
+                notification_history = { width = 0.6, height = 0.6 },
             },
         },
         keys = {
@@ -202,6 +194,14 @@ return {
                     Snacks.explorer()
                 end,
                 desc = "File Explorer",
+            },
+            {
+                "<C-`>",
+                function()
+                    Snacks.terminal()
+                end,
+                desc = "Toggle Floating Terminal",
+                mode = { "n", "t" },
             },
             {
                 "<leader>/s",

@@ -129,6 +129,14 @@ return {
         config = function()
             local disabled_filetypes = { "awk" }
             require("lspsaga").setup({
+                keys = {
+                    quit = { "q", "<ESC>" },
+                },
+                code_action = {
+                    keys = {
+                        quit = { "q", "<ESC>" },
+                    },
+                },
                 ui = {
                     kind = require("config.util").icons.kind_lspsaga,
                     devicon = true,
@@ -145,11 +153,13 @@ return {
                     hide_keyword = true,
                 },
                 lightbulb = { virtual_text = false },
-                outline = { auto_preview = false },
+                outline = {
+                    auto_preview = false,
+                    keys = {
+                        quit = { "q", "<ESC>" },
+                    },
+                },
             })
-
-            vim.keymap.set({ "n", "t" }, "<C-`>", "<cmd>Lspsaga term_toggle<cr>", { desc = "Toggle Floating Terminal" })
-            -- Rest of the keymaps in ../core/lsp.lua
         end,
     },
 

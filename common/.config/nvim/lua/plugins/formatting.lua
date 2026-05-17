@@ -25,9 +25,8 @@ return {
                 python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
                 xml = { "xmllint" },
                 yaml = { "yamlfmt" },
-
-                go = { "gofmt" },
                 rust = { "rustfmt" },
+                sql = { "sqruff" },
 
                 ["_"] = { "trim_whitespace" },
             },

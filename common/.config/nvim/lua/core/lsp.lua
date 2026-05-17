@@ -1,10 +1,10 @@
 -- TIP: Setup a new LSP:
 -- Step 1: Install the LSP through:
 --         OS Installer > Brew-linux > :MasonInstall
--- Step 2: Append the LSP server name in the below array ("newlsp")
--- Step 3: Create file ("newlsp.lua") in ../../lsp/
+-- Step 2: Append the LSP server name in the below array ("new-lsp") (not linter or formatter)
+-- Step 3: If you have special configuration for the lsp add those to ("new-lsp.lua") in ../../lsp/
 -- Step 4: Return a lua table containing required lsp config in it
--- NOTE: Only LSPs here, NOT linters or formatter
+-- NOTE: Only LSPs here, NOT linter or formatter
 vim.lsp.enable({
     "awk_ls",
     "basedpyright",
@@ -12,15 +12,15 @@ vim.lsp.enable({
     "cssls",
     "docker_compose_language_service",
     "dockerls",
-    "gopls",
     "html",
     "jsonls",
     "lua_ls",
-    "marksman",
     "markdown_oxide",
+    "marksman",
+    "pylsp",
     "sqlls",
+    "systemd_lsp",
     "taplo",
-    "trivy",
     "ts_ls",
     "yamlls",
 })

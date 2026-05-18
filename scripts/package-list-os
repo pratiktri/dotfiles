@@ -35,6 +35,7 @@ stylua
 tree-sitter
 tree-sitter-cli
 trivy
+uv
 vscode
 yamllint
 zoxide

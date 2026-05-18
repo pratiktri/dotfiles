@@ -1,0 +1,27 @@
+# ── Index / registry ───────────────────────────────────────────
+# Use PyPI by default; swap with private index URL if needed
+[[index]]
+url = "https://pypi.org/simple"
+default = true
+
+# ── Security ───────────────────────────────────────────────────
+# Only allow packages with verified checksums
+require-hashes = true
+
+# Refuse to install if lockfile is stale
+frozen = true
+
+# Pin Python version to avoid unexpected upgrades
+python-preference = "managed"
+
+# Don't fall back to insecure HTTP
+no-binary = false
+
+# Disable Astral's update check
+preview = false
+
+# pre-compile .pyc for faster startup
+compile-bytecode = true
+
+# cleaner CI output
+no-progress = true

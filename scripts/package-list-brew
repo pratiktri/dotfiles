@@ -24,6 +24,7 @@ markdownlint-cli
 marksman
 n
 neovim
+pnpm
 prettierd
 python-lsp-server
 python@3.12

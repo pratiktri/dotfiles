@@ -47,6 +47,9 @@ if [ "$XDG_SESSION_DESKTOP" = "KDE" ]; then
     export KDEHOME="${XDG_CONFIG_HOME}/KDE"
 fi
 
+# Catch all telemetry off across all tooling apps
+export DO_NOT_TRACK=1
+
 # Homebrew
 export HOMEBREW_BAT=1
 export HOMEBREW_VEBOSE=1
@@ -86,9 +89,18 @@ export PYTHON_HISTORY="${XDG_STATE_HOME}/shell/python_history" # will be picked 
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
-command -v pyenv >/dev/null && export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
+command -v pyenv >/dev/null && export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 export PATH="$XDG_DATA_HOME/python/bin:$PATH"
+
+export UV_CACHE_DIR="$XDG_CACHE_HOME/uv"
+export UV_PYTHON_INSTALL_DIR="$XDG_DATA_HOME/uv/python"
+export UV_TOOL_DIR="$XDG_DATA_HOME/uv/tools"
+export UV_TOOL_BIN_DIR="$HOME/.local/bin/uv"
+# uv installed python takes precednce over OS installed one
+export PATH="$PATH:$UV_PYTHON_INSTALL_DIR"
+# Brew installed applications take precednce over uv tools
+export PATH="$UV_TOOL_BIN_DIR:$PATH"
 
 # Rust
 export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
@@ -117,16 +129,22 @@ export GOPATH="${DEV_CACHE_PATH}"/gopath/
 # Java
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
 
-# Setup Node & n
+# Setup Node, fnm (nvm alternative), pnpm
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/node/npmrc"
 export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
-export N_PREFIX="${XDG_DATA_HOME}/n_node"
-export PATH="$N_PREFIX/bin:$PATH"
-command -v npm >/dev/null 2>&1 && PATH="$(npm config get prefix)/bin:$PATH"
-
-# Bun configurations
-export BUN_INSTALL_GLOBAL_DIR="$(npm config get prefix)/lib"
-export BUN_INSTALL_BIN="$(npm config get prefix)/bin"
+export FNM_DIR="$XDG_DATA_HOME/fnm"
+# use .nvmrc/.node-version from the closest parent dir
+export FNM_VERSION_FILE_STRATEGY="recursive"
+# warn | info | error
+export FNM_LOGLEVEL="quiet"
+# Disable corepack
+export FNM_COREPACK_ENABLED="false"
+# Activate fnm with auto-switching on cd
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+export PNPM_CONFIG_STORE_DIR="$XDG_DATA_HOME/pnpm/store"
+export PNPM_CONFIG_GLOBAL_DIR="$XDG_DATA_HOME/pnpm/global"
+export PNPM_CONFIG_CACHE_DIR="$XDG_CACHE_HOME/pnpm"
+export PNPM_CONFIG_STATE_DIR="$XDG_STATE_HOME/pnpm"
 
 # CUDA path
 export PATH="/usr/local/cuda-13.2/bin:$PATH"

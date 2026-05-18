@@ -72,8 +72,6 @@ export WGETRC="${XDG_CONFIG_HOME}/wgetrc" && [ ! -f "$WGETRC" ] && touch "$WGETR
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
-export OLLAMA_HOME="${XDG_CONFIG_HOME}/ollama/"
-export OLLAMA_MODELS="${DEV_CACHE_PATH}/AI-Models/"
 [ ! -f "$HOME/.lmstudio/bin" ] || export PATH="$PATH:$HOME/.lmstudio/bin"
 
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"

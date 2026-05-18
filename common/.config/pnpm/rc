@@ -1,0 +1,26 @@
+# ── Supply chain security ──────────────────────────────────────
+# Quarantine new packages for 7 days
+minimum-release-age=10080
+
+# Block git:// and tarball URL subdependencies
+block-exotic-subdeps=true
+
+# Prevent trust level downgrade on a package
+trust-policy=no-downgrade
+
+# Disable all lifecycle scripts by default; use `pnpm approve-builds` to whitelist
+allow-builds=[]
+
+# Always use lockfile, fail if out of date
+frozen-lockfile=true
+
+# Verify checksums of packages
+verify-store-integrity=true
+
+# ── Registry ───────────────────────────────────────────────────
+# Use official registry
+registry=https://registry.npmjs.org/
+
+# ── Telemetry ──────────────────────────────────────────────────
+# pnpm itself has no telemetry; this disables it for tools built on top
+update-notifier=false

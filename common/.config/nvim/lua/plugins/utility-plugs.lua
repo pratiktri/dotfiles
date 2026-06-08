@@ -211,41 +211,6 @@ return {
                 desc = "Select Scratch Buffer",
             },
             {
-                "<leader>gz",
-                function()
-                    Snacks.lazygit.open(opts)
-                end,
-                desc = "LazyGit: Show LazyGit",
-            },
-            {
-                "<leader>gl",
-                function()
-                    Snacks.lazygit.log(opts)
-                end,
-                desc = "LazyGit: Git Log Graph",
-            },
-            {
-                "<leader>gf",
-                function()
-                    Snacks.lazygit.log_file(opts)
-                end,
-                desc = "LazyGit: Show File Log",
-            },
-            {
-                "<leader>gL",
-                function()
-                    Snacks.git.blame_line(opts)
-                end,
-                desc = "Git: Line Log",
-            },
-            {
-                "<leader>gO",
-                function()
-                    Snacks.gitbrowse.open(opts)
-                end,
-                desc = "Git: Open the file on Browser",
-            },
-            {
                 "]]",
                 function()
                     Snacks.words.jump(vim.v.count1)
@@ -313,6 +278,34 @@ return {
 
             -- Git
             {
+                "<leader>gL",
+                function()
+                    Snacks.git.blame_line(opts)
+                end,
+                desc = "Git: Line Log",
+            },
+            {
+                "<leader>gO",
+                function()
+                    Snacks.gitbrowse.open(opts)
+                end,
+                desc = "Git: Open the file on Browser",
+            },
+            {
+                "<leader>gl",
+                function()
+                    Snacks.lazygit.log(opts)
+                end,
+                desc = "LazyGit: Git Log Graph",
+            },
+            {
+                "<leader>gf",
+                function()
+                    Snacks.picker.git_log_file()
+                end,
+                desc = "Git: File Log",
+            },
+            {
                 "<leader>gc",
                 function()
                     Snacks.picker.git_log()
@@ -325,6 +318,13 @@ return {
                     Snacks.picker.git_branches()
                 end,
                 desc = "Git: Branches",
+            },
+            {
+                "<leader>gS",
+                function()
+                    Snacks.picker.git_stash()
+                end,
+                desc = "Git: List Stash",
             },
 
             -- Neovim Things

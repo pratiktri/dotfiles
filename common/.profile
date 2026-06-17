@@ -139,10 +139,8 @@ export FNM_LOGLEVEL="quiet"
 export FNM_COREPACK_ENABLED="false"
 # Activate fnm with auto-switching on cd
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-export PNPM_CONFIG_STORE_DIR="$XDG_DATA_HOME/pnpm/store"
-export PNPM_CONFIG_GLOBAL_DIR="$XDG_DATA_HOME/pnpm/global"
-export PNPM_CONFIG_CACHE_DIR="$XDG_CACHE_HOME/pnpm"
-export PNPM_CONFIG_STATE_DIR="$XDG_STATE_HOME/pnpm"
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+export PATH="$PNPM_HOME/bin:$PATH"
 
 # CUDA path
 export PATH="/usr/local/cuda-13.2/bin:$PATH"

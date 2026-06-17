@@ -134,8 +134,6 @@ up() {
     # command -v npm >/dev/null && npm update -g
     command -v rustup >/dev/null && rustup update && echo "Rust updated"
     echo ""
-
-    echo "Manually run 'npm update -g' once every month"
 }
 
 # Update & Upgrades
@@ -152,43 +150,6 @@ autorem() {
 
     eval "$remove_command"
     flatpak uninstall --unused && flatpak --user uninstall --unused
-}
-
-install() {
-    if [ -z "$1" ]; then
-        echo "No program name provided."
-        return 1
-    fi
-
-    if command -v "$1" >/dev/null 2>&1; then
-        echo "The program '$1' is already installed."
-        type "$1"
-        return 1
-    fi
-
-    if command -v apt-get >/dev/null 2>&1; then
-        sudo apt-get install "$1"
-        os_install_status=$?
-    elif command -v dnf >/dev/null 2>&1; then
-        sudo dnf install "$1"
-        os_install_status=$?
-    else
-        log "Unsupported package manager. This script supports apt, yum, and dnf."
-        exit 1
-    fi
-
-    if [ "$os_install_status" = 0 ]; then
-        return 0
-    fi
-
-    # Try to install through brew if OS install failed
-    if brew install "$1"; then
-        return 0
-    fi
-
-    echo
-    echo "$1 could not be installed using the OS package manager or Homebrew."
-    return 1
 }
 
 remove() {

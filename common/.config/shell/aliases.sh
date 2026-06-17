@@ -51,3 +51,8 @@ alias speedtest="speedtest-cli --secure"
 geoip() {
     curl -s https://ipinfo.io | sed '/readme\|loc\|postal\|{\|}\|hostname/d;s/org/ISP/;s/"\|,$//g' | awk -F ':' 'NF { printf("%10s: %s \n", $1, $2)}'
 }
+
+# Programming
+gi() {
+    curl -sL https://www.toptal.com/developers/gitignore/api/"$1"
+}

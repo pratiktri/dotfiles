@@ -61,23 +61,16 @@ dnf_setup() {
     # Enable RPM Fusion & Install media codecs
     sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video && sudo dnf makecache
 
-    # Add VS-Code repo
-    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-    printf "%s\n%s\n%s\n%s\n%s\n%s\n" "[code]" "name=Visual Studio Code" "baseurl=https://packages.microsoft.com/yumrepos/vscode" "enabled=1" "gpgcheck=1" "gpgkey=https://packages.microsoft/com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
-
     # Add docker repository
-    sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
     # Add Brave repository
-    sudo dnf-3 config-manager --add-repo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-
-    # Install development Tools
-    sudo yum groupinstall -y "Development Tools" && yum install readline readline-devel -y
+    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
     # Download and install appimagelauncher
-    wget "https://github.com/TheAssassin/AppImageLauncher/releases/download/v2.2.0/appimagelauncher-2.2.0-travis995.0f91801.x86_64.rpm" -O /tmp/package.rpm && sudo rpm -i /tmp/package.rpm && "Installed AppImageLauncher"
+    wget "https://github.com/theassassin/appimagelauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm" -o /tmp/package.rpm && sudo rpm -i /tmp/package.rpm && "installed appimagelauncher"
 
-    dnf check-update
+    sudo dnf check-update
 }
 
 apt_setup() {
@@ -100,27 +93,7 @@ apt_setup() {
     sudo extrepo enable deb-multimedia-non-free
     sudo extrepo enable trivy
 
-    if [ "$ID" = "debian" ]; then
-        debian_setup
-    else
-        ubuntu_setup
-    fi
-
     sudo apt-get update
-}
-
-debian_setup() {
-    # Add Ulauncher repo
-    sudo apt update && sudo apt install -y gnupg
-    sudo gpg --keyserver keyserver.ubuntu.com --recv 0xfaf1020699503176 && sudo gpg --export 0xfaf1020699503176 | sudo tee /usr/share/keyrings/ulauncher-archive-keyring.gpg >/dev/null
-    echo "deb [signed-by=/usr/share/keyrings/ulauncher-archive-keyring.gpg] \
-          http://ppa.launchpad.net/agornostal/ulauncher-dev/ubuntu jammy main" |
-        sudo tee /etc/apt/sources.list.d/ulauncher-dev-jammy.list
-}
-
-ubuntu_setup() {
-    # Add Ulauncher repo
-    sudo add-apt-repository universe -y && sudo add-apt-repository ppa:agornostal/ulauncher -y
 }
 
 input_file_check() {

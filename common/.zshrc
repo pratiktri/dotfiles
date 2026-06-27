@@ -150,7 +150,7 @@ bindkey -M vicmd 'A' end-of-line
 
 bindkey '^f' autosuggest-accept
 bindkey '^u' undo
-# TIP:: zinit auto expands following when you `space`/`tab` after them
+# TIP:: zsh auto expands following when you `space`/`tab` after them
 #       !* -> all arguments to previous command
 #       !?search-term? -> Last command that contained `search-term`
 #       !! -> Entire last command

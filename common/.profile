@@ -128,17 +128,17 @@ export GOPATH="${DEV_CACHE_PATH}"/gopath/
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
 
 # Setup Node, fnm (nvm alternative), pnpm
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/node/npmrc"
 export NODE_REPL_HISTORY="${XDG_CONFIG_HOME}/node/node_repl_history"
 export FNM_DIR="$XDG_DATA_HOME/fnm"
 # use .nvmrc/.node-version from the closest parent dir
 export FNM_VERSION_FILE_STRATEGY="recursive"
-# warn | info | error
-export FNM_LOGLEVEL="quiet"
+# info | warn | error | quiet
+export FNM_LOGLEVEL="info"
 # Disable corepack
 export FNM_COREPACK_ENABLED="false"
 # Activate fnm with auto-switching on cd
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 export PATH="$PNPM_HOME/bin:$PATH"
 

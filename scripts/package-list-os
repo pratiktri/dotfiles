@@ -24,10 +24,13 @@ nodejs
 podman
 python3
 python3-pip
+readline
+readline-devel
 ripgrep
 ruff
 sccache
 shellcheck
+ShellCheck
 shfmt
 software-properties-common
 sqlite
@@ -36,7 +39,6 @@ tree-sitter
 tree-sitter-cli
 trivy
 uv
-vscode
 yamllint
 zoxide
 
@@ -54,13 +56,6 @@ akmod-nvidia
 dnf-plugins-core
 libva-nvidia-driver
 xorg-x11-drv-nvidia-cuda
-dejavu-sans-fonts
-dejavu-sans-mono-fonts
-dejavu-serif-fonts
-liberation-fonts-all
-google-noto-sans-fonts
-google-noto-serif-fonts
-google-noto-mono-fonts
 
 # Common
 ImageMagick
@@ -72,12 +67,8 @@ conntrack-tools
 curl
 dolphin
 dolphin-plugins
-evolution-ews
-evolution-mapi
 fd-find
 ffmpeg
-flameshot
-flatpak
 foliate
 fzf
 gcc
@@ -111,7 +102,6 @@ simplescreenrecorder
 solaar
 tmux
 ttf-mscorefonts-installer
-ufw
 vim
 vlc
 vulkan-tools

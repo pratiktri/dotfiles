@@ -13,6 +13,10 @@ kitty_term() {
     echo 'kitty.desktop' >~/.config/xdg-terminals.list
 }
 
+zed_ide() {
+    curl -f https://zed.dev/install.sh | sh /dev/stdin
+}
+
 rustlang() {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
@@ -20,6 +24,7 @@ rustlang() {
 manual_installs() {
     if [ "$(uname -s)" != "FreeBSD" ]; then
         kitty_term
+        zed_ide
     fi
     rustlang
 }

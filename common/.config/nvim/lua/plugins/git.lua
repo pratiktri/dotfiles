@@ -12,10 +12,13 @@ return {
             neogit.setup({
                 graph_style = "kitty",
                 process_spinner = true,
+                treesitter_diff_highlight = true,
+                word_diff_highlight = true,
             })
         end,
         keys = {
             { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git: Open Neogit", mode = { "n" } },
+            { "<leader>gl", "<cmd>Neogit log<cr>", desc = "Git: Neogit log graph", mode = { "n" } },
         },
     },
 

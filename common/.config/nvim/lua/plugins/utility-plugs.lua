@@ -292,7 +292,7 @@ return {
                 desc = "Git: Open the file on Browser",
             },
             {
-                "<leader>gl",
+                "<leader>gz",
                 function()
                     Snacks.lazygit.log(opts)
                 end,

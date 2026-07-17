@@ -3,22 +3,16 @@
 # TIP: time zsh -i -c exit # Shows how long took to start zsh
 
 # PERF: Part 1: Zsh Instrumentation => Part 2 at bottom of the file
-# zmodload zsh/datetime
-# setopt PROMPT_SUBST
-# PS4='+$EPOCHREALTIME %N:%i> '
-# logfile=$(mktemp zsh_profile.XXXXXXXX)
-# echo "Logging to $logfile"
-# exec 3>&2 2>$logfile
-# setopt XTRACE
+# zmodload zsh/zprof
 
 # --- Sets environment variables ---
 [ -z "$XDG_CONFIG_HOME" ] && source "$HOME"/.profile
 
 mkdir -p \
-  "$XDG_DATA_HOME/zsh/completions" \
-  "$XDG_DATA_HOME/zsh/plugins" \
-  "$XDG_STATE_HOME/shell" \
-  "$XDG_CACHE_HOME/zsh"
+    "$XDG_DATA_HOME/zsh/completions" \
+    "$XDG_DATA_HOME/zsh/plugins" \
+    "$XDG_STATE_HOME/shell" \
+    "$XDG_CACHE_HOME/zsh"
 
 ZSH_CONFIG_HOME="$XDG_CONFIG_HOME/zsh"
 ZSH_STATE_HOME="$XDG_STATE_HOME/shell"
@@ -29,8 +23,8 @@ ZCOMP_DUMP_FILE="${ZCOMP_CACHE_HOME}/zcompdump-$ZSH_VERSION"
 ZCOMP_CACHE_FILE="${ZCOMP_CACHE_HOME}/zcompcache"
 
 # --- ZSH Options ---
-setopt +o nomatch           # Unmatched glob patterns like bash
-setopt noglobalrcs          # Don't source global rc files from /etc/z*
+setopt +o nomatch  # Unmatched glob patterns like bash
+setopt noglobalrcs # Don't source global rc files from /etc/z*
 
 # General
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -43,14 +37,14 @@ export HISTSIZE=10000000
 export SAVEHIST=$HISTSIZE
 export HIST_STAMPS="dd.mm.yyyy" # see 'man strftime' for details.
 export HISTFILE="$ZSH_STATE_HOME/zsh_history"
-setopt APPENDHISTORY        # Append rather than overwriting
-setopt SHAREHISTORY         # Share history between all sessions.
-setopt EXTENDED_HISTORY     # Write the history file in the ":start:elapsed;command" format.
-setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
-setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
-setopt HIST_VERIFY          # Don't execute immediately upon history expansion.
-setopt HIST_IGNORE_SPACE    # Don't add commands that start with whitespace to history
-setopt HIST_FIND_NO_DUPS    # Don't show duplicate commands when searching history
+setopt APPENDHISTORY      # Append rather than overwriting
+setopt SHAREHISTORY       # Share history between all sessions.
+setopt EXTENDED_HISTORY   # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY # Write to the history file immediately, not when the shell exits.
+setopt HIST_REDUCE_BLANKS # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY        # Don't execute immediately upon history expansion.
+setopt HIST_IGNORE_SPACE  # Don't add commands that start with whitespace to history
+setopt HIST_FIND_NO_DUPS  # Don't show duplicate commands when searching history
 
 # Enable zmv (zsh batch-renamer)
 autoload zmv
@@ -58,59 +52,63 @@ autoload zmv
 # --- Download Plugins ---
 # Install plugins once - doesn't update
 _zsh_plugin_install() {
-  local name="$1"
-  local repo="$2"
-  local dest="$XDG_DATA_HOME/zsh/plugins/$name"
-  [[ -d "$dest/.git" ]] && return
-  echo "Installing zsh plugin: $name"
-  git clone --depth=1 "$repo" "$dest"
+    local name="$1"
+    local repo="$2"
+    local dest="$XDG_DATA_HOME/zsh/plugins/$name"
+    [[ -d "$dest/.git" ]] && return
+    echo "Installing zsh plugin: $name"
+    git clone --depth=1 "$repo" "$dest"
 }
 
-_zsh_plugin_install powerlevel10k         https://github.com/romkatv/powerlevel10k.git
+_zsh_plugin_install powerlevel10k https://github.com/romkatv/powerlevel10k.git
 
 # --- Completions ---
-[[ ! -d  "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]] || FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
+[[ ! -d "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]] || FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
 
 # Auto-generate completions - once
 _gen_completion() {
-  local cmd="$1"
-  local out="$2"
-  shift 2
+    local cmd="$1"
+    local out="$2"
+    shift 2
 
-  [[ -f "$out" ]] && return
-  command -v "$cmd" &>/dev/null || return
-  mkdir -p "${out:h}"
-  # $@ is the completion command args
-  "$@" > "$out"
+    [[ -f "$out" ]] && return
+    command -v "$cmd" &>/dev/null || return
+    mkdir -p "${out:h}"
+    # $@ is the completion command args
+    "$@" >"$out"
 }
 
 _gen_completion docker "$ZSH_COMPLETION_HOME/_docker" docker completion zsh
 _gen_completion podman "$ZSH_COMPLETION_HOME/_podman" podman completion zsh
 _gen_completion rustup "$ZSH_COMPLETION_HOME/_rustup" rustup completions zsh
-_gen_completion rustup "$ZSH_COMPLETION_HOME/_cargo"  rustup completions zsh cargo
+_gen_completion rustup "$ZSH_COMPLETION_HOME/_cargo" rustup completions zsh cargo
 
 fpath=("$ZSH_COMPLETION_HOME" $fpath)
-autoload -Uz compinit
-compinit -d "$ZSH_CACHE_HOME/zcompdump"
 
-# ZSH Auto-completion settings: Do it AFTER plugin load, so all fpaths are included
-autoload -Uz compinit                       # Initialized zsh completion
-_comp_options+=(globdots)                   # Include hidden files
-zmodload zsh/complist                       # Add enhancements to zsh completion system
-
-# Run compinit only once daily; skip security check on fresh dump
-if [[ -n $ZCOMP_DUMP_FILE(#qN.mh+24) ]]; then
-  compinit -d "$ZCOMP_DUMP_FILE"
-else
-  compinit -C -d "$ZCOMP_DUMP_FILE"  # -C skips security check, reuses dump
-fi
-
-# Completion styling
+# Completion styling - set BEFORE compinit
+zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$ZCOMP_CACHE_FILE"   # Sets path for completion cache files
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # Case INsensitive completion match
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # Add color to completion suggestions
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
+
+_comp_options+=(globdots) # Include hidden files
+zmodload zsh/complist     # Add enhancements to zsh completion system
+autoload -Uz compinit     # Initialized zsh completion
+
+# Defer compinit until after first prompt
+typeset -g _zsh_comp_loaded=0
+function _zsh_deferred_compinit {
+    [[ $_zsh_comp_loaded -eq 1 ]] && return
+    _zsh_comp_loaded=1
+    if [[ -n $ZCOMP_DUMP_FILE(#qN.mh+24) ]]; then
+        compinit -C -d "$ZCOMP_DUMP_FILE"
+    else
+        compinit -d "$ZCOMP_DUMP_FILE"
+    fi
+}
+precmd_functions+=(_zsh_deferred_compinit)
 
 # --- Source Plugins (downloaded + static) ---
 # Powerlevel10k
@@ -156,9 +154,8 @@ bindkey '^u' undo
 #       !! -> Entire last command
 
 # TIP: Following should be executed AFTER aliases are sourced
-command -v op >/dev/null && bindkey -s '^o' ' op\n' # Fuzzyfind projects and open in nvim
+command -v op >/dev/null && bindkey -s '^o' ' op\n'      # Fuzzyfind projects and open in nvim
 command -v pnew >/dev/null && bindkey -s '^[o' ' pnew\n' # Create a new project quickly
 
 # PERF: Part 2: Zsh Instrumentations
-# unsetopt XTRACE
-# exec 2>&3 3>&-
+# zprof

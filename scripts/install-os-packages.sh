@@ -5,22 +5,67 @@ OS_INSTALL_COMMAND=""
 OS_PKG_CHECK_COMMAND=""
 
 setup() {
-    if [ -f /etc/debian_version ] || [ -f /etc/ubuntu_version ]; then
+    # Detect OS via /etc/os-release (or /usr/lib/os-release) as primary source.
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+    elif [ -f /usr/lib/os-release ]; then
+        . /usr/lib/os-release
+    fi
+
+    OS_ID="${ID:-}"
+    case "$OS_ID" in
+    debian | ubuntu | linuxmint | pop | elementary | zorin | kali)
         OS_INSTALL_COMMAND="apt-get install -y"
         OS_PKG_CHECK_COMMAND="apt-cache show"
         apt_setup
-    elif [ -f /etc/rocky-release ] || [ -f /etc/almalinux-release ] || [ -f /etc/centos-release ] || [ -f /etc/fedora-release ]; then # Fedora, CentOS, Rocky, Almalinux
+        ;;
+    fedora | rhel | centos | rocky | almalinux)
         OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken"
         OS_PKG_CHECK_COMMAND="dnf list available"
         dnf_setup
-    elif [ -f /etc/freebsd-update.conf ]; then # FreeBSD
-        OS_INSTALL_COMMAND="pkg install -y"
-        OS_PKG_CHECK_COMMAND="pkg search"
-        freebsd_setup
-    else
-        echo "Unsupported operating system"
-        exit 1
-    fi
+        ;;
+    opensuse* | suse)
+        OS_INSTALL_COMMAND="zypper install --no-recommends -y"
+        OS_PKG_CHECK_COMMAND="zypper search --match-exact"
+        zypper_setup
+        ;;
+    arch | endeavouros | manjaro | arcolinux | garuda)
+        OS_INSTALL_COMMAND="pacman -S --noconfirm"
+        OS_PKG_CHECK_COMMAND="pacman -Si"
+        echo "Unsupported operating system (ID=$OS_ID)"
+        return 1
+        ;;
+    void)
+        OS_INSTALL_COMMAND="xbps-install -y"
+        OS_PKG_CHECK_COMMAND="xbps-query -R"
+        echo "Unsupported operating system (ID=$OS_ID)"
+        return 1
+        ;;
+    alpine)
+        OS_INSTALL_COMMAND="apk add"
+        OS_PKG_CHECK_COMMAND="apk search -e"
+        echo "Unsupported operating system (ID=$OS_ID)"
+        return 1
+        ;;
+    *)
+        # Fallback: FreeBSD (no /etc/os-release)
+        if [ -f /etc/freebsd-update.conf ]; then
+            OS_INSTALL_COMMAND="pkg install -y"
+            OS_PKG_CHECK_COMMAND="pkg search"
+            freebsd_setup
+            return
+        fi
+        # Fallback: Debian/Ubuntu without /etc/os-release (old chroots, containers)
+        if [ -f /etc/debian_version ]; then
+            OS_INSTALL_COMMAND="apt-get install -y"
+            OS_PKG_CHECK_COMMAND="apt-cache show"
+            apt_setup
+            return
+        fi
+        echo "Unsupported operating system (ID=$OS_ID)"
+        return 1
+        ;;
+    esac
 }
 
 freebsd_setup() {
@@ -68,9 +113,32 @@ dnf_setup() {
     sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
     # Download and install appimagelauncher
-    wget "https://github.com/theassassin/appimagelauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm" -o /tmp/package.rpm && sudo rpm -i /tmp/package.rpm && "installed appimagelauncher"
+    wget -O /tmp/package.rpm "https://github.com/theassassin/appimagelauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm" && sudo dnf install -y /tmp/package.rpm && echo "installed appimagelauncher"
 
     sudo dnf check-update
+}
+
+zypper_setup() {
+    # Refresh repos and update system
+    sudo zypper --non-interactive refresh && sudo zypper --non-interactive update -y
+
+    # Add Packman repository (essential for multimedia codecs)
+    sudo zypper --non-interactive addrepo --refresh --check --priority 90 \
+        https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
+    sudo zypper --non-interactive dup --from packman --allow-vendor-change
+
+    # Add Brave repository
+    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+    sudo zypper --non-interactive addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+
+    # Docker is available in default Tumbleweed repos, no extra repo needed
+
+    # Download and install AppImageLauncher v3
+    wget -O /tmp/appimagelauncher.rpm \
+        "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"
+    sudo zypper --non-interactive install /tmp/appimagelauncher.rpm
+
+    sudo zypper --non-interactive refresh
 }
 
 apt_setup() {
@@ -81,17 +149,12 @@ apt_setup() {
 
     sudo apt-get install -y wget gpg extrepo
     sudo extrepo update
-    sudo extrepo enable dotnet
     sudo extrepo enable docker-ce
     sudo extrepo enable github-cli
-    sudo extrepo enable mattermost
     sudo extrepo enable nvidia-cuda
     sudo extrepo enable postgresql
-    sudo extrepo enable vscode
-    sudo extrepo enable winehq
     sudo extrepo enable deb-multimedia-backports
     sudo extrepo enable deb-multimedia-non-free
-    sudo extrepo enable trivy
 
     sudo apt-get update
 }
@@ -144,7 +207,7 @@ print_summary() {
 
 main() {
     input_file_check
-    setup
+    setup || return 1
     install_os_packages
     print_summary "OS" "$os_not_found_packages"
 }

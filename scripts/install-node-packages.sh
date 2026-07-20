@@ -52,6 +52,12 @@ print_summary() {
 }
 
 main() {
+    # Refuse to run as root (npm/node installs don't need root)
+    if [ "$(id -u)" -eq 0 ]; then
+        echo "This script should not be run as root. Run it as your normal user."
+        return 1
+    fi
+
     validate_input
     install_node_packages
     print_summary "node" "$missing_packages"

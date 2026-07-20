@@ -116,10 +116,10 @@ up() {
     # Detect package manager and set package manager commands
     if command -v dnf >/dev/null 2>&1; then
         update_command="sudo dnf update && sudo dnf upgrade --refresh && sudo dnf autoremove"
-    elif command -v pkcon >/dev/null 2>&1; then
-        update_command="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove"
     elif command -v apt-get >/dev/null 2>&1; then
         update_command="sudo apt-get update && sudo apt-get upgrade && sudo apt dist-upgrade && sudo apt autoremove"
+    elif command -v zypper >/dev/null 2>&1; then
+        update_command="sudo zypper refresh && sudo zypper dup"
     elif command -v pkg >/dev/null 2>&1; then
         update_command="sudo pkg update && sudo pkg upgrade && sudo pkg autoremove"
     fi
@@ -144,6 +144,9 @@ autorem() {
         remove_command="sudo apt autoremove"
     elif command -v dnf >/dev/null 2>&1; then
         remove_command="sudo dnf autoremove"
+    elif command -v zypper >/dev/null 2>&1; then
+        orphaned="$(zypper packages --orphaned | awk 'NR>4{print $5}' | grep -v '^$')"
+        [ -n "$orphaned" ] && remove_command="sudo zypper rm $orphaned"
     elif command -v pkg >/dev/null 2>&1; then
         remove_command="sudo pkg autoremove"
     fi

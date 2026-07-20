@@ -35,17 +35,24 @@ rustlang() {
 }
 
 nerd_fonts() {
-    if [ -d "$HOME/.local/share/fonts/nerd-fonts" ]; then
-        echo "Nerd Fonts already installed at ~/.local/share/fonts/nerd-fonts"
-        return
-    fi
+    font_dir="$HOME/.local/share/fonts"
+    fonts="FiraCode JetBrainsMono SourceCodePro NerdFontsSymbolsOnly"
 
-    tmpdir="$(mktemp -d)"
-    git clone --depth 1 --filter=blob:none --sparse \
-        https://github.com/ryanoasis/nerd-fonts.git "$tmpdir/nerd-fonts" 2>/dev/null
-    cd "$tmpdir/nerd-fonts" || return
-    ./install.sh -q FiraCode JetBrainsMono SourceCodePro
-    rm -rf "$tmpdir"
+    mkdir -p "$font_dir"
+    cd "$font_dir" || return
+
+    for font in $fonts; do
+        echo "Downloading $font..."
+        curl -fLO "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${font}.tar.xz"
+        tar -xf "${font}.tar.xz"
+        rm -f "${font}.tar.xz"
+    done
+
+    # Remove junk files bundled in the archives
+    rm -f "$font_dir"/*.txt "$font_dir"/*.md "$font_dir"/readme* 2>/dev/null
+
+    fc-cache -f "$font_dir" 2>/dev/null && echo "Font cache updated"
+    echo "Nerd Fonts installed to $font_dir"
 }
 
 manual_installs() {

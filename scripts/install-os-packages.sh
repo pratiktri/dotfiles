@@ -125,18 +125,18 @@ zypper_setup() {
     # Add Packman repository (essential for multimedia codecs)
     sudo zypper --non-interactive addrepo --refresh --check --priority 90 \
         https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
-    sudo zypper --non-interactive dup --from packman --allow-vendor-change
+    sudo zypper dup --from packman --allow-vendor-change
 
     # Add Brave repository
     sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    sudo zypper --non-interactive addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
     # Docker is available in default Tumbleweed repos, no extra repo needed
 
     # Download and install AppImageLauncher v3
     wget -O /tmp/appimagelauncher.rpm \
         "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"
-    sudo zypper --non-interactive install /tmp/appimagelauncher.rpm
+    sudo zypper install /tmp/appimagelauncher.rpm
 
     sudo zypper --non-interactive refresh
 }

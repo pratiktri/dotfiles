@@ -12,7 +12,7 @@ input_file_check() {
 
 install_brew() {
     if ! command -v brew >/dev/null 2>&1; then
-        yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo "Brew install failed"
+        yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
 }

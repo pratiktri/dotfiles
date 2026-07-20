@@ -1,6 +1,11 @@
 #!/usr/bin/env sh
 
 kitty_term() {
+    if command -v kitty >/dev/null 2>&1; then
+        echo "Kitty already installed. Skipping."
+        return
+    fi
+
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
     mkdir -p ~/.local/bin && ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
@@ -12,10 +17,20 @@ kitty_term() {
 }
 
 zed_ide() {
+    if command -v zed >/dev/null 2>&1; then
+        echo "Zed already installed. Skipping..."
+        return
+    fi
+
     curl -f https://zed.dev/install.sh | sh /dev/stdin
 }
 
 rustlang() {
+    if command -v rustup >/dev/null 2>&1; then
+        echo "Rustup already installed. Skipping..."
+        return
+    fi
+
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
 

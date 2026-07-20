@@ -180,7 +180,13 @@ install_os_packages() {
         \#*) continue ;;
         esac
 
-        # Check if the package exists in the APT repository
+        # Check if the package is already installed
+        if command -v "$os_package" >/dev/null 2>&1; then
+            echo "Already installed: $os_package"
+            continue
+        fi
+
+        # Check if the package exists in the repository
         if eval "$OS_PKG_CHECK_COMMAND" "$os_package" 2>/dev/null | grep -q "$os_package"; then
             echo "Available: $os_package"
             os_found_packages="$os_found_packages $os_package"
@@ -192,7 +198,7 @@ install_os_packages() {
 
     # Install available packages
     if ! eval sudo "$OS_INSTALL_COMMAND" "$os_found_packages"; then
-        exit 1
+        return 1
     fi
 }
 

@@ -115,7 +115,7 @@ up() {
 
     # Detect package manager and set package manager commands
     if command -v dnf >/dev/null 2>&1; then
-        update_command="sudo dnf update && sudo dnf upgrade --refresh && sudo dnf system-upgrade download --releasever=$(rpm -E %fedora) && sudo dnf autoremove"
+        update_command="sudo dnf update && sudo dnf upgrade --refresh && sudo dnf autoremove"
     elif command -v pkcon >/dev/null 2>&1; then
         update_command="sudo pkcon refresh && sudo pkcon update && sudo apt dist-upgrade && sudo apt autoremove"
     elif command -v apt-get >/dev/null 2>&1; then

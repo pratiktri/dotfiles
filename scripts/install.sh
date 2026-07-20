@@ -30,15 +30,20 @@ manual_installs() {
 }
 
 post_install() {
-    sudo -u "${SUDO_USER:-$(logname)}" systemctl --user enable --now podman.socket
-    command -v docker >/dev/null 2>&1 && systemctl enable --now docker >/dev/null 2>&1 && echo "Docker enabled"
-    command -v docker >/dev/null 2>&1 && usermod -aG docker "$USER" && newgrp docker && echo "Added $USER to docker group"
+    systemctl --user enable --now podman.socket 2>/dev/null && echo "Podman socket enabled"
 
-    chsh -s "$(which zsh)" && echo "Default shell changed to zsh"
+    if command -v docker >/dev/null 2>&1; then
+        sudo systemctl enable --now docker >/dev/null 2>&1 && echo "Docker enabled"
+        sudo usermod -aG docker "$USER" && echo "Added $USER to docker group. Log out and back in for changes to take effect."
+    fi
+
+    if command -v zsh >/dev/null 2>&1 && [ "$SHELL" != "$(which zsh)" ]; then
+        sudo chsh -s "$(which zsh)" "$USER" && echo "Default shell changed to zsh" || echo "Could not change shell."
+    fi
 
     # Time fix for Windows dual boot - skip on FreeBSD
     if [ "$(uname -s)" != "FreeBSD" ]; then
-        timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
+        sudo timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
     fi
 
     rm -rf ~/.cache
@@ -61,12 +66,12 @@ pre_install() {
 main() {
     pre_install
 
-    ./install-os-packages.sh
+    sudo ./install-os-packages.sh
     ./install-node-package.sh
 
     # Skip flatpak & brew installations on FreeBSD
     if [ "$(uname -s)" != "FreeBSD" ]; then
-        ./install-flatpak-packages.sh
+        # ./install-flatpak-packages.sh
         ./install-brew-packages.sh
     fi
 

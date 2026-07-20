@@ -91,6 +91,12 @@ setup_symlinks() {
 }
 
 main() {
+    # Refuse to run as root (symlinks and brew/flatpak/node installs don't need it)
+    if [ "$(id -u)" -eq 0 ]; then
+        echo "This script should not be run as root. Run it as your normal user."
+        exit 1
+    fi
+
     parse_input "$@"
 
     install_file_location="$(

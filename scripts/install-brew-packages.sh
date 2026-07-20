@@ -61,6 +61,12 @@ print_summary() {
 }
 
 main() {
+    # Refuse to run as root (brew installs don't need root)
+    if [ "$(id -u)" -eq 0 ]; then
+        echo "This script should not be run as root. Run it as your normal user."
+        return 1
+    fi
+
     input_file_check
     install_brew
 

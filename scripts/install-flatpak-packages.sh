@@ -39,7 +39,7 @@ install_flatpak_packages() {
     echo "Installing available flatpak packages..."
     # shellcheck disable=SC2086
     if ! flatpak install -y --noninteractive $found_packages; then
-        exit 1
+        return 1
     fi
 }
 
@@ -53,6 +53,12 @@ print_summary() {
 }
 
 main() {
+    # Refuse to run as root (flatpak installs don't need root)
+    if [ "$(id -u)" -eq 0 ]; then
+        echo "This script should not be run as root. Run it as your normal user."
+        return 1
+    fi
+
     input_file_check
     setup_flatpak
     install_flatpak_packages

@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-# TODO: Download & install patched-nerd-fonts
-
 kitty_term() {
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
@@ -21,11 +19,26 @@ rustlang() {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
 
+nerd_fonts() {
+    if [ -d "$HOME/.local/share/fonts/nerd-fonts" ]; then
+        echo "Nerd Fonts already installed at ~/.local/share/fonts/nerd-fonts"
+        return
+    fi
+
+    tmpdir="$(mktemp -d)"
+    git clone --depth 1 --filter=blob:none --sparse \
+        https://github.com/ryanoasis/nerd-fonts.git "$tmpdir/nerd-fonts" 2>/dev/null
+    cd "$tmpdir/nerd-fonts" || return
+    ./install.sh -q FiraCode JetBrainsMono SourceCodePro
+    rm -rf "$tmpdir"
+}
+
 manual_installs() {
     if [ "$(uname -s)" != "FreeBSD" ]; then
         kitty_term
         zed_ide
     fi
+    nerd_fonts
     rustlang
 }
 
@@ -67,7 +80,7 @@ main() {
     pre_install
 
     sudo ./install-os-packages.sh
-    ./install-node-package.sh
+    ./install-node-packages.sh
 
     # Skip flatpak & brew installations on FreeBSD
     if [ "$(uname -s)" != "FreeBSD" ]; then

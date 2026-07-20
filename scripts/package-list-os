@@ -1,13 +1,11 @@
 # Lines that start with # are ignored
 
-# TIP:
-# - MacOS doesn't have OS installer
+# FIX: Remove apps not absolutely required
 
 # Coding
 build-essential
 clang
 cmake
-codespell
 fnm
 gcc
 gdb
@@ -19,58 +17,47 @@ jq
 llvm
 lua
 lua-language-server
-lua5.3
-lua54
 luajit
 make
 markdown-oxide
 node
 nodejs
+nvidia-container-toolkit
 pnpm
 podman
 python3
 python3-pip
 readline
-readline-devel
 ripgrep
 ruff
 sccache
 shellcheck
 ShellCheck
 shfmt
-software-properties-common
 sqlite
 stylua
 tlrc
 tree-sitter
 tree-sitter-cli
-trivy
 uv
 yamllint
 zoxide
 
-# Below few are apt-only packages - non-free sources must be added before this
+# Below few are apt-only packages
 apt-transport-https
-libreadline-dev
 libavcodec-extra
-fonts-dejavu
-fonts-liberation
 fonts-liberation2
-fonts-noto-core
+software-properties-common
 
 # Below few are dnf-specific packages
 akmod-nvidia
 dnf-plugins-core
 libva-nvidia-driver
-xorg-x11-drv-nvidia-cuda
-nvidia-container-toolkit
 
 # Common
-ImageMagick
 bash
 bleachbit
 btop
-conntrack-tools
 curl
 encfs
 fd
@@ -78,11 +65,10 @@ fd-find
 ffmpeg
 foliate
 fzf
-ghostscript
 gnupg
 gparted
-grub-customizer
 gzip
+ImageMagick
 imagemagick
 inxi
 iproute
@@ -90,20 +76,16 @@ iproute2
 kitty
 kitty-terminfo
 lazygit
-libreoffice
 neovim
-net-tools
 nvidia-driver
 nvidia-settings
 openssh-client
 pass
 password-store
-pavucontrol
 pipewire-audio
 qbittorrent
 qpwgraph
 rclone
-simplescreenrecorder
 solaar
 speedtest-cli
 ttf-mscorefonts-installer
@@ -117,7 +99,6 @@ zsh
 
 # FreeBSD packages
 fusefs-lkl
-firefox-esr
 py311-fastest_pkg
 noto-2.0
 v4l-utils
@@ -125,7 +106,5 @@ v4l-utils
 # Conflicts on FreeBSD
 ca-certificates
 dnscrypt-proxy
-extra-cmake-modules
 firefox
 kdeconnect
-synaptic

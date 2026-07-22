@@ -8,8 +8,8 @@ validate_input() {
         exit 1
     fi
 
-    if ! command -v node >/dev/null 2>&1; then
-        echo "node not installed"
+    if ! command -v npm >/dev/null 2>&1; then
+        echo "npm not installed"
         exit 2
     fi
 }
@@ -46,8 +46,8 @@ install_node_packages() {
 print_summary() {
     if [ -n "$2" ]; then
         echo
-        echo "The following $1 packages were not found in npm repository:" | tee -a "$INSTALL_LOG_FILE"
-        echo "$2" | tee -a "$INSTALL_LOG_FILE"
+        echo "The following $1 packages were not found in npm repository:"
+        echo "$2"
     fi
 }
 

@@ -47,8 +47,8 @@ print_summary() {
     # Print the list of packages that were not found
     if [ -n "$2" ]; then
         echo
-        echo "The following $1 packages were not found in the repository:" | tee -a "$INSTALL_LOG_FILE"
-        echo "$2" | tee -a "$INSTALL_LOG_FILE"
+        echo "The following $1 packages were not found in the repository:"
+        echo "$2"
     fi
 }
 

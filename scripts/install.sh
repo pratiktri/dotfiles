@@ -52,6 +52,8 @@ nerd_fonts() {
     rm -f "$font_dir"/*.txt "$font_dir"/*.md "$font_dir"/readme* 2>/dev/null
 
     fc-cache -f "$font_dir" 2>/dev/null && echo "Font cache updated"
+
+    cd - || return 1
     echo "Nerd Fonts installed to $font_dir"
 }
 
@@ -85,12 +87,8 @@ post_install() {
 }
 
 pre_install() {
-    export INSTALL_LOG_FILE
-    INSTALL_LOG_FILE="$(basename "$0")_$(date +"%Y%m%d_%H%M%S")_log.txt"
     echo
     echo "Starting Installation..."
-    echo "Use the following command to view the list of software that was NOT installed:"
-    echo "cat $PWD/$INSTALL_LOG_FILE"
     echo
 
     if [ -f ~/.profile ]; then
@@ -112,8 +110,6 @@ main() {
 
     manual_installs
     post_install
-
-    cat "$INSTALL_LOG_FILE"
 }
 
 main "$@"

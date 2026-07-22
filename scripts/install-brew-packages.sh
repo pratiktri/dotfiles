@@ -12,7 +12,7 @@ input_file_check() {
 
 install_brew() {
     if ! command -v brew >/dev/null 2>&1; then
-        yes | NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
 }
@@ -55,8 +55,8 @@ print_summary() {
     # Print the list of packages that were not found
     if [ -n "$2" ]; then
         echo
-        echo "The following $1 packages were not found in the repository:" | tee -a "$INSTALL_LOG_FILE"
-        echo "$2" | tee -a "$INSTALL_LOG_FILE"
+        echo "The following $1 packages were not found in the repository:"
+        echo "$2"
     fi
 }
 

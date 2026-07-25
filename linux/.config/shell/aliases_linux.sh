@@ -182,6 +182,70 @@ remove() {
     flatpak uninstall "$1"
 }
 
+pre_snap() {
+    if ! command -v snapper >/dev/null 2>&1; then
+        echo "snapper not found" >&2
+        return 1
+    fi
+
+    desc="${1:-manual}"
+
+    case "$desc" in
+    [Pp]re*) ;; # already starts with Pre/pre, keep as-is
+    *) desc="Pre $desc" ;;
+    esac
+
+    root_id=$(sudo snapper -c root create -t pre -d "$desc" -p 2>/dev/null)
+    home_id=$(sudo snapper -c home create -t pre -d "$desc" -p 2>/dev/null)
+
+    echo "root=$root_id home=$home_id"
+}
+
+post_snap() {
+    if ! command -v snapper >/dev/null 2>&1 || ! command -v fzf >/dev/null 2>&1; then
+        echo "Need both snapper & fzf installed" >&2
+        return 1
+    fi
+
+    # Get pre-snapshots with number and description
+    root_pres=$(sudo snapper -c root list --columns number,description | awk 'NR>2 && /[Pp]re/')
+    home_pres=$(sudo snapper -c home list --columns number,description | awk 'NR>2 && /[Pp]re/')
+
+    # Check if any pre-snapshots exist
+    if [ -z "$root_pres" ] && [ -z "$home_pres" ]; then
+        echo "No pre-snapshots found"
+        return 1
+    fi
+
+    # Select root pre-snapshot (shows number and description)
+    root_selection=$(echo "$root_pres" | fzf --prompt="Root pre-snapshot: " --header="NUM  DESCRIPTION")
+    if [ -z "$root_selection" ]; then
+        echo "No root pre-snapshot selected"
+        return 1
+    fi
+    root_snap_id=$(echo "$root_selection" | awk '{print $1}')
+    root_desc=$(echo "$root_selection" | sed 's/.*│ *//' | sed 's/^[Pp]re/Post/')
+
+    # Select home pre-snapshot
+    home_selection=$(echo "$home_pres" | fzf --prompt="Home pre-snapshot: " --header="NUM  DESCRIPTION")
+    if [ -z "$home_selection" ]; then
+        echo "No home pre-snapshot selected"
+        exit 1
+    fi
+    home_snap_id=$(echo "$home_selection" | awk '{print $1}')
+    home_desc=$(echo "$home_selection" | sed 's/.*│ *//' | sed 's/^[Pp]re/Post/')
+
+    # Create post-snapshots
+    sudo snapper -c root create -t post --pre-number "$root_snap_id" -c number --description "Post ${root_desc}" 2>/dev/null
+    sudo snapper -c home create -t post --pre-number "$home_snap_id" -c number --description "Post ${home_desc}" 2>/dev/null
+
+    echo "Created post-snapshots"
+
+    # TIP: Restore both system files & application/user state
+    # sudo snapper -c root undochange <pre_snap_id>..<post_snap_id>
+    # sudo snapper -c home undochange <pre_snap_id>..<post_snap_id>
+}
+
 # Network
 alias flush-dns="sudo systemd-resolve --flush-caches"
 alias dnsreset="sudo systemctl restart dnscrypt-proxy"

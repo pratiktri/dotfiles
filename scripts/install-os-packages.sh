@@ -107,17 +107,18 @@ dnf_setup() {
     sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video && sudo dnf makecache
 
     # Add Docker repository
-    sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/centos/docker-ce.repo 2>/dev/null || \
+    sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo ||
         sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
     # Add Brave repository
-    sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo 2>/dev/null || \
+    sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo ||
         sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
     # Download and install appimagelauncher
     wget -O /tmp/package.rpm "https://github.com/theassassin/appimagelauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm" && sudo dnf install -y /tmp/package.rpm && echo "installed appimagelauncher"
 
     sudo dnf check-update
+    sudo dnf update -y
 }
 
 zypper_setup() {

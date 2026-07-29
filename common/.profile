@@ -58,7 +58,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_AUTO_UPDATE_SECS=3600
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
 
-export DEV_CACHE_PATH="/media/${USER}/Projects/DevSetUps"
+export DEV_CACHE_PATH="/media/${USER}/DevelSetup"
 
 # Podman's Docker-compatible socket (rootless)
 # Makes lazydocker work

@@ -68,11 +68,11 @@ export PODMAN_COMPOSE_WARNING_LOGS=false
 
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
+export PASSWORD_STORE_DIR="$XDG_CONFIG_HOME/password-store"
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc" && [ ! -f "$WGETRC" ] && touch "$WGETRC"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export LESSHISTFILE="${XDG_STATE_HOME}/shell/lesshst"
 export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
-[ ! -f "$HOME/.lmstudio/bin" ] || export PATH="$PATH:$HOME/.lmstudio/bin"
 
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
@@ -140,7 +140,8 @@ export FNM_LOGLEVEL="info"
 export FNM_COREPACK_ENABLED="false"
 # Activate fnm with auto-switching on cd
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
-export PATH="$PNPM_HOME/bin:$PATH"
+export PATH="$PNPM_HOME:$PATH"
+export PNPM_DISABLE_OPTOUT=1
 
 # CUDA path
 export PATH="/usr/local/cuda-13.2/bin:$PATH"

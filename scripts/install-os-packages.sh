@@ -110,6 +110,10 @@ dnf_setup() {
     sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo ||
         sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
+    # Add Librefox repository
+    sudo sudo dnf config-manager addrepo --from-repofile=https://repo.librewolf.net/librewolf.repo ||
+        sudo dnf config-manager --add-repo https://repo.librewolf.net/librewolf.repo
+
     # Add Brave repository
     sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo ||
         sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
@@ -117,7 +121,7 @@ dnf_setup() {
     # Download and install appimagelauncher
     wget -O /tmp/package.rpm "https://github.com/theassassin/appimagelauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm" && sudo dnf install -y /tmp/package.rpm && echo "installed appimagelauncher"
 
-    sudo dnf check-update
+    sudo dnf check-update -y
     sudo dnf update -y
 }
 

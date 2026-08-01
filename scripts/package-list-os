@@ -49,10 +49,19 @@ libavcodec-extra
 fonts-liberation2
 software-properties-common
 
-# Below few are dnf-specific packages
-akmod-nvidia
+# dnf
 dnf-plugins-core
+librewolf
+
+# Graphics drivers
+akmod-nvidia
+xorg-x11-drv-nvidia-cuda
 libva-nvidia-driver
+ffmpeg-libs
+libva
+libva-utils
+mesa-va-drivers-freeworld
+mesa-va-drivers-freeworld.i686
 
 # Common
 bash

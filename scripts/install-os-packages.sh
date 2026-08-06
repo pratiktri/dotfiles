@@ -20,7 +20,7 @@ setup() {
         apt_setup
         ;;
     fedora | rhel | centos | rocky | almalinux)
-        OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken"
+        OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken --setopt=install_weak_deps=False"
         OS_PKG_CHECK_COMMAND="dnf list available"
         dnf_setup
         ;;

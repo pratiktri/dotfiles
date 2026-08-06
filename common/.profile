@@ -150,3 +150,8 @@ export LD_LIBRARY_PATH="/usr/local/cuda-13.2/lib64:$LD_LIBRARY_PATH"
 
 # Microsandbox: expects {bin,lib,db} under it
 export MSB_HOME="$HOME"/.local/microsandbox
+
+# AI Coding agent
+export PI_TELEMETRY=0
+export PI_OFFLINE=0
+export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME"/.pi

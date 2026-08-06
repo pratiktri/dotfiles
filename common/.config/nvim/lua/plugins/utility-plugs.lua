@@ -160,7 +160,7 @@ return {
             },
             explorer = { enabled = true, replace_netrw = true },
             terminal = { enabled = true, win = { position = "float", height = 0.6, width = 0.6 } },
-            picker = { enabled = true, hidden = true, ignored = true },
+            picker = { enabled = true, hidden = true },
             quickfile = { enabled = true },
             scratch = {
                 enabled = true,
@@ -271,7 +271,7 @@ return {
             {
                 "<C-p>",
                 function()
-                    Snacks.picker.files({ hidden = true, ignored = true })
+                    Snacks.picker.files({ hidden = true })
                 end,
                 desc = "Search Files",
             },

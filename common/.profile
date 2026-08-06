@@ -147,3 +147,6 @@ export PNPM_DISABLE_OPTOUT=1
 export PATH="/usr/local/cuda-13.2/bin:$PATH"
 export CUDA_HOME="/usr/local/cuda-13.2/"
 export LD_LIBRARY_PATH="/usr/local/cuda-13.2/lib64:$LD_LIBRARY_PATH"
+
+# Microsandbox: expects {bin,lib,db} under it
+export MSB_HOME="$HOME"/.local/microsandbox

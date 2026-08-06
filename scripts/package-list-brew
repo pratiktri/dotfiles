@@ -12,6 +12,7 @@ dnscrypt-proxy
 docker-compose-langserver
 dockerfile-language-server
 fd
+fnm
 gitleaks
 kondo
 lazydocker

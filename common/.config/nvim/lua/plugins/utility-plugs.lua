@@ -168,7 +168,11 @@ return {
                 root = vim.loop.os_homedir() .. "/Code/journal/scratch",
             },
             words = { enabled = true },
-            zen = { enabled = true, toggles = { dim = true } },
+            zen = {
+                enabled = true,
+                toggles = { dim = false, git_signs = true },
+                show = { tabline = true },
+            },
 
             animate = {
                 fps = 90,

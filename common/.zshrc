@@ -89,8 +89,7 @@ _gen_completion docker "$ZSH_COMPLETION_HOME/_docker" docker completion zsh
 _gen_completion podman "$ZSH_COMPLETION_HOME/_podman" podman completion zsh
 _gen_completion rustup "$ZSH_COMPLETION_HOME/_rustup" rustup completions zsh
 _gen_completion rustup "$ZSH_COMPLETION_HOME/_cargo" rustup completions zsh cargo
-
-fpath=("$ZSH_COMPLETION_HOME" $fpath)
+_gen_completion msb "$ZSH_COMPLETION_HOME/_msb" msb completion zsh
 
 # Completion styling - set BEFORE compinit
 zstyle ':completion:*' use-cache on

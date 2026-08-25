@@ -66,6 +66,9 @@ _zsh_plugin_install powerlevel10k https://github.com/romkatv/powerlevel10k.git
 [[ ! -d "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]] || FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
 
 # Auto-generate completions - once
+# NOTE: When a completion file is (re)generated, the compinit dump cache must
+# be invalidated, otherwise `compinit -C` reuses a stale dump that predates the
+# new file and the completion is never picked up.
 _gen_completion() {
     local cmd="$1"
     local out="$2"
@@ -76,7 +79,11 @@ _gen_completion() {
     mkdir -p "${out:h}"
     # $@ is the completion command args
     "$@" >"$out"
+    # Invalidate the compinit dump so the new file is discovered on next compinit
+    [[ -n "$ZCOMP_DUMP_FILE" && -f "$ZCOMP_DUMP_FILE" ]] && rm -f "$ZCOMP_DUMP_FILE"
 }
+
+fpath=("$ZSH_COMPLETION_HOME" $fpath)
 
 _gen_completion docker "$ZSH_COMPLETION_HOME/_docker" docker completion zsh
 _gen_completion podman "$ZSH_COMPLETION_HOME/_podman" podman completion zsh

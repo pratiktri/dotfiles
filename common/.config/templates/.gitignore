@@ -1,98 +1,25 @@
-# ----- OS Artifacts ----
-# Linux
-.Trash-*
+# KDE directory preferences
 .directory
 
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# Other Files to ignore
-**app_stat_v2.db
-.ssh/*.pub
-**/Package Control.cache
-**Cache
-*.db
-*.qmlc
-*.qml
-*.jsc
-**/contents/images
-**/contents/fonts
-*kpluginindex.json
-
-# ---- IDE ----
-# Vim Artifacts
-**.swp
-lazy-lock.json
-.luarc.json
-
-# VS Code Artifacts
-/.vscode/
-**state.vscdb
-**state.vscdb.backup
-.vscode/extensions/** # Ignore all Files under .vscode/extensions/
-!.vscode/extensions/**/*.json # Only json files inside the .vscode/extensions/ folder
-
-# Intellij IDE Artifacts
-.idea/
-*.imi
-*.jar
-*.tar
-resharper-host/
-tasks/
-
-# ---- Programming Languages ----
-# Javascript
-**/node_modules/*
-dist
-dist-ssr
-*.local
-*.min.js
-
-# Rust
-target/
-
-# Binaries for programs and plugins
+# Binaries & dlls
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
 
-**/built/
+# macOS
+.DS_Store
+
+# Thumbnails
+._*
 
 # Log files
-logs
+..logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+
+# Backup files
+*.bak

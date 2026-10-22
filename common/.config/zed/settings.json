@@ -93,8 +93,31 @@
         "ss17": true,
         "ss18": true
     },
-    "agent_ui_font_size": 19,
-    "agent_buffer_font_size": 17,
+    "agent_ui_font_size": 21,
+    "agent_buffer_font_size": 18,
+    "agent_servers": {
+        "pi-acp": {
+            "type": "registry"
+        },
+        "claude-acp": {
+            "type": "registry"
+        },
+        "claude": {
+            "favorite_config_option_values": {
+                "effort": ["medium"],
+                "model": ["opus"]
+            },
+            "default_config_options": {
+                "model": "opus",
+                "fast": false,
+                "effort": "medium",
+                "mode": "auto"
+            },
+            "default_mode": "acceptEdits",
+            "command": "claude-agent-acp",
+            "type": "custom"
+        }
+    },
     "terminal": {
         "font_family": "MonoLisa",
         "font_size": 18,

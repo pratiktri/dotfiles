@@ -223,10 +223,6 @@ return {
         branch = "main",
         lazy = false,
         build = ":TSUpdate",
-        init = function()
-            -- Disable the plugin's own vimscript runtime
-            vim.g.loaded_nvim_treesitter = 1
-        end,
         config = function()
             require("nvim-treesitter").setup({
                 auto_install = true,

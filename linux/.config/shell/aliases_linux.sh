@@ -8,6 +8,7 @@ alias ll='ls -alhF'
 alias la='ls -Ah'
 alias lsa="ls -lAFhZ"
 alias printpath="echo $PATH | tr : '\n'"
+alias nvim="PUPPETEER_EXECUTABLE_PATH=/usr/bin/brave-browser-stable nvim"
 
 # Templates
 [ ! -f "${TEMPLATE_DIR}/.gitignore" ] || alias cp_git_ignore='cp ${TEMPLATE_DIR}/.gitignore . && echo ".gitignore added"'

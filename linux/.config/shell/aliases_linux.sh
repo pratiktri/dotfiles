@@ -135,6 +135,27 @@ up() {
     # command -v npm >/dev/null && npm update -g
     command -v rustup >/dev/null && rustup update && echo "Rust updated"
     echo ""
+
+    # Floorp update (tarball install in /opt/floorp)
+    if [ -d /opt/floorp ]; then
+        latest_tag=$(curl -s https://api.github.com/repos/Floorp-Projects/Floorp/releases/latest | grep -oP '"tag_name":\s*"\K[^"]+')
+        installed_tag=$(cat /opt/floorp/.installed_tag 2>/dev/null)
+        if [ -n "$latest_tag" ] && [ "$installed_tag" != "$latest_tag" ]; then
+            echo "Updating Floorp: ${installed_tag:-unknown} -> $latest_tag"
+            dl_url=$(curl -s https://api.github.com/repos/Floorp-Projects/Floorp/releases/latest | grep -oP '"browser_download_url":\s*"\K[^"]+' | grep 'linux.*x86_64.*\.tar\.xz' | head -n1)
+            if [ -n "$dl_url" ]; then
+                curl -sL "$dl_url" -o /tmp/floorp.tar.xz &&
+                    sudo tar -xJf /tmp/floorp.tar.xz -C /opt/floorp --strip-components=1 &&
+                    echo "$latest_tag" | sudo tee /opt/floorp/.installed_tag >/dev/null &&
+                    rm /tmp/floorp.tar.xz &&
+                    echo "Floorp updated to $latest_tag"
+            else
+                echo "No matching linux tarball asset; check release page"
+            fi
+        else
+            echo "Floorp is up to date (${installed_tag:-unknown})"
+        fi
+    fi
 }
 
 # Update & Upgrades

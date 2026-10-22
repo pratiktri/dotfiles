@@ -110,10 +110,6 @@ dnf_setup() {
     sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo ||
         sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-    # Add Librefox repository
-    sudo sudo dnf config-manager addrepo --from-repofile=https://repo.librewolf.net/librewolf.repo ||
-        sudo dnf config-manager --add-repo https://repo.librewolf.net/librewolf.repo
-
     # Add Brave repository
     sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo ||
         sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo

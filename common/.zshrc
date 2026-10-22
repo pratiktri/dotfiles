@@ -160,8 +160,8 @@ bindkey '^u' undo
 #       !! -> Entire last command
 
 # TIP: Following should be executed AFTER aliases are sourced
-command -v op >/dev/null && bindkey -s '^o' ' op\n'      # Fuzzyfind projects and open in nvim
-command -v pnew >/dev/null && bindkey -s '^[o' ' pnew\n' # Create a new project quickly
+command -v hau >/dev/null && bindkey -s '^o' ' hau\n'      # Fuzzyfind projects and open in nvim
+command -v hau >/dev/null && bindkey -s '^[o' ' hau -n\n' # Create a new project quickly
 
 load_ai_api_keys() {
     ! command -v pass >/dev/null && return

@@ -2,6 +2,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+    "diff_view_style": "split",
+    "cli_default_open_behavior": "existing_window",
+    "auto_update": false,
     "show_edit_predictions": false,
     "edit_predictions": {
         "mode": "subtle"
@@ -59,9 +62,13 @@
     "theme": {
         "mode": "dark",
         "light": "One Light",
-        "dark": "Github Dark Dimmed"
+        "dark": "GitHub Dark Dimmed"
     },
-    "icon_theme": "Material Icon Theme",
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Material Icon Theme",
+        "dark": "Material Icon Theme"
+    },
     "tabs": {
         "show_close_button": "always",
         "show_diagnostics": "off",
@@ -111,12 +118,12 @@
         }
     },
     "project_panel": {
+        "folder_indicator": "chevron",
         "dock": "left",
         "button": true,
         "hide_hidden": false,
         "hide_root": true,
         "git_status": true,
-        "folder_icons": false,
         "file_icons": true,
         "entry_spacing": "standard",
         "indent_size": 18.0,
@@ -135,12 +142,12 @@
     },
     "use_smartcase_search": true,
     "title_bar": {
+        "show_branch_status_icon": true,
         "show_menus": false,
         "show_user_picture": false,
         "show_onboarding_banner": true,
         "show_project_items": true,
-        "show_branch_name": true,
-        "show_branch_icon": true
+        "show_branch_name": true
     },
     // Editor
     "vim_mode": true,
@@ -206,13 +213,6 @@
         }
     },
     // AI
-    "agent": {
-        "use_modifier_to_send": true,
-        "enable_feedback": false,
-        "default_profile": "ask",
-        "model_parameters": [],
-        "notify_when_agent_waiting": "never"
-    },
     "edit_predictions_disabled_in": ["markdown"],
     // LSP
     "languages": {

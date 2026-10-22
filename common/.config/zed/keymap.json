@@ -230,5 +230,29 @@
                 "ctrl-w <"
             ]
         }
+    },
+    {
+        "context": "AcpThread > Editor",
+        "bindings": {
+            "shift-tab": "agent::CycleThinkingEffort"
+        }
+    },
+    {
+        "context": "AcpThread > Editor",
+        "unbind": {
+            "ctrl-'": "agent::CycleThinkingEffort"
+        }
+    },
+    {
+        "context": "AcpThread",
+        "bindings": {
+            "ctrl-p": "agent::CycleFavoriteModels"
+        }
+    },
+    {
+        "context": "AcpThread",
+        "unbind": {
+            "alt-tab": "agent::CycleFavoriteModels"
+        }
     }
 ]

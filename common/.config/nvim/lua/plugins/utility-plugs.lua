@@ -26,9 +26,10 @@ return {
                 mappings = {
                     add = "ys", -- add surrounding in normal and visual modes
                     delete = "ds", -- delete surrounding
-                    find = "yf", -- find surrounding (to the right)
-                    find_left = "yf", -- find surrounding (to the left)
-                    highlight = "yh", -- highlight surrounding
+                    -- Off: `y` prefixed maps shadow `yf<char>`, `yF<char>` & `yh` yanks
+                    find = "", -- find surrounding (to the right)
+                    find_left = "", -- find surrounding (to the left)
+                    highlight = "", -- highlight surrounding
                     replace = "cs", -- replace surrounding
                     update_n_lines = "", -- update `n_lines`
                 },
@@ -221,7 +222,7 @@ return {
                     vim.cmd("normal! zz")
                 end,
                 desc = "Next Reference",
-                mode = { "n", "t" },
+                mode = { "n" },
             },
             {
                 "[[",
@@ -230,7 +231,7 @@ return {
                     vim.cmd("normal! zz")
                 end,
                 desc = "Prev Reference",
-                mode = { "n", "t" },
+                mode = { "n" },
             },
             {
                 "<leader>xx",
@@ -284,21 +285,21 @@ return {
             {
                 "<leader>gL",
                 function()
-                    Snacks.git.blame_line(opts)
+                    Snacks.git.blame_line()
                 end,
                 desc = "Git: Line Log",
             },
             {
                 "<leader>gO",
                 function()
-                    Snacks.gitbrowse.open(opts)
+                    Snacks.gitbrowse.open()
                 end,
                 desc = "Git: Open the file on Browser",
             },
             {
                 "<leader>gz",
                 function()
-                    Snacks.lazygit.log(opts)
+                    Snacks.lazygit.log()
                 end,
                 desc = "LazyGit: Git Log Graph",
             },
@@ -343,7 +344,7 @@ return {
                 "<leader>np",
                 function()
                     -- TODO: Close current project on selection
-                    Snacks.picker.projets()
+                    Snacks.picker.projects()
                 end,
                 desc = "Search Recent Projects",
             },

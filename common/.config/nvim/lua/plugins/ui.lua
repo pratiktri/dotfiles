@@ -54,7 +54,6 @@ return {
         end,
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle buffer-pin" },
-            { "<leader>bX", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
             { "<leader>xo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
             { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
             { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },

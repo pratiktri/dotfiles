@@ -17,7 +17,6 @@ vim.lsp.enable({
     "lua_ls",
     "markdown_oxide",
     "marksman",
-    "pylsp",
     "sqlls",
     "systemd_lsp",
     "taplo",

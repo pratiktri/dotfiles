@@ -2,32 +2,6 @@ return {
     -- Render Markdown on Neovim
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        init = function()
-            -- Define color variables
-            local color1_bg = "#295715"
-            local color2_bg = "#295477"
-            local color3_bg = "#395499"
-            local color4_bg = "#495477"
-            local color5_bg = "#595477"
-            local color6_bg = "#695477"
-            local color_fg = "white"
-
-            -- Heading colors (when not hovered over), extends through the entire line
-            vim.cmd(string.format([[highlight Headline1Bg guifg=%s guibg=%s]], color_fg, color1_bg))
-            vim.cmd(string.format([[highlight Headline2Bg guifg=%s guibg=%s]], color_fg, color2_bg))
-            vim.cmd(string.format([[highlight Headline3Bg guifg=%s guibg=%s]], color_fg, color3_bg))
-            vim.cmd(string.format([[highlight Headline4Bg guifg=%s guibg=%s]], color_fg, color4_bg))
-            vim.cmd(string.format([[highlight Headline5Bg guifg=%s guibg=%s]], color_fg, color5_bg))
-            vim.cmd(string.format([[highlight Headline6Bg guifg=%s guibg=%s]], color_fg, color6_bg))
-
-            -- Highlight for the heading and sign icons (symbol on the left)
-            vim.cmd(string.format([[highlight Headline1Fg cterm=bold gui=bold guifg=%s]], color1_bg))
-            vim.cmd(string.format([[highlight Headline2Fg cterm=bold gui=bold guifg=%s]], color2_bg))
-            vim.cmd(string.format([[highlight Headline3Fg cterm=bold gui=bold guifg=%s]], color3_bg))
-            vim.cmd(string.format([[highlight Headline4Fg cterm=bold gui=bold guifg=%s]], color4_bg))
-            vim.cmd(string.format([[highlight Headline5Fg cterm=bold gui=bold guifg=%s]], color5_bg))
-            vim.cmd(string.format([[highlight Headline6Fg cterm=bold gui=bold guifg=%s]], color6_bg))
-        end,
         opts = {
             latex = { enabled = false },
             preset = "obsidian",

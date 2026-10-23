@@ -39,17 +39,15 @@ return {
                         ["rust-analyzer"] = {
                             cargo = {
                                 allFeatures = true,
-                                loadOutDirsFromCheck = true,
                                 buildScripts = { enable = true },
                             },
                             checkOnSave = true,
                             diagnostics = {
                                 enable = true,
-                                enableExperimental = true,
+                                experimental = { enable = true },
                             },
                             completion = {
-                                addCallArgumentSnippets = true,
-                                addCallParenthesis = true,
+                                callable = { snippets = "fill_arguments" },
                                 postfix = { enable = true },
                                 autoimport = { enable = true },
                             },

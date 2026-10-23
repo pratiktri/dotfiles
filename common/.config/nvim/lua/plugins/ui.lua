@@ -261,9 +261,22 @@ return {
                 diff = "╱",
                 eob = " ",
             }
-
-            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
         end,
+        keys = {
+            {
+                "zR",
+                function()
+                    require("ufo").openAllFolds()
+                end,
+                desc = "Open all folds",
+            },
+            {
+                "zM",
+                function()
+                    require("ufo").closeAllFolds()
+                end,
+                desc = "Close all folds",
+            },
+        },
     },
 }

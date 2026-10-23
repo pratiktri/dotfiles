@@ -116,9 +116,6 @@ return {
                 hover = true,
             },
         },
-        config = function()
-            require("crates").setup()
-        end,
     },
 
     -- Javascript/Typescript/React/Vue

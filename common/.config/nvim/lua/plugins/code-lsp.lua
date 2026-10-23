@@ -40,7 +40,7 @@ return {
                             cargo = {
                                 allFeatures = true,
                                 loadOutDirsFromCheck = true,
-                                buildScripts = { enabled = false },
+                                buildScripts = { enable = true },
                             },
                             checkOnSave = true,
                             diagnostics = {

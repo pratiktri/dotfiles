@@ -55,11 +55,11 @@ return {
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git: Visual select hunk" })
 
                 map({ "n", "v" }, "]c", function()
-                    gs.next_hunk()
+                    gs.nav_hunk("next")
                 end, { desc = "Next Git hunk" })
 
                 map({ "n", "v" }, "[c", function()
-                    gs.prev_hunk()
+                    gs.nav_hunk("prev")
                 end, { desc = "Previous Git hunk" })
 
                 map("n", "<leader>gQ", function()

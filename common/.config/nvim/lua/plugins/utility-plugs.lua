@@ -18,13 +18,13 @@ return {
             -- functionality similar to tpope's vim-surround
             require("mini.surround").setup({
                 mappings = {
-                    add = "ys", -- add surrounding in normal and visual modes
-                    delete = "ds", -- delete surrounding
+                    add = "ys",          -- add surrounding in normal and visual modes
+                    delete = "ds",       -- delete surrounding
                     -- Off: `y` prefixed maps shadow `yf<char>`, `yF<char>` & `yh` yanks
-                    find = "", -- find surrounding (to the right)
-                    find_left = "", -- find surrounding (to the left)
-                    highlight = "", -- highlight surrounding
-                    replace = "cs", -- replace surrounding
+                    find = "",           -- find surrounding (to the right)
+                    find_left = "",      -- find surrounding (to the left)
+                    highlight = "",      -- highlight surrounding
+                    replace = "cs",      -- replace surrounding
                     update_n_lines = "", -- update `n_lines`
                 },
                 silent = true,
@@ -48,8 +48,14 @@ return {
                                 return ""
                             end
 
-                            local word_count = vim.fn.wordcount().words or 0
-                            local reading_time = math.ceil(word_count / 100.0) -- I'm slow reader
+                            -- recount only when the text changed and never while typing in insert mode
+                            local typing = vim.api.nvim_get_mode().mode:find("^i") ~= nil
+                            if (not typing or vim.b.word_count == nil) and vim.b.word_count_tick ~= vim.b.changedtick then
+                                vim.b.word_count_tick = vim.b.changedtick
+                                vim.b.word_count = vim.fn.wordcount().words or 0
+                            end
+
+                            local reading_time = math.ceil((vim.b.word_count or 0) / 100.0) -- I'm slow reader
 
                             return string.format("%dm %s |", reading_time, config.icons.misc.timer)
                         end
@@ -72,14 +78,14 @@ return {
 
                         -- Mode | Branch, diff | Diagnostics | ... | FileName | FileType | Rows/Columns
                         return MiniStatusline.combine_groups({
-                            { hl = mode_hl, strings = { mode } },
+                            { hl = mode_hl,                 strings = { mode } },
                             { hl = "MiniStatuslineDevinfo", strings = { git, diff } },
-                            { hl = mode_hl, strings = { diagnostics } },
+                            { hl = mode_hl,                 strings = { diagnostics } },
                             "%<", -- Mark general truncate point
                             "%=", -- End left alignment
                             { hl = "MiniStatuslineFilename", strings = { filename } },
                             { hl = "MiniStatuslineFileinfo", strings = { stats, fileinfo } },
-                            { hl = mode_hl, strings = { search, location } },
+                            { hl = mode_hl,                  strings = { search, location } },
                         })
                     end,
                 },

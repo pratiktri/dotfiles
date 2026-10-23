@@ -138,6 +138,7 @@ return {
                 virtual_symbol_position = "eow",
                 virtual_symbol_prefix = " ",
                 virtual_symbol_suffix = "",
+                exclude_filetypes = { "bigfile" },
             })
         end,
     },

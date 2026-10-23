@@ -33,7 +33,6 @@ vim.keymap.set("i", "<C-BS>", "<C-g>u<C-w>", { desc = "Add undo breakpoint and d
 vim.keymap.set("i", ",", ",<C-g>u", { desc = "Auto add undo breakpoints on ','" })
 vim.keymap.set("i", ".", ".<C-g>u", { desc = "Auto add undo breakpoints on '.'" })
 vim.keymap.set("i", ";", ";<C-g>u", { desc = "Auto add undo breakpoints on ';'" })
-vim.keymap.set("i", "\r", "\r<C-g>u", { desc = "Auto add undo breakpoints on new lines" })
 
 -- Save file
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" })

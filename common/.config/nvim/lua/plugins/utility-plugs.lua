@@ -9,11 +9,10 @@ return {
             require("mini.pairs").setup({
                 modes = { insert = true, command = false, terminal = false },
             })
-            -- Fixes auto-expand into newline with indent
+            -- Fixes auto-expand into newline with indent; adds an undo breakpoint before the newline
             vim.keymap.set("i", "<CR>", function()
-                local pair = MiniPairs.cr()
-                return pair
-            end, { expr = true })
+                return vim.keycode("<C-g>u") .. MiniPairs.cr()
+            end, { expr = true, replace_keycodes = false })
 
             -- mini.surround
             -- functionality similar to tpope's vim-surround

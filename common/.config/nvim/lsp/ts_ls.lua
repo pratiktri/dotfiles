@@ -3,7 +3,7 @@ return {
     filetypes = {
         "typescript",
         "typescriptreact",
-        "typescript.txt",
+        "typescript.tsx",
         "javascript",
         "javascriptreact",
         "javascript.jsx",

@@ -11,6 +11,5 @@ return {
             },
             disableOrganizeImports = true, -- let ruff do it
         },
-        python = { analysis = { ignore = { "*" } } }, -- let ruff do it
     },
 }

@@ -7,7 +7,6 @@ return {
                 config = true,
                 opts = { PATH = "append" },
             },
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
             "saghen/blink.cmp",
         },
         config = function()

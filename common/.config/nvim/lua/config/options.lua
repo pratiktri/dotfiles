@@ -22,4 +22,4 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- WARN: Hides all LspSaga deprecation warnings
 ---@diagnostic disable-next-line: duplicate-set-field
-vim.deprecate = function() end
+-- vim.deprecate = function() end

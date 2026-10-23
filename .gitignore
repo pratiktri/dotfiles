@@ -24,4 +24,8 @@
 # Backup files
 *.bak
 
+# Neovim undo & backup files
+common/.config/nvim/undo/
+common/.config/nvim/backup/
+
 todo.md

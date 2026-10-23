@@ -79,7 +79,7 @@ return {
                         return MiniStatusline.combine_groups({
                             { hl = mode_hl, strings = { mode } },
                             { hl = "MiniStatuslineDevinfo", strings = { git, diff } },
-                            { hl = mode, strings = { diagnostics } },
+                            { hl = mode_hl, strings = { diagnostics } },
                             "%<", -- Mark general truncate point
                             "%=", -- End left alignment
                             { hl = "MiniStatuslineFilename", strings = { filename } },
@@ -408,13 +408,15 @@ return {
         cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
         event = { "User KittyScrollbackLaunch" },
         version = "^4.0.0",
-        opts = {
-            status_window = {
-                icons = { nvim = "" },
-            },
-        },
         config = function()
-            require("kitty-scrollback").setup()
+            require("kitty-scrollback").setup({
+                -- Global options: first element, no key
+                {
+                    status_window = {
+                        icons = { nvim = "" },
+                    },
+                },
+            })
         end,
     },
 

@@ -126,7 +126,6 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            local disabled_filetypes = { "awk" }
             require("lspsaga").setup({
                 keys = {
                     quit = { "q", "<ESC>" },
@@ -148,8 +147,9 @@ return {
                     priority = 100,
                 },
                 symbol_in_winbar = {
-                    enable = not vim.tbl_contains(disabled_filetypes, vim.bo.filetype),
+                    enable = true,
                     hide_keyword = true,
+                    ignore_patterns = { "%.awk$" },
                 },
                 lightbulb = { virtual_text = false },
                 outline = {

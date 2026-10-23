@@ -129,9 +129,9 @@ return {
     -- Highlight colors
     {
         "brenoprata10/nvim-highlight-colors",
-        setup = { enable_tailwind = true },
         config = function()
             require("nvim-highlight-colors").setup({
+                enable_tailwind = true,
                 render = "virtual",
                 virtual_symbol_position = "eow",
                 virtual_symbol_prefix = " ",

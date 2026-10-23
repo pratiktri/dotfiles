@@ -57,12 +57,6 @@ vim.keymap.set("n", "<leader>xt", "<cmd>tabclose<cr>", { desc = "Close current t
 -- Clear searches
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
-vim.keymap.set({ "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
-vim.keymap.set({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-
 local diagnostic_goto = function(next, severity)
     severity = severity and vim.diagnostic.severity[severity] or nil
     return function()
@@ -83,5 +77,5 @@ vim.keymap.set("n", "<leader>cq", function()
 end, { desc = "Project Diagnostics -> Quickfix" })
 
 -- Center cursor
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result" })

@@ -13,8 +13,6 @@ return {
                 python = { "ruff" },
                 sql = { "sqruff" },
                 yaml = { "yamllint" },
-
-                ["*"] = { "codespell" },
             }
 
             lint.linters.markdownlint.args = {
@@ -29,6 +27,9 @@ return {
                 group = lint_augroup,
                 callback = function()
                     lint.try_lint()
+                    if vim.bo.buftype == "" and vim.bo.filetype ~= "bigfile" then
+                        lint.try_lint("codespell")
+                    end
                 end,
             })
         end,

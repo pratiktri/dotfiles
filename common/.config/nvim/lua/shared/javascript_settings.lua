@@ -10,20 +10,20 @@
 local M = {}
 
 function M.setup()
-    vim.keymap.set({ "n", "v" }, "<leader>co", function()
+    vim.keymap.set({ "n", "v" }, "<leader>cO", function()
         vim.lsp.buf.code_action({
             apply = true,
             context = {
-                only = { "source.organizeimports.ts" },
+                only = { "source.organizeImports.ts" },
                 diagnostics = {},
             },
         })
     end, { desc = "Typescript: organize imports" })
-    vim.keymap.set({ "n", "v" }, "<leader>co", function()
+    vim.keymap.set({ "n", "v" }, "<leader>cx", function()
         vim.lsp.buf.code_action({
             apply = true,
             context = {
-                only = { "source.removeunused.ts" },
+                only = { "source.removeUnused.ts" },
                 diagnostics = {},
             },
         })

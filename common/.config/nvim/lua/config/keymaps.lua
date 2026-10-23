@@ -39,18 +39,21 @@ vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Sa
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-q>", "<cmd>q<cr><esc>", { desc = "Quit Neovim without saving" })
 
 -- Close Current Buffer
-vim.keymap.set({ "n", "v" }, "<leader>bx", function()
+local save_and_close_buffer = function()
     if vim.bo.modified then
+        -- Unnamed buffer: nowhere to save, so confirm discarding instead
+        if vim.api.nvim_buf_get_name(0) == "" then
+            if vim.fn.confirm("Discard unsaved changes?", "&Yes\n&No", 2) == 1 then
+                Snacks.bufdelete({ force = true })
+            end
+            return
+        end
         vim.cmd.write()
     end
-    vim.cmd("bdelete")
-end, { desc = "Save and close current buffer" })
-vim.keymap.set({ "n", "v" }, "<leader>xb", function()
-    if vim.bo.modified then
-        vim.cmd.write()
-    end
-    vim.cmd("bdelete")
-end, { desc = "Save and close current buffer" })
+    Snacks.bufdelete()
+end
+vim.keymap.set({ "n", "v" }, "<leader>bx", save_and_close_buffer, { desc = "Save and close current buffer" })
+vim.keymap.set({ "n", "v" }, "<leader>xb", save_and_close_buffer, { desc = "Save and close current buffer" })
 
 vim.keymap.set("n", "<leader>xt", "<cmd>tabclose<cr>", { desc = "Close current tab" })
 

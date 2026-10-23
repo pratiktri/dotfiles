@@ -283,8 +283,11 @@ return {
                     local buf = args.buf
                     -- start() returns false if no parser is available, pcall catches missing parsers
                     if pcall(vim.treesitter.start, buf) then
-                        -- Treesitter-based indentation
-                        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        -- Treesitter-based indentation, only where the language ships an indents query
+                        local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+                        if lang and vim.treesitter.query.get(lang, "indents") then
+                            vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        end
                     end
                 end,
             })

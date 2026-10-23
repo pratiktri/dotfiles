@@ -439,14 +439,14 @@ return {
             warning = true,
             -- Document existing key chains
             spec = {
-                { "<leader>u", group = "Undo History", icon = { icon = "󰁯", color = "orange" } },
-                { "<leader>Q", group = "Execute DB query under cursor", icon = { icon = "", color = "orange" } },
-                { "<leader>o", group = "Hierarchical Document Symbols", icon = { icon = "", color = "orange" } },
-                { "<leader>s", group = "Search Document Symbols", icon = { icon = "", color = "orange" } },
-                { "<leader>S", group = "Search Workspace Symbols", icon = { icon = "", color = "orange" } },
-                { "<leader>y", group = "Copy to system clipboard", icon = { icon = "", color = "orange" } },
-                { "<leader>p", group = "Paste system clipboard", icon = { icon = "󰆏", color = "orange" } },
-                { "<leader><tab>", group = "File Explorer", icon = { icon = "", color = "orange" } },
+                { "<leader>u", desc = "Undo History", icon = { icon = "󰁯", color = "orange" } },
+                { "<leader>Q", desc = "Execute DB query under cursor", icon = { icon = "", color = "orange" } },
+                { "<leader>o", desc = "Hierarchical Document Symbols", icon = { icon = "", color = "orange" } },
+                { "<leader>s", desc = "Search Document Symbols", icon = { icon = "", color = "orange" } },
+                { "<leader>S", desc = "Search Workspace Symbols", icon = { icon = "", color = "orange" } },
+                { "<leader>y", desc = "Copy to system clipboard", icon = { icon = "", color = "orange" } },
+                { "<leader>p", desc = "Paste system clipboard", icon = { icon = "󰆏", color = "orange" } },
+                { "<leader><tab>", desc = "File Explorer", icon = { icon = "", color = "orange" } },
 
                 { "<leader>a", group = "AI", icon = { icon = "", color = "orange" } },
                 { "<leader>b", group = "Buffer Operations", icon = { icon = "", color = "orange" } },

@@ -44,10 +44,6 @@ return {
     },
 
     {
-        "Feel-ix-343/markdown-oxide",
-    },
-
-    {
         "bullets-vim/bullets.vim",
         ft = { "markdown", "text", "gitcommit", "scratch" },
         config = function()

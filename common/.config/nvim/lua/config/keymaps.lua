@@ -1,11 +1,9 @@
--- Load Keybindings from VIM
+-- Load Keybindings from nvim/lua/config/keymaps.vim (shared vimscript configs)
 local sep = package.config:sub(1, 1)
-local vim_mappings = vim.loop.os_homedir() .. sep .. ".vim" .. sep .. "key_maps.vim"
-if vim.loop.fs_stat(vim_mappings) then
-    vim.cmd("source " .. vim_mappings)
-end
+vim.cmd("source " .. vim.fn.stdpath("config") .. sep .. "lua" .. sep .. "config" .. sep .. "keymaps.vim")
 
-vim.keymap.set({ "n" }, "<C-,>", "<cmd>edit " .. vim.fn.expand(vim.fn.stdpath("config")) .. sep .. "init.lua<cr>", { desc = "open neovim config" })
+vim.keymap.set({ "n" }, "<C-,>", "<cmd>edit " .. vim.fn.expand(vim.fn.stdpath("config")) .. sep .. "init.lua<cr>",
+    { desc = "open neovim config" })
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })

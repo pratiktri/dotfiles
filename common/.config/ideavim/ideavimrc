@@ -41,9 +41,244 @@ sethandler <C-X> a:vim
 sethandler <C-Y> a:vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.vim/configs.vim
-source ~/.vim/key_maps.vim
-source ~/.vim/plugin_config.vim
+" ===== From ~/.vim/configs.vim (merged; .vim removed — nvim copy at nvim/vimscript) =====
+syntax on                   " Syntax highlighting.
+set nocompatible            " Do not worry about backward compatibility with VI
+set cursorline              " Hightlight cursor line
+set showmatch               " Highlight matching braces
+set noshowmode              " Donot write "--INSERT--" etc.
+set showcmd                 " Write out commands on status line
+set laststatus=2            " Show a status line
+set wrap                    " Wrap text
+set number                  " Show line numbers
+set relativenumber          " Relative line numbers
+set ruler                   " Show the line & column number of the cursor
+set shortmess+=I            " Disable the default Vim startup message.
+set shortmess+=s            " Less verbose search messages
+set mouse+=a                " Enable mouse support
+set encoding=utf-8          " Encoding
+set autowrite               " Enable auto write
+set autoread                " Auto reload file if externally changed
+set nrformats-=octal        " Do not let Ctrl-a + Ctrl-x work on octal format numbers
+set formatoptions=jcroqlnt  " When joining lines with J, delete comment characters
+set display+=truncate       " @@@ is displayed in the 1st column of the last screen line
+set tabpagemax=50           " Max number of tabs
+set viminfo^=!
+set viewoptions-=options
+set nolangremap             " Do not use non-English keyboards to define keymaps
+set list                    " Show tabs as >, trailing spaces as -, non-breakable space as +
+set signcolumn=yes          " Always show the signs column (before line number column)
+set scrolloff=10            " Cursor always at middle of the screen
+set sidescrolloff=10
+set updatetime=200          " No typing for this millisec -> write to swap file
+set timeoutlen=300          " Multiple keys in keymaps must be pressed in these millisecs
+set noswapfile              " Turn off swapfiles
+set history=10000           " Number of : commands to save
+set undofile                " Turn on undofiles (files not compatible across Vim & Nvim
+set undolevels=10000        " Number of undos per file (will be stored in memory)
+set undoreload=100000       " Amount of memory to use when reloading the buffer with :e!
+set sessionoptions-=options " Do NOT save options and mappings in session
+set splitbelow              " Split new windows at bottom instead of top
+set splitright              " New vertical windows on right instead of left
+set hidden                  " Allows to change buffer without saving it 1st
+set virtualedit=block       " Makes visual block better when selecting different line sizes
+set ignorecase              " When trying to autocomplete commands or searching, ignore case
+set noerrorbells novisualbell t_vb= " Disable all bells
+
+" Make sure tabs are 4 character wide
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab smarttab
+set autoindent smartindent breakindent  " Proper indentation
+
+" Enable searching as you type, rather than waiting till you press enter. Highlight search pattern. Intelligently handle cases in search.
+set incsearch hlsearch ignorecase smartcase wrapscan
+
+" Comments in Grey color and italic
+highlight Comment guifg=#636e7b ctermfg=50 cterm=italic
+
+" Better autocompletes
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+set complete+=kspell
+set complete-=i
+set completeopt=menuone,noselect    " Better completion experience
+set wildmenu                        " List and cycle through autocomplete on <Tab>
+set wildignorecase                  " Case insensitive path completion
+set wildmode=longest:full,full      " Command-line completion mode
+
+" Trim trailing blank spaces on save (Vim only; Neovim uses conform.nvim)
+if !has('nvim')
+    augroup trim_trailing_whitespace
+        autocmd!
+        autocmd BufWritePre * let s:view = winsaveview() | keeppatterns %s/\s\+$//e | call winrestview(s:view)
+    augroup END
+endif
+
+" Normally, backspace works only if you have made an edit. This fixes that.
+set backspace=indent,eol,start
+
+" Sync vim clipboard with system clipboard. Works across Linux, MacOS & Windows.
+set clipboard^=unnamed
+
+" Set color
+if !has('gui_running')
+  set t_Co=256
+  set termguicolors
+  hi LineNr ctermbg=NONE guibg=NONE
+endif
+
+" ===== From ~/.vim/key_maps.vim =====
+" Make space-bar the leader-key
+let mapleader = " "
+let maplocalleader = " "
+
+" Don't do anything on pressing space itself
+nnoremap <Space> <Nop>
+vnoremap <Space> <Nop>
+
+" Disable left, right, up and down keys
+" In normal mode...
+nnoremap <Left>  :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
+" ...and in insert mode
+inoremap <Left>  <ESC>:echoe "Use h"<CR>
+inoremap <Right> <ESC>:echoe "Use l"<CR>
+inoremap <Up>    <ESC>:echoe "Use k"<CR>
+inoremap <Down>  <ESC>:echoe "Use j"<CR>
+
+" Ctrl+Backspace to add an undo-point and delete last word
+imap <C-BS> <C-g>u<C-w>
+
+" Unbind some useless/annoying default key bindings.
+nmap Q <Nop>
+
+" Center the cursor when moving through document
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap gv gvzz
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
+nnoremap ]s ]szz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap G Gzz
+nnoremap g* g*zz
+nnoremap g# g#zz
+nnoremap * *zzv
+nnoremap # #zzv
+
+" Move visually selected lines around with J & K
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Better indenting
+vnoremap <  <gv
+xnoremap <  <gv
+vnoremap >  >gv
+xnoremap >  >gv
+
+" Keeps the cursor at the same place when doing J
+" And not move to end of the line
+nnoremap J mzJ`z:delmarks z<CR>
+
+" Better Up/Down
+nnoremap j gj
+xnoremap j gj
+nnoremap k gk
+xnoremap k gk
+
+" Better window/split navigation
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
+" Navigate buffers
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
+nnoremap <leader>bx :bd<CR>
+
+" Navigate Quickfix
+nnoremap [q :cprev<CR>zz
+nnoremap ]q :cnext<CR>zz
+
+" Resize window using <ctrl> arrow keys
+nnoremap <C-Up> :resize +2<CR>
+nnoremap <C-Down> :resize -2<CR>
+nnoremap <C-Left> :vertical resize -2<CR>
+nnoremap <C-Right> :vertical resize +2<CR>
+
+" Saner search n & N
+nnoremap <expr> n  'Nn'[v:searchforward]
+xnoremap <expr> n  'Nn'[v:searchforward]
+onoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+xnoremap <expr> N  'nN'[v:searchforward]
+onoremap <expr> N  'nN'[v:searchforward]
+
+" <ctrl-q> Quit Vim (without saving)
+" <ctrl-s> Save all buffers
+nnoremap <C-q> :q<CR>
+vnoremap <C-q> :q<CR>
+nnoremap <C-s> :wa<CR>
+vnoremap <C-s> :wa<CR>
+
+" Paste over currently selected text without yanking it
+vnoremap p "_dp
+vnoremap P "_dP
+
+" Copy everything between { & } including brackets
+nnoremap YY va{Vy
+
+" Move Lines with Alt+j,k
+nnoremap <M-j> :m .+1<cr>==
+nnoremap <M-k> :m .-2<cr>==
+vnoremap <M-j> :m '>+1<cr>gv=gv
+vnoremap <M-k> :m '<-2<cr>gv=gv
+
+" Evaluate expression of the highlighted text and paste at the end
+vnoremap <leader>= y`]a = <C-r>=<C-r>"<CR><Esc>
+
+" Insert mode: add undo points on "," & "." & ";"
+imap , ,<C-g>u
+imap . .<C-g>u
+imap ; ;<C-g>u
+
+" Copy to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+" To paste from system clipboard "+p
+
+" Clear search, diff update and redraw
+nnoremap <Esc> :nohlsearch<CR>:diffupdate<CR>:normal! <C-L><CR>
+
+" ===== From ~/.vim/plugin_config.vim =====
+" NERDTree Plugin configurations
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeWinSize = 25
+
+" Map nerdtree to <Leader>e
+" Changes the pwd and opens the VCS root
+" Placed here because ideavim doesn't understand :tcd
+nnoremap <leader><TAB> :tcd %:h<CR> :NERDTreeToggleVCS<CR>
+
+" Show the undo tree
+nnoremap <leader>u :UndotreeToggle<CR>
+
+" Fugitive
+nnoremap <leader>gg :0G<cr>
+
+" Quickscope
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" Quickscope in VSCode
+" https://github.com/vscode-neovim/vscode-neovim/wiki/Plugins#quick-scope
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#00C7DF' gui=underline ctermfg=81 cterm=underline
 
 " Common settings
 "set clipboard^=unnamed,unnamedplus,ideaput " Copy to and from system clipboard

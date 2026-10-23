@@ -56,10 +56,10 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 set complete+=kspell
 set complete-=i
-set completeopt="menuone,noselect"  " Better completion experience
+set completeopt=menuone,noselect    " Better completion experience
 set wildmenu                        " List and cycle through autocomplete on <Tab>
 set wildignorecase                  " Case insensitive path completion
-set wildmode="longest:full,full"    " Command-line completion mode
+set wildmode=longest:full,full      " Command-line completion mode
 
 " Remove trailing blank spaces on save
 autocmd BufWritePre * %s/\s\+$//e

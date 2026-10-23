@@ -62,7 +62,13 @@ set wildignorecase                  " Case insensitive path completion
 set wildmode=longest:full,full      " Command-line completion mode
 
 " Remove trailing blank spaces on save
-autocmd BufWritePre * %s/\s\+$//e
+" Neovim uses conform.nvim instead
+if !has('nvim')
+    augroup trim_trailing_whitespace
+        autocmd!
+        autocmd BufWritePre * let s:view = winsaveview() | keeppatterns %s/\s\+$//e | call winrestview(s:view)
+    augroup END
+endif
 
 " Normally, backspace works only if you have made an edit. This fixes that.
 set backspace=indent,eol,start

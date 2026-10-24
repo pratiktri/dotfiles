@@ -10,13 +10,27 @@
 //          - Increase/Decrease panel size
 [
     {
-        "context": "Workspace && vim_mode == normal",
+        "context": "Workspace",
         "bindings": {
             "ctrl-/": "journal::NewJournalEntry",
             "ctrl-1": "project_panel::ToggleFocus",
             "ctrl-2": "git_panel::ToggleFocus",
             "ctrl-3": "outline_panel::ToggleFocus",
-            "ctrl-4": "debug_panel::ToggleFocus",
+            "ctrl-4": "debug_panel::ToggleFocus"
+        }
+    },
+    {
+        // No file open (Welcome page, empty pane): no editor, terminal or panel has focus
+        // Excluding Dock keeps `space` instant in panels that bind it (e.g. git panel staging)
+        "context": "Workspace && !Editor && !Terminal && !Dock",
+        "bindings": {
+            "space tab": "project_panel::ToggleFocus"
+        }
+    },
+    {
+        // Must come after the block above to win over its `space tab`
+        "context": "Workspace && left_dock == ProjectPanel && !Editor && !Terminal && !Dock",
+        "bindings": {
             "space tab": "workspace::ToggleLeftDock"
         }
     },
@@ -24,7 +38,11 @@
         "context": "ProjectPanel && not_editing",
         "bindings": {
             "q": "workspace::ToggleLeftDock",
-            "space tab": "workspace::ToggleLeftDock"
+            "space tab": "workspace::ToggleLeftDock",
+            "r": "project_panel::Rename",
+            "s": "project_panel::OpenSplitHorizontal",
+            "a": "project_panel::NewFile",
+            "o": "project_panel::Open"
         }
     },
     {
@@ -200,6 +218,8 @@
             // Accept edit-prediction on Linux => alt-l
             // Accept next predicted word => alt-right
             "space tab": "project_panel::ToggleFocus",
+            // Zed's sidebar toggle instead of vim page-up
+            "ctrl-b": "workspace::ToggleLeftDock",
             "space / /": "journal::NewJournalEntry",
             "ctrl-escape": "workspace::ToggleCenteredLayout",
             // Coding & Code Navigation
@@ -321,6 +341,14 @@
                 "workspace::SendKeystrokes",
                 "ctrl-w <"
             ]
+        }
+    },
+    {
+        // Project panel already open: close it instead of focusing it
+        // Must come after the `Editor && vim_mode == normal` block to win over its `space tab`
+        "context": "(Workspace && left_dock == ProjectPanel) > (Editor && vim_mode == normal)",
+        "bindings": {
+            "space tab": "workspace::ToggleLeftDock"
         }
     },
     {

@@ -83,7 +83,10 @@
         "context": "Editor && ( vim_mode == visual || vim_mode == normal )",
         "bindings": {
             // Access system clipboard
-            "space p": "editor::Paste",
+            "space p": [
+                "workspace::SendKeystrokes",
+                "\" + p"
+            ],
             "space y": "editor::Copy"
         }
     },
@@ -92,7 +95,81 @@
         "bindings": {
             // Move line up/down with J/K
             "J": "editor::MoveLineDown",
-            "K": "editor::MoveLineUp"
+            "K": "editor::MoveLineUp",
+            // Paste over selection without yanking it
+            "p": [
+                "vim::Paste",
+                {
+                    "preserve_clipboard": true
+                }
+            ],
+            // Keep selection after indenting
+            ">": [
+                "workspace::SendKeystrokes",
+                "> g v"
+            ],
+            "<": [
+                "workspace::SendKeystrokes",
+                "< g v"
+            ]
+        }
+    },
+    {
+        "context": "VimControl && !menu && (vim_mode == normal || vim_mode == visual)",
+        "bindings": {
+            // Move by display line when wrapped
+            "j": [
+                "vim::Down",
+                {
+                    "display_lines": true
+                }
+            ],
+            "k": [
+                "vim::Up",
+                {
+                    "display_lines": true
+                }
+            ]
+        }
+    },
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual)",
+        "bindings": {
+            // Diagnostics by severity (Zed default for ]e/[e moves the line)
+            "] e": [
+                "editor::GoToDiagnostic",
+                {
+                    "severity": "error"
+                }
+            ],
+            "[ e": [
+                "editor::GoToPreviousDiagnostic",
+                {
+                    "severity": "error"
+                }
+            ],
+            "] w": [
+                "editor::GoToDiagnostic",
+                {
+                    "severity": "warning"
+                }
+            ],
+            "[ w": [
+                "editor::GoToPreviousDiagnostic",
+                {
+                    "severity": "warning"
+                }
+            ]
+        }
+    },
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual || vim_mode == operator)",
+        "bindings": {
+            "] F": "vim::NextMethodEnd",
+            "[ F": "vim::PreviousMethodEnd",
+            // Section end = top-level class or function end
+            "] C": "vim::NextSectionEnd",
+            "[ C": "vim::PreviousSectionEnd"
         }
     },
     {
@@ -132,8 +209,6 @@
             "[ f": "vim::PreviousMethodStart",
             "] i": "vim::NextSameIndent",
             "[ i": "vim::PreviousSameIndent",
-            "] C": "vim::NextSectionStart",
-            "[ C": "vim::PreviousSectionStart",
             "ctrl-space": "editor::SelectLargerSyntaxNode",
             "F2": "editor::Rename",
             "space r": "editor::Rename",
@@ -144,7 +219,24 @@
             "ctrl-.": "editor::ToggleCodeActions",
             // Diagnostics
             "space d w": "diagnostics::Deploy",
-            "space d t": "editor::ToggleInlineDiagnostics",
+            "space d x": "editor::ToggleInlineDiagnostics",
+            // Project TODOs: same keywords and `KEYWORD:` pattern as todo-comments.nvim
+            "space d t": [
+                "pane::DeploySearch",
+                {
+                    "query": "\\b(TODO|FIX|FIXME|BUG):",
+                    "regex": true,
+                    "case_sensitive": true
+                }
+            ],
+            "space d T": [
+                "pane::DeploySearch",
+                {
+                    "query": "\\b(FIX|FIXME|BUG|FIXIT|ISSUE|TODO|HACK|TIP|WARN|WARNING|XXX|PERF|OPTIM|PERFORMANCE|OPTIMIZE|NOTE|INFO|TEST|TESTING|PASSED|FAILED):",
+                    "regex": true,
+                    "case_sensitive": true
+                }
+            ],
             "space x x": "workspace::SuppressNotification",
             // Git
             "space g g": "git::Diff",

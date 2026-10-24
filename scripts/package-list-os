@@ -11,6 +11,7 @@ gcc
 gdb
 git
 gitleaks
+gopls
 hadolint
 html
 jq

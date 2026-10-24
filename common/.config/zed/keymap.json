@@ -54,7 +54,9 @@
         }
     },
     {
-        "context": "Dock",
+        // Skip editors and terminals: a pending `ctrl-w` chord delays their own `ctrl-w` by ~1s.
+        // Editors in vim normal mode already get `ctrl-w h/j/k/l` from Zed's vim keymap.
+        "context": "Dock && !Editor && !Terminal",
         "bindings": {
             "ctrl-w h": "workspace::ActivatePaneLeft",
             "ctrl-w l": "workspace::ActivatePaneRight",
@@ -92,6 +94,15 @@
                 "terminal::SendKeystroke",
                 "ctrl-n"
             ],
+            // Move between panels like in Neovim; a bare `ctrl-w` still reaches the shell after the chord timeout
+            "ctrl-w": [
+                "terminal::SendKeystroke",
+                "ctrl-w"
+            ],
+            "ctrl-w h": "workspace::ActivatePaneLeft",
+            "ctrl-w l": "workspace::ActivatePaneRight",
+            "ctrl-w k": "workspace::ActivatePaneUp",
+            "ctrl-w j": "workspace::ActivatePaneDown",
             "ctrl-shift-up": "workspace::IncreaseActiveDockSize",
             "ctrl-shift-down": "workspace::DecreaseActiveDockSize",
             "ctrl-shift-enter": "workspace::NewTerminal"
@@ -373,6 +384,20 @@
         "context": "AcpThread",
         "unbind": {
             "alt-tab": "agent::CycleFavoriteModels"
+        }
+    },
+    {
+        // Insert mode only: in normal mode `ctrl-w` must stay the window prefix for `ctrl-h/j/k/l`
+        // Keep last: an explicit binding after every `ctrl-w` chord, so it doesn't wait ~1s
+        "context": "AcpThread > Editor && vim_mode == insert",
+        "bindings": {
+            "ctrl-w": [
+                "editor::DeleteToPreviousWordStart",
+                {
+                    "ignore_newlines": false,
+                    "ignore_brackets": false
+                }
+            ]
         }
     }
 ]

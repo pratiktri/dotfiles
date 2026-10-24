@@ -15,21 +15,15 @@
 	trustctime = false
 
 [diff]
-	tool = vscode
-
-[difftool "vscode"]
-	cmd = "code --wait --diff $LOCAL $REMOTE"
+	tool = nvimdiff
 
 [merge]
-	tool = vscode
+	tool = nvimdiff
 	conflictstyle = diff3
 
 [mergetool]
 	prompt = true
 	keepBackup = false
-
-[mergetool "vscode"]
-	cmd = code --wait $MERGED
 
 [log]
 	date = local

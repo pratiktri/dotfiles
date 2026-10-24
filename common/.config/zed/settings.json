@@ -116,6 +116,19 @@
     "claude-acp": {
       "type": "registry"
     },
+    "pi": {
+      "default_config_options": {
+        "thought_level": "medium"
+      },
+      "favorite_config_option_values": {
+        "thought_level": ["minimal", "medium", "xhigh", "high"],
+        "model": []
+      },
+      "type": "custom",
+      "command": "pi-acp",
+      "args": [],
+      "env": {}
+    },
     "claude": {
       "favorite_config_option_values": {
         "effort": ["medium"],

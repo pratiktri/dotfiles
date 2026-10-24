@@ -1,14 +1,11 @@
 // TIP: To see the default key bindings run `zed: open default keymap`
-// ISSUES:
-//  - Bash support: buffer symbol search doesn't work
-//  - Git: Not nearly as useful as Neovim > Gitsigns
-// TODO:
-//  - Git stage multi-buffer: reduce the file name ribbon size
-//  - AI:
-//      - Set shortcuts:
-//          - Toggle left panel
-//          - Increase/Decrease panel size
+//
+// PRECEDENCE: deeper context wins; on a tie the later block wins.
+// A later chord (e.g. `ctrl-w h`) also makes an earlier exact key (`ctrl-w`) wait ~1s.
 [
+    // ==============================
+    // Workspace & panels
+    // ==============================
     {
         "context": "Workspace",
         "bindings": {
@@ -46,14 +43,6 @@
         }
     },
     {
-        "context": "GitDiff > Editor",
-        "bindings": {
-            "s": "git::ToggleStaged",
-            "x": "git::Restore",
-            "c": "git::Commit"
-        }
-    },
-    {
         // Skip editors and terminals: a pending `ctrl-w` chord delays their own `ctrl-w` by ~1s.
         // Editors in vim normal mode already get `ctrl-w h/j/k/l` from Zed's vim keymap.
         "context": "Dock && !Editor && !Terminal",
@@ -64,6 +53,9 @@
             "ctrl-w j": "workspace::ActivatePaneDown"
         }
     },
+    // ==============================
+    // Pickers & search bars
+    // ==============================
     {
         "context": "Picker",
         "bindings": {
@@ -82,6 +74,9 @@
             "ctrl-[": "project_search::ToggleFocus"
         }
     },
+    // ==============================
+    // Terminal
+    // ==============================
     {
         "context": "Terminal",
         "bindings": {
@@ -108,6 +103,20 @@
             "ctrl-shift-enter": "workspace::NewTerminal"
         }
     },
+    // ==============================
+    // Git
+    // ==============================
+    {
+        "context": "GitDiff > Editor",
+        "bindings": {
+            "s": "git::ToggleStaged",
+            "x": "git::Restore",
+            "c": "git::Commit"
+        }
+    },
+    // ==============================
+    // Editor (vim)
+    // ==============================
     {
         "context": "Editor && ( vim_mode == visual || vim_mode == normal )",
         "bindings": {
@@ -117,30 +126,6 @@
                 "\" + p"
             ],
             "space y": "editor::Copy"
-        }
-    },
-    {
-        "context": "Editor && vim_mode == visual",
-        "bindings": {
-            // Move line up/down with J/K
-            "J": "editor::MoveLineDown",
-            "K": "editor::MoveLineUp",
-            // Paste over selection without yanking it
-            "p": [
-                "vim::Paste",
-                {
-                    "preserve_clipboard": true
-                }
-            ],
-            // Keep selection after indenting
-            ">": [
-                "workspace::SendKeystrokes",
-                "> g v"
-            ],
-            "<": [
-                "workspace::SendKeystrokes",
-                "< g v"
-            ]
         }
     },
     {
@@ -159,6 +144,16 @@
                     "display_lines": true
                 }
             ]
+        }
+    },
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual || vim_mode == operator)",
+        "bindings": {
+            "] F": "vim::NextMethodEnd",
+            "[ F": "vim::PreviousMethodEnd",
+            // Section end = top-level class or function end
+            "] C": "vim::NextSectionEnd",
+            "[ C": "vim::PreviousSectionEnd"
         }
     },
     {
@@ -192,13 +187,27 @@
         }
     },
     {
-        "context": "Editor && (vim_mode == normal || vim_mode == visual || vim_mode == operator)",
+        "context": "Editor && vim_mode == visual",
         "bindings": {
-            "] F": "vim::NextMethodEnd",
-            "[ F": "vim::PreviousMethodEnd",
-            // Section end = top-level class or function end
-            "] C": "vim::NextSectionEnd",
-            "[ C": "vim::PreviousSectionEnd"
+            // Move line up/down with J/K
+            "J": "editor::MoveLineDown",
+            "K": "editor::MoveLineUp",
+            // Paste over selection without yanking it
+            "p": [
+                "vim::Paste",
+                {
+                    "preserve_clipboard": true
+                }
+            ],
+            // Keep selection after indenting
+            ">": [
+                "workspace::SendKeystrokes",
+                "> g v"
+            ],
+            "<": [
+                "workspace::SendKeystrokes",
+                "< g v"
+            ]
         }
     },
     {
@@ -228,11 +237,14 @@
             // AI:
             // Accept edit-prediction on Linux => alt-l
             // Accept next predicted word => alt-right
+            //
+            // Panels & layout
             "space tab": "project_panel::ToggleFocus",
             // Zed's sidebar toggle instead of vim page-up
             "ctrl-b": "workspace::ToggleLeftDock",
-            "space / /": "journal::NewJournalEntry",
             "ctrl-escape": "workspace::ToggleCenteredLayout",
+            "space / /": "journal::NewJournalEntry",
+            "space x x": "workspace::SuppressNotification",
             // Coding & Code Navigation
             "] ]": "vim::GoToNextReference",
             "[ [": "vim::GoToPreviousReference",
@@ -268,7 +280,6 @@
                     "case_sensitive": true
                 }
             ],
-            "space x x": "workspace::SuppressNotification",
             // Git
             "space g g": "git::Diff",
             "space g p": "editor::ToggleSelectedDiffHunks",
@@ -284,7 +295,6 @@
             "space x b": "pane::CloseActiveItem",
             "space x o": "pane::CloseOtherItems",
             "space b p": "pane::TogglePinTab",
-            // Quality of life improvements:
             // Center the cursor when moving through document
             "ctrl-d": [
                 "workspace::SendKeystrokes",
@@ -318,7 +328,6 @@
                 "workspace::SendKeystrokes",
                 "N z z"
             ],
-            //
             // Better split management
             "ctrl-j": [
                 "workspace::SendKeystrokes",
@@ -362,18 +371,9 @@
             "space tab": "workspace::ToggleLeftDock"
         }
     },
-    {
-        "context": "AcpThread > Editor",
-        "bindings": {
-            "shift-tab": "agent::CycleThinkingEffort"
-        }
-    },
-    {
-        "context": "AcpThread > Editor",
-        "unbind": {
-            "ctrl-'": "agent::CycleThinkingEffort"
-        }
-    },
+    // ==============================
+    // Agent panel
+    // ==============================
     {
         "context": "AcpThread",
         "bindings": {
@@ -384,6 +384,18 @@
         "context": "AcpThread",
         "unbind": {
             "alt-tab": "agent::CycleFavoriteModels"
+        }
+    },
+    {
+        "context": "AcpThread > Editor",
+        "bindings": {
+            "shift-tab": "agent::CycleThinkingEffort"
+        }
+    },
+    {
+        "context": "AcpThread > Editor",
+        "unbind": {
+            "ctrl-'": "agent::CycleThinkingEffort"
         }
     },
     {

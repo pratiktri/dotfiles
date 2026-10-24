@@ -1,8 +1,3 @@
-// ISSUES:
-//  - Bash support: buffer symbol search doesn't work
-// TODO:
-//  - Git stage multi-buffer: reduce the file name ribbon size
-//
 // To see all of Zed's default settings without changing your
 // custom settings, run `zed: open default settings` from the
 // command palette
@@ -263,6 +258,10 @@
   "languages": {
     "Markdown": {
       "show_edit_predictions": false
+    },
+    // Built-in Shell Script has no outline query; use bash-language-server symbols
+    "Shell Script": {
+      "document_symbols": "on"
     },
     // Same languages Neovim formats with prettierd
     "JavaScript": { "tab_size": 4, "prettier": { "allowed": true } },

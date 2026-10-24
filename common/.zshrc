@@ -163,15 +163,5 @@ bindkey '^u' undo
 command -v hau >/dev/null && bindkey -s '^o' ' hau\n'      # Fuzzyfind projects and open in nvim
 command -v hau >/dev/null && bindkey -s '^[o' ' hau -n\n' # Create a new project quickly
 
-load_ai_api_keys() {
-    ! command -v pass >/dev/null && return
-
-    while IFS= read -r entry; do
-        export "$entry=$(pass show "ai/$entry" 2>/dev/null)"
-    done < <(pass ls ai 2>/dev/null | tail -n +2 | awk '{print $NF}')
-}
-
-load_ai_api_keys
-
 # PERF: Part 2: Zsh Instrumentations
 # zprof

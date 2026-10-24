@@ -17,8 +17,14 @@
         "code_actions": false
     },
     "relative_line_numbers": "enabled",
+    // Fallback Prettier options for projects without a `.prettierrc`
+    // Keep in sync with ~/.config/templates/.prettierrc
     "prettier": {
-        "allowed": false
+        "allowed": false,
+        "bracketSameLine": true,
+        "quoteProps": "consistent",
+        "trailingComma": "all",
+        "endOfLine": "auto"
     },
     "search": {
         "center_on_match": true,
@@ -248,6 +254,20 @@
     "languages": {
         "Markdown": {
             "show_edit_predictions": false
+        },
+        // Same languages Neovim formats with prettierd
+        "JavaScript": { "tab_size": 4, "prettier": { "allowed": true } },
+        "TypeScript": { "tab_size": 4, "prettier": { "allowed": true } },
+        "TSX": { "tab_size": 4, "prettier": { "allowed": true } },
+        "JSON": { "tab_size": 2, "prettier": { "allowed": true } },
+        "JSONC": { "tab_size": 2, "prettier": { "allowed": true } },
+        "YAML": { "tab_size": 2, "prettier": { "allowed": true } },
+        "CSS": { "tab_size": 2, "prettier": { "allowed": true } },
+        "HTML": { "tab_size": 2, "prettier": { "allowed": true } },
+        "GraphQL": { "tab_size": 2, "prettier": { "allowed": true } },
+        "Svelte": {
+            "tab_size": 2,
+            "prettier": { "allowed": true, "plugins": ["prettier-plugin-svelte"] }
         }
     },
     "lsp": {

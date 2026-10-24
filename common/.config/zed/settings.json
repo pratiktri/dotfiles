@@ -7,6 +7,7 @@
     "auto_update": false,
     "show_edit_predictions": false,
     "edit_predictions": {
+        "allow_data_collection": "no",
         "mode": "subtle"
     },
     "disable_ai": false,
@@ -95,6 +96,12 @@
     },
     "agent_ui_font_size": 21,
     "agent_buffer_font_size": 18,
+    "agent": {
+        "show_turn_stats": true,
+        "use_modifier_to_send": true,
+        "enable_feedback": false,
+        "dock": "right"
+    },
     "agent_servers": {
         "pi-acp": {
             "type": "registry"

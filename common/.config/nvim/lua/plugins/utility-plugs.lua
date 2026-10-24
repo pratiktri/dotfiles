@@ -343,8 +343,32 @@ return {
             {
                 "<leader>np",
                 function()
-                    -- TODO: Close current project on selection
-                    Snacks.picker.projects()
+                    Snacks.picker.projects({
+                        confirm = function(picker, item)
+                            picker:close()
+                            if not item then
+                                return
+                            end
+
+                            -- Save the current session before leaving the project
+                            if package.loaded.persistence then
+                                require("persistence").save()
+                            end
+
+                            -- Asks to save modified buffers
+                            Snacks.bufdelete.all()
+                            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                                if vim.bo[buf].buflisted and vim.bo[buf].modified then
+                                    Snacks.notify.warn("Unsaved buffers, project not switched")
+                                    return
+                                end
+                            end
+
+                            -- LSP clients are rooted in the old project
+                            vim.lsp.stop_client(vim.lsp.get_clients())
+                            Snacks.picker.actions.load_session(picker, item)
+                        end,
+                    })
                 end,
                 desc = "Search Recent Projects",
             },

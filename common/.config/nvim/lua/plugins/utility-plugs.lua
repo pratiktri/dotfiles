@@ -90,29 +90,6 @@ return {
                     end,
                 },
             })
-
-            -- configure mini.indentscope
-            require("mini.indentscope").setup({
-                delay = 100,
-                symbol = "│",
-                options = { try_as_border = true },
-            })
-
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = {
-                    "help",
-                    "neo-tree",
-                    "Trouble",
-                    "trouble",
-                    "lazy",
-                    "mason",
-                    "notify",
-                    "toggleterm",
-                },
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
         end,
     },
 
@@ -124,9 +101,13 @@ return {
         opts = {
             bigfile = { enabled = true },
             dashboard = { enabled = false },
-            scope = { enabled = false },
             layout = { enabled = false },
             statuscolumn = { enabled = false },
+
+            -- `Whitespace`: default `NonText` guides are too bright
+            indent = { enabled = true, indent = { hl = "Whitespace" } },
+            -- `ii`/`ai` text objects & `[i`/`]i` jumps
+            scope = { enabled = true },
 
             bufdelete = { enabled = true },
             git = { enabled = true },

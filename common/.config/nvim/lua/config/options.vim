@@ -1,8 +1,14 @@
-syntax on                   " Syntax highlighting.
+" Syntax highlighting & filetype detection: Neovim enables both after loading plugins.
+" Running them here (before plugins) loads the argument buffers early, and their BufRead events never fire.
+if !has('nvim')
+    syntax on
+    filetype plugin indent on
+endif
+
 set nocompatible            " Do not worry about backward compatibility with VI
-set cursorline              " Hightlight cursor line
+set cursorline              " Highlight cursor line
 set showmatch               " Highlight matching braces
-set noshowmode              " Donot write "--INSERT--" etc.
+set noshowmode              " Don't write "--INSERT--" etc.
 set showcmd                 " Write out commands on status line
 set laststatus=2            " Show a status line
 set wrap                    " Wrap text
@@ -52,7 +58,6 @@ set incsearch hlsearch ignorecase smartcase wrapscan
 highlight Comment guifg=#636e7b ctermfg=50 cterm=italic
 
 " Better autocompletes
-filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 set complete+=kspell
 set complete-=i

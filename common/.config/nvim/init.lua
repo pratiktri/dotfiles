@@ -18,7 +18,6 @@ require("config.autocmd")
 --      tools: ImageMagick, xclip, xsel, ghostscript
 --      lsp: ../../../scripts/package-list-os
 -- Brew:
---      tools: lazygit
 --      lsp: ../../../scripts/package-list-brew
 -- MasonInstallAll to install the rest:
 --      (./lua/config/autocmd.lua)

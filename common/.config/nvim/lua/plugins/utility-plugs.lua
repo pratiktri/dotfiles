@@ -134,7 +134,6 @@ return {
                 },
                 img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", ".artifacts/img", ".artifacts", ".assets" },
             },
-            lazygit = { enabled = true, configure = true, win = { style = "lazygit" } },
             notifier = {
                 enabled = true,
                 timeout = 2000,
@@ -276,13 +275,6 @@ return {
                     Snacks.gitbrowse.open()
                 end,
                 desc = "Git: Open the file on Browser",
-            },
-            {
-                "<leader>gz",
-                function()
-                    Snacks.lazygit.log()
-                end,
-                desc = "LazyGit: Git Log Graph",
             },
             {
                 "<leader>gf",

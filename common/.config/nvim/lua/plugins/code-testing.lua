@@ -99,7 +99,7 @@ return {
 
             require("neotest").setup(opts)
         end,
-        -- stylua: ignore
+        ---@format disable-next
         keys = {
             -- TIP: Shortcuts in test summary window:
             --  r: Run the selected test

@@ -21,7 +21,8 @@ return {
                 typescriptreact = { "prettierd" },
                 yaml = { "prettierd" },
 
-                lua = { "stylua" },
+                -- lua_ls formats Lua; style lives in ../../.editorconfig
+                lua = { lsp_format = "prefer" },
                 markdown = { "markdownlint" },
                 python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
                 xml = { "xmllint" },

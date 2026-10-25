@@ -12,7 +12,6 @@ require("core.lsp")
 require("config.autocmd")
 
 -- NOTE: External Tools needed for this Nvim config to work
--- jsregexp
 -- rust-analyzer, rustc, cargo (rustacean)
 -- OS Installs:
 --      general: curl, gzip, unzip, git, fd-find, ripgrep, fzf, tree-sitter

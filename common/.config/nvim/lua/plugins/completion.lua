@@ -3,6 +3,9 @@ return {
         "saghen/blink.cmp",
         event = "InsertEnter",
         dependencies = {
+            -- Adds common snippets written in VS Code format
+            -- Examples: https://github.com/rafamadriz/friendly-snippets/tree/main/snippets
+            "rafamadriz/friendly-snippets",
             "disrupted/blink-cmp-conventional-commits",
         },
 
@@ -53,7 +56,7 @@ return {
 
             signature = { enabled = true },
 
-            snippets = { preset = "luasnip" },
+            snippets = { preset = "default" },
 
             cmdline = {
                 enabled = true,
@@ -107,7 +110,10 @@ return {
                 providers = {
                     lsp = { score_offset = 1000 },
                     buffer = { score_offset = 950 },
-                    snippets = { score_offset = 900 },
+                    snippets = {
+                        score_offset = 900,
+                        opts = { search_paths = { vim.fn.stdpath("config") .. "/custom-snippets" } },
+                    },
                     path = { score_offset = 750 },
                     conventional_commits = {
                         name = "Conventional Commits",
@@ -131,27 +137,5 @@ return {
                 },
             },
         },
-    },
-
-    {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        lazy = true,
-        dependencies = {
-            -- Adds common snippets written in VS Code format
-            -- Examples: https://github.com/rafamadriz/friendly-snippets/tree/main/snippets
-            "rafamadriz/friendly-snippets",
-            config = function()
-                require("luasnip.loaders.from_vscode").lazy_load()
-                require("luasnip.loaders.from_vscode").lazy_load({
-                    paths = {
-                        vim.fn.stdpath("config") .. "/custom-snippets",
-                    },
-                })
-            end,
-        },
-        build = (function()
-            return "make install_jsregexp"
-        end)(),
     },
 }

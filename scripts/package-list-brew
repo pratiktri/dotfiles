@@ -1,4 +1,4 @@
- Lines that start with # are ignored
+# Lines that start with # are ignored
 # TIP:
 # - Only add commandline apps that aren't available/updated on OS repos; cause brew isn't available on FreeBSD
 # - Apps that are already installed skipped
@@ -37,7 +37,7 @@ sqlite
 stylua
 taplo
 tlrc
-tree-sitter
+tree-sitter-cli
 typescript-language-server
 yaml-language-server
 yamlfmt

@@ -11,9 +11,24 @@ input_file_check() {
 }
 
 install_brew() {
+    if command -v brew >/dev/null 2>&1; then
+        return
+    fi
+
+    # Non-interactive mode can't ask for the sudo password, so cache it first
+    sudo -v || return 1
+    NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    for brew_bin in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+        if [ -x "$brew_bin" ]; then
+            eval "$("$brew_bin" shellenv)"
+            break
+        fi
+    done
+
     if ! command -v brew >/dev/null 2>&1; then
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        echo "Homebrew installation failed"
+        return 1
     fi
 }
 
@@ -22,6 +37,9 @@ install_brew_packages() {
     not_found_packages=""
     found_packages=""
 
+    all_formulae=$(brew formulae)
+    installed_formulae=$(brew list --formula -1)
+
     # Read the package names from the file
     while IFS= read -r app_name; do
         # Skip blank lines and lines that start with #
@@ -29,26 +47,29 @@ install_brew_packages() {
         '' | \#*) continue ;;
         esac
 
-        # Check if package exists in brew repository and is not already installed on the system
-        if brew info "$app_name" >/dev/null 2>&1; then
-            if ! command -v "$app_name" >/dev/null 2>&1; then
-                echo "Available: $app_name"
-                found_packages="$found_packages $app_name"
-            else
-                echo "Already installed: $app_name"
-            fi
+        # Skip packages installed by brew or already on PATH from the OS
+        if grep -qxF "$app_name" <<<"$installed_formulae" || command -v "$app_name" >/dev/null 2>&1; then
+            echo "Already installed: $app_name"
+        elif grep -qxF "$app_name" <<<"$all_formulae"; then
+            echo "Available: $app_name"
+            found_packages="$found_packages $app_name"
         else
             not_found_packages="$not_found_packages $app_name"
             echo "Unavailable: $app_name"
         fi
     done <"$BREW_PACKAGE_FILE"
 
+    if [ -z "$found_packages" ]; then
+        echo
+        echo "Nothing to install"
+        return
+    fi
+
     echo
     echo "Installing brew packages..."
+
     # shellcheck disable=SC2086
-    if ! brew install $found_packages; then
-        exit 1
-    fi
+    brew install $found_packages
 }
 
 print_summary() {
@@ -68,10 +89,12 @@ main() {
     fi
 
     input_file_check
-    install_brew
+    install_brew || return 1
 
     install_brew_packages
+    status=$?
     print_summary "Brew" "$not_found_packages"
+    return "$status"
 }
 
 main "$@"

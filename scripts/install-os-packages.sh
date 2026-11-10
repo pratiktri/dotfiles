@@ -47,14 +47,12 @@ setup() {
         echo "Unsupported operating system (ID=$OS_ID)"
         return 1
         ;;
+    freebsd)
+        OS_INSTALL_COMMAND="pkg install -y"
+        PKG_MGR=pkg
+        freebsd_setup
+        ;;
     *)
-        # Fallback: FreeBSD (no /etc/os-release)
-        if [ -f /etc/freebsd-update.conf ]; then
-            OS_INSTALL_COMMAND="pkg install -y"
-            PKG_MGR=pkg
-            freebsd_setup
-            return
-        fi
         # Fallback: Debian/Ubuntu without /etc/os-release (old chroots, containers)
         if [ -f /etc/debian_version ]; then
             OS_INSTALL_COMMAND="apt-get install -y"
@@ -80,15 +78,33 @@ freebsd_sudo() {
         chmod 0440 /usr/local/etc/sudoers.d/wheel"
 }
 
+freebsd_fastest_mirror() {
+    # Origin instead of `pyXYZ-fastest_pkg`, so the Python version doesn't matter
+    sudo pkg install -y ports-mgmt/fastest_pkg || return 1
+
+    # `fastest_pkg -j` prints fastest first
+    mirror=$(fastest_pkg -j | sed -n 's/^\[{"mirror_name": "\([^"]*\)".*/\1/p')
+    [ -n "$mirror" ] || return 1
+
+    # Same repo names as /etc/pkg/FreeBSD.conf, so its signature settings still apply
+    sudo mkdir -p /usr/local/etc/pkg/repos
+    sudo tee /usr/local/etc/pkg/repos/FreeBSD.conf >/dev/null <<EOF
+FreeBSD-ports: { url: "http://$mirror/\${ABI}/quarterly", mirror_type: "none" }
+FreeBSD-ports-kmods: { url: "http://$mirror/\${ABI}/kmods_quarterly_\${VERSION_MINOR}", mirror_type: "none" }
+EOF
+    echo "pkg mirror set to $mirror"
+}
+
 freebsd_setup() {
     freebsd_sudo || return 1
+    freebsd_fastest_mirror
 
     # Update package repository
     sudo pkg update && sudo pkg upgrade
 
     # Install KDE WM
     sudo pkg install -y xorg sddm nvidia-driver
-    sudo pkg install -y kde5 plasma5-sddm-kcm plasma5-nm
+    sudo pkg install -y kde
 
     # Add current user to video & wheel group
     sudo pw groupmod video -m "$(whoami)"
@@ -102,8 +118,10 @@ freebsd_setup() {
     sudo sysrc sddm_enable="YES"
     sudo service dbus start
 
-    sudo sysctl net.local.stream.recvspace=65535
-    sudo sysctl net.local.stream.sendspace=65535
+    for opt in net.local.stream.recvspace=65535 net.local.stream.sendspace=65535; do
+        sudo sysctl "$opt"
+        sudo sysrc -f /etc/sysctl.conf "$opt"
+    done
 
     echo "exec dbus-launch --exit-with-x11 ck-launch-session startplasma-x11" >~/.xinitrc
 }

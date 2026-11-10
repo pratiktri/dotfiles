@@ -114,7 +114,6 @@ zsh
 
 # FreeBSD packages
 fusefs-lkl
-py311-fastest_pkg
 noto-2.0
 v4l-utils
 

@@ -68,7 +68,21 @@ setup() {
     esac
 }
 
+# Needs the user in `wheel` and the root password
+freebsd_sudo() {
+    if command -v sudo >/dev/null 2>&1; then
+        return
+    fi
+
+    echo "Installing sudo; enter the root password..."
+    su root -c "pkg install -y sudo &&
+        echo '%wheel ALL=(ALL:ALL) ALL' >/usr/local/etc/sudoers.d/wheel &&
+        chmod 0440 /usr/local/etc/sudoers.d/wheel"
+}
+
 freebsd_setup() {
+    freebsd_sudo || return 1
+
     # Update package repository
     sudo pkg update && sudo pkg upgrade
 

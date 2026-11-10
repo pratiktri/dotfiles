@@ -20,9 +20,9 @@ install_flatpak_packages() {
 
     # Read the package names from the file
     while IFS= read -r flatpak_package; do
-        # Skip lines that start with #
+        # Skip blank lines and lines that start with #
         case "$flatpak_package" in
-        \#*) continue ;;
+        '' | \#*) continue ;;
         esac
 
         # Check if the package exists in the flatpak repository

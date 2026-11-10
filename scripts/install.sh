@@ -32,6 +32,7 @@ rustlang() {
     fi
 
     if curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; then
+        . "$CARGO_HOME/env"
         rustup component add rust-analyzer
     fi
 }
@@ -84,8 +85,6 @@ post_install() {
     if [ "$(uname -s)" != "FreeBSD" ]; then
         sudo timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
     fi
-
-    rm -rf ~/.cache
 }
 
 pre_install() {
@@ -101,8 +100,8 @@ pre_install() {
 main() {
     pre_install
 
-    sudo ./install-os-packages.sh
-    ./install-node-packages.sh
+    ./install-os-packages.sh
+    ./install-pnpm-packages.sh
 
     # Skip flatpak & brew installations on FreeBSD
     if [ "$(uname -s)" != "FreeBSD" ]; then

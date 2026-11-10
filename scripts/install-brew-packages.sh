@@ -24,9 +24,9 @@ install_brew_packages() {
 
     # Read the package names from the file
     while IFS= read -r app_name; do
-        # Skip lines that start with #
+        # Skip blank lines and lines that start with #
         case "$app_name" in
-        \#*) continue ;;
+        '' | \#*) continue ;;
         esac
 
         # Check if package exists in brew repository and is not already installed on the system

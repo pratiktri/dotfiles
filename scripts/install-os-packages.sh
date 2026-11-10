@@ -2,7 +2,7 @@
 
 OS_PACKAGE_FILE=package-list-os
 OS_INSTALL_COMMAND=""
-OS_PKG_CHECK_COMMAND=""
+PKG_MGR=""
 
 setup() {
     # Detect OS via /etc/os-release (or /usr/lib/os-release) as primary source.
@@ -16,34 +16,34 @@ setup() {
     case "$OS_ID" in
     debian | ubuntu | linuxmint | pop | elementary | zorin | kali)
         OS_INSTALL_COMMAND="apt-get install -y"
-        OS_PKG_CHECK_COMMAND="apt-cache show"
+        PKG_MGR=apt
         apt_setup
         ;;
     fedora | rhel | centos | rocky | almalinux)
         OS_INSTALL_COMMAND="dnf install -y --allowerasing --skip-broken --setopt=install_weak_deps=False"
-        OS_PKG_CHECK_COMMAND="dnf list available"
+        PKG_MGR=dnf
         dnf_setup
         ;;
     opensuse* | suse)
         OS_INSTALL_COMMAND="zypper install --no-recommends -y"
-        OS_PKG_CHECK_COMMAND="zypper search --match-exact"
+        PKG_MGR=zypper
         zypper_setup
         ;;
     arch | endeavouros | manjaro | arcolinux | garuda)
         OS_INSTALL_COMMAND="pacman -S --noconfirm"
-        OS_PKG_CHECK_COMMAND="pacman -Si"
+        PKG_MGR=pacman
         echo "Unsupported operating system (ID=$OS_ID)"
         return 1
         ;;
     void)
         OS_INSTALL_COMMAND="xbps-install -y"
-        OS_PKG_CHECK_COMMAND="xbps-query -R"
+        PKG_MGR=xbps
         echo "Unsupported operating system (ID=$OS_ID)"
         return 1
         ;;
     alpine)
         OS_INSTALL_COMMAND="apk add"
-        OS_PKG_CHECK_COMMAND="apk search -e"
+        PKG_MGR=apk
         echo "Unsupported operating system (ID=$OS_ID)"
         return 1
         ;;
@@ -51,14 +51,14 @@ setup() {
         # Fallback: FreeBSD (no /etc/os-release)
         if [ -f /etc/freebsd-update.conf ]; then
             OS_INSTALL_COMMAND="pkg install -y"
-            OS_PKG_CHECK_COMMAND="pkg search"
+            PKG_MGR=pkg
             freebsd_setup
             return
         fi
         # Fallback: Debian/Ubuntu without /etc/os-release (old chroots, containers)
         if [ -f /etc/debian_version ]; then
             OS_INSTALL_COMMAND="apt-get install -y"
-            OS_PKG_CHECK_COMMAND="apt-cache show"
+            PKG_MGR=apt
             apt_setup
             return
         fi
@@ -162,6 +162,26 @@ apt_setup() {
     sudo apt-get update
 }
 
+pkg_installed() {
+    case "$PKG_MGR" in
+    apt) dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -q "install ok installed" ;;
+    dnf | zypper) rpm -q "$1" >/dev/null 2>&1 ;;
+    pkg) pkg info -e "$1" ;;
+    *) return 1 ;;
+    esac
+}
+
+pkg_available() {
+    case "$PKG_MGR" in
+    apt) apt-cache show "$1" 2>/dev/null | grep -qx "Package: $1" ;;
+    # Both forms so `mesa-va-drivers-freeworld.i686` matches
+    dnf) dnf -q repoquery --available --qf '%{name}\n%{name}.%{arch}\n' "$1" 2>/dev/null | grep -qxF "$1" ;;
+    zypper) zypper -q search --match-exact -t package "$1" 2>/dev/null | awk -F'|' '{ gsub(/ /, "", $2) } $2 == p { f = 1 } END { exit !f }' p="$1" ;;
+    pkg) pkg rquery '%n' "$1" 2>/dev/null | grep -qxF "$1" ;;
+    *) return 1 ;;
+    esac
+}
+
 input_file_check() {
     if [ ! -f "$OS_PACKAGE_FILE" ]; then
         echo "File not found: $OS_PACKAGE_FILE"
@@ -178,19 +198,19 @@ install_os_packages() {
 
     # Loop through each package name in the file
     while IFS= read -r os_package; do
-        # Skip lines that start with #
+        # Skip blank lines and lines that start with #
         case "$os_package" in
-        \#*) continue ;;
+        '' | \#*) continue ;;
         esac
 
         # Check if the package is already installed
-        if command -v "$os_package" >/dev/null 2>&1; then
+        if pkg_installed "$os_package"; then
             echo "Already installed: $os_package"
             continue
         fi
 
         # Check if the package exists in the repository
-        if eval "$OS_PKG_CHECK_COMMAND" "$os_package" 2>/dev/null | grep -q "$os_package"; then
+        if pkg_available "$os_package"; then
             echo "Available: $os_package"
             os_found_packages="$os_found_packages $os_package"
         else
@@ -215,6 +235,12 @@ print_summary() {
 }
 
 main() {
+    # Refuse to run as root (sudo is called where needed; `whoami` and `~` must be the user)
+    if [ "$(id -u)" -eq 0 ]; then
+        echo "This script should not be run as root. Run it as your normal user."
+        return 1
+    fi
+
     input_file_check
     setup || return 1
     install_os_packages

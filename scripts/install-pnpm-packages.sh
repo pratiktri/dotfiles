@@ -20,9 +20,9 @@ install_pnpm_packages() {
 
     # Read the package names from the file
     while IFS= read -r pnpm_packages; do
-        # Skip lines that start with #
+        # Skip blank lines and lines that start with #
         case "$pnpm_packages" in
-        \#*) continue ;;
+        '' | \#*) continue ;;
         esac
 
         # Check if the package exists in the pnpm repository

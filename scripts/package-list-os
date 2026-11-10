@@ -6,6 +6,11 @@
 build-essential
 clang
 cmake
+containerd.io
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-compose-plugin
 fnm
 gcc
 gdb

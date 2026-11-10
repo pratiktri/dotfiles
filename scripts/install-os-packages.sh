@@ -141,22 +141,26 @@ zypper_setup() {
     sudo zypper --non-interactive refresh && sudo zypper --non-interactive update -y
 
     # Add Packman repository (essential for multimedia codecs)
-    sudo zypper --non-interactive addrepo --refresh --check --priority 90 \
-        https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
-    sudo zypper dup --from packman --allow-vendor-change
+    zypper lr packman >/dev/null 2>&1 ||
+        sudo zypper --non-interactive addrepo --refresh --check --priority 90 \
+            https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
+    sudo zypper --non-interactive --gpg-auto-import-keys dup --from packman --allow-vendor-change
 
     # Add Brave repository
     sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    zypper lr | grep -qi brave ||
+        sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
-    # Docker is available in default Tumbleweed repos, no extra repo needed
+    # Docker has no openSUSE repo; Tumbleweed ships its own build
+    # Not in package-list-os: Debian, Ubuntu and Fedora have packages with these names that conflict with docker-ce
+    sudo zypper --non-interactive install docker docker-compose docker-buildx
 
     # Download and install AppImageLauncher v3
     wget -O /tmp/appimagelauncher.rpm \
         "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"
-    sudo zypper install /tmp/appimagelauncher.rpm
+    sudo zypper --non-interactive install --allow-unsigned-rpm /tmp/appimagelauncher.rpm
 
-    sudo zypper --non-interactive refresh
+    sudo zypper --non-interactive --gpg-auto-import-keys refresh
 }
 
 apt_setup() {
@@ -165,14 +169,27 @@ apt_setup() {
 
     sudo apt-get update && sudo apt-get upgrade -y
 
-    sudo apt-get install -y wget gpg extrepo
+    sudo apt-get install -y curl wget gpg extrepo
     sudo extrepo update
-    sudo extrepo enable docker-ce
     sudo extrepo enable github-cli
     sudo extrepo enable nvidia-cuda
     sudo extrepo enable postgresql
     sudo extrepo enable deb-multimedia-backports
     sudo extrepo enable deb-multimedia-non-free
+
+    # Add Docker repository
+    docker_distro=debian
+    [ -n "${UBUNTU_CODENAME:-}" ] && docker_distro=ubuntu
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL "https://download.docker.com/linux/$docker_distro/gpg" -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    sudo tee /etc/apt/sources.list.d/docker.sources >/dev/null <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/$docker_distro
+Suites: ${UBUNTU_CODENAME:-$VERSION_CODENAME}
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
     sudo apt-get update
 }

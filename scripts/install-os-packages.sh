@@ -110,15 +110,16 @@ freebsd_setup() {
 
 dnf_setup() {
     # Faster dnf installs
-    echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    echo "defaultYes=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    echo "minrate=40k" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    echo "timeout=20" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
+    for opt in fastestmirror=True max_parallel_downloads=10 defaultYes=True keepcache=True minrate=40k timeout=20; do
+        grep -qx "$opt" /etc/dnf/dnf.conf || echo "$opt" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
+    done
 
     # Enable RPM Fusion & Install media codecs
-    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm && sudo dnf groupupdate -y core multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin sound-and-video && sudo dnf makecache
+    if sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm; then
+        sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
+        sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+        sudo dnf makecache
+    fi
 
     # Add Docker repository
     sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo ||

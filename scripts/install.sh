@@ -80,11 +80,6 @@ post_install() {
     if command -v zsh >/dev/null 2>&1 && [ "$SHELL" != "$(which zsh)" ]; then
         sudo chsh -s "$(which zsh)" "$USER" && echo "Default shell changed to zsh" || echo "Could not change shell."
     fi
-
-    # Time fix for Windows dual boot - skip on FreeBSD
-    if [ "$(uname -s)" != "FreeBSD" ]; then
-        sudo timedatectl set-local-rtc 1 --adjust-system-clock && echo "Set Datetime"
-    fi
 }
 
 pre_install() {

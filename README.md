@@ -35,15 +35,10 @@ Any package not available are *skipped*.
 
 ### Manual installation to be done for various distros
 
-- aka, pending installations that I gave up automating.
-
 - All Distros:
     - Appimagelauncher: <https://github.com/TheAssassin/AppImageLauncher/releases>
     - Zoho Mail: <https://downloads.zohocdn.com/zmail-desktop/linux/>
     - Zoho Workdrive: <https://www.zoho.com/workdrive/desktop-sync.html>
-- Debian & Ubuntu:
-    - Add non-free and backport sources, then run the `install-os-packges.sh` again
-    - Ulauncher: <https://ulauncher.io/#Download>
 
 ## Test
 

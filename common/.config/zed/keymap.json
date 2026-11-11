@@ -3,423 +3,358 @@
 // PRECEDENCE: deeper context wins; on a tie the later block wins.
 // A later chord (e.g. `ctrl-w h`) also makes an earlier exact key (`ctrl-w`) wait ~1s.
 [
-    // ==============================
-    // Workspace & panels
-    // ==============================
-    {
-        "context": "Workspace",
-        "bindings": {
-            "ctrl-/": "journal::NewJournalEntry",
-            "ctrl-1": "project_panel::ToggleFocus",
-            "ctrl-2": "git_panel::ToggleFocus",
-            "ctrl-3": "outline_panel::ToggleFocus",
-            "ctrl-4": "debug_panel::ToggleFocus"
-        }
-    },
-    {
-        // No file open (Welcome page, empty pane): no editor, terminal or panel has focus
-        // Excluding Dock keeps `space` instant in panels that bind it (e.g. git panel staging)
-        "context": "Workspace && !Editor && !Terminal && !Dock",
-        "bindings": {
-            "space tab": "project_panel::ToggleFocus"
-        }
-    },
-    {
-        // Must come after the block above to win over its `space tab`
-        "context": "Workspace && left_dock == ProjectPanel && !Editor && !Terminal && !Dock",
-        "bindings": {
-            "space tab": "workspace::ToggleLeftDock"
-        }
-    },
-    {
-        "context": "ProjectPanel && not_editing",
-        "bindings": {
-            "q": "workspace::ToggleLeftDock",
-            "space tab": "workspace::ToggleLeftDock",
-            "r": "project_panel::Rename",
-            "s": "project_panel::OpenSplitHorizontal",
-            "a": "project_panel::NewFile",
-            "o": "project_panel::Open"
-        }
-    },
-    {
-        // Skip editors and terminals: a pending `ctrl-w` chord delays their own `ctrl-w` by ~1s.
-        // Editors in vim normal mode already get `ctrl-w h/j/k/l` from Zed's vim keymap.
-        "context": "Dock && !Editor && !Terminal",
-        "bindings": {
-            "ctrl-w h": "workspace::ActivatePaneLeft",
-            "ctrl-w l": "workspace::ActivatePaneRight",
-            "ctrl-w k": "workspace::ActivatePaneUp",
-            "ctrl-w j": "workspace::ActivatePaneDown"
-        }
-    },
-    // ==============================
-    // Pickers & search bars
-    // ==============================
-    {
-        "context": "Picker",
-        "bindings": {
-            "ctrl-[": "menu::Cancel"
-        }
-    },
-    {
-        "context": "BufferSearchBar",
-        "bindings": {
-            "ctrl-[": "buffer_search::Dismiss"
-        }
-    },
-    {
-        "context": "ProjectSearchBar",
-        "bindings": {
-            "ctrl-[": "project_search::ToggleFocus"
-        }
-    },
-    // ==============================
-    // Terminal
-    // ==============================
-    {
-        "context": "Terminal",
-        "bindings": {
-            // Don't let ctrl-p & ctrl-n be high jacked
-            "ctrl-p": [
-                "terminal::SendKeystroke",
-                "ctrl-p"
-            ],
-            "ctrl-n": [
-                "terminal::SendKeystroke",
-                "ctrl-n"
-            ],
-            // Move between panels like in Neovim; a bare `ctrl-w` still reaches the shell after the chord timeout
-            "ctrl-w": [
-                "terminal::SendKeystroke",
-                "ctrl-w"
-            ],
-            "ctrl-w h": "workspace::ActivatePaneLeft",
-            "ctrl-w l": "workspace::ActivatePaneRight",
-            "ctrl-w k": "workspace::ActivatePaneUp",
-            "ctrl-w j": "workspace::ActivatePaneDown",
-            "ctrl-shift-up": "workspace::IncreaseActiveDockSize",
-            "ctrl-shift-down": "workspace::DecreaseActiveDockSize",
-            "ctrl-shift-enter": "workspace::NewTerminal"
-        }
-    },
-    // ==============================
-    // Git
-    // ==============================
-    {
-        "context": "GitDiff > Editor",
-        "bindings": {
-            "s": "git::ToggleStaged",
-            "x": "git::Restore",
-            "c": "git::Commit"
-        }
-    },
-    // ==============================
-    // Editor (vim)
-    // ==============================
-    {
-        "context": "Editor && ( vim_mode == visual || vim_mode == normal )",
-        "bindings": {
-            // Access system clipboard
-            "space p": [
-                "workspace::SendKeystrokes",
-                "\" + p"
-            ],
-            "space y": "editor::Copy"
-        }
-    },
-    {
-        "context": "VimControl && !menu && (vim_mode == normal || vim_mode == visual)",
-        "bindings": {
-            // Move by display line when wrapped
-            "j": [
-                "vim::Down",
-                {
-                    "display_lines": true
-                }
-            ],
-            "k": [
-                "vim::Up",
-                {
-                    "display_lines": true
-                }
-            ]
-        }
-    },
-    {
-        "context": "Editor && (vim_mode == normal || vim_mode == visual || vim_mode == operator)",
-        "bindings": {
-            "] F": "vim::NextMethodEnd",
-            "[ F": "vim::PreviousMethodEnd",
-            // Section end = top-level class or function end
-            "] C": "vim::NextSectionEnd",
-            "[ C": "vim::PreviousSectionEnd"
-        }
-    },
-    {
-        "context": "Editor && (vim_mode == normal || vim_mode == visual)",
-        "bindings": {
-            // Diagnostics by severity (Zed default for ]e/[e moves the line)
-            "] e": [
-                "editor::GoToDiagnostic",
-                {
-                    "severity": "error"
-                }
-            ],
-            "[ e": [
-                "editor::GoToPreviousDiagnostic",
-                {
-                    "severity": "error"
-                }
-            ],
-            "] w": [
-                "editor::GoToDiagnostic",
-                {
-                    "severity": "warning"
-                }
-            ],
-            "[ w": [
-                "editor::GoToPreviousDiagnostic",
-                {
-                    "severity": "warning"
-                }
-            ]
-        }
-    },
-    {
-        "context": "Editor && vim_mode == visual",
-        "bindings": {
-            // Move line up/down with J/K
-            "J": "editor::MoveLineDown",
-            "K": "editor::MoveLineUp",
-            // Paste over selection without yanking it
-            "p": [
-                "vim::Paste",
-                {
-                    "preserve_clipboard": true
-                }
-            ],
-            // Keep selection after indenting
-            ">": [
-                "workspace::SendKeystrokes",
-                "> g v"
-            ],
-            "<": [
-                "workspace::SendKeystrokes",
-                "< g v"
-            ]
-        }
-    },
-    {
-        "context": "Editor && vim_mode == normal",
-        "bindings": {
-            // Useful Zed-VIM defaults:
-            // Go to declaration           =>	gD
-            // Go to type definition       =>	gy
-            // Go to implementation        =>	gI
-            // Rename (change definition)  =>	cd
-            // Go to All references to the current word =>	gA
-            // Find symbol in current file =>	gs
-            // Find symbol in project      =>	gS
-            // Show inline error (hover)   =>	gh
-            // Open the code actions menu  =>	g.
-            //
-            // Multi-cursor:
-            // Add a cursor selecting the next copy of the current word	    => gl
-            // Add a visual selection for every copy of the current word	=> ga
-            // Add a cursor selecting the previous copy of the current word	=> gL
-            // Skip latest word selection, and add next	                    => g>
-            // Skip latest word selection, and add previous	                => g<
-            //
-            // https://github.com/tommcdo/vim-exchange
-            // https://github.com/jeetsukumaran/vim-indentwise
-            //
-            // AI:
-            // Accept edit-prediction on Linux => alt-l
-            // Accept next predicted word => alt-right
-            //
-            // Panels & layout
-            "space tab": "project_panel::ToggleFocus",
-            // Zed's sidebar toggle instead of vim page-up
-            "ctrl-b": "workspace::ToggleLeftDock",
-            "ctrl-escape": "workspace::ToggleCenteredLayout",
-            "space / /": "journal::NewJournalEntry",
-            "space x x": "workspace::SuppressNotification",
-            // Coding & Code Navigation
-            "] ]": "vim::GoToNextReference",
-            "[ [": "vim::GoToPreviousReference",
-            "] f": "vim::NextMethodStart",
-            "[ f": "vim::PreviousMethodStart",
-            "] i": "vim::NextSameIndent",
-            "[ i": "vim::PreviousSameIndent",
-            "ctrl-space": "editor::SelectLargerSyntaxNode",
-            "F2": "editor::Rename",
-            "space r": "editor::Rename",
-            "space c r": "editor::FindAllReferences",
-            "space o": "outline::Toggle",
-            "space s": "outline::Toggle",
-            "space S": "project_symbols::Toggle",
-            "ctrl-.": "editor::ToggleCodeActions",
-            // Diagnostics
-            "space d w": "diagnostics::Deploy",
-            "space d x": "editor::ToggleInlineDiagnostics",
-            // Project TODOs: same keywords and `KEYWORD:` pattern as todo-comments.nvim
-            "space d t": [
-                "pane::DeploySearch",
-                {
-                    "query": "\\b(TODO|FIX|FIXME|BUG):",
-                    "regex": true,
-                    "case_sensitive": true
-                }
-            ],
-            "space d T": [
-                "pane::DeploySearch",
-                {
-                    "query": "\\b(FIX|FIXME|BUG|FIXIT|ISSUE|TODO|HACK|TIP|WARN|WARNING|XXX|PERF|OPTIM|PERFORMANCE|OPTIMIZE|NOTE|INFO|TEST|TESTING|PASSED|FAILED):",
-                    "regex": true,
-                    "case_sensitive": true
-                }
-            ],
-            // Git
-            "space g g": "git::Diff",
-            "space g p": "editor::ToggleSelectedDiffHunks",
-            "] g": "editor::GoToHunk",
-            "[ g": "editor::GoToPreviousHunk",
-            "space g s": "git::ToggleStaged",
-            "space g r": "git::Restore",
-            "space g b": "git::Branch",
-            "space g B": "editor::ToggleGitBlameInline",
-            // Buffer
-            "space b l": "tab_switcher::ToggleAll",
-            "space b x": "pane::CloseActiveItem",
-            "space x b": "pane::CloseActiveItem",
-            "space x o": "pane::CloseOtherItems",
-            "space b p": "pane::TogglePinTab",
-            // Center the cursor when moving through document
-            "ctrl-d": [
-                "workspace::SendKeystrokes",
-                "Ctrl-d z z"
-            ],
-            "ctrl-u": [
-                "workspace::SendKeystrokes",
-                "Ctrl-u z z"
-            ],
-            "ctrl-o": [
-                "workspace::SendKeystrokes",
-                "Ctrl-o z z"
-            ],
-            "ctrl-i": [
-                "workspace::SendKeystrokes",
-                "Ctrl-i z z"
-            ],
-            "g ;": [
-                "workspace::SendKeystrokes",
-                "g ; z z"
-            ],
-            "g ,": [
-                "workspace::SendKeystrokes",
-                "g , z z"
-            ],
-            "n": [
-                "workspace::SendKeystrokes",
-                "n z z"
-            ],
-            "N": [
-                "workspace::SendKeystrokes",
-                "N z z"
-            ],
-            // Better split management
-            "ctrl-j": [
-                "workspace::SendKeystrokes",
-                "ctrl-w j"
-            ],
-            "ctrl-k": [
-                "workspace::SendKeystrokes",
-                "ctrl-w k"
-            ],
-            "ctrl-h": [
-                "workspace::SendKeystrokes",
-                "ctrl-w h"
-            ],
-            "ctrl-l": [
-                "workspace::SendKeystrokes",
-                "ctrl-w l"
-            ],
-            "ctrl-up": [
-                "workspace::SendKeystrokes",
-                "ctrl-w +"
-            ],
-            "ctrl-down": [
-                "workspace::SendKeystrokes",
-                "ctrl-w -"
-            ],
-            "ctrl-right": [
-                "workspace::SendKeystrokes",
-                "ctrl-w >"
-            ],
-            "ctrl-left": [
-                "workspace::SendKeystrokes",
-                "ctrl-w <"
-            ]
-        }
-    },
-    {
-        // Project panel already open: close it instead of focusing it
-        // Must come after the `Editor && vim_mode == normal` block to win over its `space tab`
-        "context": "(Workspace && left_dock == ProjectPanel) > (Editor && vim_mode == normal)",
-        "bindings": {
-            "space tab": "workspace::ToggleLeftDock"
-        }
-    },
-    // ==============================
-    // Agent panel
-    // ==============================
-    {
-        "context": "AcpThread",
-        "bindings": {
-            "ctrl-p": "agent::CycleFavoriteModels"
-        }
-    },
-    {
-        "context": "AcpThread",
-        "unbind": {
-            "alt-tab": "agent::CycleFavoriteModels"
-        }
-    },
-    {
-        "context": "AcpThread > Editor",
-        "bindings": {
-            "shift-tab": "agent::CycleThinkingEffort"
-        }
-    },
-    {
-        "context": "AcpThread > Editor",
-        "unbind": {
-            "ctrl-'": "agent::CycleThinkingEffort"
-        }
-    },
-    {
-        // Insert mode only: in normal mode `ctrl-w` must stay the window prefix for `ctrl-h/j/k/l`
-        // Keep last: an explicit binding after every `ctrl-w` chord, so it doesn't wait ~1s
-        "context": "AcpThread > Editor && vim_mode == insert",
-        "bindings": {
-            "ctrl-w": [
-                "editor::DeleteToPreviousWordStart",
-                {
-                    "ignore_newlines": false,
-                    "ignore_brackets": false
-                }
-            ]
-        }
-    },
-    // Hugo: bump lastmod
-    {
-        "context": "Editor && extension == md && vim_mode == normal",
-        "bindings": {
-            "space h l": [
-                "workspace::SendKeystrokes",
-                ": . ! e c h o space \" l a s t m o d : space ' $ ( d a t e space - u space + \\ % Y - \\ % m - \\ % d T \\ % H : \\ % M : \\ % S Z ) ' \" enter"
-            ]
-        }
+  // ==============================
+  // Workspace & panels
+  // ==============================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-/": "journal::NewJournalEntry",
+      "ctrl-1": "project_panel::ToggleFocus",
+      "ctrl-2": "git_panel::ToggleFocus",
+      "ctrl-3": "outline_panel::ToggleFocus",
+      "ctrl-4": "debug_panel::ToggleFocus"
     }
+  },
+  {
+    // No file open (Welcome page, empty pane): no editor, terminal or panel has focus
+    // Excluding Dock keeps `space` instant in panels that bind it (e.g. git panel staging)
+    "context": "Workspace && !Editor && !Terminal && !Dock",
+    "bindings": {
+      "space tab": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    // Must come after the block above to win over its `space tab`
+    "context": "Workspace && left_dock == ProjectPanel && !Editor && !Terminal && !Dock",
+    "bindings": {
+      "space tab": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleLeftDock",
+      "space tab": "workspace::ToggleLeftDock",
+      "r": "project_panel::Rename",
+      "s": "project_panel::OpenSplitHorizontal",
+      "a": "project_panel::NewFile",
+      "o": "project_panel::Open"
+    }
+  },
+  {
+    // Skip editors and terminals: a pending `ctrl-w` chord delays their own `ctrl-w` by ~1s.
+    // Editors in vim normal mode already get `ctrl-w h/j/k/l` from Zed's vim keymap.
+    "context": "Dock && !Editor && !Terminal",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown"
+    }
+  },
+  // ==============================
+  // Pickers & search bars
+  // ==============================
+  {
+    "context": "Picker",
+    "bindings": {
+      "ctrl-[": "menu::Cancel"
+    }
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "ctrl-[": "buffer_search::Dismiss"
+    }
+  },
+  {
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "ctrl-[": "project_search::ToggleFocus"
+    }
+  },
+  // ==============================
+  // Terminal
+  // ==============================
+  {
+    "context": "Terminal",
+    "bindings": {
+      // Don't let ctrl-p & ctrl-n be high jacked
+      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
+      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+      // Move between panels like in Neovim; a bare `ctrl-w` still reaches the shell after the chord timeout
+      "ctrl-w": ["terminal::SendKeystroke", "ctrl-w"],
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-shift-up": "workspace::IncreaseActiveDockSize",
+      "ctrl-shift-down": "workspace::DecreaseActiveDockSize",
+      "ctrl-shift-enter": "workspace::NewTerminal"
+    }
+  },
+  // ==============================
+  // Git
+  // ==============================
+  {
+    "context": "GitDiff > Editor",
+    "bindings": {
+      "s": "git::ToggleStaged",
+      "x": "git::Restore",
+      "c": "git::Commit"
+    }
+  },
+  // ==============================
+  // Editor (vim)
+  // ==============================
+  {
+    "context": "Editor && ( vim_mode == visual || vim_mode == normal )",
+    "bindings": {
+      // Access system clipboard
+      "space p": ["workspace::SendKeystrokes", "\" + p"],
+      "space y": "editor::Copy"
+    }
+  },
+  {
+    "context": "VimControl && !menu && (vim_mode == normal || vim_mode == visual)",
+    "bindings": {
+      // Move by display line when wrapped
+      "j": [
+        "vim::Down",
+        {
+          "display_lines": true
+        }
+      ],
+      "k": [
+        "vim::Up",
+        {
+          "display_lines": true
+        }
+      ]
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual || vim_mode == operator)",
+    "bindings": {
+      "] F": "vim::NextMethodEnd",
+      "[ F": "vim::PreviousMethodEnd",
+      // Section end = top-level class or function end
+      "] C": "vim::NextSectionEnd",
+      "[ C": "vim::PreviousSectionEnd"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual)",
+    "bindings": {
+      // Diagnostics by severity (Zed default for ]e/[e moves the line)
+      "] e": [
+        "editor::GoToDiagnostic",
+        {
+          "severity": "error"
+        }
+      ],
+      "[ e": [
+        "editor::GoToPreviousDiagnostic",
+        {
+          "severity": "error"
+        }
+      ],
+      "] w": [
+        "editor::GoToDiagnostic",
+        {
+          "severity": "warning"
+        }
+      ],
+      "[ w": [
+        "editor::GoToPreviousDiagnostic",
+        {
+          "severity": "warning"
+        }
+      ]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      // Move line up/down with J/K
+      "J": "editor::MoveLineDown",
+      "K": "editor::MoveLineUp",
+      // Paste over selection without yanking it
+      "p": [
+        "vim::Paste",
+        {
+          "preserve_clipboard": true
+        }
+      ],
+      // Keep selection after indenting
+      ">": ["workspace::SendKeystrokes", "> g v"],
+      "<": ["workspace::SendKeystrokes", "< g v"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Useful Zed-VIM defaults:
+      // Go to declaration           =>	gD
+      // Go to type definition       =>	gy
+      // Go to implementation        =>	gI
+      // Rename (change definition)  =>	cd
+      // Go to All references to the current word =>	gA
+      // Find symbol in current file =>	gs
+      // Find symbol in project      =>	gS
+      // Show inline error (hover)   =>	gh
+      // Open the code actions menu  =>	g.
+      //
+      // Multi-cursor:
+      // Add a cursor selecting the next copy of the current word	    => gl
+      // Add a visual selection for every copy of the current word	=> ga
+      // Add a cursor selecting the previous copy of the current word	=> gL
+      // Skip latest word selection, and add next	                    => g>
+      // Skip latest word selection, and add previous	                => g<
+      //
+      // https://github.com/tommcdo/vim-exchange
+      // https://github.com/jeetsukumaran/vim-indentwise
+      //
+      // AI:
+      // Accept edit-prediction on Linux => alt-l
+      // Accept next predicted word => alt-right
+      //
+      // Panels & layout
+      "space tab": "project_panel::ToggleFocus",
+      // Zed's sidebar toggle instead of vim page-up
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-escape": "workspace::ToggleCenteredLayout",
+      "space / /": "journal::NewJournalEntry",
+      "space x x": "workspace::SuppressNotification",
+      // Coding & Code Navigation
+      "] ]": "vim::GoToNextReference",
+      "[ [": "vim::GoToPreviousReference",
+      "] f": "vim::NextMethodStart",
+      "[ f": "vim::PreviousMethodStart",
+      "] i": "vim::NextSameIndent",
+      "[ i": "vim::PreviousSameIndent",
+      "ctrl-space": "editor::SelectLargerSyntaxNode",
+      "F2": "editor::Rename",
+      "space r": "editor::Rename",
+      "space c r": "editor::FindAllReferences",
+      "space o": "outline::Toggle",
+      "space s": "outline::Toggle",
+      "space S": "project_symbols::Toggle",
+      "ctrl-.": "editor::ToggleCodeActions",
+      // Diagnostics
+      "space d w": "diagnostics::Deploy",
+      "space d x": "editor::ToggleInlineDiagnostics",
+      // Project TODOs: same keywords and `KEYWORD:` pattern as todo-comments.nvim
+      "space d t": [
+        "pane::DeploySearch",
+        {
+          "query": "\\b(TODO|FIX|FIXME|BUG):",
+          "regex": true,
+          "case_sensitive": true
+        }
+      ],
+      "space d T": [
+        "pane::DeploySearch",
+        {
+          "query": "\\b(FIX|FIXME|BUG|FIXIT|ISSUE|TODO|HACK|TIP|WARN|WARNING|XXX|PERF|OPTIM|PERFORMANCE|OPTIMIZE|NOTE|INFO|TEST|TESTING|PASSED|FAILED):",
+          "regex": true,
+          "case_sensitive": true
+        }
+      ],
+      // Git
+      "space g g": "git::Diff",
+      "space g p": "editor::ToggleSelectedDiffHunks",
+      "] g": "editor::GoToHunk",
+      "[ g": "editor::GoToPreviousHunk",
+      "space g s": "git::ToggleStaged",
+      "space g r": "git::Restore",
+      "space g b": "git::Branch",
+      "space g B": "editor::ToggleGitBlameInline",
+      // Buffer
+      "space b l": "tab_switcher::ToggleAll",
+      "space b x": "pane::CloseActiveItem",
+      "space x b": "pane::CloseActiveItem",
+      "space x o": "pane::CloseOtherItems",
+      "space b p": "pane::TogglePinTab",
+      // Center the cursor when moving through document
+      "ctrl-d": ["workspace::SendKeystrokes", "Ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "Ctrl-u z z"],
+      "ctrl-o": ["workspace::SendKeystrokes", "Ctrl-o z z"],
+      "ctrl-i": ["workspace::SendKeystrokes", "Ctrl-i z z"],
+      "g ;": ["workspace::SendKeystrokes", "g ; z z"],
+      "g ,": ["workspace::SendKeystrokes", "g , z z"],
+      "n": ["workspace::SendKeystrokes", "n z z"],
+      "N": ["workspace::SendKeystrokes", "N z z"],
+      // Better split management
+      "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
+      "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
+      "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
+      "ctrl-up": ["workspace::SendKeystrokes", "ctrl-w +"],
+      "ctrl-down": ["workspace::SendKeystrokes", "ctrl-w -"],
+      "ctrl-right": ["workspace::SendKeystrokes", "ctrl-w >"],
+      "ctrl-left": ["workspace::SendKeystrokes", "ctrl-w <"]
+    }
+  },
+  {
+    // Project panel already open: close it instead of focusing it
+    // Must come after the `Editor && vim_mode == normal` block to win over its `space tab`
+    "context": "(Workspace && left_dock == ProjectPanel) > (Editor && vim_mode == normal)",
+    "bindings": {
+      "space tab": "workspace::ToggleLeftDock"
+    }
+  },
+  // ==============================
+  // Agent panel
+  // ==============================
+  {
+    "context": "AcpThread",
+    "bindings": {
+      "ctrl-p": "agent::CycleFavoriteModels"
+    }
+  },
+  {
+    "context": "AcpThread",
+    "unbind": {
+      "alt-tab": "agent::CycleFavoriteModels"
+    }
+  },
+  {
+    "context": "AcpThread > Editor",
+    "bindings": {
+      "shift-tab": "agent::CycleThinkingEffort"
+    }
+  },
+  {
+    "context": "AcpThread > Editor",
+    "unbind": {
+      "ctrl-'": "agent::CycleThinkingEffort"
+    }
+  },
+  {
+    // Insert mode only: in normal mode `ctrl-w` must stay the window prefix for `ctrl-h/j/k/l`
+    // Keep last: an explicit binding after every `ctrl-w` chord, so it doesn't wait ~1s
+    "context": "AcpThread > Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-w": [
+        "editor::DeleteToPreviousWordStart",
+        {
+          "ignore_newlines": false,
+          "ignore_brackets": false
+        }
+      ]
+    }
+  },
+
+  // Hugo: bump lastmod
+  {
+    "context": "Editor && extension == md && vim_mode == normal",
+    "bindings": {
+      "space h l": [
+        "workspace::SendKeystrokes",
+        ": . ! e c h o space \" l a s t m o d : space ' $ ( d a t e space - u space + \\ % Y - \\ % m - \\ % d T \\ % H : \\ % M : \\ % S Z ) ' \" enter"
+      ]
+    }
+  }
 ]

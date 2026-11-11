@@ -121,9 +121,6 @@ export PGPASSFILE="${XDG_CONFIG_HOME}/postgres/pgpass"
 export PGSERVICEFILE="${XDG_CONFIG_HOME}/postgres/pg_service.conf"
 export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
 
-# Go
-export GOPATH="${DEV_CACHE_PATH}"/gopath/
-
 # Java
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
 

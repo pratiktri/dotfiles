@@ -411,5 +411,15 @@
                 }
             ]
         }
+    },
+    // Hugo: bump lastmod
+    {
+        "context": "Editor && extension == md && vim_mode == normal",
+        "bindings": {
+            "space h l": [
+                "workspace::SendKeystrokes",
+                ": . ! e c h o space \" l a s t m o d : space ' $ ( d a t e space - u space + \\ % Y - \\ % m - \\ % d T \\ % H : \\ % M : \\ % S Z ) ' \" enter"
+            ]
+        }
     }
 ]
